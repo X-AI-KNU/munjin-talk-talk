@@ -2,8 +2,7 @@
 
 MODEL_ID = "Qwen/Qwen3-TTS-12Hz-1.7B-Base"
 
-# Local GTX 1650Ti Max-Q 기준
-# flash_attention_2보다 eager가 안전한 출발점
+# flash_attention_2에서 eager로 환경 설정(Local Testing 용)
 ATTN_IMPLEMENTATION = "eager"
 BATCH_SIZE = 1
 
