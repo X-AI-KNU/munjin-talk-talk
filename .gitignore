@@ -4,6 +4,7 @@ qwen_voice/data/
 qwen_voice/outputs/
 qwen_voice/models/
 qwen_voice/checkpoints/
+qwen_voice/voice_bank/
 
 # audio files
 *.wav
@@ -22,6 +23,7 @@ qwen_voice/checkpoints/
 .env
 *.key
 *.pem
+*.json
 
 # python cache
 __pycache__/
@@ -51,8 +53,16 @@ qwen_voice/checkpoints/
 .env
 *.key
 *.pem
+*.json
 
 # python cache
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+# accidental root-level local test files
+scripts.csv
+speakers.csv
+speakergw1.csv
+sample_001.wav
+sample_001.json
