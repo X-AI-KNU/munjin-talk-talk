@@ -1,0 +1,6317 @@
+{
+  "metadata": {
+    "dataset_name": "q1_gangwon_dialect_symptom_test_cases",
+    "version": "v0.1-draft",
+    "created_at": "2026-05-23T10:40:08.472515+00:00",
+    "purpose": "문진톡톡 Q1 증상 발화의 span 추출, 표준어 변환, symptom_index 매칭, safety flag 감지 테스트",
+    "case_count": 100,
+    "source_basis": [
+      "diseases_cleaned.json: 아산병원 호흡기질환 63개 질환의 symptoms 및 sections",
+      "symptom_index.json: diseases_cleaned.json의 symptoms를 뒤집은 87개 증상 reverse index",
+      "강릉시청 강릉 사투리 어휘 자료: 일반 사투리/표준말 대비 참고"
+    ],
+    "important_notes": [
+      "이 데이터셋은 실제 환자 데이터가 아니라 합성 테스트 데이터입니다.",
+      "질환명은 증상 조합 다양화를 위한 scenario seed이며 정답 질환 라벨이나 질병 예측 대상이 아닙니다.",
+      "expected_safety_flags는 MVP 테스트용 초안 라벨입니다. 실제 의료 기준 확정 전까지 임상 판단으로 사용하지 않습니다.",
+      "dialect_features는 강릉시청 공식 어휘 자료 기반 표현과 문진톡톡 프로젝트 내 의료 발화 후보 표현을 구분하여 표시합니다."
+    ],
+    "schema": {
+      "input": "환자 Q1 원문 발화",
+      "spans": "원문 phrase span, 표준어 변환, symptom_index 검색 후보",
+      "expected_symptoms": "affirmed로 기대하는 symptom_index key",
+      "expected_denied": "명시적으로 부정된 symptom_index key",
+      "expected_needs_review": "매칭 후보이나 의료진/LLM verifier 확인이 필요한 key",
+      "expected_safety_flags": "테스트용 위험 표현 flag"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "gw_q1_001",
+      "input": "으찌냑부터 목이 칼칼하민 기침이 데우 나요. 목에 가래도 좀 낀 것 같아요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31810",
+        "content_id": "31810",
+        "name_ko": "급성 기관지염",
+        "name_en": "Acute bronchitis",
+        "display_name": "급성 기관지염(Acute bronchitis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "으찌냑부터",
+          "type": "onset",
+          "normalization": {
+            "normalized_text": "어제 저녁부터",
+            "normalized_candidates": []
+          }
+        },
+        {
+          "source_quote": "목이 칼칼하민",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목이 칼칼하면서",
+            "normalized_candidates": [
+              "목의 통증"
+            ]
+          }
+        },
+        {
+          "source_quote": "기침이 데우 나요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침이 매우 나요",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "목에 가래도 좀 낀 것 같아요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목에 가래가 낀 것 같아요",
+            "normalized_candidates": [
+              "가래"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "으찌냑",
+          "standard": "어제 저녁",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "데우",
+          "standard": "몹시/매우",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "하민",
+          "standard": "하면서",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "목의 통증",
+        "기침",
+        "가래"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "acute_bronchitis",
+        "official_dialect",
+        "standard_matching"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_002",
+      "input": "오늘에는 코빼기가 맥혀요. 콧물도 줄줄 나고 재채기도 마카 나와요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:33702",
+        "content_id": "33702",
+        "name_ko": "꽃가루 알레르기",
+        "name_en": "Pollen allergy",
+        "display_name": "꽃가루 알레르기(Pollen allergy)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "오늘에는",
+          "type": "onset",
+          "normalization": {
+            "normalized_text": "오늘은",
+            "normalized_candidates": []
+          }
+        },
+        {
+          "source_quote": "코빼기가 맥혀요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "코가 막혀요",
+            "normalized_candidates": [
+              "코막힘"
+            ]
+          }
+        },
+        {
+          "source_quote": "콧물도 줄줄 나고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "콧물이 나요",
+            "normalized_candidates": [
+              "콧물"
+            ]
+          }
+        },
+        {
+          "source_quote": "재채기도 마카 나와요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "재채기도 많이 나와요",
+            "normalized_candidates": [
+              "재채기"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "마카",
+          "standard": "모두/전부",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "오늘에는",
+          "standard": "오늘은",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "코빼기",
+          "standard": "코",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "맥혀요",
+          "standard": "막혀요",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "코막힘",
+        "콧물",
+        "재채기"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "rhinitis",
+        "pollen_allergy",
+        "official_dialect",
+        "project_expr"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_003",
+      "input": "어제부터 가심이 답답하고 숨이 맥혀요. 밤에 더 그래요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31811",
+        "content_id": "31811",
+        "name_ko": "천식",
+        "name_en": "Asthma",
+        "display_name": "천식(Asthma)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "어제부터",
+          "type": "onset",
+          "normalization": {
+            "normalized_text": "어제부터",
+            "normalized_candidates": []
+          }
+        },
+        {
+          "source_quote": "가심이 답답하고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 답답하고",
+            "normalized_candidates": [
+              "가슴 답답",
+              "흉부압박감"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨이 맥혀요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 막혀요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        },
+        {
+          "source_quote": "밤에 더 그래요",
+          "type": "course",
+          "normalization": {
+            "normalized_text": "밤에 더 심해요",
+            "normalized_candidates": []
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "가심",
+          "standard": "가슴",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        },
+        {
+          "surface": "맥혀요",
+          "standard": "막혀요",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "가슴 답답",
+        "호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [
+        "흉부압박감"
+      ],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "asthma",
+        "project_expr",
+        "needs_review"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_004",
+      "input": "기침은 없고요, 목구녕이 좀 아푸나 싶고 콧물만 있어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31816",
+        "content_id": "31816",
+        "name_ko": "상기도 감염",
+        "name_en": "Upper respiratory infections",
+        "display_name": "상기도 감염(Upper respiratory infections)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "기침은 없고요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침은 없고요",
+            "normalized_candidates": [
+              "기침"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "목구녕이 좀 아푸나 싶고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목구멍이 좀 아픈 것 같고",
+            "normalized_candidates": [
+              "목의 통증"
+            ]
+          }
+        },
+        {
+          "source_quote": "콧물만 있어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "콧물만 있어요",
+            "normalized_candidates": [
+              "콧물"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "아푸나",
+          "standard": "아프니",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "목구녕",
+          "standard": "목구멍",
+          "source": "일반 구어체 표현",
+          "source_type": "general_colloquial"
+        }
+      ],
+      "expected_symptoms": [
+        "목의 통증",
+        "콧물"
+      ],
+      "expected_denied": [
+        "기침"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "upper_respiratory",
+        "negation",
+        "colloquial"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_005",
+      "input": "으찌냑 지악부터 열이 나고 오한이 들어요. 온몸이 마카 떨리는 것 같아요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31620",
+        "content_id": "31620",
+        "name_ko": "인플루엔자",
+        "name_en": "Influenza",
+        "display_name": "인플루엔자(Influenza)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "으찌냑 지악부터",
+          "type": "onset",
+          "normalization": {
+            "normalized_text": "어제 저녁부터",
+            "normalized_candidates": []
+          }
+        },
+        {
+          "source_quote": "열이 나고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "열이 나고",
+            "normalized_candidates": [
+              "열"
+            ]
+          }
+        },
+        {
+          "source_quote": "오한이 들어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "오한이 있어요",
+            "normalized_candidates": [
+              "오한"
+            ]
+          }
+        },
+        {
+          "source_quote": "온몸이 마카 떨리는 것 같아요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "온몸이 전부 떨리는 것 같아요",
+            "normalized_candidates": [
+              "온몸이 떨림"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "으찌냑",
+          "standard": "어제 저녁",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "마카",
+          "standard": "모두/전부",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "열",
+        "오한",
+        "온몸이 떨림"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "influenza",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_006",
+      "input": "가래에 피가 쪼매 섞여 나와요. 기침하민 더 보여요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31850",
+        "content_id": "31850",
+        "name_ko": "객혈",
+        "name_en": "Hemoptysis",
+        "display_name": "객혈(Hemoptysis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가래에 피가 쪼매 섞여 나와요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가래에 피가 조금 섞여 나와요",
+            "normalized_candidates": [
+              "가래",
+              "객혈"
+            ]
+          }
+        },
+        {
+          "source_quote": "기침하민 더 보여요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침하면서 더 보여요",
+            "normalized_candidates": [
+              "기침",
+              "객혈"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "하민",
+          "standard": "하면서",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "가래",
+        "객혈",
+        "기침"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:hemoptysis_expression"
+      ],
+      "case_tags": [
+        "hemoptysis",
+        "safety",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_007",
+      "input": "숨을 못 쉬겠어요. 입술이 파래지는 것 같다고 우리 아가 그래요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32257",
+        "content_id": "32257",
+        "name_ko": "폐부종",
+        "name_en": "Pulmonary edema",
+        "display_name": "폐부종(Pulmonary edema)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "숨을 못 쉬겠어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨을 못 쉬겠어요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        },
+        {
+          "source_quote": "입술이 파래지는 것 같다고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "입술이 파래지는 것 같다고",
+            "normalized_candidates": [
+              "청색증"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "호흡곤란",
+        "청색증"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:severe_dyspnea_expression",
+        "safety:cyanosis_expression"
+      ],
+      "case_tags": [
+        "severe_dyspnea",
+        "safety"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_008",
+      "input": "가심이 콕 찌르듯 아프고 숨 쉴 때 더 아파요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:30455",
+        "content_id": "30455",
+        "name_ko": "공기가슴증(기흉)",
+        "name_en": "Pneumothorax",
+        "display_name": "공기가슴증(기흉)(Pneumothorax)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가심이 콕 찌르듯 아프고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 콕 찌르듯 아프고",
+            "normalized_candidates": [
+              "흉통"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨 쉴 때 더 아파요",
+          "type": "course",
+          "normalization": {
+            "normalized_text": "숨 쉴 때 더 아파요",
+            "normalized_candidates": []
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "가심",
+          "standard": "가슴",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "흉통"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:chest_pain_expression"
+      ],
+      "case_tags": [
+        "pneumothorax",
+        "project_expr",
+        "safety"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_009",
+      "input": "기침이 새꿎게 나고 쌕쌕 소리도 나요. 가래는 없사요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31810",
+        "content_id": "31810",
+        "name_ko": "급성 기관지염",
+        "name_en": "Acute bronchitis",
+        "display_name": "급성 기관지염(Acute bronchitis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "기침이 새꿎게 나고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침 소리가 크고 거칠게 나고",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "쌕쌕 소리도 나요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "호흡할 때 쌕쌕거리는 소리가 나요",
+            "normalized_candidates": [
+              "천명음"
+            ]
+          }
+        },
+        {
+          "source_quote": "가래는 없사요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가래는 없어요",
+            "normalized_candidates": [
+              "가래"
+            ]
+          },
+          "status_hint": "denied"
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "기침",
+        "천명음"
+      ],
+      "expected_denied": [
+        "가래"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "wheezing",
+        "negation",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_010",
+      "input": "마커 감기 기운 같아요. 두통도 있고 목도 아프고 근육도 쑤셔요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31665",
+        "content_id": "31665",
+        "name_ko": "신종 플루",
+        "name_en": "Novel swine-origin influenza A(H1N1)",
+        "display_name": "신종 플루(Novel swine-origin influenza A(H1N1))"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "마커 감기 기운 같아요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "전부 감기 기운 같아요",
+            "normalized_candidates": [
+              "감기 증상"
+            ]
+          }
+        },
+        {
+          "source_quote": "두통도 있고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "두통도 있고",
+            "normalized_candidates": [
+              "두통"
+            ]
+          }
+        },
+        {
+          "source_quote": "목도 아프고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목도 아프고",
+            "normalized_candidates": [
+              "목의 통증"
+            ]
+          }
+        },
+        {
+          "source_quote": "근육도 쑤셔요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "근육통이 있어요",
+            "normalized_candidates": [
+              "근육통"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "마커",
+          "standard": "모두/전부",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "감기 증상",
+        "두통",
+        "목의 통증",
+        "근육통"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "swine_flu",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_011",
+      "input": "오늘에는 열은 없는데 기침이 상구도 계속 나요.",
+      "visit_type": "followup",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31522",
+        "content_id": "31522",
+        "name_ko": "만성 기침",
+        "name_en": "Chronic cough",
+        "display_name": "만성 기침(Chronic cough)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "오늘에는",
+          "type": "onset",
+          "normalization": {
+            "normalized_text": "오늘은",
+            "normalized_candidates": []
+          }
+        },
+        {
+          "source_quote": "열은 없는데",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "열은 없는데",
+            "normalized_candidates": [
+              "열"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "기침이 상구도 계속 나요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침이 아직도 계속 나요",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "상구도",
+          "standard": "아직도",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "오늘에는",
+          "standard": "오늘은",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "기침"
+      ],
+      "expected_denied": [
+        "열"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "chronic_cough",
+        "negation",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_012",
+      "input": "코빼기가 잠구킨 것처럼 꽉 막히고 기침도 조금 나요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31522",
+        "content_id": "31522",
+        "name_ko": "만성 기침",
+        "name_en": "Chronic cough",
+        "display_name": "만성 기침(Chronic cough)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "코빼기가 잠구킨 것처럼 꽉 막히고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "코가 잠긴 것처럼 꽉 막히고",
+            "normalized_candidates": [
+              "코막힘"
+            ]
+          }
+        },
+        {
+          "source_quote": "기침도 조금 나요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침도 조금 나요",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "코빼기",
+          "standard": "코",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "코막힘",
+        "기침"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "chronic_cough",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_013",
+      "input": "가래가 검게 나와요. 기침도 데우 하고요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32499",
+        "content_id": "32499",
+        "name_ko": "진폐증",
+        "name_en": "Pneumoconiosis",
+        "display_name": "진폐증(Pneumoconiosis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가래가 검게 나와요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "검은색 가래가 나와요",
+            "normalized_candidates": [
+              "검은색 가래",
+              "가래"
+            ]
+          }
+        },
+        {
+          "source_quote": "기침도 데우 하고요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침도 매우 하고요",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "데우",
+          "standard": "몹시/매우",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "검은색 가래",
+        "가래",
+        "기침"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "pneumoconiosis",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_014",
+      "input": "숨이 시나매 쉬면 괜찮은데 조금 걸으민 바로 차요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32181",
+        "content_id": "32181",
+        "name_ko": "규폐증",
+        "name_en": "Silicosis",
+        "display_name": "규폐증(Silicosis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "숨이 시나매 쉬면 괜찮은데",
+          "type": "context",
+          "normalization": {
+            "normalized_text": "숨을 천천히 쉬면 괜찮은데",
+            "normalized_candidates": []
+          }
+        },
+        {
+          "source_quote": "조금 걸으민 바로 차요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "조금 걸으면 바로 숨이 차요",
+            "normalized_candidates": [
+              "운동 시 호흡곤란",
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "시나매",
+          "standard": "천천히/쉬엄쉬엄",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "운동 시 호흡곤란",
+        "호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "exertional_dyspnea",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_015",
+      "input": "목소리가 쉬어가꼬 말하기가 힘들고, 삼키기도 곤란해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:33899",
+        "content_id": "33899",
+        "name_ko": "후두개염",
+        "name_en": "Epiglottitis",
+        "display_name": "후두개염(Epiglottitis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "목소리가 쉬어가꼬",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목소리가 쉬어서",
+            "normalized_candidates": [
+              "목소리 변화"
+            ]
+          }
+        },
+        {
+          "source_quote": "삼키기도 곤란해요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "삼키기도 곤란해요",
+            "normalized_candidates": [
+              "삼키기 곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "목소리 변화",
+        "삼키기 곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "epiglottitis",
+        "colloquial"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_016",
+      "input": "밥 먹다가 싸래기 걸린 뒤로 계속 기침하고 숨이 좀 차요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32320",
+        "content_id": "32320",
+        "name_ko": "이물질에 의한 기도 막힘",
+        "name_en": "Airway obstruction",
+        "display_name": "이물질에 의한 기도 막힘(Airway obstruction)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "밥 먹다가 싸래기 걸린 뒤로",
+          "type": "context",
+          "normalization": {
+            "normalized_text": "밥 먹다가 사래 걸린 뒤로",
+            "normalized_candidates": [
+              "사래걸림"
+            ]
+          }
+        },
+        {
+          "source_quote": "계속 기침하고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "계속 기침하고",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨이 좀 차요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 좀 차요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "싸래기",
+          "standard": "사래",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "사래걸림",
+        "기침",
+        "호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:choking_expression"
+      ],
+      "case_tags": [
+        "foreign_body",
+        "official_dialect",
+        "safety"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_017",
+      "input": "가심이 데우 두근거리고 불안해서 숨을 자꾸 몰아쉬어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31694",
+        "content_id": "31694",
+        "name_ko": "과호흡 증후군",
+        "name_en": "Hyperventilation syndrome",
+        "display_name": "과호흡 증후군(Hyperventilation syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가심이 데우 두근거리고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 매우 두근거리고",
+            "normalized_candidates": [
+              "가슴 두근거림"
+            ]
+          }
+        },
+        {
+          "source_quote": "불안해서",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "불안해서",
+            "normalized_candidates": [
+              "불안"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨을 자꾸 몰아쉬어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨을 자꾸 몰아쉬어요",
+            "normalized_candidates": [
+              "호흡곤란",
+              "빈호흡"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "데우",
+          "standard": "몹시/매우",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "가심",
+          "standard": "가슴",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "가슴 두근거림",
+        "불안",
+        "호흡곤란",
+        "빈호흡"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "hyperventilation",
+        "official_dialect",
+        "project_expr"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_018",
+      "input": "머리깽이가 아프고 토할 것 같고 열도 나요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31665",
+        "content_id": "31665",
+        "name_ko": "신종 플루",
+        "name_en": "Novel swine-origin influenza A(H1N1)",
+        "display_name": "신종 플루(Novel swine-origin influenza A(H1N1))"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "머리깽이가 아프고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "머리가 아프고",
+            "normalized_candidates": [
+              "두통"
+            ]
+          }
+        },
+        {
+          "source_quote": "토할 것 같고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "토할 것 같고",
+            "normalized_candidates": [
+              "구토"
+            ]
+          }
+        },
+        {
+          "source_quote": "열도 나요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "열도 나요",
+            "normalized_candidates": [
+              "열"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "머리깽이",
+          "standard": "머리",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "두통",
+        "구토",
+        "열"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "flu",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_019",
+      "input": "눈이 벌겋고 눈꼽이 끼고 재채기가 계속 나와요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:33702",
+        "content_id": "33702",
+        "name_ko": "꽃가루 알레르기",
+        "name_en": "Pollen allergy",
+        "display_name": "꽃가루 알레르기(Pollen allergy)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "눈이 벌겋고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "눈이 충혈되고",
+            "normalized_candidates": [
+              "눈의 충혈"
+            ]
+          }
+        },
+        {
+          "source_quote": "눈꼽이 끼고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "눈꼽이 끼고",
+            "normalized_candidates": [
+              "눈꼽"
+            ]
+          }
+        },
+        {
+          "source_quote": "재채기가 계속 나와요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "재채기가 계속 나와요",
+            "normalized_candidates": [
+              "재채기"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "눈의 충혈",
+        "눈꼽",
+        "재채기"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "pollen_allergy"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_020",
+      "input": "가래가 노랗고 끈적해요. 열하고 오한도 같이 와요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31631",
+        "content_id": "31631",
+        "name_ko": "폐렴",
+        "name_en": "Pneumonia",
+        "display_name": "폐렴(Pneumonia)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가래가 노랗고 끈적해요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "화농성 가래가 있어요",
+            "normalized_candidates": [
+              "화농성 객담",
+              "가래"
+            ]
+          }
+        },
+        {
+          "source_quote": "열하고 오한도 같이 와요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "열과 오한도 같이 와요",
+            "normalized_candidates": [
+              "열",
+              "오한"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "화농성 객담",
+        "가래",
+        "열",
+        "오한"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "pneumonia"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_021",
+      "input": "숨 쉴 때 가심이 답답하고 쌕쌕거리는 소리가 나요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31811",
+        "content_id": "31811",
+        "name_ko": "천식",
+        "name_en": "Asthma",
+        "display_name": "천식(Asthma)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "숨 쉴 때 가심이 답답하고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 답답하고",
+            "normalized_candidates": [
+              "가슴 답답"
+            ]
+          }
+        },
+        {
+          "source_quote": "쌕쌕거리는 소리가 나요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "쌕쌕거리는 소리가 나요",
+            "normalized_candidates": [
+              "천명음"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "가심",
+          "standard": "가슴",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "가슴 답답",
+        "천명음"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "asthma",
+        "project_expr"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_022",
+      "input": "으찌냑부터 기침은 좀 나는데 가래는 없어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31810",
+        "content_id": "31810",
+        "name_ko": "급성 기관지염",
+        "name_en": "Acute bronchitis",
+        "display_name": "급성 기관지염(Acute bronchitis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "으찌냑부터",
+          "type": "onset",
+          "normalization": {
+            "normalized_text": "어제 저녁부터",
+            "normalized_candidates": []
+          }
+        },
+        {
+          "source_quote": "기침은 좀 나는데",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침은 좀 나는데",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "가래는 없어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가래는 없어요",
+            "normalized_candidates": [
+              "가래"
+            ]
+          },
+          "status_hint": "denied"
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "으찌냑",
+          "standard": "어제 저녁",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "기침"
+      ],
+      "expected_denied": [
+        "가래"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "acute_bronchitis",
+        "negation",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_023",
+      "input": "기침하민 가슴이 아프고 열도 좀 나는 것 같아요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31743",
+        "content_id": "31743",
+        "name_ko": "병원 감염성 폐렴",
+        "name_en": "Hospital acquired pneumonia (HAP)",
+        "display_name": "병원 감염성 폐렴(Hospital acquired pneumonia (HAP))"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "기침하민",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침하면서",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "가슴이 아프고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 아프고",
+            "normalized_candidates": [
+              "흉통"
+            ]
+          }
+        },
+        {
+          "source_quote": "열도 좀 나는 것 같아요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "열도 좀 나는 것 같아요",
+            "normalized_candidates": [
+              "열"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "하민",
+          "standard": "하면서",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "기침",
+        "흉통",
+        "열"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "pneumonia",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_024",
+      "input": "얼매나 숨이 찬지 조금만 걸어도 쉬어야 돼요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31528",
+        "content_id": "31528",
+        "name_ko": "만성 폐쇄성 폐질환",
+        "name_en": "Chronic obstructive pulmonary disease",
+        "display_name": "만성 폐쇄성 폐질환(Chronic obstructive pulmonary disease)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "얼매나 숨이 찬지",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "얼마나 숨이 찬지",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        },
+        {
+          "source_quote": "조금만 걸어도 쉬어야 돼요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "조금만 걸어도 숨이 차서 쉬어야 돼요",
+            "normalized_candidates": [
+              "운동 시 호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "얼매나",
+          "standard": "얼마나",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "호흡곤란",
+        "운동 시 호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "copd",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_025",
+      "input": "가래는 많은데 피는 안 섞였어요. 기침만 계속 나요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32497",
+        "content_id": "32497",
+        "name_ko": "만성 기관지염",
+        "name_en": "Chronic bronchitis",
+        "display_name": "만성 기관지염(Chronic bronchitis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가래는 많은데",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가래는 많은데",
+            "normalized_candidates": [
+              "가래"
+            ]
+          }
+        },
+        {
+          "source_quote": "피는 안 섞였어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "피는 안 섞였어요",
+            "normalized_candidates": [
+              "객혈"
+            ]
+          }
+        },
+        {
+          "source_quote": "기침만 계속 나요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침만 계속 나요",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "가래",
+        "기침"
+      ],
+      "expected_denied": [
+        "객혈"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "chronic_bronchitis",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_026",
+      "input": "가래에 거품이 낀 것처럼 나오고 숨이 좀 막혀요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31850",
+        "content_id": "31850",
+        "name_ko": "객혈",
+        "name_en": "Hemoptysis",
+        "display_name": "객혈(Hemoptysis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가래에 거품이 낀 것처럼 나오고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "거품이 섞인 가래가 나와요",
+            "normalized_candidates": [
+              "거품이 섞인 가래",
+              "가래"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨이 좀 막혀요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 좀 막혀요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "거품이 섞인 가래",
+        "가래",
+        "호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "hemoptysis_related"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_027",
+      "input": "온몸이 떨리고 열이 데우 나서 밤새 잠을 못 잤어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31620",
+        "content_id": "31620",
+        "name_ko": "인플루엔자",
+        "name_en": "Influenza",
+        "display_name": "인플루엔자(Influenza)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "온몸이 떨리고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "온몸이 떨리고",
+            "normalized_candidates": [
+              "온몸이 떨림"
+            ]
+          }
+        },
+        {
+          "source_quote": "열이 데우 나서",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "열이 매우 나서",
+            "normalized_candidates": [
+              "열"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "데우",
+          "standard": "몹시/매우",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "온몸이 떨림",
+        "열"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "flu",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_028",
+      "input": "목이 아프고 목소리가 변한 것 같아요. 열은 없어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:33899",
+        "content_id": "33899",
+        "name_ko": "후두개염",
+        "name_en": "Epiglottitis",
+        "display_name": "후두개염(Epiglottitis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "목이 아프고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목이 아프고",
+            "normalized_candidates": [
+              "목의 통증"
+            ]
+          }
+        },
+        {
+          "source_quote": "목소리가 변한 것 같아요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목소리가 변한 것 같아요",
+            "normalized_candidates": [
+              "목소리 변화"
+            ]
+          }
+        },
+        {
+          "source_quote": "열은 없어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "열은 없어요",
+            "normalized_candidates": [
+              "열"
+            ]
+          },
+          "status_hint": "denied"
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "목의 통증",
+        "목소리 변화"
+      ],
+      "expected_denied": [
+        "열"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "throat",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_029",
+      "input": "기침 소리가 새꿎고 밤에는 더 심해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31522",
+        "content_id": "31522",
+        "name_ko": "만성 기침",
+        "name_en": "Chronic cough",
+        "display_name": "만성 기침(Chronic cough)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "기침 소리가 새꿎고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침 소리가 크고 거칠고",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "밤에는 더 심해요",
+          "type": "course",
+          "normalization": {
+            "normalized_text": "밤에는 더 심해요",
+            "normalized_candidates": []
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "기침"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "chronic_cough",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_030",
+      "input": "코빼기에서 물이 나고 재채기가 상구도 멈추질 않아요.",
+      "visit_type": "followup",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:33702",
+        "content_id": "33702",
+        "name_ko": "꽃가루 알레르기",
+        "name_en": "Pollen allergy",
+        "display_name": "꽃가루 알레르기(Pollen allergy)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "코빼기에서 물이 나고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "코에서 콧물이 나고",
+            "normalized_candidates": [
+              "콧물"
+            ]
+          }
+        },
+        {
+          "source_quote": "재채기가 상구도 멈추질 않아요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "재채기가 아직도 멈추질 않아요",
+            "normalized_candidates": [
+              "재채기"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "상구도",
+          "standard": "아직도",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "코빼기",
+          "standard": "코",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "콧물",
+        "재채기"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "allergy",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_031",
+      "input": "가슴이 제리제리하고 숨도 살짝 차요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31694",
+        "content_id": "31694",
+        "name_ko": "과호흡 증후군",
+        "name_en": "Hyperventilation syndrome",
+        "display_name": "과호흡 증후군(Hyperventilation syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가슴이 제리제리하고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 저리고 답답하고",
+            "normalized_candidates": [
+              "가슴 답답",
+              "흉부압박감"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨도 살짝 차요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨도 살짝 차요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "제리제리",
+          "standard": "저리다",
+          "source": "강릉시청 사투리 어휘 자료: (가슴이) 제리제리하다 - 저리다",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "가슴 답답",
+        "호흡곤란"
+      ],
+      "expected_denied": [
+        "흉부압박감"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "needs_review",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_032",
+      "input": "식은땀이 나고 어지럽고 가심이 두근거려요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31694",
+        "content_id": "31694",
+        "name_ko": "과호흡 증후군",
+        "name_en": "Hyperventilation syndrome",
+        "display_name": "과호흡 증후군(Hyperventilation syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "식은땀이 나고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "발한이 있고",
+            "normalized_candidates": [
+              "발한"
+            ]
+          }
+        },
+        {
+          "source_quote": "어지럽고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "어지럽고",
+            "normalized_candidates": [
+              "어지러움"
+            ]
+          }
+        },
+        {
+          "source_quote": "가심이 두근거려요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 두근거려요",
+            "normalized_candidates": [
+              "가슴 두근거림"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "가심",
+          "standard": "가슴",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "발한",
+        "어지러움",
+        "가슴 두근거림"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "hyperventilation",
+        "project_expr"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_033",
+      "input": "마카 기운이 없고 밥맛도 없고 살이 빠지는 것 같아요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32191",
+        "content_id": "32191",
+        "name_ko": "결핵",
+        "name_en": "Tuberculosis",
+        "display_name": "결핵(Tuberculosis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "마카 기운이 없고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "전부 기운이 없고",
+            "normalized_candidates": [
+              "기운없음"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "밥맛도 없고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "식욕이 없고",
+            "normalized_candidates": [
+              "식욕부진"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "살이 빠지는 것 같아요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "체중이 감소하는 것 같아요",
+            "normalized_candidates": [
+              "체중감소"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "마카",
+          "standard": "모두/전부",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "기운없음",
+        "식욕부진",
+        "체중감소"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "tb",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_034",
+      "input": "열은 없고 오한도 없는데, 기침만 오래 가요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31522",
+        "content_id": "31522",
+        "name_ko": "만성 기침",
+        "name_en": "Chronic cough",
+        "display_name": "만성 기침(Chronic cough)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "열은 없고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "열은 없고",
+            "normalized_candidates": [
+              "열"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "오한도 없는데",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "오한도 없는데",
+            "normalized_candidates": [
+              "오한"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "기침만 오래 가요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침만 오래 가요",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "기침"
+      ],
+      "expected_denied": [
+        "열",
+        "오한"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_035",
+      "input": "기침할 때 피가 조금 보여요. 가래도 있어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31850",
+        "content_id": "31850",
+        "name_ko": "객혈",
+        "name_en": "Hemoptysis",
+        "display_name": "객혈(Hemoptysis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "기침할 때 피가 조금 보여요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침할 때 피가 조금 보여요",
+            "normalized_candidates": [
+              "객혈",
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "가래도 있어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가래도 있어요",
+            "normalized_candidates": [
+              "가래"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "객혈",
+        "기침",
+        "가래"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:hemoptysis_expression"
+      ],
+      "case_tags": [
+        "hemoptysis",
+        "safety"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_036",
+      "input": "숨이 빡힌다 싶고 말하기도 힘들어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32511",
+        "content_id": "32511",
+        "name_ko": "성인 호흡곤란 증후군",
+        "name_en": "Adult respiratory distress syndrome",
+        "display_name": "성인 호흡곤란 증후군(Adult respiratory distress syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "숨이 빡힌다 싶고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 막히고 답답하다 싶고",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        },
+        {
+          "source_quote": "말하기도 힘들어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "말하기도 힘들어요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "빡힌다",
+          "standard": "막힌다/답답하다",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_colloquial_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:severe_dyspnea_expression"
+      ],
+      "case_tags": [
+        "severe_dyspnea",
+        "safety",
+        "project_expr"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_037",
+      "input": "입술이 파랗다고 그러고, 숨이 데우 차요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32031",
+        "content_id": "32031",
+        "name_ko": "신생아 호흡곤란증후군",
+        "name_en": "Neonatal respiratory distress syndrome",
+        "display_name": "신생아 호흡곤란증후군(Neonatal respiratory distress syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "입술이 파랗다고 그러고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "입술이 파랗다고 그러고",
+            "normalized_candidates": [
+              "청색증"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨이 데우 차요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 매우 차요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "데우",
+          "standard": "몹시/매우",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "청색증",
+        "호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:cyanosis_expression"
+      ],
+      "case_tags": [
+        "cyanosis",
+        "safety",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_038",
+      "input": "숨 쉬는 횟수가 빨라진 것 같고 가심이 답답해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31694",
+        "content_id": "31694",
+        "name_ko": "과호흡 증후군",
+        "name_en": "Hyperventilation syndrome",
+        "display_name": "과호흡 증후군(Hyperventilation syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "숨 쉬는 횟수가 빨라진 것 같고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "호흡이 빨라진 것 같고",
+            "normalized_candidates": [
+              "빈호흡"
+            ]
+          }
+        },
+        {
+          "source_quote": "가심이 답답해요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 답답해요",
+            "normalized_candidates": [
+              "가슴 답답"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "가심",
+          "standard": "가슴",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "빈호흡",
+        "가슴 답답"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "hyperventilation",
+        "project_expr"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_039",
+      "input": "가래가 화농성처럼 누렇고 냄새가 나요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32195",
+        "content_id": "32195",
+        "name_ko": "농흉",
+        "name_en": "Pyothorax, Empyema",
+        "display_name": "농흉(Pyothorax, Empyema)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가래가 화농성처럼 누렇고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "화농성 객담처럼 누렇고",
+            "normalized_candidates": [
+              "화농성 객담",
+              "가래"
+            ]
+          }
+        },
+        {
+          "source_quote": "냄새가 나요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "냄새가 나요",
+            "normalized_candidates": []
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "화농성 객담",
+        "가래"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "empyema"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_040",
+      "input": "가심이 답답한 건 아닌데 흉통처럼 콕콕 아파요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32183",
+        "content_id": "32183",
+        "name_ko": "늑막염",
+        "name_en": "Pleurisy",
+        "display_name": "늑막염(Pleurisy)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가심이 답답한 건 아닌데",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 답답한 건 아닌데",
+            "normalized_candidates": [
+              "가슴 답답"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "흉통처럼 콕콕 아파요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "흉통처럼 콕콕 아파요",
+            "normalized_candidates": [
+              "흉통"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "가심",
+          "standard": "가슴",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "흉통"
+      ],
+      "expected_denied": [
+        "가슴 답답"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "pleurisy",
+        "negation",
+        "project_expr"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_041",
+      "input": "으찌냑부터 가래가 끓고 기침이 계속 나요. 숨은 안 차요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31810",
+        "content_id": "31810",
+        "name_ko": "급성 기관지염",
+        "name_en": "Acute bronchitis",
+        "display_name": "급성 기관지염(Acute bronchitis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "으찌냑부터",
+          "type": "onset",
+          "normalization": {
+            "normalized_text": "어제 저녁부터",
+            "normalized_candidates": []
+          },
+          "status_hint": "onset"
+        },
+        {
+          "source_quote": "가래가 끓고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가래가 끓고",
+            "normalized_candidates": [
+              "가래"
+            ]
+          }
+        },
+        {
+          "source_quote": "기침이 계속 나요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침이 계속 나요",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨은 안 차요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨은 차지 않아요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          },
+          "status_hint": "denied"
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "으찌냑",
+          "standard": "어제 저녁",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "가래",
+        "기침"
+      ],
+      "expected_denied": [
+        "호흡곤란"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "급성 기관지염",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_042",
+      "input": "목이 칼칼하민 기침이 나오는데 열은 없사요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31816",
+        "content_id": "31816",
+        "name_ko": "상기도 감염",
+        "name_en": "Upper respiratory infections",
+        "display_name": "상기도 감염(Upper respiratory infections)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "목이 칼칼하민",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목이 칼칼하면서",
+            "normalized_candidates": [
+              "목의 통증"
+            ]
+          }
+        },
+        {
+          "source_quote": "기침이 나오는데",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침이 나오는데",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "열은 없사요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "열은 없어요",
+            "normalized_candidates": [
+              "열"
+            ]
+          },
+          "status_hint": "denied"
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "하민",
+          "standard": "하면서",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "목의 통증",
+        "기침"
+      ],
+      "expected_denied": [
+        "열"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "상기도 감염",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_043",
+      "input": "콧물이 나오고 코빼기가 맥혀서 숨 쉬기 매해서요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:33702",
+        "content_id": "33702",
+        "name_ko": "꽃가루 알레르기",
+        "name_en": "Pollen allergy",
+        "display_name": "꽃가루 알레르기(Pollen allergy)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "콧물이 나오고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "콧물이 나오고",
+            "normalized_candidates": [
+              "콧물"
+            ]
+          }
+        },
+        {
+          "source_quote": "코빼기가 맥혀서",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "코가 막혀서",
+            "normalized_candidates": [
+              "코막힘"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨 쉬기 매해서요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨 쉬기 불편해요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "코빼기",
+          "standard": "코",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "매해서",
+          "standard": "불편하게 해서",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "콧물",
+        "코막힘",
+        "호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "꽃가루 알레르기"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_044",
+      "input": "눈이 충혈되고 눈꼽이 껴요. 기침은 없어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:33702",
+        "content_id": "33702",
+        "name_ko": "꽃가루 알레르기",
+        "name_en": "Pollen allergy",
+        "display_name": "꽃가루 알레르기(Pollen allergy)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "눈이 충혈되고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "눈이 충혈되고",
+            "normalized_candidates": [
+              "눈의 충혈"
+            ]
+          }
+        },
+        {
+          "source_quote": "눈꼽이 껴요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "눈꼽이 껴요",
+            "normalized_candidates": [
+              "눈꼽"
+            ]
+          }
+        },
+        {
+          "source_quote": "기침은 없어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침은 없어요",
+            "normalized_candidates": [
+              "기침"
+            ]
+          },
+          "status_hint": "denied"
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "눈의 충혈",
+        "눈꼽"
+      ],
+      "expected_denied": [
+        "기침"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "꽃가루 알레르기",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_045",
+      "input": "기침하민 가래가 많고 숨이 좀 차요. 열도 납니다.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31742",
+        "content_id": "31742",
+        "name_ko": "지역사회성 폐렴",
+        "name_en": "Community acquired pneumonia",
+        "display_name": "지역사회성 폐렴(Community acquired pneumonia)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "기침하민",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침하면서",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "가래가 많고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가래가 많고",
+            "normalized_candidates": [
+              "가래"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨이 좀 차요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 좀 차요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        },
+        {
+          "source_quote": "열도 납니다",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "열도 납니다",
+            "normalized_candidates": [
+              "열"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "하민",
+          "standard": "하면서",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "기침",
+        "가래",
+        "호흡곤란",
+        "열"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "지역사회성 폐렴"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_046",
+      "input": "오한이 와서 마카 떨리고 머리깽이도 아파요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31620",
+        "content_id": "31620",
+        "name_ko": "인플루엔자",
+        "name_en": "Influenza",
+        "display_name": "인플루엔자(Influenza)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "오한이 와서",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "오한이 와서",
+            "normalized_candidates": [
+              "오한"
+            ]
+          }
+        },
+        {
+          "source_quote": "마카 떨리고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "전부 떨리고",
+            "normalized_candidates": [
+              "온몸이 떨림"
+            ]
+          }
+        },
+        {
+          "source_quote": "머리깽이도 아파요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "머리도 아파요",
+            "normalized_candidates": [
+              "두통"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "마카",
+          "standard": "모두/전부",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "머리깽이",
+          "standard": "머리",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "오한",
+        "온몸이 떨림",
+        "두통"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "인플루엔자"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_047",
+      "input": "근육통이 있고 설사도 했어요. 목은 안 아파요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31665",
+        "content_id": "31665",
+        "name_ko": "신종 플루",
+        "name_en": "Novel swine-origin influenza A(H1N1)",
+        "display_name": "신종 플루(Novel swine-origin influenza A(H1N1))"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "근육통이 있고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "근육통이 있고",
+            "normalized_candidates": [
+              "근육통"
+            ]
+          }
+        },
+        {
+          "source_quote": "설사도 했어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "설사도 했어요",
+            "normalized_candidates": [
+              "설사"
+            ]
+          }
+        },
+        {
+          "source_quote": "목은 안 아파요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목은 아프지 않아요",
+            "normalized_candidates": [
+              "목의 통증"
+            ]
+          },
+          "status_hint": "denied"
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "근육통",
+        "설사"
+      ],
+      "expected_denied": [
+        "목의 통증"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "신종 플루",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_048",
+      "input": "가심이 두근두근하고 불안해서 어터 해야 할지 모르겠어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31694",
+        "content_id": "31694",
+        "name_ko": "과호흡 증후군",
+        "name_en": "Hyperventilation syndrome",
+        "display_name": "과호흡 증후군(Hyperventilation syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가심이 두근두근하고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 두근거리고",
+            "normalized_candidates": [
+              "가슴 두근거림"
+            ]
+          }
+        },
+        {
+          "source_quote": "불안해서",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "불안해서",
+            "normalized_candidates": [
+              "불안"
+            ]
+          }
+        },
+        {
+          "source_quote": "어터 해야 할지 모르겠어요",
+          "type": "context",
+          "normalization": {
+            "normalized_text": "어떻게 해야 할지 모르겠어요",
+            "normalized_candidates": []
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "어터",
+          "standard": "어떻게",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "가심",
+          "standard": "가슴",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "가슴 두근거림",
+        "불안"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "과호흡 증후군"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_049",
+      "input": "손발이 제리제리하고 어지럽고 숨을 빨리 쉬게 돼요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31694",
+        "content_id": "31694",
+        "name_ko": "과호흡 증후군",
+        "name_en": "Hyperventilation syndrome",
+        "display_name": "과호흡 증후군(Hyperventilation syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "손발이 제리제리하고",
+          "type": "context",
+          "normalization": {
+            "normalized_text": "손발이 저리고",
+            "normalized_candidates": []
+          }
+        },
+        {
+          "source_quote": "어지럽고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "어지럽고",
+            "normalized_candidates": [
+              "어지러움"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨을 빨리 쉬게 돼요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨을 빨리 쉬게 돼요",
+            "normalized_candidates": [
+              "빈호흡"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "제리제리",
+          "standard": "저리다",
+          "source": "강릉시청 사투리 어휘 자료: (가슴이) 제리제리하다 - 저리다",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "어지러움",
+        "빈호흡"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "과호흡 증후군"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_050",
+      "input": "가래가 끓고 기침이 오래됐어요. 체중도 빠진 것 같아요.",
+      "visit_type": "followup",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32191",
+        "content_id": "32191",
+        "name_ko": "결핵",
+        "name_en": "Tuberculosis",
+        "display_name": "결핵(Tuberculosis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가래가 끓고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가래가 끓고",
+            "normalized_candidates": [
+              "가래"
+            ]
+          }
+        },
+        {
+          "source_quote": "기침이 오래됐어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침이 오래됐어요",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "체중도 빠진 것 같아요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "체중도 빠진 것 같아요",
+            "normalized_candidates": [
+              "체중감소"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "가래",
+        "기침",
+        "체중감소"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "결핵"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_051",
+      "input": "열은 조금 있고 식은땀이 나요. 밤에 더 그래요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32191",
+        "content_id": "32191",
+        "name_ko": "결핵",
+        "name_en": "Tuberculosis",
+        "display_name": "결핵(Tuberculosis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "열은 조금 있고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "열은 조금 있고",
+            "normalized_candidates": [
+              "열"
+            ]
+          }
+        },
+        {
+          "source_quote": "식은땀이 나요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "식은땀이 나요",
+            "normalized_candidates": [
+              "발한"
+            ]
+          }
+        },
+        {
+          "source_quote": "밤에 더 그래요",
+          "type": "context",
+          "normalization": {
+            "normalized_text": "밤에 더 그래요",
+            "normalized_candidates": []
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "열",
+        "발한"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "결핵"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_052",
+      "input": "기침하민 피가래가 나오고 몸이 마카 힘이 없어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31847",
+        "content_id": "31847",
+        "name_ko": "폐결핵",
+        "name_en": "Pulmonary tuberculosis",
+        "display_name": "폐결핵(Pulmonary tuberculosis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "기침하민 피가래가 나오고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침하면서 피 섞인 가래가 나오고",
+            "normalized_candidates": [
+              "기침",
+              "객혈",
+              "가래"
+            ]
+          }
+        },
+        {
+          "source_quote": "몸이 마카 힘이 없어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "몸이 전부 힘이 없어요",
+            "normalized_candidates": [
+              "기운없음"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "마카",
+          "standard": "모두/전부",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "하민",
+          "standard": "하면서",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "기침",
+        "객혈",
+        "가래",
+        "기운없음"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:hemoptysis_expression"
+      ],
+      "case_tags": [
+        "폐결핵",
+        "safety"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_053",
+      "input": "숨이 차고 다리깽이가 부은 것 같아요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32257",
+        "content_id": "32257",
+        "name_ko": "폐부종",
+        "name_en": "Pulmonary edema",
+        "display_name": "폐부종(Pulmonary edema)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "숨이 차고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 차고",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        },
+        {
+          "source_quote": "다리깽이가 부은 것 같아요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "다리가 부은 것 같아요",
+            "normalized_candidates": [
+              "하지부종"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "다리깽이",
+          "standard": "다리",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "호흡곤란",
+        "하지부종"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "폐부종"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_054",
+      "input": "가심이 답답하고 누우면 숨이 더 매해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32257",
+        "content_id": "32257",
+        "name_ko": "폐부종",
+        "name_en": "Pulmonary edema",
+        "display_name": "폐부종(Pulmonary edema)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가심이 답답하고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 답답하고",
+            "normalized_candidates": [
+              "가슴 답답"
+            ]
+          }
+        },
+        {
+          "source_quote": "누우면 숨이 더 매해요",
+          "type": "course",
+          "normalization": {
+            "normalized_text": "누우면 숨쉬기가 더 불편해요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "가심",
+          "standard": "가슴",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "가슴 답답",
+        "호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "폐부종"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_055",
+      "input": "가래는 없는데 쌕쌕거리고 숨이 차요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31811",
+        "content_id": "31811",
+        "name_ko": "천식",
+        "name_en": "Asthma",
+        "display_name": "천식(Asthma)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가래는 없는데",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가래는 없는데",
+            "normalized_candidates": [
+              "가래"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "쌕쌕거리고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "쌕쌕거리고",
+            "normalized_candidates": [
+              "천명음"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨이 차요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 차요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "천명음",
+        "호흡곤란"
+      ],
+      "expected_denied": [
+        "가래"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "천식",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_056",
+      "input": "운동하민 숨이 차고 피로감이 심해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31528",
+        "content_id": "31528",
+        "name_ko": "만성 폐쇄성 폐질환",
+        "name_en": "Chronic obstructive pulmonary disease",
+        "display_name": "만성 폐쇄성 폐질환(Chronic obstructive pulmonary disease)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "운동하민 숨이 차고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "운동하면서 숨이 차고",
+            "normalized_candidates": [
+              "운동 시 호흡곤란",
+              "호흡곤란"
+            ]
+          }
+        },
+        {
+          "source_quote": "피로감이 심해요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "피로감이 심해요",
+            "normalized_candidates": [
+              "피로감"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "하민",
+          "standard": "하면서",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "운동 시 호흡곤란",
+        "호흡곤란",
+        "피로감"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "만성 폐쇄성 폐질환"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_057",
+      "input": "기침은 상구도 나고 가래도 있는데 피는 없어요.",
+      "visit_type": "followup",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31528",
+        "content_id": "31528",
+        "name_ko": "만성 폐쇄성 폐질환",
+        "name_en": "Chronic obstructive pulmonary disease",
+        "display_name": "만성 폐쇄성 폐질환(Chronic obstructive pulmonary disease)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "기침은 상구도 나고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침은 아직도 나고",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "가래도 있는데",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가래도 있는데",
+            "normalized_candidates": [
+              "가래"
+            ]
+          }
+        },
+        {
+          "source_quote": "피는 없어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "피는 없어요",
+            "normalized_candidates": [
+              "객혈"
+            ]
+          },
+          "status_hint": "denied"
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "상구도",
+          "standard": "아직도",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "기침",
+        "가래"
+      ],
+      "expected_denied": [
+        "객혈"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "만성 폐쇄성 폐질환",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_058",
+      "input": "가슴이 갑자기 콕 아프고 숨이 차서 놀랐어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:30455",
+        "content_id": "30455",
+        "name_ko": "공기가슴증(기흉)",
+        "name_en": "Pneumothorax",
+        "display_name": "공기가슴증(기흉)(Pneumothorax)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가슴이 갑자기 콕 아프고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 갑자기 콕 아프고",
+            "normalized_candidates": [
+              "흉통"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨이 차서",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 차서",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "흉통",
+        "호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:chest_pain_expression"
+      ],
+      "case_tags": [
+        "공기가슴증(기흉)",
+        "safety"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_059",
+      "input": "등겡이 쪽으로 담 결린 것처럼 아프고 숨쉴 때 더 그래요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:30455",
+        "content_id": "30455",
+        "name_ko": "공기가슴증(기흉)",
+        "name_en": "Pneumothorax",
+        "display_name": "공기가슴증(기흉)(Pneumothorax)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "등겡이 쪽으로 담 결린 것처럼 아프고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "등/허리 쪽으로 담 결린 것처럼 아프고",
+            "normalized_candidates": [
+              "흉통"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨쉴 때 더 그래요",
+          "type": "context",
+          "normalization": {
+            "normalized_text": "숨쉴 때 더 심해요",
+            "normalized_candidates": []
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "등겡이",
+          "standard": "등/허리",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "흉통"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:chest_pain_expression"
+      ],
+      "case_tags": [
+        "공기가슴증(기흉)",
+        "safety"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_060",
+      "input": "흉통은 없고 가슴만 좀 답답해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32183",
+        "content_id": "32183",
+        "name_ko": "늑막염",
+        "name_en": "Pleurisy",
+        "display_name": "늑막염(Pleurisy)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "흉통은 없고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "흉통은 없고",
+            "normalized_candidates": [
+              "흉통"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "가슴만 좀 답답해요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴만 좀 답답해요",
+            "normalized_candidates": [
+              "가슴 답답"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "가슴 답답"
+      ],
+      "expected_denied": [
+        "흉통"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "늑막염",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_061",
+      "input": "숨 쉴 때 마찰되는 소리 같은 게 나고 가심이 답답해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32195",
+        "content_id": "32195",
+        "name_ko": "농흉",
+        "name_en": "Pyothorax, Empyema",
+        "display_name": "농흉(Pyothorax, Empyema)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "숨 쉴 때 마찰되는 소리 같은 게 나고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨 쉴 때 마찰음 같은 게 나고",
+            "normalized_candidates": [
+              "마찰음"
+            ]
+          }
+        },
+        {
+          "source_quote": "가심이 답답해요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 답답해요",
+            "normalized_candidates": [
+              "가슴 답답"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "가심",
+          "standard": "가슴",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "마찰음",
+        "가슴 답답"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "농흉"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_062",
+      "input": "열이 나고 빈맥처럼 심장이 빨리 뛰어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32195",
+        "content_id": "32195",
+        "name_ko": "농흉",
+        "name_en": "Pyothorax, Empyema",
+        "display_name": "농흉(Pyothorax, Empyema)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "열이 나고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "열이 나고",
+            "normalized_candidates": [
+              "열"
+            ]
+          }
+        },
+        {
+          "source_quote": "심장이 빨리 뛰어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "심장이 빨리 뛰어요",
+            "normalized_candidates": [
+              "빈맥"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "열",
+        "빈맥"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "농흉"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_063",
+      "input": "얼굴이 창백하고 식은땀이 나요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "name_ko": "폐 혈전색전증"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "얼굴이 창백하고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "얼굴이 창백하고",
+            "normalized_candidates": [
+              "창백"
+            ]
+          }
+        },
+        {
+          "source_quote": "식은땀이 나요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "식은땀이 나요",
+            "normalized_candidates": [
+              "발한"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "창백",
+        "발한"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "폐 혈전색전증"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_064",
+      "input": "숨이 너무 차고 의식이 흐려지는 것 같아요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32511",
+        "content_id": "32511",
+        "name_ko": "성인 호흡곤란 증후군",
+        "name_en": "Adult respiratory distress syndrome",
+        "display_name": "성인 호흡곤란 증후군(Adult respiratory distress syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "숨이 너무 차고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 너무 차고",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        },
+        {
+          "source_quote": "의식이 흐려지는 것 같아요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "의식이 흐려지는 것 같아요",
+            "normalized_candidates": [
+              "의식 변화",
+              "의식 저하"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "호흡곤란",
+        "의식 변화",
+        "의식 저하"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:severe_dyspnea_expression",
+        "safety:altered_mental_status"
+      ],
+      "case_tags": [
+        "성인 호흡곤란 증후군",
+        "safety"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_065",
+      "input": "어지러움이 있고 지남력이 좀 이상한 것 같아요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32311",
+        "content_id": "32311",
+        "name_ko": "호흡성 산증",
+        "name_en": "Respiratory Acidosis",
+        "display_name": "호흡성 산증(Respiratory Acidosis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "어지러움이 있고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "어지러움이 있고",
+            "normalized_candidates": [
+              "어지러움"
+            ]
+          }
+        },
+        {
+          "source_quote": "지남력이 좀 이상한 것 같아요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "지남력이 좀 이상한 것 같아요",
+            "normalized_candidates": [
+              "지남력 장애"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "어지러움",
+        "지남력 장애"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "호흡성 산증"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_066",
+      "input": "호흡이 빨라지고 온몸이 데우 불안해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31694",
+        "content_id": "31694",
+        "name_ko": "과호흡 증후군",
+        "name_en": "Hyperventilation syndrome",
+        "display_name": "과호흡 증후군(Hyperventilation syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "호흡이 빨라지고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "호흡이 빨라지고",
+            "normalized_candidates": [
+              "빈호흡"
+            ]
+          }
+        },
+        {
+          "source_quote": "온몸이 데우 불안해요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "온몸이 매우 불안해요",
+            "normalized_candidates": [
+              "불안"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "데우",
+          "standard": "몹시/매우",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "빈호흡",
+        "불안"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "과호흡 증후군"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_067",
+      "input": "목에 뭔가 걸린 것처럼 삼키기가 곤란해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:33899",
+        "content_id": "33899",
+        "name_ko": "후두개염",
+        "name_en": "Epiglottitis",
+        "display_name": "후두개염(Epiglottitis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "목에 뭔가 걸린 것처럼",
+          "type": "context",
+          "normalization": {
+            "normalized_text": "목에 뭔가 걸린 것처럼",
+            "normalized_candidates": []
+          }
+        },
+        {
+          "source_quote": "삼키기가 곤란해요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "삼키기가 곤란해요",
+            "normalized_candidates": [
+              "삼키기 곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "삼키기 곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "후두개염"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_068",
+      "input": "목소리가 변했고 숨쉴 때 답답해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:33899",
+        "content_id": "33899",
+        "name_ko": "후두개염",
+        "name_en": "Epiglottitis",
+        "display_name": "후두개염(Epiglottitis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "목소리가 변했고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목소리가 변했고",
+            "normalized_candidates": [
+              "목소리 변화"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨쉴 때 답답해요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨쉴 때 답답해요",
+            "normalized_candidates": [
+              "호흡곤란",
+              "가슴 답답"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "목소리 변화",
+        "호흡곤란",
+        "가슴 답답"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "후두개염"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_069",
+      "input": "사래가 걸린 뒤로 질식할 것처럼 켁켁거렸어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32320",
+        "content_id": "32320",
+        "name_ko": "이물질에 의한 기도 막힘",
+        "name_en": "Airway obstruction",
+        "display_name": "이물질에 의한 기도 막힘(Airway obstruction)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "사래가 걸린 뒤로",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "사래가 걸린 뒤로",
+            "normalized_candidates": [
+              "사래걸림"
+            ]
+          }
+        },
+        {
+          "source_quote": "질식할 것처럼",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "질식할 것처럼",
+            "normalized_candidates": [
+              "질식"
+            ]
+          }
+        },
+        {
+          "source_quote": "켁켁거렸어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침했어요",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "사래걸림",
+        "질식",
+        "기침"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:choking_expression"
+      ],
+      "case_tags": [
+        "이물질에 의한 기도 막힘",
+        "safety"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_070",
+      "input": "밥 먹다 싸래기 걸리고 그 뒤부터 목이 매해서요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32320",
+        "content_id": "32320",
+        "name_ko": "이물질에 의한 기도 막힘",
+        "name_en": "Airway obstruction",
+        "display_name": "이물질에 의한 기도 막힘(Airway obstruction)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "밥 먹다 싸래기 걸리고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "밥 먹다 사래 걸리고",
+            "normalized_candidates": [
+              "사래걸림"
+            ]
+          }
+        },
+        {
+          "source_quote": "목이 매해서요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목이 불편해서요",
+            "normalized_candidates": [
+              "목의 통증"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "싸래기",
+          "standard": "사래",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        },
+        {
+          "surface": "매해서",
+          "standard": "불편하게 해서",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "사래걸림",
+        "목의 통증"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:choking_expression"
+      ],
+      "case_tags": [
+        "이물질에 의한 기도 막힘",
+        "safety"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_071",
+      "input": "콧물도 없고 코막힘도 없는데 기침만 납니다.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31522",
+        "content_id": "31522",
+        "name_ko": "만성 기침",
+        "name_en": "Chronic cough",
+        "display_name": "만성 기침(Chronic cough)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "콧물도 없고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "콧물도 없고",
+            "normalized_candidates": [
+              "콧물"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "코막힘도 없는데",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "코막힘도 없는데",
+            "normalized_candidates": [
+              "코막힘"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "기침만 납니다",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침만 납니다",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "기침"
+      ],
+      "expected_denied": [
+        "콧물",
+        "코막힘"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "만성 기침",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_072",
+      "input": "가래가 아침마다 나오고 목이 칼칼해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31847",
+        "content_id": "31847",
+        "name_ko": "폐결핵",
+        "name_en": "Pulmonary tuberculosis",
+        "display_name": "폐결핵(Pulmonary tuberculosis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가래가 아침마다 나오고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가래가 아침마다 나오고",
+            "normalized_candidates": [
+              "가래"
+            ]
+          }
+        },
+        {
+          "source_quote": "목이 칼칼해요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목이 칼칼해요",
+            "normalized_candidates": [
+              "목의 통증"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "가래",
+        "목의 통증"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "폐결핵"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_073",
+      "input": "피로감이 심하고 밥맛이 없어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32191",
+        "content_id": "32191",
+        "name_ko": "결핵",
+        "name_en": "Tuberculosis",
+        "display_name": "결핵(Tuberculosis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "피로감이 심하고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "피로감이 심하고",
+            "normalized_candidates": [
+              "피로감"
+            ]
+          }
+        },
+        {
+          "source_quote": "밥맛이 없어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "식욕이 없어요",
+            "normalized_candidates": [
+              "식욕부진"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "피로감",
+        "식욕부진"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "결핵"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_074",
+      "input": "눈이 무겁고 머리깽이가 박동치듯 아파요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31852",
+        "content_id": "31852",
+        "name_ko": "두통",
+        "name_en": "Headache",
+        "display_name": "두통(Headache)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "눈이 무겁고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "눈이 무겁고",
+            "normalized_candidates": [
+              "눈이 무거운 느낌"
+            ]
+          }
+        },
+        {
+          "source_quote": "머리깽이가 박동치듯 아파요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "머리가 박동치듯 아파요",
+            "normalized_candidates": [
+              "두통",
+              "박동성 통증"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "머리깽이",
+          "standard": "머리",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "눈이 무거운 느낌",
+        "두통",
+        "박동성 통증"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "두통"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_075",
+      "input": "배가 아프고 설사를 했어요. 기침은 없어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31665",
+        "content_id": "31665",
+        "name_ko": "신종 플루",
+        "name_en": "Novel swine-origin influenza A(H1N1)",
+        "display_name": "신종 플루(Novel swine-origin influenza A(H1N1))"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "배가 아프고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "배가 아프고",
+            "normalized_candidates": [
+              "복부 통증"
+            ]
+          }
+        },
+        {
+          "source_quote": "설사를 했어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "설사를 했어요",
+            "normalized_candidates": [
+              "설사"
+            ]
+          }
+        },
+        {
+          "source_quote": "기침은 없어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침은 없어요",
+            "normalized_candidates": [
+              "기침"
+            ]
+          },
+          "status_hint": "denied"
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "복부 통증",
+        "설사"
+      ],
+      "expected_denied": [
+        "기침"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "신종 플루",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_076",
+      "input": "복부가 빵빵하고 숨을 몰아쉬게 돼요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31694",
+        "content_id": "31694",
+        "name_ko": "과호흡 증후군",
+        "name_en": "Hyperventilation syndrome",
+        "display_name": "과호흡 증후군(Hyperventilation syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "복부가 빵빵하고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "복부가 팽만하고",
+            "normalized_candidates": [
+              "복부팽만감"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨을 몰아쉬게 돼요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨을 몰아쉬게 돼요",
+            "normalized_candidates": [
+              "호흡곤란",
+              "빈호흡"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "복부팽만감",
+        "호흡곤란",
+        "빈호흡"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "과호흡 증후군"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_077",
+      "input": "다리가 붓고 사지까지 붓는 느낌이에요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32560",
+        "content_id": "32560",
+        "name_ko": "상대정맥 증후군",
+        "name_en": "Superior vena cava Syndrome",
+        "display_name": "상대정맥 증후군(Superior vena cava Syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "다리가 붓고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "다리가 붓고",
+            "normalized_candidates": [
+              "하지부종"
+            ]
+          }
+        },
+        {
+          "source_quote": "사지까지 붓는 느낌이에요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "사지까지 붓는 느낌이에요",
+            "normalized_candidates": [
+              "사지 부종"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "하지부종",
+        "사지 부종"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "상대정맥 증후군"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_078",
+      "input": "얼굴이 붉어지고 피부가 화끈거려요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32128",
+        "content_id": "32128",
+        "name_ko": "중증 급성 호흡기 증후군",
+        "name_en": "Severe Acute Respiratory Syndrom",
+        "display_name": "중증 급성 호흡기 증후군(Severe Acute Respiratory Syndrom)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "얼굴이 붉어지고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "얼굴이 붉어지고",
+            "normalized_candidates": [
+              "피부홍조"
+            ]
+          }
+        },
+        {
+          "source_quote": "피부가 화끈거려요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "피부가 화끈거려요",
+            "normalized_candidates": [
+              "피부홍조"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "피부홍조"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "중증 급성 호흡기 증후군"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_079",
+      "input": "창백해지고 숨이 차요. 가심도 좀 답답해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "name_ko": "폐 혈전색전증"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "창백해지고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "창백해지고",
+            "normalized_candidates": [
+              "창백"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨이 차요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 차요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        },
+        {
+          "source_quote": "가심도 좀 답답해요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴도 좀 답답해요",
+            "normalized_candidates": [
+              "가슴 답답"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "가심",
+          "standard": "가슴",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "창백",
+        "호흡곤란",
+        "가슴 답답"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "폐 혈전색전증"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_080",
+      "input": "기침이랑 열이 있고 근육통도 같이 와요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:33922",
+        "content_id": "33922",
+        "name_ko": "코로나-19",
+        "name_en": "COVID-19",
+        "display_name": "코로나-19(COVID-19)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "기침이랑 열이 있고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침과 열이 있고",
+            "normalized_candidates": [
+              "기침",
+              "열"
+            ]
+          }
+        },
+        {
+          "source_quote": "근육통도 같이 와요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "근육통도 같이 와요",
+            "normalized_candidates": [
+              "근육통"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "기침",
+        "열",
+        "근육통"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "코로나-19"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_081",
+      "input": "열이랑 오한은 없고 목만 아프고 코가 맥혀요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31816",
+        "content_id": "31816",
+        "name_ko": "상기도 감염",
+        "name_en": "Upper respiratory infections",
+        "display_name": "상기도 감염(Upper respiratory infections)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "열이랑 오한은 없고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "열과 오한은 없고",
+            "normalized_candidates": [
+              "열",
+              "오한"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "목만 아프고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목만 아프고",
+            "normalized_candidates": [
+              "목의 통증"
+            ]
+          }
+        },
+        {
+          "source_quote": "코가 맥혀요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "코가 막혀요",
+            "normalized_candidates": [
+              "코막힘"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "맥혀요",
+          "standard": "막혀요",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "목의 통증",
+        "코막힘"
+      ],
+      "expected_denied": [
+        "열",
+        "오한"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "상기도 감염",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_082",
+      "input": "으찌냑부터 숨이 맥혀서 자다가 깼어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31811",
+        "content_id": "31811",
+        "name_ko": "천식",
+        "name_en": "Asthma",
+        "display_name": "천식(Asthma)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "으찌냑부터",
+          "type": "onset",
+          "normalization": {
+            "normalized_text": "어제 저녁부터",
+            "normalized_candidates": []
+          },
+          "status_hint": "onset"
+        },
+        {
+          "source_quote": "숨이 맥혀서",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 막혀서",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        },
+        {
+          "source_quote": "자다가 깼어요",
+          "type": "context",
+          "normalization": {
+            "normalized_text": "자다가 깼어요",
+            "normalized_candidates": []
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "으찌냑",
+          "standard": "어제 저녁",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "천식"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_083",
+      "input": "가래도 없고 기침도 없는데 숨만 차요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31849",
+        "content_id": "31849",
+        "name_ko": "폐기종",
+        "name_en": "Emphysema",
+        "display_name": "폐기종(Emphysema)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가래도 없고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가래도 없고",
+            "normalized_candidates": [
+              "가래"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "기침도 없는데",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침도 없는데",
+            "normalized_candidates": [
+              "기침"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "숨만 차요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨만 차요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "호흡곤란"
+      ],
+      "expected_denied": [
+        "가래",
+        "기침"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "폐기종",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_084",
+      "input": "기침하다가 흉통이 같이 와요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31850",
+        "content_id": "31850",
+        "name_ko": "객혈",
+        "name_en": "Hemoptysis",
+        "display_name": "객혈(Hemoptysis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "기침하다가",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침하다가",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "흉통이 같이 와요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "흉통이 같이 와요",
+            "normalized_candidates": [
+              "흉통"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "기침",
+        "흉통"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:chest_pain_expression"
+      ],
+      "case_tags": [
+        "객혈",
+        "safety"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_085",
+      "input": "가래에 피는 아닌데 거품이 좀 섞여요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31850",
+        "content_id": "31850",
+        "name_ko": "객혈",
+        "name_en": "Hemoptysis",
+        "display_name": "객혈(Hemoptysis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가래에 피는 아닌데",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가래에 피는 아닌데",
+            "normalized_candidates": [
+              "객혈"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "거품이 좀 섞여요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "거품이 좀 섞여요",
+            "normalized_candidates": [
+              "거품이 섞인 가래",
+              "가래"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "거품이 섞인 가래",
+        "가래"
+      ],
+      "expected_denied": [
+        "객혈"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "객혈",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_086",
+      "input": "숨이 차지는 않고 가래만 검게 나옵니다.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32499",
+        "content_id": "32499",
+        "name_ko": "진폐증",
+        "name_en": "Pneumoconiosis",
+        "display_name": "진폐증(Pneumoconiosis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "숨이 차지는 않고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 차지는 않고",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "가래만 검게 나옵니다",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "검은색 가래만 나옵니다",
+            "normalized_candidates": [
+              "검은색 가래",
+              "가래"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "검은색 가래",
+        "가래"
+      ],
+      "expected_denied": [
+        "호흡곤란"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "진폐증",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_087",
+      "input": "흉곽이 부풀어 오른 것 같고 숨이 힘들어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31989",
+        "content_id": "31989",
+        "name_ko": "기관지폐 형성이상",
+        "name_en": "Bronchopulmonary dysplasia",
+        "display_name": "기관지폐 형성이상(Bronchopulmonary dysplasia)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "흉곽이 부풀어 오른 것 같고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "흉곽이 부풀어 오른 것 같고",
+            "normalized_candidates": [
+              "흉곽 팽윤"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨이 힘들어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 힘들어요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "흉곽 팽윤",
+        "호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "기관지폐 형성이상"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_088",
+      "input": "숨을 내쉴 때 시간이 오래 걸리고 쌕쌕거려요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31989",
+        "content_id": "31989",
+        "name_ko": "기관지폐 형성이상",
+        "name_en": "Bronchopulmonary dysplasia",
+        "display_name": "기관지폐 형성이상(Bronchopulmonary dysplasia)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "숨을 내쉴 때 시간이 오래 걸리고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "호기가 증가한 것 같고",
+            "normalized_candidates": [
+              "호기의 증가"
+            ]
+          }
+        },
+        {
+          "source_quote": "쌕쌕거려요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "쌕쌕거려요",
+            "normalized_candidates": [
+              "천명음"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "호기의 증가",
+        "천명음"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "기관지폐 형성이상"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_089",
+      "input": "아이 숨쉴 때 복벽이 움푹 들어가는 것 같아요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32031",
+        "content_id": "32031",
+        "name_ko": "신생아 호흡곤란증후군",
+        "name_en": "Neonatal respiratory distress syndrome",
+        "display_name": "신생아 호흡곤란증후군(Neonatal respiratory distress syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "복벽이 움푹 들어가는 것 같아요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "복벽이 움푹 들어가는 것 같아요",
+            "normalized_candidates": [
+              "복벽이 움푹 들어감"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "복벽이 움푹 들어감"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "신생아 호흡곤란증후군"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_090",
+      "input": "아기가 수유를 잘 못하고 숨이 가빠 보여요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32031",
+        "content_id": "32031",
+        "name_ko": "신생아 호흡곤란증후군",
+        "name_en": "Neonatal respiratory distress syndrome",
+        "display_name": "신생아 호흡곤란증후군(Neonatal respiratory distress syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "수유를 잘 못하고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "수유를 잘 못하고",
+            "normalized_candidates": [
+              "수유 곤란"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨이 가빠 보여요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 가빠 보여요",
+            "normalized_candidates": [
+              "호흡곤란",
+              "빈호흡"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "수유 곤란",
+        "호흡곤란",
+        "빈호흡"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "신생아 호흡곤란증후군"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_091",
+      "input": "기침도 하고 호흡기감염 같다고 들었어요.",
+      "visit_type": "followup",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:33562",
+        "content_id": "33562",
+        "name_ko": "낭종성 폐질환",
+        "name_en": "Cystic Lung Disease",
+        "display_name": "낭종성 폐질환(Cystic Lung Disease)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "기침도 하고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침도 하고",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        },
+        {
+          "source_quote": "호흡기감염 같다고 들었어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "호흡기 감염 같다고 들었어요",
+            "normalized_candidates": [
+              "호흡기감염"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "기침",
+        "호흡기감염"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "낭종성 폐질환"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_092",
+      "input": "반복해서 폐렴이 온다 그러고 기침도 계속해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32513",
+        "content_id": "32513",
+        "name_ko": "기관 협착",
+        "name_en": "Stenosis of trachea",
+        "display_name": "기관 협착(Stenosis of trachea)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "반복해서 폐렴이 온다 그러고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "반복되는 폐렴이 있다고 들었고",
+            "normalized_candidates": [
+              "반복되는 폐렴"
+            ]
+          }
+        },
+        {
+          "source_quote": "기침도 계속해요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침도 계속해요",
+            "normalized_candidates": [
+              "기침"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "반복되는 폐렴",
+        "기침"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "기관 협착"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_093",
+      "input": "사래가 자주 걸리고 숨이 막힐 때가 있어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32513",
+        "content_id": "32513",
+        "name_ko": "기관 협착",
+        "name_en": "Stenosis of trachea",
+        "display_name": "기관 협착(Stenosis of trachea)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "사래가 자주 걸리고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "사래가 자주 걸리고",
+            "normalized_candidates": [
+              "사래걸림"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨이 막힐 때가 있어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 막힐 때가 있어요",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "사래걸림",
+        "호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:choking_expression"
+      ],
+      "case_tags": [
+        "기관 협착",
+        "safety"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_094",
+      "input": "무증상이라고 했는데 검사에서 뭐가 있다고 들어서 왔어요.",
+      "visit_type": "followup",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32717",
+        "content_id": "32717",
+        "name_ko": "폐결절",
+        "name_en": "Pulmonary nodule",
+        "display_name": "폐결절(Pulmonary nodule)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "무증상이라고 했는데",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "증상은 없다고 했는데",
+            "normalized_candidates": [
+              "무증상"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "무증상"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "폐결절"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_095",
+      "input": "기침은 없고 무증상인데 걱정돼서 왔어요.",
+      "visit_type": "followup",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32717",
+        "content_id": "32717",
+        "name_ko": "폐결절",
+        "name_en": "Pulmonary nodule",
+        "display_name": "폐결절(Pulmonary nodule)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "기침은 없고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침은 없고",
+            "normalized_candidates": [
+              "기침"
+            ]
+          },
+          "status_hint": "denied"
+        },
+        {
+          "source_quote": "무증상인데",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "증상은 없는데",
+            "normalized_candidates": [
+              "무증상"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "무증상"
+      ],
+      "expected_denied": [
+        "기침"
+      ],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "폐결절",
+        "negation"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_096",
+      "input": "목이 아프고 결막염처럼 눈도 빨개요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31666",
+        "content_id": "31666",
+        "name_ko": "백일해",
+        "name_en": "Pertussis",
+        "display_name": "백일해(Pertussis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "목이 아프고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "목이 아프고",
+            "normalized_candidates": [
+              "목의 통증"
+            ]
+          }
+        },
+        {
+          "source_quote": "결막염처럼",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "결막염처럼",
+            "normalized_candidates": [
+              "결막염"
+            ]
+          }
+        },
+        {
+          "source_quote": "눈도 빨개요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "눈도 충혈돼요",
+            "normalized_candidates": [
+              "눈의 충혈"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "목의 통증",
+        "결막염",
+        "눈의 충혈"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "pertussis",
+        "eye",
+        "throat"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_097",
+      "input": "손가락 끝이 뭉툭해지고 기침이랑 가래가 상구도 있어요.",
+      "visit_type": "followup",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "60대 후반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:31814",
+        "content_id": "31814",
+        "name_ko": "기관지확장증",
+        "name_en": "Bronchiectasis",
+        "display_name": "기관지확장증(Bronchiectasis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "손가락 끝이 뭉툭해지고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "손가락 끝이 뭉툭해지고",
+            "normalized_candidates": [
+              "곤봉지"
+            ]
+          }
+        },
+        {
+          "source_quote": "기침이랑 가래가 상구도 있어요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "기침과 가래가 아직도 있어요",
+            "normalized_candidates": [
+              "기침",
+              "가래"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "상구도",
+          "standard": "아직도",
+          "source": "강릉시청 사투리 어휘 자료",
+          "source_type": "official_gangneung_glossary"
+        }
+      ],
+      "expected_symptoms": [
+        "곤봉지",
+        "기침",
+        "가래"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "bronchiectasis",
+        "official_dialect"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_098",
+      "input": "흉수 있다 그러고 숨이 차서 왔어요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 초반",
+        "speech_style": "접수처 짧은 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32510",
+        "content_id": "32510",
+        "name_ko": "흉막 삼출",
+        "name_en": "Pleural effusion",
+        "display_name": "흉막 삼출(Pleural effusion)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "흉수 있다 그러고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "흉수가 있다고 들었고",
+            "normalized_candidates": [
+              "흉수"
+            ]
+          }
+        },
+        {
+          "source_quote": "숨이 차서",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "숨이 차서",
+            "normalized_candidates": [
+              "호흡곤란"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "흉수",
+        "호흡곤란"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "pleural_effusion"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_099",
+      "input": "경정맥이 부었다고 하고 얼굴도 붓는 것 같아요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "70대 후반",
+        "speech_style": "반복·수정 포함"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32560",
+        "content_id": "32560",
+        "name_ko": "상대정맥 증후군",
+        "name_en": "Superior vena cava Syndrome",
+        "display_name": "상대정맥 증후군(Superior vena cava Syndrome)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "경정맥이 부었다고 하고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "경정맥이 확장되었다고 하고",
+            "normalized_candidates": [
+              "경정맥 확장"
+            ]
+          }
+        },
+        {
+          "source_quote": "얼굴도 붓는 것 같아요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "얼굴도 붓는 것 같아요",
+            "normalized_candidates": [
+              "말초부종"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [],
+      "expected_symptoms": [
+        "경정맥 확장",
+        "말초부종"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [],
+      "case_tags": [
+        "svc_syndrome"
+      ],
+      "notes": ""
+    },
+    {
+      "case_id": "gw_q1_100",
+      "input": "가심이 눌리는 것 같고 흉부압박감처럼 답답해요.",
+      "visit_type": "initial",
+      "speaker_profile": {
+        "region": "강원권/강릉권 참고",
+        "age_band": "80대 초반",
+        "speech_style": "고령층 자연 발화"
+      },
+      "scenario_seed_disease": {
+        "disease_id": "amc:32514",
+        "content_id": "32514",
+        "name_ko": "종격동염",
+        "name_en": "Mediastinitis",
+        "display_name": "종격동염(Mediastinitis)"
+      },
+      "disease_seed_policy": "증상 조합 다양화를 위한 seed일 뿐, 정답 질환 라벨이나 예측 대상이 아님",
+      "spans": [
+        {
+          "source_quote": "가심이 눌리는 것 같고",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "가슴이 눌리는 것 같고",
+            "normalized_candidates": [
+              "흉부압박감",
+              "가슴 답답"
+            ]
+          }
+        },
+        {
+          "source_quote": "흉부압박감처럼 답답해요",
+          "type": "symptom_candidate",
+          "normalization": {
+            "normalized_text": "흉부압박감처럼 답답해요",
+            "normalized_candidates": [
+              "흉부압박감"
+            ]
+          }
+        }
+      ],
+      "dialect_features": [
+        {
+          "surface": "가심",
+          "standard": "가슴",
+          "source": "문진톡톡 프로젝트 예시 표현",
+          "source_type": "project_medical_dialect_candidate"
+        }
+      ],
+      "expected_symptoms": [
+        "흉부압박감",
+        "가슴 답답"
+      ],
+      "expected_denied": [],
+      "expected_needs_review": [],
+      "expected_safety_flags": [
+        "safety:chest_pain_expression"
+      ],
+      "case_tags": [
+        "mediastinitis",
+        "project_expr",
+        "safety"
+      ],
+      "notes": ""
+    }
+  ]
+}
