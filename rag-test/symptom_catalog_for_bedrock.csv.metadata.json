@@ -1,0 +1,30 @@
+{
+  "metadataAttributes": {
+    "source": "symptom_index",
+    "task": "symptom_matching",
+    "contains_disease_labels": "false"
+  },
+  "documentStructureConfiguration": {
+    "type": "RECORD_BASED_STRUCTURE_METADATA",
+    "recordBasedStructureMetadata": {
+      "contentFields": [
+        {
+          "fieldName": "content"
+        }
+      ],
+      "metadataFieldsSpecification": {
+        "fieldsToInclude": [
+          {
+            "fieldName": "symptom_id"
+          },
+          {
+            "fieldName": "symptom_name"
+          },
+          {
+            "fieldName": "aliases"
+          }
+        ]
+      }
+    }
+  }
+}

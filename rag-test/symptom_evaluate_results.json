@@ -1,0 +1,2594 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-05-26T13:51:44.476769+00:00",
+  "summary": {
+    "total_cases": 20,
+    "success_cases": 20,
+    "error_cases": 0,
+    "exact_match_count": 15,
+    "exact_match_rate": 0.75,
+    "avg_precision": 0.9083,
+    "avg_recall": 0.875,
+    "avg_f1": 0.8817
+  },
+  "records": [
+    {
+      "record_id": "c768de08-b06f-426c-9c8f-c030542d5663",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:19.581250+00:00",
+      "completed_at": "2026-05-26T13:51:21.006052+00:00",
+      "duration_ms": 1423.95,
+      "input": {
+        "text": "열이 나고 기침이 심하고 가래도 있어요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "열",
+          "가래",
+          "기침",
+          "화농성 객담",
+          "거품이 섞인 가래",
+          "검은색 가래",
+          "기운없음",
+          "객혈",
+          "가슴 두근거림",
+          "사래걸림",
+          "어지러움",
+          "가슴 답답",
+          "흉곽 팽윤",
+          "복벽이 움푹 들어감",
+          "호흡곤란",
+          "온몸이 떨림",
+          "탈장",
+          "근력 약화",
+          "호기의 증가",
+          "운동 시 호흡곤란",
+          "근긴장의 이상",
+          "고탄산증",
+          "수유 곤란",
+          "감기 증상",
+          "오한"
+        ]
+      },
+      "result": {
+        "input_text": "열이 나고 기침이 심하고 가래도 있어요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "열",
+            "evidence_text": "열이 나고",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "기침",
+            "evidence_text": "기침이 심하고",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "가래",
+            "evidence_text": "가래도 있어요",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "열",
+          "가래",
+          "기침",
+          "화농성 객담",
+          "거품이 섞인 가래",
+          "검은색 가래",
+          "기운없음",
+          "객혈",
+          "가슴 두근거림",
+          "사래걸림",
+          "어지러움",
+          "가슴 답답",
+          "흉곽 팽윤",
+          "복벽이 움푹 들어감",
+          "호흡곤란",
+          "온몸이 떨림",
+          "탈장",
+          "근력 약화",
+          "호기의 증가",
+          "운동 시 호흡곤란",
+          "근긴장의 이상",
+          "고탄산증",
+          "수유 곤란",
+          "감기 증상",
+          "오한"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"열이 나고 기침이 심하고 가래도 있어요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"열\",\n      \"evidence_text\": \"열이 나고\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"기침\",\n      \"evidence_text\": \"기침이 심하고\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"가래\",\n      \"evidence_text\": \"가래도 있어요\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n열이 나고 기침이 심하고 가래도 있어요.\n\n후보 증상 목록:\n- 열 | aliases: 열; 발열; 열이 나요; 체온이 높음; 고열\n- 가래 | aliases: 가래; 객담; 가래가 나와요; 목에 가래가 낀 느낌; 끈적한 가래\n- 기침 | aliases: 기침; 콜록거림; 기침이 나요; 마른기침; 기침이 심함\n- 화농성 객담 | aliases: 화농성 객담; 누런 가래; 고름 같은 가래; 화농성 가래\n- 거품이 섞인 가래 | aliases: 거품이 섞인 가래; 거품 낀 가래; 거품이 있는 객담\n- 검은색 가래 | aliases: 검은색 가래; 검은 가래; 까만 가래\n- 기운없음 | aliases: 기운없음; 기운이 없어요; 힘이 없어요; 무기력해요\n- 객혈 | aliases: 객혈; 피가 섞인 가래; 기침할 때 피가 나와요; 피가래; 혈담\n- 가슴 두근거림 | aliases: 가슴 두근거림; 심장이 두근거려요; 심장이 빨리 뛰어요; 두근거림; 심계항진\n- 사래걸림 | aliases: 사래걸림; 음식이 기도로 넘어감; 사레들림; 기침하며 사레\n- 어지러움 | aliases: 어지러움; 어지러워요; 현기증; 빙빙 도는 느낌\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 복벽이 움푹 들어감 | aliases: 복벽이 움푹 들어감; 배가 움푹 들어감; 복벽 함몰\n- 호흡곤란 | aliases: 호흡곤란; 숨이 차요; 숨쉬기 힘듦; 호흡이 어려움; 숨 가쁨\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 탈장 | aliases: 탈장; 장이 튀어나옴; 탈장 의심\n- 근력 약화 | aliases: 근력 약화; 힘이 빠짐; 근육 힘이 약함; 사지에 힘이 없음\n- 호기의 증가 | aliases: 호기의 증가; 숨 내쉬는 시간이 길어짐; 호기가 길어짐\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 근긴장의 이상 | aliases: 근긴장의 이상; 근육 긴장 이상; 근육이 비정상적으로 긴장됨\n- 고탄산증 | aliases: 고탄산증; 이산화탄소가 높음; CO2 상승\n- 수유 곤란 | aliases: 수유 곤란; 수유가 어려움; 젖을 잘 못 먹음\n- 감기 증상 | aliases: 감기 증상; 감기 같은 증상; 몸살 감기 느낌; 감기 기운\n- 오한 | aliases: 오한; 춥고 떨림; 몸이 으슬으슬함; 오슬오슬함\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 1,
+        "expected_symptoms": [
+          "열",
+          "기침",
+          "가래"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "가래",
+          "기침",
+          "열"
+        ],
+        "predicted": [
+          "가래",
+          "기침",
+          "열"
+        ],
+        "correct": [
+          "가래",
+          "기침",
+          "열"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "4a4f860e-3e3e-4480-88ac-0881836faf4b",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:21.006052+00:00",
+      "completed_at": "2026-05-26T13:51:22.194855+00:00",
+      "duration_ms": 1191.92,
+      "input": {
+        "text": "숨이 차고 가슴이 답답해요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "가슴 답답",
+          "가슴 두근거림",
+          "함몰가슴",
+          "호흡곤란",
+          "기침",
+          "운동 시 호흡곤란",
+          "흉곽 팽윤",
+          "온몸이 떨림",
+          "심부전",
+          "호기의 증가",
+          "체중감소",
+          "눈이 무거운 느낌",
+          "피부홍조",
+          "기운없음",
+          "가래",
+          "흉부압박감",
+          "목소리 변화",
+          "말초부종",
+          "목의 통증",
+          "뇌압상승증상",
+          "열",
+          "복벽이 움푹 들어감",
+          "탈장",
+          "눈의 충혈",
+          "눈꼽"
+        ]
+      },
+      "result": {
+        "input_text": "숨이 차고 가슴이 답답해요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "호흡곤란",
+            "evidence_text": "숨이 차고",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "가슴 답답",
+            "evidence_text": "가슴이 답답해요",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "가슴 답답",
+          "가슴 두근거림",
+          "함몰가슴",
+          "호흡곤란",
+          "기침",
+          "운동 시 호흡곤란",
+          "흉곽 팽윤",
+          "온몸이 떨림",
+          "심부전",
+          "호기의 증가",
+          "체중감소",
+          "눈이 무거운 느낌",
+          "피부홍조",
+          "기운없음",
+          "가래",
+          "흉부압박감",
+          "목소리 변화",
+          "말초부종",
+          "목의 통증",
+          "뇌압상승증상",
+          "열",
+          "복벽이 움푹 들어감",
+          "탈장",
+          "눈의 충혈",
+          "눈꼽"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"숨이 차고 가슴이 답답해요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"호흡곤란\",\n      \"evidence_text\": \"숨이 차고\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"가슴 답답\",\n      \"evidence_text\": \"가슴이 답답해요\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n숨이 차고 가슴이 답답해요.\n\n후보 증상 목록:\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n- 가슴 두근거림 | aliases: 가슴 두근거림; 심장이 두근거려요; 심장이 빨리 뛰어요; 두근거림; 심계항진\n- 함몰가슴 | aliases: 함몰가슴; 가슴이 움푹 들어감; 흉부 함몰\n- 호흡곤란 | aliases: 호흡곤란; 숨이 차요; 숨쉬기 힘듦; 호흡이 어려움; 숨 가쁨\n- 기침 | aliases: 기침; 콜록거림; 기침이 나요; 마른기침; 기침이 심함\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 심부전 | aliases: 심부전; 심장 기능 저하; 심부전 증상\n- 호기의 증가 | aliases: 호기의 증가; 숨 내쉬는 시간이 길어짐; 호기가 길어짐\n- 체중감소 | aliases: 체중감소; 살이 빠짐; 몸무게 감소; 체중이 줄어듦\n- 눈이 무거운 느낌 | aliases: 눈이 무거운 느낌; 눈이 무거워요; 눈꺼풀이 무거움\n- 피부홍조 | aliases: 피부홍조; 얼굴이 빨개짐; 피부가 붉어짐; 홍조\n- 기운없음 | aliases: 기운없음; 기운이 없어요; 힘이 없어요; 무기력해요\n- 가래 | aliases: 가래; 객담; 가래가 나와요; 목에 가래가 낀 느낌; 끈적한 가래\n- 흉부압박감 | aliases: 흉부압박감; 가슴이 눌리는 느낌; 가슴 압박감; 흉부 압박\n- 목소리 변화 | aliases: 목소리 변화; 목소리가 변함; 쉰 목소리; 목소리가 쉬었어요\n- 말초부종 | aliases: 말초부종; 손발이 부음; 말초가 부음\n- 목의 통증 | aliases: 목의 통증; 목이 아파요; 인후통; 목 통증; 목이 따가움\n- 뇌압상승증상 | aliases: 뇌압상승증상; 머리 압력이 오른 느낌; 뇌압 상승 의심 증상\n- 열 | aliases: 열; 발열; 열이 나요; 체온이 높음; 고열\n- 복벽이 움푹 들어감 | aliases: 복벽이 움푹 들어감; 배가 움푹 들어감; 복벽 함몰\n- 탈장 | aliases: 탈장; 장이 튀어나옴; 탈장 의심\n- 눈의 충혈 | aliases: 눈의 충혈; 눈이 빨개요; 눈 충혈; 눈이 붉음\n- 눈꼽 | aliases: 눈꼽; 눈곱; 눈에 분비물이 낌\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 2,
+        "expected_symptoms": [
+          "호흡곤란",
+          "가슴 답답"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "가슴 답답",
+          "호흡곤란"
+        ],
+        "predicted": [
+          "가슴 답답",
+          "호흡곤란"
+        ],
+        "correct": [
+          "가슴 답답",
+          "호흡곤란"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "38e8c2dc-08f6-4995-8b30-cac66dbc4b1f",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:22.194855+00:00",
+      "completed_at": "2026-05-26T13:51:23.516727+00:00",
+      "duration_ms": 1312.67,
+      "input": {
+        "text": "기침할 때 피가 섞인 가래가 나와요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "가래",
+          "기침",
+          "거품이 섞인 가래",
+          "객혈",
+          "검은색 가래",
+          "화농성 객담",
+          "흉곽 팽윤",
+          "가슴 답답",
+          "사래걸림",
+          "온몸이 떨림",
+          "가슴 두근거림",
+          "호기의 증가",
+          "피부홍조",
+          "폐부종",
+          "복부팽만감",
+          "함몰가슴",
+          "근긴장의 이상",
+          "복벽이 움푹 들어감",
+          "사지 부종",
+          "구토",
+          "흉부압박감",
+          "운동 시 호흡곤란",
+          "근력 약화",
+          "호흡곤란",
+          "말초부종"
+        ]
+      },
+      "result": {
+        "input_text": "기침할 때 피가 섞인 가래가 나와요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "기침",
+            "evidence_text": "기침할 때",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "가래",
+            "evidence_text": "가래가 나와요",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "객혈",
+            "evidence_text": "피가 섞인",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "가래",
+          "기침",
+          "거품이 섞인 가래",
+          "객혈",
+          "검은색 가래",
+          "화농성 객담",
+          "흉곽 팽윤",
+          "가슴 답답",
+          "사래걸림",
+          "온몸이 떨림",
+          "가슴 두근거림",
+          "호기의 증가",
+          "피부홍조",
+          "폐부종",
+          "복부팽만감",
+          "함몰가슴",
+          "근긴장의 이상",
+          "복벽이 움푹 들어감",
+          "사지 부종",
+          "구토",
+          "흉부압박감",
+          "운동 시 호흡곤란",
+          "근력 약화",
+          "호흡곤란",
+          "말초부종"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"기침할 때 피가 섞인 가래가 나와요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"기침\",\n      \"evidence_text\": \"기침할 때\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"가래\",\n      \"evidence_text\": \"가래가 나와요\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"객혈\",\n      \"evidence_text\": \"피가 섞인\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n기침할 때 피가 섞인 가래가 나와요.\n\n후보 증상 목록:\n- 가래 | aliases: 가래; 객담; 가래가 나와요; 목에 가래가 낀 느낌; 끈적한 가래\n- 기침 | aliases: 기침; 콜록거림; 기침이 나요; 마른기침; 기침이 심함\n- 거품이 섞인 가래 | aliases: 거품이 섞인 가래; 거품 낀 가래; 거품이 있는 객담\n- 객혈 | aliases: 객혈; 피가 섞인 가래; 기침할 때 피가 나와요; 피가래; 혈담\n- 검은색 가래 | aliases: 검은색 가래; 검은 가래; 까만 가래\n- 화농성 객담 | aliases: 화농성 객담; 누런 가래; 고름 같은 가래; 화농성 가래\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n- 사래걸림 | aliases: 사래걸림; 음식이 기도로 넘어감; 사레들림; 기침하며 사레\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 가슴 두근거림 | aliases: 가슴 두근거림; 심장이 두근거려요; 심장이 빨리 뛰어요; 두근거림; 심계항진\n- 호기의 증가 | aliases: 호기의 증가; 숨 내쉬는 시간이 길어짐; 호기가 길어짐\n- 피부홍조 | aliases: 피부홍조; 얼굴이 빨개짐; 피부가 붉어짐; 홍조\n- 폐부종 | aliases: 폐부종; 폐에 물이 참; 폐부종 의심\n- 복부팽만감 | aliases: 복부팽만감; 배가 빵빵함; 배가 더부룩함; 복부 팽만\n- 함몰가슴 | aliases: 함몰가슴; 가슴이 움푹 들어감; 흉부 함몰\n- 근긴장의 이상 | aliases: 근긴장의 이상; 근육 긴장 이상; 근육이 비정상적으로 긴장됨\n- 복벽이 움푹 들어감 | aliases: 복벽이 움푹 들어감; 배가 움푹 들어감; 복벽 함몰\n- 사지 부종 | aliases: 사지 부종; 팔다리가 부음; 팔 다리 부종\n- 구토 | aliases: 구토; 토해요; 구역질 후 토함; 음식을 토함\n- 흉부압박감 | aliases: 흉부압박감; 가슴이 눌리는 느낌; 가슴 압박감; 흉부 압박\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 근력 약화 | aliases: 근력 약화; 힘이 빠짐; 근육 힘이 약함; 사지에 힘이 없음\n- 호흡곤란 | aliases: 호흡곤란; 숨이 차요; 숨쉬기 힘듦; 호흡이 어려움; 숨 가쁨\n- 말초부종 | aliases: 말초부종; 손발이 부음; 말초가 부음\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 3,
+        "expected_symptoms": [
+          "기침",
+          "객혈",
+          "가래"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "가래",
+          "객혈",
+          "기침"
+        ],
+        "predicted": [
+          "가래",
+          "객혈",
+          "기침"
+        ],
+        "correct": [
+          "가래",
+          "객혈",
+          "기침"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "68131e2b-e821-453a-80d3-fb7cd9f1eca5",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:23.517337+00:00",
+      "completed_at": "2026-05-26T13:51:24.748525+00:00",
+      "duration_ms": 1233.57,
+      "input": {
+        "text": "콧물이 계속 나고 코가 막혀서 숨쉬기 불편해요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "콧물",
+          "코막힘",
+          "호흡곤란",
+          "질식",
+          "호기의 증가",
+          "운동 시 호흡곤란",
+          "복벽이 움푹 들어감",
+          "어지러움",
+          "흉곽 팽윤",
+          "피로감",
+          "복부팽만감",
+          "온몸이 떨림",
+          "체중감소",
+          "기침",
+          "결막염",
+          "고탄산증",
+          "화농성 객담",
+          "눈의 충혈",
+          "피부홍조",
+          "거품이 섞인 가래",
+          "권태감",
+          "발한",
+          "눈이 무거운 느낌",
+          "폐부종",
+          "가슴 답답"
+        ]
+      },
+      "result": {
+        "input_text": "콧물이 계속 나고 코가 막혀서 숨쉬기 불편해요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "콧물",
+            "evidence_text": "콧물이 계속 나고",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "코막힘",
+            "evidence_text": "코가 막혀서",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "호흡곤란",
+            "evidence_text": "숨쉬기 불편해요",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "콧물",
+          "코막힘",
+          "호흡곤란",
+          "질식",
+          "호기의 증가",
+          "운동 시 호흡곤란",
+          "복벽이 움푹 들어감",
+          "어지러움",
+          "흉곽 팽윤",
+          "피로감",
+          "복부팽만감",
+          "온몸이 떨림",
+          "체중감소",
+          "기침",
+          "결막염",
+          "고탄산증",
+          "화농성 객담",
+          "눈의 충혈",
+          "피부홍조",
+          "거품이 섞인 가래",
+          "권태감",
+          "발한",
+          "눈이 무거운 느낌",
+          "폐부종",
+          "가슴 답답"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"콧물이 계속 나고 코가 막혀서 숨쉬기 불편해요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"콧물\",\n      \"evidence_text\": \"콧물이 계속 나고\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"코막힘\",\n      \"evidence_text\": \"코가 막혀서\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"호흡곤란\",\n      \"evidence_text\": \"숨쉬기 불편해요\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n콧물이 계속 나고 코가 막혀서 숨쉬기 불편해요.\n\n후보 증상 목록:\n- 콧물 | aliases: 콧물; 코물이 나옴; 맑은 콧물; 콧물이 흘러요\n- 코막힘 | aliases: 코막힘; 코가 막힘; 코가 답답함; 비폐색\n- 호흡곤란 | aliases: 호흡곤란; 숨이 차요; 숨쉬기 힘듦; 호흡이 어려움; 숨 가쁨\n- 질식 | aliases: 질식; 숨이 막힘; 기도가 막힘; 질식할 것 같음\n- 호기의 증가 | aliases: 호기의 증가; 숨 내쉬는 시간이 길어짐; 호기가 길어짐\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 복벽이 움푹 들어감 | aliases: 복벽이 움푹 들어감; 배가 움푹 들어감; 복벽 함몰\n- 어지러움 | aliases: 어지러움; 어지러워요; 현기증; 빙빙 도는 느낌\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 피로감 | aliases: 피로감; 피곤함; 쉽게 지침; 피로해요\n- 복부팽만감 | aliases: 복부팽만감; 배가 빵빵함; 배가 더부룩함; 복부 팽만\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 체중감소 | aliases: 체중감소; 살이 빠짐; 몸무게 감소; 체중이 줄어듦\n- 기침 | aliases: 기침; 콜록거림; 기침이 나요; 마른기침; 기침이 심함\n- 결막염 | aliases: 결막염; 눈병; 눈이 빨갛고 눈곱이 생김; 결막이 충혈됨\n- 고탄산증 | aliases: 고탄산증; 이산화탄소가 높음; CO2 상승\n- 화농성 객담 | aliases: 화농성 객담; 누런 가래; 고름 같은 가래; 화농성 가래\n- 눈의 충혈 | aliases: 눈의 충혈; 눈이 빨개요; 눈 충혈; 눈이 붉음\n- 피부홍조 | aliases: 피부홍조; 얼굴이 빨개짐; 피부가 붉어짐; 홍조\n- 거품이 섞인 가래 | aliases: 거품이 섞인 가래; 거품 낀 가래; 거품이 있는 객담\n- 권태감 | aliases: 권태감; 몸이 처져요; 무기력함; 몸이 나른함; 컨디션 저하\n- 발한 | aliases: 발한; 땀이 많이 남; 식은땀; 땀 흘림\n- 눈이 무거운 느낌 | aliases: 눈이 무거운 느낌; 눈이 무거워요; 눈꺼풀이 무거움\n- 폐부종 | aliases: 폐부종; 폐에 물이 참; 폐부종 의심\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 4,
+        "expected_symptoms": [
+          "콧물",
+          "코막힘"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "코막힘",
+          "콧물"
+        ],
+        "predicted": [
+          "코막힘",
+          "콧물",
+          "호흡곤란"
+        ],
+        "correct": [
+          "코막힘",
+          "콧물"
+        ],
+        "missing": [],
+        "extra": [
+          "호흡곤란"
+        ],
+        "precision": 0.6667,
+        "recall": 1.0,
+        "f1": 0.8,
+        "exact_match": false
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "8b8bca89-18da-4f5b-8bb5-dc69a4b8de41",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:24.748525+00:00",
+      "completed_at": "2026-05-26T13:51:25.995198+00:00",
+      "duration_ms": 1245.43,
+      "input": {
+        "text": "재채기를 자주 하고 눈도 충혈된 것 같아요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "재채기",
+          "눈의 충혈",
+          "눈꼽",
+          "결막염",
+          "눈이 무거운 느낌",
+          "콧물",
+          "발한",
+          "창백",
+          "반복되는 폐렴",
+          "객혈",
+          "고탄산증",
+          "피부홍조",
+          "설사",
+          "지남력 장애",
+          "흉곽 팽윤",
+          "거품이 섞인 가래",
+          "폐부종",
+          "의식 변화",
+          "말초부종",
+          "다발성 장기부전 증상",
+          "호기의 증가",
+          "복벽이 움푹 들어감",
+          "사지 부종",
+          "뇌압상승증상",
+          "폐기능저하"
+        ]
+      },
+      "result": {
+        "input_text": "재채기를 자주 하고 눈도 충혈된 것 같아요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "재채기",
+            "evidence_text": "재채기를 자주",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "눈의 충혈",
+            "evidence_text": "눈도 충혈된",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "재채기",
+          "눈의 충혈",
+          "눈꼽",
+          "결막염",
+          "눈이 무거운 느낌",
+          "콧물",
+          "발한",
+          "창백",
+          "반복되는 폐렴",
+          "객혈",
+          "고탄산증",
+          "피부홍조",
+          "설사",
+          "지남력 장애",
+          "흉곽 팽윤",
+          "거품이 섞인 가래",
+          "폐부종",
+          "의식 변화",
+          "말초부종",
+          "다발성 장기부전 증상",
+          "호기의 증가",
+          "복벽이 움푹 들어감",
+          "사지 부종",
+          "뇌압상승증상",
+          "폐기능저하"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"재채기를 자주 하고 눈도 충혈된 것 같아요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"재채기\",\n      \"evidence_text\": \"재채기를 자주\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"눈의 충혈\",\n      \"evidence_text\": \"눈도 충혈된\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n재채기를 자주 하고 눈도 충혈된 것 같아요.\n\n후보 증상 목록:\n- 재채기 | aliases: 재채기; 재채기를 해요; 재채기가 계속 남\n- 눈의 충혈 | aliases: 눈의 충혈; 눈이 빨개요; 눈 충혈; 눈이 붉음\n- 눈꼽 | aliases: 눈꼽; 눈곱; 눈에 분비물이 낌\n- 결막염 | aliases: 결막염; 눈병; 눈이 빨갛고 눈곱이 생김; 결막이 충혈됨\n- 눈이 무거운 느낌 | aliases: 눈이 무거운 느낌; 눈이 무거워요; 눈꺼풀이 무거움\n- 콧물 | aliases: 콧물; 코물이 나옴; 맑은 콧물; 콧물이 흘러요\n- 발한 | aliases: 발한; 땀이 많이 남; 식은땀; 땀 흘림\n- 창백 | aliases: 창백; 얼굴이 창백함; 피부가 하얗게 질림\n- 반복되는 폐렴 | aliases: 반복되는 폐렴; 폐렴이 자주 반복됨; 자주 폐렴에 걸림\n- 객혈 | aliases: 객혈; 피가 섞인 가래; 기침할 때 피가 나와요; 피가래; 혈담\n- 고탄산증 | aliases: 고탄산증; 이산화탄소가 높음; CO2 상승\n- 피부홍조 | aliases: 피부홍조; 얼굴이 빨개짐; 피부가 붉어짐; 홍조\n- 설사 | aliases: 설사; 묽은 변; 배탈 설사; 설사를 해요\n- 지남력 장애 | aliases: 지남력 장애; 시간 장소 사람을 헷갈림; 방향감각 상실; 혼동\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 거품이 섞인 가래 | aliases: 거품이 섞인 가래; 거품 낀 가래; 거품이 있는 객담\n- 폐부종 | aliases: 폐부종; 폐에 물이 참; 폐부종 의심\n- 의식 변화 | aliases: 의식 변화; 의식이 이상함; 정신이 흐림; 의식 상태 변화\n- 말초부종 | aliases: 말초부종; 손발이 부음; 말초가 부음\n- 다발성 장기부전 증상 | aliases: 다발성 장기부전 증상; 여러 장기 기능 저하; 장기부전 의심\n- 호기의 증가 | aliases: 호기의 증가; 숨 내쉬는 시간이 길어짐; 호기가 길어짐\n- 복벽이 움푹 들어감 | aliases: 복벽이 움푹 들어감; 배가 움푹 들어감; 복벽 함몰\n- 사지 부종 | aliases: 사지 부종; 팔다리가 부음; 팔 다리 부종\n- 뇌압상승증상 | aliases: 뇌압상승증상; 머리 압력이 오른 느낌; 뇌압 상승 의심 증상\n- 폐기능저하 | aliases: 폐기능저하; 폐 기능이 떨어짐; 호흡 기능 저하\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 5,
+        "expected_symptoms": [
+          "재채기",
+          "눈의 충혈"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "눈의 충혈",
+          "재채기"
+        ],
+        "predicted": [
+          "눈의 충혈",
+          "재채기"
+        ],
+        "correct": [
+          "눈의 충혈",
+          "재채기"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "76caa33f-5d9e-4b7d-a537-b4bff5d965fd",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:25.995198+00:00",
+      "completed_at": "2026-05-26T13:51:27.287245+00:00",
+      "duration_ms": 1295.08,
+      "input": {
+        "text": "몸살처럼 근육통이 있고 열도 나요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "열",
+          "근육통",
+          "근긴장의 이상",
+          "방사통",
+          "감기 증상",
+          "압통",
+          "복부팽만감",
+          "말초부종",
+          "온몸이 떨림",
+          "폐동맥 고혈압",
+          "객혈",
+          "복부 통증",
+          "가슴 답답",
+          "목의 통증",
+          "권태감",
+          "박동성 통증",
+          "두통",
+          "피로감",
+          "근력 약화",
+          "고탄산증",
+          "흉곽 팽윤",
+          "기침",
+          "가슴 두근거림",
+          "흉통",
+          "흉부압박감"
+        ]
+      },
+      "result": {
+        "input_text": "몸살처럼 근육통이 있고 열도 나요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "근육통",
+            "evidence_text": "근육통",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "열",
+            "evidence_text": "열도 나요",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [
+          {
+            "symptom_name": "감기 증상",
+            "reason": "몸살처럼이라는 표현이 감기 증상과 유사함",
+            "confidence": 0.7
+          }
+        ],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "열",
+          "근육통",
+          "근긴장의 이상",
+          "방사통",
+          "감기 증상",
+          "압통",
+          "복부팽만감",
+          "말초부종",
+          "온몸이 떨림",
+          "폐동맥 고혈압",
+          "객혈",
+          "복부 통증",
+          "가슴 답답",
+          "목의 통증",
+          "권태감",
+          "박동성 통증",
+          "두통",
+          "피로감",
+          "근력 약화",
+          "고탄산증",
+          "흉곽 팽윤",
+          "기침",
+          "가슴 두근거림",
+          "흉통",
+          "흉부압박감"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"몸살처럼 근육통이 있고 열도 나요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"근육통\",\n      \"evidence_text\": \"근육통\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"열\",\n      \"evidence_text\": \"열도 나요\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"감기 증상\",\n      \"reason\": \"몸살처럼이라는 표현이 감기 증상과 유사함\",\n      \"confidence\": 0.7\n    }\n  ],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n몸살처럼 근육통이 있고 열도 나요.\n\n후보 증상 목록:\n- 열 | aliases: 열; 발열; 열이 나요; 체온이 높음; 고열\n- 근육통 | aliases: 근육통; 몸살; 근육이 아픔; 온몸이 쑤심\n- 근긴장의 이상 | aliases: 근긴장의 이상; 근육 긴장 이상; 근육이 비정상적으로 긴장됨\n- 방사통 | aliases: 방사통; 통증이 퍼짐; 다른 부위로 뻗치는 통증\n- 감기 증상 | aliases: 감기 증상; 감기 같은 증상; 몸살 감기 느낌; 감기 기운\n- 압통 | aliases: 압통; 누르면 아픔; 눌렀을 때 통증\n- 복부팽만감 | aliases: 복부팽만감; 배가 빵빵함; 배가 더부룩함; 복부 팽만\n- 말초부종 | aliases: 말초부종; 손발이 부음; 말초가 부음\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 폐동맥 고혈압 | aliases: 폐동맥 고혈압; 폐동맥압 상승; 폐고혈압\n- 객혈 | aliases: 객혈; 피가 섞인 가래; 기침할 때 피가 나와요; 피가래; 혈담\n- 복부 통증 | aliases: 복부 통증; 배가 아파요; 복통; 배 통증\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n- 목의 통증 | aliases: 목의 통증; 목이 아파요; 인후통; 목 통증; 목이 따가움\n- 권태감 | aliases: 권태감; 몸이 처져요; 무기력함; 몸이 나른함; 컨디션 저하\n- 박동성 통증 | aliases: 박동성 통증; 맥박처럼 욱신거리는 통증; 두근두근 뛰듯 아픔\n- 두통 | aliases: 두통; 머리가 아파요; 머리 통증; 편두통처럼 아픔\n- 피로감 | aliases: 피로감; 피곤함; 쉽게 지침; 피로해요\n- 근력 약화 | aliases: 근력 약화; 힘이 빠짐; 근육 힘이 약함; 사지에 힘이 없음\n- 고탄산증 | aliases: 고탄산증; 이산화탄소가 높음; CO2 상승\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 기침 | aliases: 기침; 콜록거림; 기침이 나요; 마른기침; 기침이 심함\n- 가슴 두근거림 | aliases: 가슴 두근거림; 심장이 두근거려요; 심장이 빨리 뛰어요; 두근거림; 심계항진\n- 흉통 | aliases: 흉통; 가슴 통증; 가슴이 아파요; 흉부 통증\n- 흉부압박감 | aliases: 흉부압박감; 가슴이 눌리는 느낌; 가슴 압박감; 흉부 압박\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 6,
+        "expected_symptoms": [
+          "근육통",
+          "열"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "근육통",
+          "열"
+        ],
+        "predicted": [
+          "근육통",
+          "열"
+        ],
+        "correct": [
+          "근육통",
+          "열"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": [
+        "감기 증상"
+      ]
+    },
+    {
+      "record_id": "74bc828b-25b2-4a1c-bd1a-d2c941e3fb0b",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:27.287245+00:00",
+      "completed_at": "2026-05-26T13:51:28.544182+00:00",
+      "duration_ms": 1263.12,
+      "input": {
+        "text": "머리가 아프고 온몸에 힘이 없어요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "온몸이 떨림",
+          "기운없음",
+          "눈이 무거운 느낌",
+          "근력 약화",
+          "가슴 답답",
+          "뇌압상승증상",
+          "목소리 변화",
+          "권태감",
+          "피부홍조",
+          "빈호흡",
+          "어지러움",
+          "사망",
+          "가슴 두근거림",
+          "코막힘",
+          "질식",
+          "눈의 충혈",
+          "함몰가슴",
+          "두통",
+          "오한",
+          "목의 통증",
+          "서맥",
+          "무증상",
+          "호흡곤란",
+          "저산소증",
+          "빈맥"
+        ]
+      },
+      "result": {
+        "input_text": "머리가 아프고 온몸에 힘이 없어요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "두통",
+            "evidence_text": "머리가 아프고",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "기운없음",
+            "evidence_text": "온몸에 힘이 없어요",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "온몸이 떨림",
+          "기운없음",
+          "눈이 무거운 느낌",
+          "근력 약화",
+          "가슴 답답",
+          "뇌압상승증상",
+          "목소리 변화",
+          "권태감",
+          "피부홍조",
+          "빈호흡",
+          "어지러움",
+          "사망",
+          "가슴 두근거림",
+          "코막힘",
+          "질식",
+          "눈의 충혈",
+          "함몰가슴",
+          "두통",
+          "오한",
+          "목의 통증",
+          "서맥",
+          "무증상",
+          "호흡곤란",
+          "저산소증",
+          "빈맥"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"머리가 아프고 온몸에 힘이 없어요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"두통\",\n      \"evidence_text\": \"머리가 아프고\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"기운없음\",\n      \"evidence_text\": \"온몸에 힘이 없어요\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n머리가 아프고 온몸에 힘이 없어요.\n\n후보 증상 목록:\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 기운없음 | aliases: 기운없음; 기운이 없어요; 힘이 없어요; 무기력해요\n- 눈이 무거운 느낌 | aliases: 눈이 무거운 느낌; 눈이 무거워요; 눈꺼풀이 무거움\n- 근력 약화 | aliases: 근력 약화; 힘이 빠짐; 근육 힘이 약함; 사지에 힘이 없음\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n- 뇌압상승증상 | aliases: 뇌압상승증상; 머리 압력이 오른 느낌; 뇌압 상승 의심 증상\n- 목소리 변화 | aliases: 목소리 변화; 목소리가 변함; 쉰 목소리; 목소리가 쉬었어요\n- 권태감 | aliases: 권태감; 몸이 처져요; 무기력함; 몸이 나른함; 컨디션 저하\n- 피부홍조 | aliases: 피부홍조; 얼굴이 빨개짐; 피부가 붉어짐; 홍조\n- 빈호흡 | aliases: 빈호흡; 호흡이 빠름; 숨을 빠르게 쉼; 빠른 호흡\n- 어지러움 | aliases: 어지러움; 어지러워요; 현기증; 빙빙 도는 느낌\n- 사망 | aliases: 사망; 죽음\n- 가슴 두근거림 | aliases: 가슴 두근거림; 심장이 두근거려요; 심장이 빨리 뛰어요; 두근거림; 심계항진\n- 코막힘 | aliases: 코막힘; 코가 막힘; 코가 답답함; 비폐색\n- 질식 | aliases: 질식; 숨이 막힘; 기도가 막힘; 질식할 것 같음\n- 눈의 충혈 | aliases: 눈의 충혈; 눈이 빨개요; 눈 충혈; 눈이 붉음\n- 함몰가슴 | aliases: 함몰가슴; 가슴이 움푹 들어감; 흉부 함몰\n- 두통 | aliases: 두통; 머리가 아파요; 머리 통증; 편두통처럼 아픔\n- 오한 | aliases: 오한; 춥고 떨림; 몸이 으슬으슬함; 오슬오슬함\n- 목의 통증 | aliases: 목의 통증; 목이 아파요; 인후통; 목 통증; 목이 따가움\n- 서맥 | aliases: 서맥; 맥박이 느림; 느린 심박\n- 무증상 | aliases: 무증상; 증상이 없음; 별다른 증상 없음; 아무 증상 없음\n- 호흡곤란 | aliases: 호흡곤란; 숨이 차요; 숨쉬기 힘듦; 호흡이 어려움; 숨 가쁨\n- 저산소증 | aliases: 저산소증; 산소포화도 낮음; 산소가 부족함; 저산소\n- 빈맥 | aliases: 빈맥; 맥박이 빠름; 심장이 빠르게 뜀; 빠른 심박\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 7,
+        "expected_symptoms": [
+          "두통",
+          "기운없음"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "기운없음",
+          "두통"
+        ],
+        "predicted": [
+          "기운없음",
+          "두통"
+        ],
+        "correct": [
+          "기운없음",
+          "두통"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "174e7f40-22e4-44c4-a4e5-9b903529799e",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:28.544182+00:00",
+      "completed_at": "2026-05-26T13:51:29.695872+00:00",
+      "duration_ms": 1149.15,
+      "input": {
+        "text": "가래가 끈적하고 숨 쉴 때 쌕쌕거리는 소리가 나요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "가래",
+          "천명음",
+          "화농성 객담",
+          "목소리 변화",
+          "거품이 섞인 가래",
+          "마찰음",
+          "운동 시 호흡곤란",
+          "검은색 가래",
+          "호흡곤란",
+          "사래걸림",
+          "가슴 답답",
+          "흉곽 팽윤",
+          "질식",
+          "기침",
+          "흉부압박감",
+          "기운없음",
+          "복부팽만감",
+          "말초부종",
+          "온몸이 떨림",
+          "가슴 두근거림",
+          "호기의 증가",
+          "어지러움",
+          "하지부종",
+          "사지 부종",
+          "빈호흡"
+        ]
+      },
+      "result": {
+        "input_text": "가래가 끈적하고 숨 쉴 때 쌕쌕거리는 소리가 나요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "가래",
+            "evidence_text": "가래가 끈적하고",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "천명음",
+            "evidence_text": "숨 쉴 때 쌕쌕거리는 소리",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "가래",
+          "천명음",
+          "화농성 객담",
+          "목소리 변화",
+          "거품이 섞인 가래",
+          "마찰음",
+          "운동 시 호흡곤란",
+          "검은색 가래",
+          "호흡곤란",
+          "사래걸림",
+          "가슴 답답",
+          "흉곽 팽윤",
+          "질식",
+          "기침",
+          "흉부압박감",
+          "기운없음",
+          "복부팽만감",
+          "말초부종",
+          "온몸이 떨림",
+          "가슴 두근거림",
+          "호기의 증가",
+          "어지러움",
+          "하지부종",
+          "사지 부종",
+          "빈호흡"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"가래가 끈적하고 숨 쉴 때 쌕쌕거리는 소리가 나요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"가래\",\n      \"evidence_text\": \"가래가 끈적하고\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"천명음\",\n      \"evidence_text\": \"숨 쉴 때 쌕쌕거리는 소리\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n가래가 끈적하고 숨 쉴 때 쌕쌕거리는 소리가 나요.\n\n후보 증상 목록:\n- 가래 | aliases: 가래; 객담; 가래가 나와요; 목에 가래가 낀 느낌; 끈적한 가래\n- 천명음 | aliases: 천명음; 쌕쌕거림; 숨 쉴 때 쌕쌕 소리; 휘파람 같은 숨소리\n- 화농성 객담 | aliases: 화농성 객담; 누런 가래; 고름 같은 가래; 화농성 가래\n- 목소리 변화 | aliases: 목소리 변화; 목소리가 변함; 쉰 목소리; 목소리가 쉬었어요\n- 거품이 섞인 가래 | aliases: 거품이 섞인 가래; 거품 낀 가래; 거품이 있는 객담\n- 마찰음 | aliases: 마찰음; 숨 쉴 때 마찰 소리; 흉막 마찰음\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 검은색 가래 | aliases: 검은색 가래; 검은 가래; 까만 가래\n- 호흡곤란 | aliases: 호흡곤란; 숨이 차요; 숨쉬기 힘듦; 호흡이 어려움; 숨 가쁨\n- 사래걸림 | aliases: 사래걸림; 음식이 기도로 넘어감; 사레들림; 기침하며 사레\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 질식 | aliases: 질식; 숨이 막힘; 기도가 막힘; 질식할 것 같음\n- 기침 | aliases: 기침; 콜록거림; 기침이 나요; 마른기침; 기침이 심함\n- 흉부압박감 | aliases: 흉부압박감; 가슴이 눌리는 느낌; 가슴 압박감; 흉부 압박\n- 기운없음 | aliases: 기운없음; 기운이 없어요; 힘이 없어요; 무기력해요\n- 복부팽만감 | aliases: 복부팽만감; 배가 빵빵함; 배가 더부룩함; 복부 팽만\n- 말초부종 | aliases: 말초부종; 손발이 부음; 말초가 부음\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 가슴 두근거림 | aliases: 가슴 두근거림; 심장이 두근거려요; 심장이 빨리 뛰어요; 두근거림; 심계항진\n- 호기의 증가 | aliases: 호기의 증가; 숨 내쉬는 시간이 길어짐; 호기가 길어짐\n- 어지러움 | aliases: 어지러움; 어지러워요; 현기증; 빙빙 도는 느낌\n- 하지부종 | aliases: 하지부종; 다리가 부음; 발목이 부음; 하지 부종\n- 사지 부종 | aliases: 사지 부종; 팔다리가 부음; 팔 다리 부종\n- 빈호흡 | aliases: 빈호흡; 호흡이 빠름; 숨을 빠르게 쉼; 빠른 호흡\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 8,
+        "expected_symptoms": [
+          "가래",
+          "천명음"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "가래",
+          "천명음"
+        ],
+        "predicted": [
+          "가래",
+          "천명음"
+        ],
+        "correct": [
+          "가래",
+          "천명음"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "b3f3d1da-713f-4b5d-95f9-228da59b8dc1",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:29.695872+00:00",
+      "completed_at": "2026-05-26T13:51:31.018140+00:00",
+      "duration_ms": 1313.83,
+      "input": {
+        "text": "운동하면 숨이 너무 차고 쉽게 피로해져요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "운동 시 호흡곤란",
+          "피로감",
+          "호흡곤란",
+          "온몸이 떨림",
+          "피부홍조",
+          "근력 약화",
+          "기침",
+          "복부팽만감",
+          "함몰가슴",
+          "탈장",
+          "발한",
+          "고탄산증",
+          "방사통",
+          "흉곽 팽윤",
+          "창백",
+          "체중감소",
+          "가슴 답답",
+          "천명음",
+          "사망",
+          "압통",
+          "뇌압상승증상",
+          "호기의 증가",
+          "객혈",
+          "폐기능저하",
+          "권태감"
+        ]
+      },
+      "result": {
+        "input_text": "운동하면 숨이 너무 차고 쉽게 피로해져요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "운동 시 호흡곤란",
+            "evidence_text": "운동하면 숨이 너무 차",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "피로감",
+            "evidence_text": "쉽게 피로해져요",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "운동 시 호흡곤란",
+          "피로감",
+          "호흡곤란",
+          "온몸이 떨림",
+          "피부홍조",
+          "근력 약화",
+          "기침",
+          "복부팽만감",
+          "함몰가슴",
+          "탈장",
+          "발한",
+          "고탄산증",
+          "방사통",
+          "흉곽 팽윤",
+          "창백",
+          "체중감소",
+          "가슴 답답",
+          "천명음",
+          "사망",
+          "압통",
+          "뇌압상승증상",
+          "호기의 증가",
+          "객혈",
+          "폐기능저하",
+          "권태감"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"운동하면 숨이 너무 차고 쉽게 피로해져요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"운동 시 호흡곤란\",\n      \"evidence_text\": \"운동하면 숨이 너무 차\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"피로감\",\n      \"evidence_text\": \"쉽게 피로해져요\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n운동하면 숨이 너무 차고 쉽게 피로해져요.\n\n후보 증상 목록:\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 피로감 | aliases: 피로감; 피곤함; 쉽게 지침; 피로해요\n- 호흡곤란 | aliases: 호흡곤란; 숨이 차요; 숨쉬기 힘듦; 호흡이 어려움; 숨 가쁨\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 피부홍조 | aliases: 피부홍조; 얼굴이 빨개짐; 피부가 붉어짐; 홍조\n- 근력 약화 | aliases: 근력 약화; 힘이 빠짐; 근육 힘이 약함; 사지에 힘이 없음\n- 기침 | aliases: 기침; 콜록거림; 기침이 나요; 마른기침; 기침이 심함\n- 복부팽만감 | aliases: 복부팽만감; 배가 빵빵함; 배가 더부룩함; 복부 팽만\n- 함몰가슴 | aliases: 함몰가슴; 가슴이 움푹 들어감; 흉부 함몰\n- 탈장 | aliases: 탈장; 장이 튀어나옴; 탈장 의심\n- 발한 | aliases: 발한; 땀이 많이 남; 식은땀; 땀 흘림\n- 고탄산증 | aliases: 고탄산증; 이산화탄소가 높음; CO2 상승\n- 방사통 | aliases: 방사통; 통증이 퍼짐; 다른 부위로 뻗치는 통증\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 창백 | aliases: 창백; 얼굴이 창백함; 피부가 하얗게 질림\n- 체중감소 | aliases: 체중감소; 살이 빠짐; 몸무게 감소; 체중이 줄어듦\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n- 천명음 | aliases: 천명음; 쌕쌕거림; 숨 쉴 때 쌕쌕 소리; 휘파람 같은 숨소리\n- 사망 | aliases: 사망; 죽음\n- 압통 | aliases: 압통; 누르면 아픔; 눌렀을 때 통증\n- 뇌압상승증상 | aliases: 뇌압상승증상; 머리 압력이 오른 느낌; 뇌압 상승 의심 증상\n- 호기의 증가 | aliases: 호기의 증가; 숨 내쉬는 시간이 길어짐; 호기가 길어짐\n- 객혈 | aliases: 객혈; 피가 섞인 가래; 기침할 때 피가 나와요; 피가래; 혈담\n- 폐기능저하 | aliases: 폐기능저하; 폐 기능이 떨어짐; 호흡 기능 저하\n- 권태감 | aliases: 권태감; 몸이 처져요; 무기력함; 몸이 나른함; 컨디션 저하\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 9,
+        "expected_symptoms": [
+          "운동 시 호흡곤란",
+          "피로감"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "운동 시 호흡곤란",
+          "피로감"
+        ],
+        "predicted": [
+          "운동 시 호흡곤란",
+          "피로감"
+        ],
+        "correct": [
+          "운동 시 호흡곤란",
+          "피로감"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "5f18b1df-99b0-4088-b9d6-47de78b7308f",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:31.018140+00:00",
+      "completed_at": "2026-05-26T13:51:32.130774+00:00",
+      "duration_ms": 1122.13,
+      "input": {
+        "text": "가슴이 아프고 숨쉬기가 힘들어요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "가슴 답답",
+          "가슴 두근거림",
+          "호흡곤란",
+          "운동 시 호흡곤란",
+          "흉부압박감",
+          "흉곽 팽윤",
+          "기운없음",
+          "심부전",
+          "뇌압상승증상",
+          "호기의 증가",
+          "눈이 무거운 느낌",
+          "어지러움",
+          "온몸이 떨림",
+          "피부홍조",
+          "함몰가슴",
+          "의식 저하",
+          "체중감소",
+          "근력 약화",
+          "인지장애",
+          "피로감",
+          "의식 변화",
+          "목의 통증",
+          "지남력 장애",
+          "천명음",
+          "불안"
+        ]
+      },
+      "result": {
+        "input_text": "가슴이 아프고 숨쉬기가 힘들어요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "호흡곤란",
+            "evidence_text": "숨쉬기가 힘들어요",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [
+          "가슴이 아프고"
+        ],
+        "retrieved_candidates": [
+          "가슴 답답",
+          "가슴 두근거림",
+          "호흡곤란",
+          "운동 시 호흡곤란",
+          "흉부압박감",
+          "흉곽 팽윤",
+          "기운없음",
+          "심부전",
+          "뇌압상승증상",
+          "호기의 증가",
+          "눈이 무거운 느낌",
+          "어지러움",
+          "온몸이 떨림",
+          "피부홍조",
+          "함몰가슴",
+          "의식 저하",
+          "체중감소",
+          "근력 약화",
+          "인지장애",
+          "피로감",
+          "의식 변화",
+          "목의 통증",
+          "지남력 장애",
+          "천명음",
+          "불안"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"가슴이 아프고 숨쉬기가 힘들어요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"호흡곤란\",\n      \"evidence_text\": \"숨쉬기가 힘들어요\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": [\n    \"가슴이 아프고\"\n  ]\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n가슴이 아프고 숨쉬기가 힘들어요.\n\n후보 증상 목록:\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n- 가슴 두근거림 | aliases: 가슴 두근거림; 심장이 두근거려요; 심장이 빨리 뛰어요; 두근거림; 심계항진\n- 호흡곤란 | aliases: 호흡곤란; 숨이 차요; 숨쉬기 힘듦; 호흡이 어려움; 숨 가쁨\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 흉부압박감 | aliases: 흉부압박감; 가슴이 눌리는 느낌; 가슴 압박감; 흉부 압박\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 기운없음 | aliases: 기운없음; 기운이 없어요; 힘이 없어요; 무기력해요\n- 심부전 | aliases: 심부전; 심장 기능 저하; 심부전 증상\n- 뇌압상승증상 | aliases: 뇌압상승증상; 머리 압력이 오른 느낌; 뇌압 상승 의심 증상\n- 호기의 증가 | aliases: 호기의 증가; 숨 내쉬는 시간이 길어짐; 호기가 길어짐\n- 눈이 무거운 느낌 | aliases: 눈이 무거운 느낌; 눈이 무거워요; 눈꺼풀이 무거움\n- 어지러움 | aliases: 어지러움; 어지러워요; 현기증; 빙빙 도는 느낌\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 피부홍조 | aliases: 피부홍조; 얼굴이 빨개짐; 피부가 붉어짐; 홍조\n- 함몰가슴 | aliases: 함몰가슴; 가슴이 움푹 들어감; 흉부 함몰\n- 의식 저하 | aliases: 의식 저하; 의식이 떨어짐; 깨우기 어려움; 반응이 둔함\n- 체중감소 | aliases: 체중감소; 살이 빠짐; 몸무게 감소; 체중이 줄어듦\n- 근력 약화 | aliases: 근력 약화; 힘이 빠짐; 근육 힘이 약함; 사지에 힘이 없음\n- 인지장애 | aliases: 인지장애; 인지 기능 저하; 기억력 저하; 판단력이 떨어짐\n- 피로감 | aliases: 피로감; 피곤함; 쉽게 지침; 피로해요\n- 의식 변화 | aliases: 의식 변화; 의식이 이상함; 정신이 흐림; 의식 상태 변화\n- 목의 통증 | aliases: 목의 통증; 목이 아파요; 인후통; 목 통증; 목이 따가움\n- 지남력 장애 | aliases: 지남력 장애; 시간 장소 사람을 헷갈림; 방향감각 상실; 혼동\n- 천명음 | aliases: 천명음; 쌕쌕거림; 숨 쉴 때 쌕쌕 소리; 휘파람 같은 숨소리\n- 불안 | aliases: 불안; 불안감; 초조함; 불안해요\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 10,
+        "expected_symptoms": [
+          "흉통",
+          "호흡곤란"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "호흡곤란",
+          "흉통"
+        ],
+        "predicted": [
+          "호흡곤란"
+        ],
+        "correct": [
+          "호흡곤란"
+        ],
+        "missing": [
+          "흉통"
+        ],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6667,
+        "exact_match": false
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "b5453f17-08b2-49cf-94e9-4246caaae8a3",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:32.130774+00:00",
+      "completed_at": "2026-05-26T13:51:33.216484+00:00",
+      "duration_ms": 1081.38,
+      "input": {
+        "text": "목이 아프고 목소리가 변한 것 같아요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "목소리 변화",
+          "목의 통증",
+          "온몸이 떨림",
+          "가래",
+          "가슴 답답",
+          "어지러움",
+          "기운없음",
+          "천명음",
+          "마찰음",
+          "피부홍조",
+          "하지부종",
+          "근력 약화",
+          "의식 변화",
+          "눈이 무거운 느낌",
+          "운동 시 호흡곤란",
+          "서맥",
+          "가슴 두근거림",
+          "곤봉지",
+          "기침",
+          "화농성 객담",
+          "말초부종",
+          "사래걸림",
+          "권태감",
+          "부정맥",
+          "두통"
+        ]
+      },
+      "result": {
+        "input_text": "목이 아프고 목소리가 변한 것 같아요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "목의 통증",
+            "evidence_text": "목이 아프고",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "목소리 변화",
+            "evidence_text": "목소리가 변한 것 같아요",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "목소리 변화",
+          "목의 통증",
+          "온몸이 떨림",
+          "가래",
+          "가슴 답답",
+          "어지러움",
+          "기운없음",
+          "천명음",
+          "마찰음",
+          "피부홍조",
+          "하지부종",
+          "근력 약화",
+          "의식 변화",
+          "눈이 무거운 느낌",
+          "운동 시 호흡곤란",
+          "서맥",
+          "가슴 두근거림",
+          "곤봉지",
+          "기침",
+          "화농성 객담",
+          "말초부종",
+          "사래걸림",
+          "권태감",
+          "부정맥",
+          "두통"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"목이 아프고 목소리가 변한 것 같아요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"목의 통증\",\n      \"evidence_text\": \"목이 아프고\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"목소리 변화\",\n      \"evidence_text\": \"목소리가 변한 것 같아요\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n목이 아프고 목소리가 변한 것 같아요.\n\n후보 증상 목록:\n- 목소리 변화 | aliases: 목소리 변화; 목소리가 변함; 쉰 목소리; 목소리가 쉬었어요\n- 목의 통증 | aliases: 목의 통증; 목이 아파요; 인후통; 목 통증; 목이 따가움\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 가래 | aliases: 가래; 객담; 가래가 나와요; 목에 가래가 낀 느낌; 끈적한 가래\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n- 어지러움 | aliases: 어지러움; 어지러워요; 현기증; 빙빙 도는 느낌\n- 기운없음 | aliases: 기운없음; 기운이 없어요; 힘이 없어요; 무기력해요\n- 천명음 | aliases: 천명음; 쌕쌕거림; 숨 쉴 때 쌕쌕 소리; 휘파람 같은 숨소리\n- 마찰음 | aliases: 마찰음; 숨 쉴 때 마찰 소리; 흉막 마찰음\n- 피부홍조 | aliases: 피부홍조; 얼굴이 빨개짐; 피부가 붉어짐; 홍조\n- 하지부종 | aliases: 하지부종; 다리가 부음; 발목이 부음; 하지 부종\n- 근력 약화 | aliases: 근력 약화; 힘이 빠짐; 근육 힘이 약함; 사지에 힘이 없음\n- 의식 변화 | aliases: 의식 변화; 의식이 이상함; 정신이 흐림; 의식 상태 변화\n- 눈이 무거운 느낌 | aliases: 눈이 무거운 느낌; 눈이 무거워요; 눈꺼풀이 무거움\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 서맥 | aliases: 서맥; 맥박이 느림; 느린 심박\n- 가슴 두근거림 | aliases: 가슴 두근거림; 심장이 두근거려요; 심장이 빨리 뛰어요; 두근거림; 심계항진\n- 곤봉지 | aliases: 곤봉지; 손가락 끝이 둥글게 부음; 곤봉 손가락\n- 기침 | aliases: 기침; 콜록거림; 기침이 나요; 마른기침; 기침이 심함\n- 화농성 객담 | aliases: 화농성 객담; 누런 가래; 고름 같은 가래; 화농성 가래\n- 말초부종 | aliases: 말초부종; 손발이 부음; 말초가 부음\n- 사래걸림 | aliases: 사래걸림; 음식이 기도로 넘어감; 사레들림; 기침하며 사레\n- 권태감 | aliases: 권태감; 몸이 처져요; 무기력함; 몸이 나른함; 컨디션 저하\n- 부정맥 | aliases: 부정맥; 맥박이 불규칙함; 심장 박동이 불규칙함\n- 두통 | aliases: 두통; 머리가 아파요; 머리 통증; 편두통처럼 아픔\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 11,
+        "expected_symptoms": [
+          "목의 통증",
+          "목소리 변화"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "목소리 변화",
+          "목의 통증"
+        ],
+        "predicted": [
+          "목소리 변화",
+          "목의 통증"
+        ],
+        "correct": [
+          "목소리 변화",
+          "목의 통증"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "77477aaa-c366-4ee6-bca7-a737cce72980",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:33.216484+00:00",
+      "completed_at": "2026-05-26T13:51:34.528687+00:00",
+      "duration_ms": 1306.04,
+      "input": {
+        "text": "오한이 들고 열이 나면서 온몸이 떨려요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "온몸이 떨림",
+          "오한",
+          "열",
+          "운동 시 호흡곤란",
+          "감기 증상",
+          "발한",
+          "호흡곤란",
+          "객혈",
+          "탈장",
+          "눈의 충혈",
+          "기운없음",
+          "복벽이 움푹 들어감",
+          "호흡기감염",
+          "콧물",
+          "질식",
+          "삼키기 곤란",
+          "흉곽 팽윤",
+          "흉부압박감",
+          "목소리 변화",
+          "불안",
+          "의식 변화",
+          "가슴 두근거림",
+          "천명음",
+          "압통",
+          "권태감"
+        ]
+      },
+      "result": {
+        "input_text": "오한이 들고 열이 나면서 온몸이 떨려요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "오한",
+            "evidence_text": "오한이 들고",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "열",
+            "evidence_text": "열이 나면서",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "온몸이 떨림",
+            "evidence_text": "온몸이 떨려요",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "온몸이 떨림",
+          "오한",
+          "열",
+          "운동 시 호흡곤란",
+          "감기 증상",
+          "발한",
+          "호흡곤란",
+          "객혈",
+          "탈장",
+          "눈의 충혈",
+          "기운없음",
+          "복벽이 움푹 들어감",
+          "호흡기감염",
+          "콧물",
+          "질식",
+          "삼키기 곤란",
+          "흉곽 팽윤",
+          "흉부압박감",
+          "목소리 변화",
+          "불안",
+          "의식 변화",
+          "가슴 두근거림",
+          "천명음",
+          "압통",
+          "권태감"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"오한이 들고 열이 나면서 온몸이 떨려요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"오한\",\n      \"evidence_text\": \"오한이 들고\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"열\",\n      \"evidence_text\": \"열이 나면서\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"온몸이 떨림\",\n      \"evidence_text\": \"온몸이 떨려요\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n오한이 들고 열이 나면서 온몸이 떨려요.\n\n후보 증상 목록:\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 오한 | aliases: 오한; 춥고 떨림; 몸이 으슬으슬함; 오슬오슬함\n- 열 | aliases: 열; 발열; 열이 나요; 체온이 높음; 고열\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 감기 증상 | aliases: 감기 증상; 감기 같은 증상; 몸살 감기 느낌; 감기 기운\n- 발한 | aliases: 발한; 땀이 많이 남; 식은땀; 땀 흘림\n- 호흡곤란 | aliases: 호흡곤란; 숨이 차요; 숨쉬기 힘듦; 호흡이 어려움; 숨 가쁨\n- 객혈 | aliases: 객혈; 피가 섞인 가래; 기침할 때 피가 나와요; 피가래; 혈담\n- 탈장 | aliases: 탈장; 장이 튀어나옴; 탈장 의심\n- 눈의 충혈 | aliases: 눈의 충혈; 눈이 빨개요; 눈 충혈; 눈이 붉음\n- 기운없음 | aliases: 기운없음; 기운이 없어요; 힘이 없어요; 무기력해요\n- 복벽이 움푹 들어감 | aliases: 복벽이 움푹 들어감; 배가 움푹 들어감; 복벽 함몰\n- 호흡기감염 | aliases: 호흡기감염; 호흡기 감염 증상; 기도 감염\n- 콧물 | aliases: 콧물; 코물이 나옴; 맑은 콧물; 콧물이 흘러요\n- 질식 | aliases: 질식; 숨이 막힘; 기도가 막힘; 질식할 것 같음\n- 삼키기 곤란 | aliases: 삼키기 곤란; 삼키기 어려움; 음식 삼키기 힘듦; 연하곤란\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 흉부압박감 | aliases: 흉부압박감; 가슴이 눌리는 느낌; 가슴 압박감; 흉부 압박\n- 목소리 변화 | aliases: 목소리 변화; 목소리가 변함; 쉰 목소리; 목소리가 쉬었어요\n- 불안 | aliases: 불안; 불안감; 초조함; 불안해요\n- 의식 변화 | aliases: 의식 변화; 의식이 이상함; 정신이 흐림; 의식 상태 변화\n- 가슴 두근거림 | aliases: 가슴 두근거림; 심장이 두근거려요; 심장이 빨리 뛰어요; 두근거림; 심계항진\n- 천명음 | aliases: 천명음; 쌕쌕거림; 숨 쉴 때 쌕쌕 소리; 휘파람 같은 숨소리\n- 압통 | aliases: 압통; 누르면 아픔; 눌렀을 때 통증\n- 권태감 | aliases: 권태감; 몸이 처져요; 무기력함; 몸이 나른함; 컨디션 저하\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 12,
+        "expected_symptoms": [
+          "오한",
+          "열",
+          "온몸이 떨림"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "열",
+          "오한",
+          "온몸이 떨림"
+        ],
+        "predicted": [
+          "열",
+          "오한",
+          "온몸이 떨림"
+        ],
+        "correct": [
+          "열",
+          "오한",
+          "온몸이 떨림"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "b439f8c4-bf57-4879-8112-795f2c885454",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:34.528687+00:00",
+      "completed_at": "2026-05-26T13:51:35.942876+00:00",
+      "duration_ms": 1425.35,
+      "input": {
+        "text": "숨을 빨리 쉬게 되고 가슴이 답답해요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "가슴 답답",
+          "가슴 두근거림",
+          "함몰가슴",
+          "호흡곤란",
+          "목의 통증",
+          "흉부압박감",
+          "흉곽 팽윤",
+          "눈이 무거운 느낌",
+          "천명음",
+          "목소리 변화",
+          "말초부종",
+          "피부홍조",
+          "온몸이 떨림",
+          "운동 시 호흡곤란",
+          "체중감소",
+          "뇌압상승증상",
+          "심부전",
+          "호기의 증가",
+          "탈장",
+          "빈맥",
+          "두통",
+          "권태감",
+          "마찰음",
+          "가래",
+          "기침"
+        ]
+      },
+      "result": {
+        "input_text": "숨을 빨리 쉬게 되고 가슴이 답답해요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "가슴 답답",
+            "evidence_text": "가슴이 답답해요",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "호흡곤란",
+            "evidence_text": "숨을 빨리 쉬게 되고",
+            "confidence": 0.9
+          }
+        ],
+        "possible_symptoms": [
+          {
+            "symptom_name": "빈맥",
+            "reason": "숨을 빨리 쉬는 표현에서 추정",
+            "confidence": 0.6
+          }
+        ],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "가슴 답답",
+          "가슴 두근거림",
+          "함몰가슴",
+          "호흡곤란",
+          "목의 통증",
+          "흉부압박감",
+          "흉곽 팽윤",
+          "눈이 무거운 느낌",
+          "천명음",
+          "목소리 변화",
+          "말초부종",
+          "피부홍조",
+          "온몸이 떨림",
+          "운동 시 호흡곤란",
+          "체중감소",
+          "뇌압상승증상",
+          "심부전",
+          "호기의 증가",
+          "탈장",
+          "빈맥",
+          "두통",
+          "권태감",
+          "마찰음",
+          "가래",
+          "기침"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"숨을 빨리 쉬게 되고 가슴이 답답해요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"가슴 답답\",\n      \"evidence_text\": \"가슴이 답답해요\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"호흡곤란\",\n      \"evidence_text\": \"숨을 빨리 쉬게 되고\",\n      \"confidence\": 0.9\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"빈맥\",\n      \"reason\": \"숨을 빨리 쉬는 표현에서 추정\",\n      \"confidence\": 0.6\n    }\n  ],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n숨을 빨리 쉬게 되고 가슴이 답답해요.\n\n후보 증상 목록:\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n- 가슴 두근거림 | aliases: 가슴 두근거림; 심장이 두근거려요; 심장이 빨리 뛰어요; 두근거림; 심계항진\n- 함몰가슴 | aliases: 함몰가슴; 가슴이 움푹 들어감; 흉부 함몰\n- 호흡곤란 | aliases: 호흡곤란; 숨이 차요; 숨쉬기 힘듦; 호흡이 어려움; 숨 가쁨\n- 목의 통증 | aliases: 목의 통증; 목이 아파요; 인후통; 목 통증; 목이 따가움\n- 흉부압박감 | aliases: 흉부압박감; 가슴이 눌리는 느낌; 가슴 압박감; 흉부 압박\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 눈이 무거운 느낌 | aliases: 눈이 무거운 느낌; 눈이 무거워요; 눈꺼풀이 무거움\n- 천명음 | aliases: 천명음; 쌕쌕거림; 숨 쉴 때 쌕쌕 소리; 휘파람 같은 숨소리\n- 목소리 변화 | aliases: 목소리 변화; 목소리가 변함; 쉰 목소리; 목소리가 쉬었어요\n- 말초부종 | aliases: 말초부종; 손발이 부음; 말초가 부음\n- 피부홍조 | aliases: 피부홍조; 얼굴이 빨개짐; 피부가 붉어짐; 홍조\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 체중감소 | aliases: 체중감소; 살이 빠짐; 몸무게 감소; 체중이 줄어듦\n- 뇌압상승증상 | aliases: 뇌압상승증상; 머리 압력이 오른 느낌; 뇌압 상승 의심 증상\n- 심부전 | aliases: 심부전; 심장 기능 저하; 심부전 증상\n- 호기의 증가 | aliases: 호기의 증가; 숨 내쉬는 시간이 길어짐; 호기가 길어짐\n- 탈장 | aliases: 탈장; 장이 튀어나옴; 탈장 의심\n- 빈맥 | aliases: 빈맥; 맥박이 빠름; 심장이 빠르게 뜀; 빠른 심박\n- 두통 | aliases: 두통; 머리가 아파요; 머리 통증; 편두통처럼 아픔\n- 권태감 | aliases: 권태감; 몸이 처져요; 무기력함; 몸이 나른함; 컨디션 저하\n- 마찰음 | aliases: 마찰음; 숨 쉴 때 마찰 소리; 흉막 마찰음\n- 가래 | aliases: 가래; 객담; 가래가 나와요; 목에 가래가 낀 느낌; 끈적한 가래\n- 기침 | aliases: 기침; 콜록거림; 기침이 나요; 마른기침; 기침이 심함\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 13,
+        "expected_symptoms": [
+          "빈호흡",
+          "가슴 답답"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "가슴 답답",
+          "빈호흡"
+        ],
+        "predicted": [
+          "가슴 답답",
+          "호흡곤란"
+        ],
+        "correct": [
+          "가슴 답답"
+        ],
+        "missing": [
+          "빈호흡"
+        ],
+        "extra": [
+          "호흡곤란"
+        ],
+        "precision": 0.5,
+        "recall": 0.5,
+        "f1": 0.5,
+        "exact_match": false
+      },
+      "possible_symptom_names": [
+        "빈맥"
+      ]
+    },
+    {
+      "record_id": "dee54a95-93d6-4122-bbe5-38415554d84b",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:35.942876+00:00",
+      "completed_at": "2026-05-26T13:51:37.465435+00:00",
+      "duration_ms": 1513.7,
+      "input": {
+        "text": "입술이 파랗게 보이고 숨쉬기 힘들어요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "운동 시 호흡곤란",
+          "호흡곤란",
+          "흉곽 팽윤",
+          "검은색 가래",
+          "복벽이 움푹 들어감",
+          "객혈",
+          "가슴 답답",
+          "호기의 증가",
+          "복부팽만감",
+          "탈장",
+          "거품이 섞인 가래",
+          "지남력 장애",
+          "기운없음",
+          "뇌압상승증상",
+          "어지러움",
+          "방사통",
+          "눈의 충혈",
+          "화농성 객담",
+          "흉부압박감",
+          "가래",
+          "기침",
+          "피로감",
+          "피부홍조",
+          "압통",
+          "인지장애"
+        ]
+      },
+      "result": {
+        "input_text": "입술이 파랗게 보이고 숨쉬기 힘들어요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "호흡곤란",
+            "evidence_text": "숨쉬기 힘들어요",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [
+          {
+            "symptom_name": "피부홍조",
+            "reason": "입술이 파랗게 보임은 피부홍조와 유사한 증상일 수 있으나 정확한 매칭은 불가능",
+            "confidence": 0.4
+          }
+        ],
+        "unmatched_expressions": [
+          "입술이 파랗게 보이고"
+        ],
+        "retrieved_candidates": [
+          "운동 시 호흡곤란",
+          "호흡곤란",
+          "흉곽 팽윤",
+          "검은색 가래",
+          "복벽이 움푹 들어감",
+          "객혈",
+          "가슴 답답",
+          "호기의 증가",
+          "복부팽만감",
+          "탈장",
+          "거품이 섞인 가래",
+          "지남력 장애",
+          "기운없음",
+          "뇌압상승증상",
+          "어지러움",
+          "방사통",
+          "눈의 충혈",
+          "화농성 객담",
+          "흉부압박감",
+          "가래",
+          "기침",
+          "피로감",
+          "피부홍조",
+          "압통",
+          "인지장애"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"입술이 파랗게 보이고 숨쉬기 힘들어요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"호흡곤란\",\n      \"evidence_text\": \"숨쉬기 힘들어요\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"피부홍조\",\n      \"reason\": \"입술이 파랗게 보임은 피부홍조와 유사한 증상일 수 있으나 정확한 매칭은 불가능\",\n      \"confidence\": 0.4\n    }\n  ],\n  \"unmatched_expressions\": [\n    \"입술이 파랗게 보이고\"\n  ]\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n입술이 파랗게 보이고 숨쉬기 힘들어요.\n\n후보 증상 목록:\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 호흡곤란 | aliases: 호흡곤란; 숨이 차요; 숨쉬기 힘듦; 호흡이 어려움; 숨 가쁨\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 검은색 가래 | aliases: 검은색 가래; 검은 가래; 까만 가래\n- 복벽이 움푹 들어감 | aliases: 복벽이 움푹 들어감; 배가 움푹 들어감; 복벽 함몰\n- 객혈 | aliases: 객혈; 피가 섞인 가래; 기침할 때 피가 나와요; 피가래; 혈담\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n- 호기의 증가 | aliases: 호기의 증가; 숨 내쉬는 시간이 길어짐; 호기가 길어짐\n- 복부팽만감 | aliases: 복부팽만감; 배가 빵빵함; 배가 더부룩함; 복부 팽만\n- 탈장 | aliases: 탈장; 장이 튀어나옴; 탈장 의심\n- 거품이 섞인 가래 | aliases: 거품이 섞인 가래; 거품 낀 가래; 거품이 있는 객담\n- 지남력 장애 | aliases: 지남력 장애; 시간 장소 사람을 헷갈림; 방향감각 상실; 혼동\n- 기운없음 | aliases: 기운없음; 기운이 없어요; 힘이 없어요; 무기력해요\n- 뇌압상승증상 | aliases: 뇌압상승증상; 머리 압력이 오른 느낌; 뇌압 상승 의심 증상\n- 어지러움 | aliases: 어지러움; 어지러워요; 현기증; 빙빙 도는 느낌\n- 방사통 | aliases: 방사통; 통증이 퍼짐; 다른 부위로 뻗치는 통증\n- 눈의 충혈 | aliases: 눈의 충혈; 눈이 빨개요; 눈 충혈; 눈이 붉음\n- 화농성 객담 | aliases: 화농성 객담; 누런 가래; 고름 같은 가래; 화농성 가래\n- 흉부압박감 | aliases: 흉부압박감; 가슴이 눌리는 느낌; 가슴 압박감; 흉부 압박\n- 가래 | aliases: 가래; 객담; 가래가 나와요; 목에 가래가 낀 느낌; 끈적한 가래\n- 기침 | aliases: 기침; 콜록거림; 기침이 나요; 마른기침; 기침이 심함\n- 피로감 | aliases: 피로감; 피곤함; 쉽게 지침; 피로해요\n- 피부홍조 | aliases: 피부홍조; 얼굴이 빨개짐; 피부가 붉어짐; 홍조\n- 압통 | aliases: 압통; 누르면 아픔; 눌렀을 때 통증\n- 인지장애 | aliases: 인지장애; 인지 기능 저하; 기억력 저하; 판단력이 떨어짐\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 14,
+        "expected_symptoms": [
+          "청색증",
+          "호흡곤란"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "청색증",
+          "호흡곤란"
+        ],
+        "predicted": [
+          "호흡곤란"
+        ],
+        "correct": [
+          "호흡곤란"
+        ],
+        "missing": [
+          "청색증"
+        ],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6667,
+        "exact_match": false
+      },
+      "possible_symptom_names": [
+        "피부홍조"
+      ]
+    },
+    {
+      "record_id": "d7b3c1ea-ae88-49f2-b346-ed646d85e741",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:37.465435+00:00",
+      "completed_at": "2026-05-26T13:51:38.566214+00:00",
+      "duration_ms": 1096.75,
+      "input": {
+        "text": "기침은 없는데 가래가 목에 낀 느낌이 계속 있어요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "가래",
+          "기침",
+          "거품이 섞인 가래",
+          "화농성 객담",
+          "검은색 가래",
+          "기운없음",
+          "가슴 답답",
+          "사래걸림",
+          "온몸이 떨림",
+          "목의 통증",
+          "권태감",
+          "어지러움",
+          "객혈",
+          "복부팽만감",
+          "탈장",
+          "흉곽 팽윤",
+          "마찰음",
+          "재채기",
+          "가슴 두근거림",
+          "무증상",
+          "천명음",
+          "함몰가슴",
+          "하지부종",
+          "심부전",
+          "말초부종"
+        ]
+      },
+      "result": {
+        "input_text": "기침은 없는데 가래가 목에 낀 느낌이 계속 있어요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "가래",
+            "evidence_text": "가래가 목에 낀 느낌",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [
+          "기침은 없는데"
+        ],
+        "retrieved_candidates": [
+          "가래",
+          "기침",
+          "거품이 섞인 가래",
+          "화농성 객담",
+          "검은색 가래",
+          "기운없음",
+          "가슴 답답",
+          "사래걸림",
+          "온몸이 떨림",
+          "목의 통증",
+          "권태감",
+          "어지러움",
+          "객혈",
+          "복부팽만감",
+          "탈장",
+          "흉곽 팽윤",
+          "마찰음",
+          "재채기",
+          "가슴 두근거림",
+          "무증상",
+          "천명음",
+          "함몰가슴",
+          "하지부종",
+          "심부전",
+          "말초부종"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"기침은 없는데 가래가 목에 낀 느낌이 계속 있어요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"가래\",\n      \"evidence_text\": \"가래가 목에 낀 느낌\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": [\n    \"기침은 없는데\"\n  ]\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n기침은 없는데 가래가 목에 낀 느낌이 계속 있어요.\n\n후보 증상 목록:\n- 가래 | aliases: 가래; 객담; 가래가 나와요; 목에 가래가 낀 느낌; 끈적한 가래\n- 기침 | aliases: 기침; 콜록거림; 기침이 나요; 마른기침; 기침이 심함\n- 거품이 섞인 가래 | aliases: 거품이 섞인 가래; 거품 낀 가래; 거품이 있는 객담\n- 화농성 객담 | aliases: 화농성 객담; 누런 가래; 고름 같은 가래; 화농성 가래\n- 검은색 가래 | aliases: 검은색 가래; 검은 가래; 까만 가래\n- 기운없음 | aliases: 기운없음; 기운이 없어요; 힘이 없어요; 무기력해요\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n- 사래걸림 | aliases: 사래걸림; 음식이 기도로 넘어감; 사레들림; 기침하며 사레\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 목의 통증 | aliases: 목의 통증; 목이 아파요; 인후통; 목 통증; 목이 따가움\n- 권태감 | aliases: 권태감; 몸이 처져요; 무기력함; 몸이 나른함; 컨디션 저하\n- 어지러움 | aliases: 어지러움; 어지러워요; 현기증; 빙빙 도는 느낌\n- 객혈 | aliases: 객혈; 피가 섞인 가래; 기침할 때 피가 나와요; 피가래; 혈담\n- 복부팽만감 | aliases: 복부팽만감; 배가 빵빵함; 배가 더부룩함; 복부 팽만\n- 탈장 | aliases: 탈장; 장이 튀어나옴; 탈장 의심\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 마찰음 | aliases: 마찰음; 숨 쉴 때 마찰 소리; 흉막 마찰음\n- 재채기 | aliases: 재채기; 재채기를 해요; 재채기가 계속 남\n- 가슴 두근거림 | aliases: 가슴 두근거림; 심장이 두근거려요; 심장이 빨리 뛰어요; 두근거림; 심계항진\n- 무증상 | aliases: 무증상; 증상이 없음; 별다른 증상 없음; 아무 증상 없음\n- 천명음 | aliases: 천명음; 쌕쌕거림; 숨 쉴 때 쌕쌕 소리; 휘파람 같은 숨소리\n- 함몰가슴 | aliases: 함몰가슴; 가슴이 움푹 들어감; 흉부 함몰\n- 하지부종 | aliases: 하지부종; 다리가 부음; 발목이 부음; 하지 부종\n- 심부전 | aliases: 심부전; 심장 기능 저하; 심부전 증상\n- 말초부종 | aliases: 말초부종; 손발이 부음; 말초가 부음\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 15,
+        "expected_symptoms": [
+          "가래"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "가래"
+        ],
+        "predicted": [
+          "가래"
+        ],
+        "correct": [
+          "가래"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "df3b51c1-3ea9-48e7-b9f8-38fa51f95976",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:38.566214+00:00",
+      "completed_at": "2026-05-26T13:51:39.750180+00:00",
+      "duration_ms": 1182.5,
+      "input": {
+        "text": "밤에 식은땀이 나고 체중이 줄었어요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "체중감소",
+          "질식",
+          "온몸이 떨림",
+          "식욕부진",
+          "객혈",
+          "발한",
+          "근력 약화",
+          "재채기",
+          "복벽이 움푹 들어감",
+          "흉부압박감",
+          "오한",
+          "피부홍조",
+          "운동 시 호흡곤란",
+          "폐기능저하",
+          "뇌압상승증상",
+          "사망",
+          "저산소증",
+          "빈혈",
+          "권태감",
+          "천명음",
+          "함몰가슴",
+          "콧물",
+          "호흡곤란",
+          "구토",
+          "기운없음"
+        ]
+      },
+      "result": {
+        "input_text": "밤에 식은땀이 나고 체중이 줄었어요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "발한",
+            "evidence_text": "식은땀이",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "체중감소",
+            "evidence_text": "체중이 줄었어요",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "체중감소",
+          "질식",
+          "온몸이 떨림",
+          "식욕부진",
+          "객혈",
+          "발한",
+          "근력 약화",
+          "재채기",
+          "복벽이 움푹 들어감",
+          "흉부압박감",
+          "오한",
+          "피부홍조",
+          "운동 시 호흡곤란",
+          "폐기능저하",
+          "뇌압상승증상",
+          "사망",
+          "저산소증",
+          "빈혈",
+          "권태감",
+          "천명음",
+          "함몰가슴",
+          "콧물",
+          "호흡곤란",
+          "구토",
+          "기운없음"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"밤에 식은땀이 나고 체중이 줄었어요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"발한\",\n      \"evidence_text\": \"식은땀이\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"체중감소\",\n      \"evidence_text\": \"체중이 줄었어요\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n밤에 식은땀이 나고 체중이 줄었어요.\n\n후보 증상 목록:\n- 체중감소 | aliases: 체중감소; 살이 빠짐; 몸무게 감소; 체중이 줄어듦\n- 질식 | aliases: 질식; 숨이 막힘; 기도가 막힘; 질식할 것 같음\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 식욕부진 | aliases: 식욕부진; 입맛이 없음; 식욕이 떨어짐; 잘 못 먹음\n- 객혈 | aliases: 객혈; 피가 섞인 가래; 기침할 때 피가 나와요; 피가래; 혈담\n- 발한 | aliases: 발한; 땀이 많이 남; 식은땀; 땀 흘림\n- 근력 약화 | aliases: 근력 약화; 힘이 빠짐; 근육 힘이 약함; 사지에 힘이 없음\n- 재채기 | aliases: 재채기; 재채기를 해요; 재채기가 계속 남\n- 복벽이 움푹 들어감 | aliases: 복벽이 움푹 들어감; 배가 움푹 들어감; 복벽 함몰\n- 흉부압박감 | aliases: 흉부압박감; 가슴이 눌리는 느낌; 가슴 압박감; 흉부 압박\n- 오한 | aliases: 오한; 춥고 떨림; 몸이 으슬으슬함; 오슬오슬함\n- 피부홍조 | aliases: 피부홍조; 얼굴이 빨개짐; 피부가 붉어짐; 홍조\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 폐기능저하 | aliases: 폐기능저하; 폐 기능이 떨어짐; 호흡 기능 저하\n- 뇌압상승증상 | aliases: 뇌압상승증상; 머리 압력이 오른 느낌; 뇌압 상승 의심 증상\n- 사망 | aliases: 사망; 죽음\n- 저산소증 | aliases: 저산소증; 산소포화도 낮음; 산소가 부족함; 저산소\n- 빈혈 | aliases: 빈혈; 어지럽고 창백함; 빈혈 증상\n- 권태감 | aliases: 권태감; 몸이 처져요; 무기력함; 몸이 나른함; 컨디션 저하\n- 천명음 | aliases: 천명음; 쌕쌕거림; 숨 쉴 때 쌕쌕 소리; 휘파람 같은 숨소리\n- 함몰가슴 | aliases: 함몰가슴; 가슴이 움푹 들어감; 흉부 함몰\n- 콧물 | aliases: 콧물; 코물이 나옴; 맑은 콧물; 콧물이 흘러요\n- 호흡곤란 | aliases: 호흡곤란; 숨이 차요; 숨쉬기 힘듦; 호흡이 어려움; 숨 가쁨\n- 구토 | aliases: 구토; 토해요; 구역질 후 토함; 음식을 토함\n- 기운없음 | aliases: 기운없음; 기운이 없어요; 힘이 없어요; 무기력해요\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 16,
+        "expected_symptoms": [
+          "발한",
+          "체중감소"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "발한",
+          "체중감소"
+        ],
+        "predicted": [
+          "발한",
+          "체중감소"
+        ],
+        "correct": [
+          "발한",
+          "체중감소"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "06b6a304-8504-431a-9d24-ceabfffedf6a",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:39.750180+00:00",
+      "completed_at": "2026-05-26T13:51:40.944175+00:00",
+      "duration_ms": 1204.03,
+      "input": {
+        "text": "가슴이 두근거리고 불안한 느낌이 들어요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "가슴 두근거림",
+          "가슴 답답",
+          "불안",
+          "온몸이 떨림",
+          "어지러움",
+          "심부전",
+          "눈이 무거운 느낌",
+          "함몰가슴",
+          "두통",
+          "흉부압박감",
+          "호기의 증가",
+          "운동 시 호흡곤란",
+          "열",
+          "뇌압상승증상",
+          "목의 통증",
+          "권태감",
+          "기운없음",
+          "가래",
+          "의식 변화",
+          "화농성 객담",
+          "흉곽 팽윤",
+          "지남력 장애",
+          "박동성 통증",
+          "부정맥",
+          "사래걸림"
+        ]
+      },
+      "result": {
+        "input_text": "가슴이 두근거리고 불안한 느낌이 들어요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "가슴 두근거림",
+            "evidence_text": "가슴이 두근거리고",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "불안",
+            "evidence_text": "불안한 느낌이 들어요",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "가슴 두근거림",
+          "가슴 답답",
+          "불안",
+          "온몸이 떨림",
+          "어지러움",
+          "심부전",
+          "눈이 무거운 느낌",
+          "함몰가슴",
+          "두통",
+          "흉부압박감",
+          "호기의 증가",
+          "운동 시 호흡곤란",
+          "열",
+          "뇌압상승증상",
+          "목의 통증",
+          "권태감",
+          "기운없음",
+          "가래",
+          "의식 변화",
+          "화농성 객담",
+          "흉곽 팽윤",
+          "지남력 장애",
+          "박동성 통증",
+          "부정맥",
+          "사래걸림"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"가슴이 두근거리고 불안한 느낌이 들어요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"가슴 두근거림\",\n      \"evidence_text\": \"가슴이 두근거리고\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"불안\",\n      \"evidence_text\": \"불안한 느낌이 들어요\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n가슴이 두근거리고 불안한 느낌이 들어요.\n\n후보 증상 목록:\n- 가슴 두근거림 | aliases: 가슴 두근거림; 심장이 두근거려요; 심장이 빨리 뛰어요; 두근거림; 심계항진\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n- 불안 | aliases: 불안; 불안감; 초조함; 불안해요\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 어지러움 | aliases: 어지러움; 어지러워요; 현기증; 빙빙 도는 느낌\n- 심부전 | aliases: 심부전; 심장 기능 저하; 심부전 증상\n- 눈이 무거운 느낌 | aliases: 눈이 무거운 느낌; 눈이 무거워요; 눈꺼풀이 무거움\n- 함몰가슴 | aliases: 함몰가슴; 가슴이 움푹 들어감; 흉부 함몰\n- 두통 | aliases: 두통; 머리가 아파요; 머리 통증; 편두통처럼 아픔\n- 흉부압박감 | aliases: 흉부압박감; 가슴이 눌리는 느낌; 가슴 압박감; 흉부 압박\n- 호기의 증가 | aliases: 호기의 증가; 숨 내쉬는 시간이 길어짐; 호기가 길어짐\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 열 | aliases: 열; 발열; 열이 나요; 체온이 높음; 고열\n- 뇌압상승증상 | aliases: 뇌압상승증상; 머리 압력이 오른 느낌; 뇌압 상승 의심 증상\n- 목의 통증 | aliases: 목의 통증; 목이 아파요; 인후통; 목 통증; 목이 따가움\n- 권태감 | aliases: 권태감; 몸이 처져요; 무기력함; 몸이 나른함; 컨디션 저하\n- 기운없음 | aliases: 기운없음; 기운이 없어요; 힘이 없어요; 무기력해요\n- 가래 | aliases: 가래; 객담; 가래가 나와요; 목에 가래가 낀 느낌; 끈적한 가래\n- 의식 변화 | aliases: 의식 변화; 의식이 이상함; 정신이 흐림; 의식 상태 변화\n- 화농성 객담 | aliases: 화농성 객담; 누런 가래; 고름 같은 가래; 화농성 가래\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 지남력 장애 | aliases: 지남력 장애; 시간 장소 사람을 헷갈림; 방향감각 상실; 혼동\n- 박동성 통증 | aliases: 박동성 통증; 맥박처럼 욱신거리는 통증; 두근두근 뛰듯 아픔\n- 부정맥 | aliases: 부정맥; 맥박이 불규칙함; 심장 박동이 불규칙함\n- 사래걸림 | aliases: 사래걸림; 음식이 기도로 넘어감; 사레들림; 기침하며 사레\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 17,
+        "expected_symptoms": [
+          "가슴 두근거림",
+          "불안"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "가슴 두근거림",
+          "불안"
+        ],
+        "predicted": [
+          "가슴 두근거림",
+          "불안"
+        ],
+        "correct": [
+          "가슴 두근거림",
+          "불안"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "7c48c36a-e3a7-43b9-a5e0-df05d905dcd5",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:40.944175+00:00",
+      "completed_at": "2026-05-26T13:51:42.150812+00:00",
+      "duration_ms": 1207.53,
+      "input": {
+        "text": "음식을 삼키기 어렵고 사래가 자주 걸려요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "사래걸림",
+          "삼키기 곤란",
+          "가래",
+          "의식 저하",
+          "질식",
+          "구토",
+          "식욕부진",
+          "사지 부종",
+          "수유 곤란",
+          "코막힘",
+          "화농성 객담",
+          "운동 시 호흡곤란",
+          "체중감소",
+          "폐기능저하",
+          "온몸이 떨림",
+          "권태감",
+          "콧물",
+          "복부팽만감",
+          "하지부종",
+          "거품이 섞인 가래",
+          "설사",
+          "빈호흡",
+          "발한",
+          "천식",
+          "가슴 답답"
+        ]
+      },
+      "result": {
+        "input_text": "음식을 삼키기 어렵고 사래가 자주 걸려요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "삼키기 곤란",
+            "evidence_text": "음식을 삼키기 어렵고",
+            "confidence": 1.0
+          },
+          {
+            "symptom_name": "사래걸림",
+            "evidence_text": "사래가 자주 걸려요",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "사래걸림",
+          "삼키기 곤란",
+          "가래",
+          "의식 저하",
+          "질식",
+          "구토",
+          "식욕부진",
+          "사지 부종",
+          "수유 곤란",
+          "코막힘",
+          "화농성 객담",
+          "운동 시 호흡곤란",
+          "체중감소",
+          "폐기능저하",
+          "온몸이 떨림",
+          "권태감",
+          "콧물",
+          "복부팽만감",
+          "하지부종",
+          "거품이 섞인 가래",
+          "설사",
+          "빈호흡",
+          "발한",
+          "천식",
+          "가슴 답답"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"음식을 삼키기 어렵고 사래가 자주 걸려요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"삼키기 곤란\",\n      \"evidence_text\": \"음식을 삼키기 어렵고\",\n      \"confidence\": 1.0\n    },\n    {\n      \"symptom_name\": \"사래걸림\",\n      \"evidence_text\": \"사래가 자주 걸려요\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n음식을 삼키기 어렵고 사래가 자주 걸려요.\n\n후보 증상 목록:\n- 사래걸림 | aliases: 사래걸림; 음식이 기도로 넘어감; 사레들림; 기침하며 사레\n- 삼키기 곤란 | aliases: 삼키기 곤란; 삼키기 어려움; 음식 삼키기 힘듦; 연하곤란\n- 가래 | aliases: 가래; 객담; 가래가 나와요; 목에 가래가 낀 느낌; 끈적한 가래\n- 의식 저하 | aliases: 의식 저하; 의식이 떨어짐; 깨우기 어려움; 반응이 둔함\n- 질식 | aliases: 질식; 숨이 막힘; 기도가 막힘; 질식할 것 같음\n- 구토 | aliases: 구토; 토해요; 구역질 후 토함; 음식을 토함\n- 식욕부진 | aliases: 식욕부진; 입맛이 없음; 식욕이 떨어짐; 잘 못 먹음\n- 사지 부종 | aliases: 사지 부종; 팔다리가 부음; 팔 다리 부종\n- 수유 곤란 | aliases: 수유 곤란; 수유가 어려움; 젖을 잘 못 먹음\n- 코막힘 | aliases: 코막힘; 코가 막힘; 코가 답답함; 비폐색\n- 화농성 객담 | aliases: 화농성 객담; 누런 가래; 고름 같은 가래; 화농성 가래\n- 운동 시 호흡곤란 | aliases: 운동 시 호흡곤란; 운동하면 숨이 참; 계단 오르면 숨참; 움직이면 숨이 차요\n- 체중감소 | aliases: 체중감소; 살이 빠짐; 몸무게 감소; 체중이 줄어듦\n- 폐기능저하 | aliases: 폐기능저하; 폐 기능이 떨어짐; 호흡 기능 저하\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 권태감 | aliases: 권태감; 몸이 처져요; 무기력함; 몸이 나른함; 컨디션 저하\n- 콧물 | aliases: 콧물; 코물이 나옴; 맑은 콧물; 콧물이 흘러요\n- 복부팽만감 | aliases: 복부팽만감; 배가 빵빵함; 배가 더부룩함; 복부 팽만\n- 하지부종 | aliases: 하지부종; 다리가 부음; 발목이 부음; 하지 부종\n- 거품이 섞인 가래 | aliases: 거품이 섞인 가래; 거품 낀 가래; 거품이 있는 객담\n- 설사 | aliases: 설사; 묽은 변; 배탈 설사; 설사를 해요\n- 빈호흡 | aliases: 빈호흡; 호흡이 빠름; 숨을 빠르게 쉼; 빠른 호흡\n- 발한 | aliases: 발한; 땀이 많이 남; 식은땀; 땀 흘림\n- 천식 | aliases: 천식; 천식 증상; 천식 발작\n- 가슴 답답 | aliases: 가슴 답답; 가슴이 답답해요; 흉부가 답답해요; 가슴이 막힌 느낌; 숨 쉬기 답답함\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 18,
+        "expected_symptoms": [
+          "삼키기 곤란",
+          "사래걸림"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "사래걸림",
+          "삼키기 곤란"
+        ],
+        "predicted": [
+          "사래걸림",
+          "삼키기 곤란"
+        ],
+        "correct": [
+          "사래걸림",
+          "삼키기 곤란"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "c3d72217-fc53-472f-be75-f80d194d0d4d",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:42.150812+00:00",
+      "completed_at": "2026-05-26T13:51:43.447125+00:00",
+      "duration_ms": 1284.87,
+      "input": {
+        "text": "다리가 붓고 몸이 전반적으로 피곤해요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "온몸이 떨림",
+          "사래걸림",
+          "목의 통증",
+          "발한",
+          "흉곽 팽윤",
+          "체중감소",
+          "권태감",
+          "피부홍조",
+          "가래",
+          "창백",
+          "삼키기 곤란",
+          "다발성 장기부전 증상",
+          "경정맥 확장",
+          "객혈",
+          "눈이 무거운 느낌",
+          "함몰가슴",
+          "뇌압상승증상",
+          "근력 약화",
+          "서맥",
+          "박동성 통증",
+          "눈의 충혈",
+          "화농성 객담",
+          "지남력 장애",
+          "복부팽만감",
+          "어지러움"
+        ]
+      },
+      "result": {
+        "input_text": "다리가 붓고 몸이 전반적으로 피곤해요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "권태감",
+            "evidence_text": "몸이 전반적으로 피곤해요",
+            "confidence": 0.9
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [
+          "다리가 붓고"
+        ],
+        "retrieved_candidates": [
+          "온몸이 떨림",
+          "사래걸림",
+          "목의 통증",
+          "발한",
+          "흉곽 팽윤",
+          "체중감소",
+          "권태감",
+          "피부홍조",
+          "가래",
+          "창백",
+          "삼키기 곤란",
+          "다발성 장기부전 증상",
+          "경정맥 확장",
+          "객혈",
+          "눈이 무거운 느낌",
+          "함몰가슴",
+          "뇌압상승증상",
+          "근력 약화",
+          "서맥",
+          "박동성 통증",
+          "눈의 충혈",
+          "화농성 객담",
+          "지남력 장애",
+          "복부팽만감",
+          "어지러움"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"다리가 붓고 몸이 전반적으로 피곤해요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"권태감\",\n      \"evidence_text\": \"몸이 전반적으로 피곤해요\",\n      \"confidence\": 0.9\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": [\n    \"다리가 붓고\"\n  ]\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n다리가 붓고 몸이 전반적으로 피곤해요.\n\n후보 증상 목록:\n- 온몸이 떨림 | aliases: 온몸이 떨림; 전신 떨림; 몸이 떨림; 떨려요\n- 사래걸림 | aliases: 사래걸림; 음식이 기도로 넘어감; 사레들림; 기침하며 사레\n- 목의 통증 | aliases: 목의 통증; 목이 아파요; 인후통; 목 통증; 목이 따가움\n- 발한 | aliases: 발한; 땀이 많이 남; 식은땀; 땀 흘림\n- 흉곽 팽윤 | aliases: 흉곽 팽윤; 가슴이 부풀어 보임; 흉곽이 팽창됨\n- 체중감소 | aliases: 체중감소; 살이 빠짐; 몸무게 감소; 체중이 줄어듦\n- 권태감 | aliases: 권태감; 몸이 처져요; 무기력함; 몸이 나른함; 컨디션 저하\n- 피부홍조 | aliases: 피부홍조; 얼굴이 빨개짐; 피부가 붉어짐; 홍조\n- 가래 | aliases: 가래; 객담; 가래가 나와요; 목에 가래가 낀 느낌; 끈적한 가래\n- 창백 | aliases: 창백; 얼굴이 창백함; 피부가 하얗게 질림\n- 삼키기 곤란 | aliases: 삼키기 곤란; 삼키기 어려움; 음식 삼키기 힘듦; 연하곤란\n- 다발성 장기부전 증상 | aliases: 다발성 장기부전 증상; 여러 장기 기능 저하; 장기부전 의심\n- 경정맥 확장 | aliases: 경정맥 확장; 목 혈관이 부풀어 보임; 목 정맥이 튀어나옴\n- 객혈 | aliases: 객혈; 피가 섞인 가래; 기침할 때 피가 나와요; 피가래; 혈담\n- 눈이 무거운 느낌 | aliases: 눈이 무거운 느낌; 눈이 무거워요; 눈꺼풀이 무거움\n- 함몰가슴 | aliases: 함몰가슴; 가슴이 움푹 들어감; 흉부 함몰\n- 뇌압상승증상 | aliases: 뇌압상승증상; 머리 압력이 오른 느낌; 뇌압 상승 의심 증상\n- 근력 약화 | aliases: 근력 약화; 힘이 빠짐; 근육 힘이 약함; 사지에 힘이 없음\n- 서맥 | aliases: 서맥; 맥박이 느림; 느린 심박\n- 박동성 통증 | aliases: 박동성 통증; 맥박처럼 욱신거리는 통증; 두근두근 뛰듯 아픔\n- 눈의 충혈 | aliases: 눈의 충혈; 눈이 빨개요; 눈 충혈; 눈이 붉음\n- 화농성 객담 | aliases: 화농성 객담; 누런 가래; 고름 같은 가래; 화농성 가래\n- 지남력 장애 | aliases: 지남력 장애; 시간 장소 사람을 헷갈림; 방향감각 상실; 혼동\n- 복부팽만감 | aliases: 복부팽만감; 배가 빵빵함; 배가 더부룩함; 복부 팽만\n- 어지러움 | aliases: 어지러움; 어지러워요; 현기증; 빙빙 도는 느낌\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 19,
+        "expected_symptoms": [
+          "하지부종",
+          "피로감"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "피로감",
+          "하지부종"
+        ],
+        "predicted": [
+          "권태감"
+        ],
+        "correct": [],
+        "missing": [
+          "피로감",
+          "하지부종"
+        ],
+        "extra": [
+          "권태감"
+        ],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "exact_match": false
+      },
+      "possible_symptom_names": []
+    },
+    {
+      "record_id": "ce85cc89-3c7d-474d-aa7a-3a1c60a0c6bd",
+      "status": "success",
+      "started_at": "2026-05-26T13:51:43.448145+00:00",
+      "completed_at": "2026-05-26T13:51:44.476769+00:00",
+      "duration_ms": 1036.51,
+      "input": {
+        "text": "특별히 아픈 곳은 없고 증상은 없는 것 같아요."
+      },
+      "config": {
+        "aws_region": "ap-northeast-2",
+        "knowledge_base_id": "FKL2EDDFB2",
+        "model_id": "global.amazon.nova-2-lite-v1:0",
+        "number_of_results": 25,
+        "retrieval_search_type": "SEMANTIC"
+      },
+      "retrieval": {
+        "candidate_count": 25,
+        "candidate_names": [
+          "무증상",
+          "기운없음",
+          "발한",
+          "불안",
+          "오한",
+          "흉수",
+          "창백",
+          "권태감",
+          "부정맥",
+          "서맥",
+          "빈맥",
+          "고탄산증",
+          "다발성 장기부전 증상",
+          "폐동맥 고혈압",
+          "기침",
+          "방사통",
+          "구토",
+          "감기 증상",
+          "압통",
+          "두통",
+          "콧물",
+          "코막힘",
+          "피로감",
+          "객혈",
+          "열"
+        ]
+      },
+      "result": {
+        "input_text": "특별히 아픈 곳은 없고 증상은 없는 것 같아요.",
+        "matched_symptoms": [
+          {
+            "symptom_name": "무증상",
+            "evidence_text": "증상은 없는",
+            "confidence": 1.0
+          }
+        ],
+        "possible_symptoms": [],
+        "unmatched_expressions": [],
+        "retrieved_candidates": [
+          "무증상",
+          "기운없음",
+          "발한",
+          "불안",
+          "오한",
+          "흉수",
+          "창백",
+          "권태감",
+          "부정맥",
+          "서맥",
+          "빈맥",
+          "고탄산증",
+          "다발성 장기부전 증상",
+          "폐동맥 고혈압",
+          "기침",
+          "방사통",
+          "구토",
+          "감기 증상",
+          "압통",
+          "두통",
+          "콧물",
+          "코막힘",
+          "피로감",
+          "객혈",
+          "열"
+        ]
+      },
+      "error": null,
+      "model": {
+        "raw_output": "```json\n{\n  \"input_text\": \"특별히 아픈 곳은 없고 증상은 없는 것 같아요.\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"무증상\",\n      \"evidence_text\": \"증상은 없는\",\n      \"confidence\": 1.0\n    }\n  ],\n  \"possible_symptoms\": [],\n  \"unmatched_expressions\": []\n}\n```"
+      },
+      "prompts": {
+        "system_prompt": "너는 '증상명 표준화 매칭기'다.\n입력 문장을 보고 후보 증상 목록 중 실제로 문장에 나타난 증상만 고른다.\n\n절대 규칙:\n- 질환명, 진단명, 원인, 치료법을 출력하지 않는다.\n- 후보 목록에 없는 증상명을 새로 만들지 않는다.\n- 출력은 JSON만 한다.\n- matched_symptoms에는 후보 목록에 존재하는 symptom_name만 넣는다.\n- 애매한 표현은 possible_symptoms에 넣고 confidence를 낮춘다.",
+        "user_prompt": "입력 문장:\n특별히 아픈 곳은 없고 증상은 없는 것 같아요.\n\n후보 증상 목록:\n- 무증상 | aliases: 무증상; 증상이 없음; 별다른 증상 없음; 아무 증상 없음\n- 기운없음 | aliases: 기운없음; 기운이 없어요; 힘이 없어요; 무기력해요\n- 발한 | aliases: 발한; 땀이 많이 남; 식은땀; 땀 흘림\n- 불안 | aliases: 불안; 불안감; 초조함; 불안해요\n- 오한 | aliases: 오한; 춥고 떨림; 몸이 으슬으슬함; 오슬오슬함\n- 흉수 | aliases: 흉수; 가슴에 물이 참\n- 창백 | aliases: 창백; 얼굴이 창백함; 피부가 하얗게 질림\n- 권태감 | aliases: 권태감; 몸이 처져요; 무기력함; 몸이 나른함; 컨디션 저하\n- 부정맥 | aliases: 부정맥; 맥박이 불규칙함; 심장 박동이 불규칙함\n- 서맥 | aliases: 서맥; 맥박이 느림; 느린 심박\n- 빈맥 | aliases: 빈맥; 맥박이 빠름; 심장이 빠르게 뜀; 빠른 심박\n- 고탄산증 | aliases: 고탄산증; 이산화탄소가 높음; CO2 상승\n- 다발성 장기부전 증상 | aliases: 다발성 장기부전 증상; 여러 장기 기능 저하; 장기부전 의심\n- 폐동맥 고혈압 | aliases: 폐동맥 고혈압; 폐동맥압 상승; 폐고혈압\n- 기침 | aliases: 기침; 콜록거림; 기침이 나요; 마른기침; 기침이 심함\n- 방사통 | aliases: 방사통; 통증이 퍼짐; 다른 부위로 뻗치는 통증\n- 구토 | aliases: 구토; 토해요; 구역질 후 토함; 음식을 토함\n- 감기 증상 | aliases: 감기 증상; 감기 같은 증상; 몸살 감기 느낌; 감기 기운\n- 압통 | aliases: 압통; 누르면 아픔; 눌렀을 때 통증\n- 두통 | aliases: 두통; 머리가 아파요; 머리 통증; 편두통처럼 아픔\n- 콧물 | aliases: 콧물; 코물이 나옴; 맑은 콧물; 콧물이 흘러요\n- 코막힘 | aliases: 코막힘; 코가 막힘; 코가 답답함; 비폐색\n- 피로감 | aliases: 피로감; 피곤함; 쉽게 지침; 피로해요\n- 객혈 | aliases: 객혈; 피가 섞인 가래; 기침할 때 피가 나와요; 피가래; 혈담\n- 열 | aliases: 열; 발열; 열이 나요; 체온이 높음; 고열\n\n반환 JSON 형식:\n{\n  \"input_text\": \"...\",\n  \"matched_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"evidence_text\": \"입력 문장에서 근거가 되는 짧은 표현\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"possible_symptoms\": [\n    {\n      \"symptom_name\": \"...\",\n      \"reason\": \"애매한 이유\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"unmatched_expressions\": []\n}"
+      },
+      "test_case": {
+        "id": 20,
+        "expected_symptoms": [
+          "무증상"
+        ]
+      },
+      "evaluation": {
+        "expected": [
+          "무증상"
+        ],
+        "predicted": [
+          "무증상"
+        ],
+        "correct": [
+          "무증상"
+        ],
+        "missing": [],
+        "extra": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "exact_match": true
+      },
+      "possible_symptom_names": []
+    }
+  ]
+}
