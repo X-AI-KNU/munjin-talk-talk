@@ -37,9 +37,9 @@ export default function App() {
     const doctor = sessions.find((session) => ['needs_priority', 'completed', 'reviewed'].includes(session.status))
       || tablet
     return {
-      patient: tablet ? `/patient/${tablet.sessionId}` : '/staff',
-      doctor: doctor ? `/doctor/${doctor.sessionId}` : '/doctor/queue',
-      guide: doctor ? `/guide/${doctor.sessionId}` : '/guide',
+      patient: tablet ? `/patient/${tablet.sessionId}` : null,
+      doctor: doctor ? `/doctor/${doctor.sessionId}` : null,
+      guide: doctor ? `/guide/${doctor.sessionId}` : null,
     }
   }, [sessions])
 
@@ -52,21 +52,16 @@ export default function App() {
         <Link to="/staff" className={navClass(path === '/staff')}>
           직원 접수
         </Link>
-        <Link to={navTargets.patient} className={navClass(path.startsWith('/patient/'))}>
-          환자 태블릿
-        </Link>
+        <NavItem to={navTargets.patient} active={path.startsWith('/patient/')} label="환자 태블릿" />
         <Link to="/doctor/queue" className={navClass(path === '/doctor/queue')}>
           의사 대기열
         </Link>
-        <Link
+        <NavItem
           to={navTargets.doctor}
-          className={navClass(path.startsWith('/doctor/') && path !== '/doctor/queue')}
-        >
-          원페이퍼
-        </Link>
-        <Link to={navTargets.guide} className={navClass(path.startsWith('/guide'))}>
-          안내문 출력
-        </Link>
+          active={path.startsWith('/doctor/') && path !== '/doctor/queue'}
+          label="원페이퍼"
+        />
+        <NavItem to={navTargets.guide} active={path.startsWith('/guide/')} label="안내문 출력" />
       </nav>
 
       <main className="app-stage">
@@ -82,6 +77,21 @@ export default function App() {
         </Routes>
       </main>
     </>
+  )
+}
+
+function NavItem({ to, active, label }) {
+  if (!to) {
+    return (
+      <span className="disabled" aria-disabled="true" title="문진 세션 생성 후 사용할 수 있습니다.">
+        {label}
+      </span>
+    )
+  }
+  return (
+    <Link to={to} className={active ? 'active' : ''}>
+      {label}
+    </Link>
   )
 }
 
