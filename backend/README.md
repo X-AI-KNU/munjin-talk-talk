@@ -1,6 +1,6 @@
-# 문진톡톡 Backend
+# Backend
 
-실제 MVP 백엔드는 `serverless/` 폴더만 사용합니다.
+The MVP backend lives in `backend/serverless`.
 
 ```text
 backend/
@@ -13,6 +13,6 @@ backend/
     └── README.md
 ```
 
-이전 로컬 평가용 IR 데이터, 테스트셋, 실험 스크립트는 배포 MVP에 필요하지 않아 제거했습니다.
+Local IR experiments, evaluation data, and prototype scripts are not part of the deployment repository.
 
-백엔드 상세 실행 및 배포 방법은 [serverless/README.md](serverless/README.md)를 참고하세요.
+See [serverless/README.md](serverless/README.md) for deployment details.

@@ -1,7 +1,7 @@
 # Project Structure
 
 ```text
-munjin-talk-talk-mvp/
+munjin-talk-talk/
 ├── backend/
 │   └── serverless/
 │       ├── src/
@@ -27,37 +27,43 @@ munjin-talk-talk-mvp/
 │   └── vite.config.js
 ├── docs/
 │   ├── DEPLOYMENT.md
+│   ├── MVP_SETUP.md
 │   └── PROJECT_STRUCTURE.md
 └── README.md
 ```
 
-## Runtime Responsibilities
+## Responsibilities
 
-`frontend/`:
+`frontend/`
 
-- 직원 접수 화면
-- 환자 태블릿 문진
-- 의사 대기열
-- 의사 원페이퍼
-- 환자 안내문/출력 화면
+- Staff reception
+- Patient tablet intake
+- Doctor queue
+- Doctor onepaper
+- Patient guide
 
-`backend/serverless/`:
+`backend/serverless/`
 
-- 세션 생성과 대기 순번 관리
-- S3 presigned upload URL 발급
-- Amazon Transcribe polling
-- Bedrock 기반 추출, 매칭, 검증, 안내문 생성
-- DynamoDB 세션 저장
+- Session creation and queue numbering
+- S3 upload URL generation
+- Transcribe polling
+- Bedrock extraction, matching, validation, and guide generation
+- DynamoDB session persistence
 
-## Removed From MVP Repository
+`docs/`
 
-아래 항목은 MVP 배포 저장소에서 제외했습니다.
+- Setup notes
+- Deployment instructions
+- Repository structure
 
-- 로컬 IR 실험 패키지
-- 100명 persona 테스트 데이터
-- diseases/symptom 원천 JSON 데이터
-- retrieval dataset builder script
-- evaluation output
+## Excluded Artifacts
+
+The deployment repository intentionally excludes:
+
+- local IR experiments
+- persona/evaluation datasets
+- source crawling data
 - embedding cache
-- Vite build output
+- generated outputs
 - `node_modules`
+- `dist`
