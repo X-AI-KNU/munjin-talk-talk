@@ -1,0 +1,122 @@
+<mxfile host="app.diagrams.net" modified="2026-05-31T03:45:00.000Z" agent="Codex" version="24.7.17" type="device">
+  <diagram id="munjin-architecture" name="MunjinTalkTalk MVP Architecture">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="MunjinTalkTalk MVP Architecture" style="text;html=1;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;fontColor=#0f2147;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="720" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="note" value="Voice intake -> transcription -> Bedrock structuring -> doctor onepaper -> patient guide" style="text;html=1;strokeColor=none;fillColor=none;fontSize=14;fontColor=#52627a;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="62" y="78" width="900" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="clientGroup" value="Client Screens" style="swimlane;whiteSpace=wrap;html=1;rounded=1;strokeColor=#b8c7dd;fillColor=#f7fbff;fontSize=16;fontStyle=1;startSize=36;" vertex="1" parent="1">
+          <mxGeometry x="60" y="140" width="260" height="660" as="geometry" />
+        </mxCell>
+        <mxCell id="staff" value="Staff Reception&#xa;/staff&#xa;&#xa;Create patient session&#xa;Manual fallback input" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#2f6df6;fontSize=13;spacing=10;" vertex="1" parent="clientGroup">
+          <mxGeometry x="30" y="70" width="200" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="patient" value="Patient Tablet&#xa;/patient/{sessionId}&#xa;&#xa;Voice questionnaire&#xa;STT confirmation&#xa;Safety alert handoff" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf8f6;strokeColor=#00a7a7;fontSize=13;spacing=10;" vertex="1" parent="clientGroup">
+          <mxGeometry x="30" y="205" width="200" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="doctor" value="Doctor Onepaper&#xa;/doctor/queue&#xa;/doctor/{sessionId}&#xa;&#xa;Review symptoms, quotes, context, checklist&#xa;Submit answers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7e8;strokeColor=#f59f00;fontSize=13;spacing=10;" vertex="1" parent="clientGroup">
+          <mxGeometry x="30" y="360" width="200" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="guide" value="Patient Guide&#xa;/guide/{sessionId}&#xa;&#xa;Plain-language answers&#xa;Doctor notes shown as-is&#xa;Print view" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1fff3;strokeColor=#16a34a;fontSize=13;spacing=10;" vertex="1" parent="clientGroup">
+          <mxGeometry x="30" y="525" width="200" height="115" as="geometry" />
+        </mxCell>
+
+        <mxCell id="frontendGroup" value="Frontend Hosting" style="swimlane;whiteSpace=wrap;html=1;rounded=1;strokeColor=#b8c7dd;fillColor=#ffffff;fontSize=16;fontStyle=1;startSize=36;" vertex="1" parent="1">
+          <mxGeometry x="390" y="140" width="260" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="github" value="GitHub&#xa;CHOIGIBUM/munjin-talk-talk-mvp&#xa;main branch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#64748b;fontSize=13;spacing=10;" vertex="1" parent="frontendGroup">
+          <mxGeometry x="30" y="70" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="amplify" value="AWS Amplify Hosting&#xa;React + Vite static app&#xa;&#xa;VITE_API_BASE_URL&#xa;SPA rewrite to /index.html" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e8ff;strokeColor=#8b5cf6;fontSize=13;spacing=10;" vertex="1" parent="frontendGroup">
+          <mxGeometry x="30" y="180" width="200" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="apiGroup" value="Serverless API" style="swimlane;whiteSpace=wrap;html=1;rounded=1;strokeColor=#b8c7dd;fillColor=#fbfdff;fontSize=16;fontStyle=1;startSize=36;" vertex="1" parent="1">
+          <mxGeometry x="730" y="140" width="330" height="660" as="geometry" />
+        </mxCell>
+        <mxCell id="apiGateway" value="API Gateway HTTP API&#xa;&#xa;/sessions&#xa;/upload-url&#xa;/transcribe-result&#xa;/extract /match /validate&#xa;/doctor/queue&#xa;/onepager/{id}&#xa;/doctor-response&#xa;/guide/{id}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eef2ff;strokeColor=#4f46e5;fontSize=13;spacing=10;" vertex="1" parent="apiGroup">
+          <mxGeometry x="40" y="70" width="250" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="lambda" value="Lambda Python 3.12&#xa;&#xa;Session orchestration&#xa;Presigned S3 upload URL&#xa;Transcribe job polling&#xa;LLM extraction / matching / validation&#xa;Doctor response save&#xa;Patient guide generation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#f97316;fontSize=13;spacing=10;" vertex="1" parent="apiGroup">
+          <mxGeometry x="40" y="300" width="250" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="guardrails" value="Application Guardrails&#xa;&#xa;No rule fallback for production-like test&#xa;Quote validation against patient utterance&#xa;No diagnosis/prescription output" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff1f2;strokeColor=#e11d48;fontSize=13;spacing=10;" vertex="1" parent="apiGroup">
+          <mxGeometry x="40" y="555" width="250" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="awsGroup" value="AWS Data and AI Services" style="swimlane;whiteSpace=wrap;html=1;rounded=1;strokeColor=#b8c7dd;fillColor=#ffffff;fontSize=16;fontStyle=1;startSize=36;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="140" width="370" height="660" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="Amazon S3&#xa;Artifact Bucket&#xa;&#xa;Audio files&#xa;Transcript JSON&#xa;CORS allows Amplify HTTPS origin" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#eff6ff;strokeColor=#2563eb;fontSize=13;spacing=10;" vertex="1" parent="awsGroup">
+          <mxGeometry x="60" y="70" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="transcribe" value="Amazon Transcribe&#xa;&#xa;Korean STT job&#xa;Returns transcript text for confirmation and parsing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ecfeff;strokeColor=#0891b2;fontSize=13;spacing=10;" vertex="1" parent="awsGroup">
+          <mxGeometry x="60" y="230" width="250" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="bedrock" value="Amazon Bedrock&#xa;Nova Pro / Nova Lite&#xa;&#xa;Semantic parsing&#xa;Symptom and question structuring&#xa;Onepaper review&#xa;Patient guide rewriting" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdf2f8;strokeColor=#db2777;fontSize=13;spacing=10;" vertex="1" parent="awsGroup">
+          <mxGeometry x="60" y="375" width="250" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="ddb" value="DynamoDB&#xa;MunjinSessions&#xa;&#xa;Session state&#xa;Queue number&#xa;Onepaper payload&#xa;Doctor responses&#xa;Guide data" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f0fdf4;strokeColor=#16a34a;fontSize=13;spacing=10;" vertex="1" parent="awsGroup">
+          <mxGeometry x="60" y="555" width="250" height="105" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" value="push / auto deploy" style="endArrow=block;html=1;rounded=0;strokeColor=#64748b;fontSize=12;" edge="1" parent="1" source="github" target="amplify">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="serve static app" style="endArrow=block;html=1;rounded=0;strokeColor=#64748b;fontSize=12;" edge="1" parent="1" source="amplify" target="patient">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="serve static app" style="endArrow=block;html=1;rounded=0;strokeColor=#64748b;fontSize=12;" edge="1" parent="1" source="amplify" target="staff">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="serve static app" style="endArrow=block;html=1;rounded=0;strokeColor=#64748b;fontSize=12;" edge="1" parent="1" source="amplify" target="doctor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="serve static app" style="endArrow=block;html=1;rounded=0;strokeColor=#64748b;fontSize=12;" edge="1" parent="1" source="amplify" target="guide">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="HTTPS API calls" style="endArrow=block;html=1;rounded=0;strokeColor=#2563eb;fontSize=12;" edge="1" parent="1" source="amplify" target="apiGateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="invoke" style="endArrow=block;html=1;rounded=0;strokeColor=#4f46e5;fontSize=12;" edge="1" parent="1" source="apiGateway" target="lambda">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="presigned PUT audio" style="endArrow=block;html=1;rounded=0;strokeColor=#2563eb;fontSize=12;" edge="1" parent="1" source="patient" target="s3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="370" />
+              <mxPoint x="620" y="210" />
+              <mxPoint x="1160" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" value="start/get job" style="endArrow=block;html=1;rounded=0;strokeColor=#0891b2;fontSize=12;" edge="1" parent="1" source="lambda" target="transcribe">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="read/write artifacts" style="endArrow=block;html=1;rounded=0;strokeColor=#2563eb;fontSize=12;" edge="1" parent="1" source="lambda" target="s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="transcript output" style="endArrow=block;html=1;rounded=0;strokeColor=#0891b2;fontSize=12;" edge="1" parent="1" source="transcribe" target="s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="invoke models" style="endArrow=block;html=1;rounded=0;strokeColor=#db2777;fontSize=12;" edge="1" parent="1" source="lambda" target="bedrock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="persist session" style="endArrow=block;html=1;rounded=0;strokeColor=#16a34a;fontSize=12;" edge="1" parent="1" source="lambda" target="ddb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="validated payload" style="endArrow=block;html=1;rounded=0;strokeColor=#e11d48;fontSize=12;" edge="1" parent="1" source="lambda" target="guardrails">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
