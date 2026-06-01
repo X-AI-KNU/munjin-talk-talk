@@ -7,6 +7,7 @@ LLM/IR pipeline.
 """
 
 import re
+import uuid
 from urllib.parse import urlencode
 
 import boto3
@@ -65,7 +66,12 @@ def generate_streaming_transcribe_url(body):
     if not session:
         session = create_session({"session_id": session_id, "visit_type": visit_type})
 
-    stream_session_id = safe_job_name(f"{session_id}-{question_id}")[:36]
+    # Amazon Transcribe Streaming의 session-id는 UUID 형식만 허용한다.
+    # 서비스의 문진 session_id는 `s_...` 형태라 그대로 넘기면 WebSocket이
+    # 열리자마자 ValidationException으로 종료되므로, 스트리밍 연결마다
+    # AWS 규격에 맞는 별도 UUID를 발급한다. 이 값은 저장 식별자가 아니라
+    # Transcribe 연결 추적용 임시 ID다.
+    stream_session_id = str(uuid.uuid4())
     params = {
         "language-code": "ko-KR",
         "media-encoding": "pcm",

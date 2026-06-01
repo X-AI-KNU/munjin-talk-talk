@@ -1011,13 +1011,23 @@ body {
 }
 .voice-body .voice-mic-wrap {
   flex: 0 0 auto !important;
-  min-height: 142px !important;
-  justify-content: flex-start !important;
-  margin: 10px 0 0 !important;
+  min-height: 126px !important;
+  justify-content: center !important;
+  margin: 8px 0 0 !important;
 }
 .voice-body .voice-mic {
   width: 84px;
   height: 84px;
+  flex: 0 0 84px;
+}
+.voice-body {
+  overflow: visible !important;
+  padding-bottom: 8px !important;
+}
+.screen-footer .btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 .verify-footer-btn {
   min-height: 52px;

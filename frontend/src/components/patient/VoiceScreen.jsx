@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import ScreenHeader from '../tablet/ScreenHeader.jsx'
 import { useStreamingTranscribe } from '../../hooks/useStreamingTranscribe.js'
 
@@ -15,8 +15,9 @@ function formatTime(seconds) {
   return `${m}:${s}`
 }
 
-// Q1~Q4 공통 음성 입력 화면입니다.
-// 브라우저 마이크 음성을 Amazon Transcribe Streaming으로 보내고, 받은 텍스트만 다음 단계로 전달합니다.
+// Q1~Q4 공통 음성 입력 화면.
+// 환자가 화면에 들어오면 녹음을 자동으로 시작하고, 실패하거나 다시 말해야 할 때는
+// 중앙 마이크 버튼으로만 재시도한다. 하단 버튼은 녹음 종료 역할만 맡긴다.
 export default function VoiceScreen({
   sessionId,
   patient,
@@ -28,6 +29,7 @@ export default function VoiceScreen({
   onFinish,
   onStaffCall,
 }) {
+  const [notice, setNotice] = useState(null)
   const { isRecording, transcript, error, elapsed, start, stop } = useStreamingTranscribe({
     sessionId,
     questionId: question.id,
@@ -35,27 +37,37 @@ export default function VoiceScreen({
   })
 
   useEffect(() => {
-    const timer = setTimeout(() => start(), 400)
+    setNotice(null)
+    const timer = setTimeout(() => start(), 450)
     return () => clearTimeout(timer)
-    // 질문이 바뀌면 새 STT 세션을 준비합니다. 자동 시작이 막히면 마이크 버튼으로 다시 시작할 수 있습니다.
+    // 질문이 바뀔 때마다 새 Transcribe Streaming 세션을 준비한다.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [question.id])
 
   const handleEnd = async () => {
-    const finalText = await stop()
+    const finalText = (await stop()).trim()
+    if (!finalText) {
+      setNotice('음성 인식 결과가 비어 있습니다. 마이크 버튼을 눌러 다시 말씀해 주세요.')
+      return
+    }
+    setNotice(null)
     onFinish(finalText)
   }
 
   const handleMicClick = () => {
-    if (isRecording) handleEnd()
-    else start()
+    if (isRecording) {
+      handleEnd()
+      return
+    }
+    setNotice(null)
+    start()
   }
 
-  const displayTranscript = error
-    ? '마이크 버튼을 다시 눌러 말씀해 주세요.'
-    : isRecording
-      ? (transcript || '듣고 있어요. 한 문장으로 말씀해 주세요.')
-      : (transcript || partialText || '말씀하실 준비가 되면 마이크를 눌러 주세요.')
+  const displayTranscript = notice
+    || (error ? '마이크 버튼을 다시 눌러 말씀해 주세요.' : null)
+    || transcript
+    || partialText
+    || '말씀하신 내용이 여기에 바로 표시됩니다.'
 
   return (
     <>
@@ -89,7 +101,7 @@ export default function VoiceScreen({
             className={`voice-mic ${isRecording ? 'recording' : ''}`}
             onClick={handleMicClick}
             disabled={isProcessing}
-            aria-label={isRecording ? '녹음 중지' : '녹음 시작'}
+            aria-label={isRecording ? '발화 마치기' : '다시 말하기'}
           >
             <MicIcon />
           </button>
@@ -112,8 +124,8 @@ export default function VoiceScreen({
 
       <div className="screen-footer">
         <button className="btn-help staff-button-wide" onClick={onStaffCall} disabled={isProcessing}>직원 도움</button>
-        <button className="btn-primary" onClick={isRecording ? handleEnd : start} disabled={isProcessing}>
-          {isProcessing ? '분석 중...' : isRecording ? '발화 마치기' : '녹음 시작'}
+        <button className="btn-primary" onClick={handleEnd} disabled={isProcessing || !isRecording}>
+          {isProcessing ? '분석 중...' : '발화 마치기'}
         </button>
       </div>
     </>
