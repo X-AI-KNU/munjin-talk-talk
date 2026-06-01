@@ -25,6 +25,7 @@ GET  /guide/{session_id}
 - S3 artifact bucket for audio and transcript files
 - Amazon Transcribe
 - Amazon Bedrock Nova Pro/Lite
+- Amazon Titan Text Embeddings for symptom IR
 
 ## Required AWS Resources
 
@@ -99,8 +100,18 @@ Default Bedrock model routing:
 
 - Q1 symptom/new-vs-follow-up extraction: `apac.amazon.nova-pro-v1:0`
 - Q2/Q3/Q4 structured extraction: `apac.amazon.nova-lite-v1:0`
+- Symptom matching: BM25 over `diseases_cleaned.json` + `symptom_index.json`, reranked with `amazon.titan-embed-text-v2:0`
 - Onepaper review: `apac.amazon.nova-pro-v1:0`
 - Patient guide rewriting: `apac.amazon.nova-lite-v1:0`
+
+## Symptom IR Data
+
+Runtime symptom search uses only these source files under `src/data/`:
+
+- `diseases_cleaned.json`
+- `symptom_index.json`
+
+At cold-start, Lambda builds concise symptom search documents from those two files by deterministic rules. The packaged `symptom_embeddings_*.json` file is a numeric Titan vector index for those generated documents, so `/match` can run full hybrid retrieval without waiting for 87 document embeddings on the first request. No LLM-written `symptom_retrieval_dataset.json` is required.
 
 Production-like testing should use:
 

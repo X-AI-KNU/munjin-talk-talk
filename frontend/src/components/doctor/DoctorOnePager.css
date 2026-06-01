@@ -537,6 +537,17 @@
   gap: 14px;
 }
 
+.onepaper-empty {
+  padding: 16px;
+}
+.onepaper-empty p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
 /* 좌우 그리드 — 길이 차이 무너지지 않도록 align-items: start 명시 */
 .onepaper-v4 .op-split {
   display: grid;

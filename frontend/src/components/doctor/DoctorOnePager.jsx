@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
-import { getOnePager } from '../../services/api.js'
+import { getOnePager, isMockApiEnabled } from '../../services/api.js'
 import { normalizeOnePager } from '../../services/onepagerAdapter.js'
 import './DoctorOnePager.css'
 
@@ -175,14 +175,28 @@ export default function DoctorOnePager({ sessionId, sessionData, sidePanel, rend
   }, [sessionId, sessionData])
 
   const data = useMemo(() => {
-    const fallback = mockOverride === 'followup' ? MOCK_FOLLOWUP : MOCK_INITIAL
-    return normalizeOnePager(sessionData || apiData || fallback, fallback)
+    const fallback = isMockApiEnabled() ? (mockOverride === 'followup' ? MOCK_FOLLOWUP : MOCK_INITIAL) : null
+    const source = sessionData || apiData || fallback
+    return source ? normalizeOnePager(source, fallback) : null
   }, [sessionData, apiData, mockOverride])
 
   // mock 변경 시 체크 초기화
   useEffect(() => {
     setChecked({})
   }, [mockOverride])
+
+  if (!data) {
+    return (
+      <div className="onepaper-v4 onepaper-empty">
+        <div className="op-card">
+          <div className="op-card-title">
+            <h4>원페이퍼를 표시할 세션이 없습니다</h4>
+          </div>
+          <p>직원 접수에서 문진 세션을 생성하고 환자 문진을 완료하면 이 화면에 내용이 표시됩니다.</p>
+        </div>
+      </div>
+    )
+  }
 
   const isFollowup = data.patient.visit_type === 'followup'
   const themeClass = isFollowup ? 'theme-followup' : 'theme-initial'
@@ -204,7 +218,7 @@ export default function DoctorOnePager({ sessionId, sessionData, sidePanel, rend
     <div className={`onepaper-v4 ${themeClass}`}>
 
       {/* 데모용 토글 (실시연 시 제거) */}
-      {!sessionData && !apiData && (
+      {isMockApiEnabled() && !sessionData && !apiData && (
         <div className="onepaper-demo-toggle">
           <button
             className={!mockOverride || mockOverride === 'initial' ? 'active' : ''}

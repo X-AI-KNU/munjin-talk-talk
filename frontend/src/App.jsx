@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Routes, Route, NavLink } from 'react-router-dom'
+import { Link, Routes, Route, useLocation } from 'react-router-dom'
 import PatientFlow from './components/patient/PatientFlow.jsx'
 import PatientKioskView from './components/patient/PatientKioskView.jsx'
 import DoctorView from './components/doctor/DoctorView.jsx'
 import DoctorQueueView from './components/doctor/DoctorQueueView.jsx'
 import PatientGuideScreen from './components/patient/PatientGuideScreen.jsx'
 import ReceptionView from './components/staff/ReceptionView.jsx'
-import { getDoctorQueue } from './services/api.js'
+import { getDoctorQueue, isMockApiEnabled } from './services/api.js'
 
 // v4 변경:
 // - 우측 상단에 시연용 Flag 메뉴 (드롭다운)
@@ -15,6 +15,8 @@ import { getDoctorQueue } from './services/api.js'
 
 export default function App() {
   const [sessions, setSessions] = useState([])
+  const location = useLocation()
+  const mockMode = isMockApiEnabled()
 
   useEffect(() => {
     const refresh = async () => setSessions(await getDoctorQueue())
@@ -36,35 +38,36 @@ export default function App() {
     const doctor = sessions.find((session) => ['needs_priority', 'completed', 'reviewed'].includes(session.status))
       || tablet
     return {
-      patient: tablet ? `/patient/${tablet.sessionId}` : '/staff',
-      doctor: doctor ? `/doctor/${doctor.sessionId}` : '/doctor/queue',
-      guide: doctor ? `/guide/${doctor.sessionId}` : '/guide',
+      patient: tablet ? `/patient/${tablet.sessionId}` : null,
+      doctor: doctor ? `/doctor/${doctor.sessionId}` : null,
+      guide: doctor ? `/guide/${doctor.sessionId}` : null,
     }
   }, [sessions])
+
+  const path = location.pathname
+  const navClass = (active) => (active ? 'active' : '')
 
   return (
     <>
       <nav className="mode-switcher">
-        <NavLink to="/staff" className={({ isActive }) => (isActive ? 'active' : '')}>
+        <Link to="/staff" className={navClass(path === '/staff')}>
           직원 접수
-        </NavLink>
-        <NavLink to={navTargets.patient} className={({ isActive }) => (isActive ? 'active' : '')}>
-          환자 태블릿
-        </NavLink>
-        <NavLink to="/doctor/queue" className={({ isActive }) => (isActive ? 'active' : '')}>
+        </Link>
+        <NavItem to={navTargets.patient} active={path.startsWith('/patient/')} label="환자 태블릿" />
+        <Link to="/doctor/queue" className={navClass(path === '/doctor/queue')}>
           의사 대기열
-        </NavLink>
-        <NavLink to={navTargets.doctor} className={({ isActive }) => (isActive ? 'active' : '')}>
-          원페이퍼
-        </NavLink>
-        <NavLink to={navTargets.guide} className={({ isActive }) => (isActive ? 'active' : '')}>
-          안내문 출력
-        </NavLink>
+        </Link>
+        <NavItem
+          to={navTargets.doctor}
+          active={path.startsWith('/doctor/') && path !== '/doctor/queue'}
+          label="원페이퍼"
+        />
+        <NavItem to={navTargets.guide} active={path.startsWith('/guide/')} label="안내문 출력" />
       </nav>
 
       <main className="app-stage">
         <Routes>
-          <Route path="/" element={<PatientFlowWithDemoMenu />} />
+          <Route path="/" element={mockMode ? <PatientFlowWithDemoMenu /> : <ReceptionView />} />
           <Route path="/staff" element={<ReceptionView />} />
           <Route path="/patient/:sessionId" element={<PatientKioskView />} />
           <Route path="/doctor/queue" element={<DoctorQueueView />} />
@@ -75,6 +78,21 @@ export default function App() {
         </Routes>
       </main>
     </>
+  )
+}
+
+function NavItem({ to, active, label }) {
+  if (!to) {
+    return (
+      <span className="disabled" aria-disabled="true" title="문진 세션 생성 후 사용할 수 있습니다.">
+        {label}
+      </span>
+    )
+  }
+  return (
+    <Link to={to} className={active ? 'active' : ''}>
+      {label}
+    </Link>
   )
 }
 

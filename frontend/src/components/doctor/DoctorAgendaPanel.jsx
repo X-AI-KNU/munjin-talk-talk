@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { isMockApiEnabled } from '../../services/api.js'
 import { normalizeAgendaSource } from '../../services/onepagerAdapter.js'
 import './DoctorAgendaPanel.css'
 
@@ -49,7 +50,7 @@ function buildManualAgendaFallback(fullTranscript) {
 }
 
 export default function DoctorAgendaPanel({ sessionData, submitStatus, onSubmit }) {
-  const normalized = normalizeAgendaSource(sessionData, sessionData ? [] : MOCK_AGENDA)
+  const normalized = normalizeAgendaSource(sessionData, !sessionData && isMockApiEnabled() ? MOCK_AGENDA : [])
   const fullTranscript = normalized.full_q4_transcript || ''
   const agenda = (normalized.agenda?.length ? normalized.agenda : buildManualAgendaFallback(fullTranscript))
   const uncategorizedRemnant = normalized.uncategorized_remnant || ''

@@ -41,6 +41,15 @@ Globals:
         MAX_LLM_TOKENS: '1600'
         REVIEW_MAX_TOKENS: '900'
         GUIDE_MAX_TOKENS: '900'
+        USE_TITAN_EMBEDDING: 'true'
+        EMBEDDING_MODEL_ID: amazon.titan-embed-text-v2:0
+        EMBEDDING_DIMENSIONS: '512'
+        HYBRID_TOP_K: '5'
+        HYBRID_CANDIDATE_K: '24'
+        HYBRID_ACCEPT_THRESHOLD: '0.18'
+        HYBRID_BM25_WEIGHT: '0.35'
+        HYBRID_VECTOR_WEIGHT: '0.65'
+        HYBRID_PRECOMPUTE_DOC_EMBEDDINGS: 'false'
 
 Resources:
   MunjinHttpApi:

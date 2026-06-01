@@ -1,0 +1,1533 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>문진톡톡 MVP 기술 구조 안내서</title>
+  <style>
+    :root {
+      --navy: #0b2447;
+      --ink: #102a4c;
+      --muted: #5f718b;
+      --line: #d8e4f2;
+      --bg: #f4f8fd;
+      --panel: #ffffff;
+      --blue: #2563eb;
+      --teal: #0ea5a5;
+      --green: #16a34a;
+      --orange: #f97316;
+      --red: #dc2626;
+      --soft-blue: #eff6ff;
+      --soft-teal: #ecfeff;
+      --soft-green: #f0fdf4;
+      --soft-orange: #fff7ed;
+      --soft-red: #fef2f2;
+      --code-bg: #0f172a;
+      --shadow: 0 16px 36px rgba(15, 35, 71, 0.08);
+      color: var(--ink);
+      font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+      line-height: 1.65;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(219, 234, 254, 0.62), rgba(204, 251, 241, 0.42)),
+        var(--bg);
+      color: var(--ink);
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.94em;
+    }
+
+    .shell {
+      width: min(1240px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 56px 0 34px;
+    }
+
+    .kicker {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin-bottom: 16px;
+      color: var(--navy);
+      font-size: clamp(36px, 5vw, 60px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 930px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 750;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .hero-card,
+    .section,
+    .mini-card,
+    .note,
+    .arch-box,
+    .data-pill {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      min-height: 120px;
+      padding: 18px;
+    }
+
+    .hero-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--navy);
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .hero-card span {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(244, 248, 253, 0.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 12px 0;
+    }
+
+    .nav a {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      border: 1px solid #cfe0f4;
+      border-radius: 999px;
+      background: white;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    main {
+      padding: 26px 0 78px;
+    }
+
+    .section {
+      margin: 22px 0;
+      padding: 30px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 22px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-title h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 29px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .section-title p:last-child {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      display: grid;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .mini-card {
+      padding: 18px;
+      box-shadow: none;
+    }
+
+    .mini-card h3 {
+      margin-bottom: 8px;
+      color: var(--navy);
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .mini-card p,
+    .mini-card li {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .mini-card p:last-child,
+    .mini-card ul:last-child {
+      margin-bottom: 0;
+    }
+
+    .tint-blue {
+      background: linear-gradient(180deg, var(--soft-blue), #ffffff);
+      border-color: #bfdbfe;
+    }
+
+    .tint-teal {
+      background: linear-gradient(180deg, var(--soft-teal), #ffffff);
+      border-color: #99f6e4;
+    }
+
+    .tint-green {
+      background: linear-gradient(180deg, var(--soft-green), #ffffff);
+      border-color: #bbf7d0;
+    }
+
+    .tint-orange {
+      background: linear-gradient(180deg, var(--soft-orange), #ffffff);
+      border-color: #fed7aa;
+    }
+
+    .tint-red {
+      background: linear-gradient(180deg, var(--soft-red), #ffffff);
+      border-color: #fecaca;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 126px;
+      padding: 15px 12px;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      background: #ffffff;
+    }
+
+    .flow-step::after {
+      content: ">";
+      position: absolute;
+      top: 42px;
+      right: -14px;
+      z-index: 2;
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    .flow-step:last-child::after {
+      display: none;
+    }
+
+    .flow-step b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .flow-step span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr 1.12fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .arch-column {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .arch-column h3 {
+      margin-bottom: 12px;
+      color: var(--navy);
+      font-size: 18px;
+    }
+
+    .arch-box {
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #f8fafc;
+      box-shadow: none;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .arch-box strong {
+      display: block;
+      color: var(--navy);
+      font-size: 14px;
+    }
+
+    .arrow-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 12px 13px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--navy);
+      color: white;
+      font-weight: 900;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    pre {
+      margin: 0;
+      overflow-x: auto;
+      border-radius: 12px;
+      background: var(--code-bg);
+      color: #e2e8f0;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    pre code {
+      display: block;
+      padding: 18px;
+    }
+
+    .schema-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 16px;
+      align-items: start;
+      margin-top: 12px;
+    }
+
+    .callout-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .callout-list li {
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-weight: 750;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .badge.green {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .badge.orange {
+      background: #ffedd5;
+      color: #c2410c;
+    }
+
+    .badge.red {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 16px 18px;
+      box-shadow: none;
+      background: #fff7ed;
+      border-color: #fed7aa;
+      color: #7c2d12;
+      font-weight: 800;
+    }
+
+    .note.blue {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      color: #1e3a8a;
+    }
+
+    .note.green {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+      color: #14532d;
+    }
+
+    .data-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .data-pill {
+      padding: 10px 12px;
+      box-shadow: none;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .caption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .section h3.schema-title {
+      margin: 24px 0 10px;
+      padding-top: 4px;
+      color: var(--navy);
+      font-size: 20px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .schema-grid,
+      .architecture,
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-step::after {
+        display: none;
+      }
+
+      .section {
+        padding: 22px;
+      }
+
+      .section-title {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero shell">
+    <p class="kicker">문진톡톡 MVP 기술 안내서</p>
+    <h1>프론트, 백엔드, AI 처리, JSON 저장 구조를 한 번에 보는 문서</h1>
+    <p class="hero-copy">
+      이 문서는 현재 배포된 문진톡톡 MVP가 실제로 어떻게 동작하는지 설명합니다.
+      환자 음성 문진이 Amazon Transcribe, Bedrock Nova, Titan embedding, Lambda, DynamoDB를 거쳐
+      의사용 원페이퍼와 환자 안내문으로 바뀌는 전체 흐름을 기준으로 정리했습니다.
+    </p>
+    <div class="hero-grid">
+      <div class="hero-card">
+        <strong>Frontend</strong>
+        <span>React/Vite 화면, 녹음, API 호출, 원페이퍼와 안내문 표시</span>
+      </div>
+      <div class="hero-card">
+        <strong>Serverless Backend</strong>
+        <span>API Gateway, Lambda, DynamoDB, S3 기반 세션 처리</span>
+      </div>
+      <div class="hero-card">
+        <strong>AWS AI</strong>
+        <span>Transcribe STT, Nova 의미 분해, Titan vector 검색</span>
+      </div>
+      <div class="hero-card">
+        <strong>Output</strong>
+        <span>의사용 원페이퍼, 의료진 체크리스트, 환자용 안내문</span>
+      </div>
+    </div>
+    <p class="caption">
+      핵심 문장: 환자 한 명의 문진은 DynamoDB의 session JSON 하나로 누적되고, 프론트는 그 JSON을 읽어 직원, 환자, 의사 화면에 맞게 보여줍니다.
+    </p>
+  </header>
+
+  <nav class="nav">
+    <div class="shell nav-inner">
+      <a href="#summary">요약</a>
+      <a href="#runtime">실행 흐름</a>
+      <a href="#folders">폴더 구조</a>
+      <a href="#frontend">프론트엔드</a>
+      <a href="#backend">백엔드</a>
+      <a href="#ai">AI 역할</a>
+      <a href="#ir">증상 매칭</a>
+      <a href="#schemas">JSON 스키마</a>
+      <a href="#deploy">배포 구조</a>
+      <a href="#debug">확인 방법</a>
+    </div>
+  </nav>
+
+  <main class="shell">
+    <section id="summary" class="section">
+      <div class="section-title">
+        <div>
+          <p class="kicker">Current MVP</p>
+          <h2>1. 현재 구현 기준 요약</h2>
+        </div>
+        <p>
+          지금 코드는 단순 데모 UI가 아니라, AWS Transcribe와 Bedrock을 실제 호출하는 서버리스 MVP 구조입니다.
+          다만 인증, 병원 EMR 연동, 개인정보 운영 정책은 아직 프로덕션 이전 단계입니다.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="mini-card tint-blue">
+          <h3>접수처</h3>
+          <p>직원이 환자 이름, 생년월일, 성별, 진료과, 담당 의사, 연락처를 입력하고 문진 세션을 생성합니다.</p>
+        </div>
+        <div class="mini-card tint-teal">
+          <h3>환자 태블릿</h3>
+          <p>환자가 초진/재진 흐름에 따라 Q1~Q4에 음성으로 답하고, 인식된 텍스트를 확인합니다.</p>
+        </div>
+        <div class="mini-card tint-green">
+          <h3>의사 원페이퍼</h3>
+          <p>증상, 원문 quote, 문진 맥락, 환자 질문, 의료진 체크리스트를 한 화면에서 확인합니다.</p>
+        </div>
+        <div class="mini-card tint-orange">
+          <h3>환자 안내문</h3>
+          <p>의사가 환자 질문에 답하면 Nova Lite가 쉬운 표현으로 정리하고, 의사 강조사항은 원문 그대로 별도 표시합니다.</p>
+        </div>
+        <div class="mini-card">
+          <h3>데이터 저장</h3>
+          <p>S3에는 음성/Transcribe 산출물이, DynamoDB에는 원페이퍼와 안내문을 포함한 세션 JSON이 저장됩니다.</p>
+        </div>
+        <div class="mini-card tint-red">
+          <h3>안전 플래그</h3>
+          <p>객혈 등 우선 확인 표현은 Lambda rule로 감지하고, 환자 화면에서는 직원 도움 흐름으로 전환됩니다.</p>
+        </div>
+      </div>
+
+      <div class="note blue">
+        중요한 정정: 현재 증상 매칭은 단순 단어 포함 점수가 아닙니다.
+        <code>diseases_cleaned.json</code>과 <code>symptom_index.json</code>에서 rule-base로 만든 증상 문서를 대상으로
+        BM25 lexical 검색, Titan embedding vector 검색, LLM이 추출한 slot_ref/name 힌트를 함께 반영합니다.
+        생성형 LLM이 IR 안에서 새 증상을 만들어내는 구조는 아닙니다.
+      </div>
+    </section>
+
+    <section id="runtime" class="section">
+      <div class="section-title">
+        <div>
+          <p class="kicker">Runtime Flow</p>
+          <h2>2. 환자 1명이 진행할 때의 실제 흐름</h2>
+        </div>
+        <p>
+          사용자가 화면에서 보는 흐름과 백엔드 내부 처리 순서를 같은 순서로 놓으면 아래와 같습니다.
+        </p>
+      </div>
+
+      <div class="flow">
+        <div class="flow-step tint-blue">
+          <b>1. 직원 접수</b>
+          <span><code>POST /sessions</code><br />DynamoDB에 기본 session 생성</span>
+        </div>
+        <div class="flow-step">
+          <b>2. 태블릿 진입</b>
+          <span><code>/patient/{id}</code><br />초진/재진 문항 시작</span>
+        </div>
+        <div class="flow-step tint-teal">
+          <b>3. 음성 업로드</b>
+          <span><code>/upload-url</code><br />S3 presigned URL로 audio 저장</span>
+        </div>
+        <div class="flow-step tint-teal">
+          <b>4. STT</b>
+          <span><code>/transcribe-result</code><br />Amazon Transcribe 결과 확인</span>
+        </div>
+        <div class="flow-step tint-orange">
+          <b>5. 의미 분해</b>
+          <span><code>/extract</code><br />Nova가 표준화, span, 질문, 단서 추출</span>
+        </div>
+        <div class="flow-step tint-orange">
+          <b>6. 증상 매칭</b>
+          <span><code>/match</code><br />BM25 + Titan hybrid IR</span>
+        </div>
+        <div class="flow-step tint-green">
+          <b>7. 저장 검증</b>
+          <span><code>/validate</code><br />responses.Qx에 누적 저장</span>
+        </div>
+        <div class="flow-step tint-green">
+          <b>8. 원페이퍼</b>
+          <span><code>/onepager/{id}</code><br />Nova Pro가 의사 task 생성</span>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top: 18px;">
+        <div class="mini-card tint-blue">
+          <h3>Q별 처리 차이</h3>
+          <ul class="callout-list">
+            <li>Q1: 주 증상/재진 경과 문항이라 Nova Pro를 사용합니다.</li>
+            <li>Q2~Q4: Nova Lite를 사용하지만, 표준화와 의미 분해는 모두 수행합니다.</li>
+            <li>Q1, 재진 경과, 새 증상 문항에서 symptom-like span이 있으면 <code>/match</code>가 호출됩니다.</li>
+            <li>Q4의 환자 질문은 <code>structured.questions</code>와 원페이퍼 <code>agenda</code>로 이어집니다.</li>
+          </ul>
+        </div>
+        <div class="mini-card tint-green">
+          <h3>진료 후 흐름</h3>
+          <ul class="callout-list">
+            <li>의사가 원페이퍼에서 환자 질문별 답변을 입력합니다.</li>
+            <li><code>POST /doctor-response</code>가 답변과 강조사항을 저장합니다.</li>
+            <li>Nova Lite가 환자용 안내문 문장을 쉽게 다시 씁니다.</li>
+            <li>의사 강조사항은 LLM이 바꾸지 않고 안내문에 그대로 표시합니다.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="folders" class="section">
+      <div class="section-title">
+        <div>
+          <p class="kicker">Repository</p>
+          <h2>3. 폴더와 파일 구조</h2>
+        </div>
+        <p>
+          실제로 코드를 따라갈 때는 <code>frontend/src/services/api.js</code>,
+          <code>backend/serverless/src/handler.py</code>, <code>backend/serverless/src/common.py</code> 순서로 보면 됩니다.
+        </p>
+      </div>
+
+      <div class="schema-grid">
+        <pre><code>munjin-talk-talk-mvp/
+├─ frontend/
+│  ├─ src/App.jsx
+│  ├─ src/services/api.js
+│  ├─ src/services/onepagerAdapter.js
+│  ├─ src/components/staff/
+│  ├─ src/components/patient/
+│  └─ src/components/doctor/
+├─ backend/serverless/
+│  ├─ template.yaml
+│  └─ src/
+│     ├─ handler.py
+│     ├─ common.py
+│     └─ data/
+│        ├─ diseases_cleaned.json
+│        ├─ symptom_index.json
+│        └─ symptom_embeddings_amazon.titan-embed-text-v2_0_512.json
+├─ docs/
+│  ├─ technical-guide.html
+│  ├─ architecture.drawio
+│  └─ architecture.svg
+├─ amplify.yml
+└─ README.md</code></pre>
+
+        <div class="grid-2">
+          <div class="mini-card tint-blue">
+            <h3>프론트 핵심</h3>
+            <p><code>App.jsx</code>가 상단 메뉴와 route를 관리하고, <code>api.js</code>가 백엔드 호출을 모읍니다.</p>
+          </div>
+          <div class="mini-card tint-teal">
+            <h3>백엔드 핵심</h3>
+            <p><code>handler.py</code>는 라우팅, <code>common.py</code>는 세션, STT, LLM, IR, 원페이퍼 생성을 담당합니다.</p>
+          </div>
+          <div class="mini-card tint-green">
+            <h3>IR 데이터</h3>
+            <p>증상 검색은 <code>diseases_cleaned.json</code>, <code>symptom_index.json</code>, 사전 계산된 Titan 벡터를 사용합니다.</p>
+          </div>
+          <div class="mini-card tint-orange">
+            <h3>문서</h3>
+            <p>구조 설명, 배포 메모, 아키텍처 그림은 <code>docs/</code> 아래에 둡니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="frontend" class="section">
+      <div class="section-title">
+        <div>
+          <p class="kicker">Frontend</p>
+          <h2>4. 프론트엔드 화면 구조</h2>
+        </div>
+        <p>
+          프론트는 화면을 보여주고 API를 호출하는 역할입니다. 의료 판단이나 최종 JSON 생성은 백엔드에서 처리합니다.
+        </p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>경로</th>
+            <th>사용자</th>
+            <th>주요 컴포넌트</th>
+            <th>역할</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>/staff</code></td>
+            <td>접수 직원</td>
+            <td><code>ReceptionView</code></td>
+            <td>환자 확인, 문진 세션 생성, 오늘 접수/문진 대기 확인</td>
+          </tr>
+          <tr>
+            <td><code>/patient/{sessionId}</code></td>
+            <td>환자</td>
+            <td><code>PatientKioskView</code>, <code>PatientFlow</code>, <code>VoiceScreen</code></td>
+            <td>초진/재진 선택, 음성 녹음, STT 결과 확인, 직원 도움 요청</td>
+          </tr>
+          <tr>
+            <td><code>/doctor/queue</code></td>
+            <td>의사</td>
+            <td><code>DoctorQueueView</code></td>
+            <td>문진 완료/우선 확인 환자 목록 확인</td>
+          </tr>
+          <tr>
+            <td><code>/doctor/{sessionId}</code></td>
+            <td>의사</td>
+            <td><code>DoctorView</code>, <code>DoctorOnePager</code>, <code>DoctorAgendaPanel</code></td>
+            <td>증상, 문진 맥락, 질문, 체크리스트, EMR 문장 확인 및 답변 입력</td>
+          </tr>
+          <tr>
+            <td><code>/guide/{sessionId}</code></td>
+            <td>환자/직원</td>
+            <td><code>PatientGuideScreen</code></td>
+            <td>진료 후 안내문, TTS 재생, 종이 출력 화면</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note blue">
+        세션이 하나도 없을 때 환자 태블릿, 원페이퍼, 안내문 출력 메뉴가 비활성화되는 것은 정상 동작입니다.
+        먼저 <code>/staff</code>에서 문진 세션을 생성해야 해당 세션으로 이동할 수 있습니다.
+      </div>
+    </section>
+
+    <section id="backend" class="section">
+      <div class="section-title">
+        <div>
+          <p class="kicker">Backend</p>
+          <h2>5. 백엔드와 AWS 아키텍처</h2>
+        </div>
+        <p>
+          현재 백엔드는 Lambda 하나가 여러 API endpoint를 처리하는 구조입니다.
+          작은 MVP에는 단순하고, 이후 모듈별 Lambda 분리나 인증 추가로 확장할 수 있습니다.
+        </p>
+      </div>
+
+      <div class="architecture">
+        <div class="arch-column">
+          <h3>Client Screens</h3>
+          <div class="arch-box">
+            <strong>직원 접수</strong>
+            /staff
+          </div>
+          <div class="arch-box">
+            <strong>환자 태블릿</strong>
+            /patient/{sessionId}
+          </div>
+          <div class="arch-box">
+            <strong>의사 원페이퍼</strong>
+            /doctor/{sessionId}
+          </div>
+          <div class="arch-box">
+            <strong>환자 안내문</strong>
+            /guide/{sessionId}
+          </div>
+        </div>
+
+        <div class="arch-column">
+          <h3>Serverless API</h3>
+          <div class="arch-box">
+            <strong>AWS Amplify Hosting</strong>
+            React 정적 파일 호스팅
+          </div>
+          <div class="arch-box">
+            <strong>API Gateway HTTP API</strong>
+            HTTPS endpoint 제공
+          </div>
+          <div class="arch-box">
+            <strong>Lambda Python 3.12</strong>
+            handler.py 라우팅, common.py 업무 로직
+          </div>
+          <div class="arch-box">
+            <strong>CloudWatch Logs</strong>
+            Lambda 실행 로그 확인
+          </div>
+        </div>
+
+        <div class="arch-column">
+          <h3>Data & AI Services</h3>
+          <div class="arch-box">
+            <strong>DynamoDB MunjinSessions</strong>
+            session JSON 저장
+          </div>
+          <div class="arch-box">
+            <strong>S3 artifact bucket</strong>
+            audio, transcript, cloudformation 산출물 저장
+          </div>
+          <div class="arch-box">
+            <strong>Amazon Transcribe</strong>
+            한국어 음성 텍스트 변환
+          </div>
+          <div class="arch-box">
+            <strong>Amazon Bedrock</strong>
+            Nova Pro, Nova Lite, Titan embedding 호출
+          </div>
+        </div>
+      </div>
+
+      <div class="data-row">
+        <div class="data-pill">API Gateway: <code>ll45vqa5u9.execute-api.ap-northeast-2.amazonaws.com</code></div>
+        <div class="data-pill">DynamoDB: <code>MunjinSessions</code></div>
+        <div class="data-pill">Lambda: <code>munjin-mvp-backend-MunjinApiFunction-6SCgLyXDQVAk</code></div>
+      </div>
+    </section>
+
+    <section id="api" class="section">
+      <div class="section-title">
+        <div>
+          <p class="kicker">API</p>
+          <h2>6. API endpoint와 역할</h2>
+        </div>
+        <p>
+          프론트의 <code>services/api.js</code> 함수가 아래 endpoint들을 호출합니다.
+        </p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Endpoint</th>
+            <th>호출 시점</th>
+            <th>백엔드 함수</th>
+            <th>저장/반환 내용</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>POST /sessions</code></td>
+            <td>직원 접수</td>
+            <td><code>create_session</code></td>
+            <td>환자 기본 정보와 session_id 생성</td>
+          </tr>
+          <tr>
+            <td><code>GET /sessions/{id}</code></td>
+            <td>환자 태블릿 진입</td>
+            <td><code>get_session</code></td>
+            <td>해당 세션 조회</td>
+          </tr>
+          <tr>
+            <td><code>POST /sessions/{id}/staff-help</code></td>
+            <td>환자 도움 요청/flag 종료</td>
+            <td><code>update_session</code></td>
+            <td>status를 <code>staff_help</code>로 변경</td>
+          </tr>
+          <tr>
+            <td><code>POST /upload-url</code></td>
+            <td>질문별 녹음 완료</td>
+            <td><code>generate_upload_url</code></td>
+            <td>S3 업로드 URL, key, Transcribe job name</td>
+          </tr>
+          <tr>
+            <td><code>GET /transcribe-result</code></td>
+            <td>STT 결과 확인</td>
+            <td><code>get_or_start_transcript</code></td>
+            <td>Transcribe 시작 또는 결과 반환</td>
+          </tr>
+          <tr>
+            <td><code>POST /extract</code></td>
+            <td>환자가 STT 문구 확인 후</td>
+            <td><code>extract_question</code></td>
+            <td>Nova 기반 표준화, span, clinical_clues, questions</td>
+          </tr>
+          <tr>
+            <td><code>POST /match</code></td>
+            <td>증상형 span이 있는 문항</td>
+            <td><code>match_slots</code></td>
+            <td>BM25 + Titan hybrid 증상 매칭</td>
+          </tr>
+          <tr>
+            <td><code>POST /validate</code></td>
+            <td>문항 처리 마무리</td>
+            <td><code>validate_and_save</code></td>
+            <td><code>responses.Qx</code> 저장, safety flag 반영</td>
+          </tr>
+          <tr>
+            <td><code>GET /doctor/queue</code></td>
+            <td>접수/의사 목록 화면</td>
+            <td><code>list_sessions</code></td>
+            <td>오늘 접수 및 대기열 목록</td>
+          </tr>
+          <tr>
+            <td><code>GET /onepager/{id}</code></td>
+            <td>의사 원페이퍼 진입</td>
+            <td><code>build_onepager</code></td>
+            <td>원페이퍼 생성, Nova Pro 체크리스트 생성</td>
+          </tr>
+          <tr>
+            <td><code>POST /doctor-response</code></td>
+            <td>의사 답변 저장</td>
+            <td><code>save_doctor_response</code></td>
+            <td>doctor_review 저장, patient_guide 생성</td>
+          </tr>
+          <tr>
+            <td><code>GET /guide/{id}</code></td>
+            <td>안내문 출력</td>
+            <td><code>get_guide</code></td>
+            <td>환자 안내문 JSON 반환</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ai" class="section">
+      <div class="section-title">
+        <div>
+          <p class="kicker">AI Orchestration</p>
+          <h2>7. LLM과 AI 호출 역할</h2>
+        </div>
+        <p>
+          역할별로 모델을 완전히 다른 서비스처럼 분리한 것은 아니지만,
+          문항 난이도와 업무 성격에 따라 Nova Pro, Nova Lite, Titan embedding을 나누어 호출합니다.
+        </p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>단계</th>
+            <th>모델/서비스</th>
+            <th>하는 일</th>
+            <th>JSON 영향</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>음성 인식</td>
+            <td>Amazon Transcribe</td>
+            <td>환자 음성을 한국어 텍스트로 변환</td>
+            <td><code>responses.Qx.text</code></td>
+          </tr>
+          <tr>
+            <td>Q1 의미 분해</td>
+            <td>Bedrock Nova Pro</td>
+            <td>주 증상 또는 재진 경과를 증상 span, 맥락, 표준 문장으로 구조화</td>
+            <td><code>spans</code>, <code>structured.standardized_text</code>, <code>clinical_clues</code></td>
+          </tr>
+          <tr>
+            <td>Q2~Q4 의미 분해</td>
+            <td>Bedrock Nova Lite</td>
+            <td>발병 시점, 복약, 환자 질문을 표준화하고 구조화</td>
+            <td><code>clinical_clues</code>, <code>structured.questions</code></td>
+          </tr>
+          <tr>
+            <td>증상 IR</td>
+            <td>BM25 + Titan embedding</td>
+            <td>LLM이 추출한 증상 span을 실제 표준 증상 문서와 매칭</td>
+            <td><code>matched_slots</code>, <code>ir_trace</code></td>
+          </tr>
+          <tr>
+            <td>의사용 task 생성</td>
+            <td>Bedrock Nova Pro</td>
+            <td>증상 JSON, 환자 질문 JSON, safety flag, 원문을 보고 의사가 확인할 다음 행동 생성</td>
+            <td><code>onepager.review_items</code>, <code>doctor_brief</code>, <code>transfer_text</code></td>
+          </tr>
+          <tr>
+            <td>환자 안내문 생성</td>
+            <td>Bedrock Nova Lite</td>
+            <td>의사 답변을 어르신 환자에게 쉬운 안내문으로 재작성</td>
+            <td><code>patient_guide.items</code></td>
+          </tr>
+          <tr>
+            <td>안전 감지</td>
+            <td>Lambda rule</td>
+            <td>객혈, 심한 호흡곤란 등 우선 확인 표현 감지</td>
+            <td><code>safety_flag</code>, <code>safety_flags</code>, <code>risk</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="grid-2" style="margin-top: 18px;">
+        <div class="mini-card tint-blue">
+          <h3>1명 기준 대략 호출 수</h3>
+          <ul class="callout-list">
+            <li>Transcribe: Q1~Q4 녹음마다 1회, 총 4회</li>
+            <li>Nova Pro: Q1 의미 분해 1회, 원페이퍼 review 1회</li>
+            <li>Nova Lite: Q2~Q4 의미 분해 3회, 안내문 생성 1회</li>
+            <li>Titan embedding: 매칭할 증상 span 수만큼 보통 2~5회</li>
+          </ul>
+        </div>
+        <div class="mini-card tint-orange">
+          <h3>LLM fallback 정책</h3>
+          <ul class="callout-list">
+            <li><code>ALLOW_RULE_FALLBACK=false</code> 기준으로, LLM 실패 시 조용히 rule-base 결과로 대체하지 않습니다.</li>
+            <li>원페이퍼 체크리스트는 Nova Pro 실패 또는 빈 결과일 때만 제한적 fallback 후보를 사용합니다.</li>
+            <li>환자 안내문은 Nova Lite 결과가 너무 일반적이거나 원문 복사면 deterministic fallback을 사용합니다.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="ir" class="section">
+      <div class="section-title">
+        <div>
+          <p class="kicker">Symptom Retrieval</p>
+          <h2>8. 증상 매칭과 점수 계산</h2>
+        </div>
+        <p>
+          원페이퍼의 증상 이름과 오른쪽 점수는 LLM이 그냥 찍는 값이 아니라,
+          <code>/match</code>에서 검색 후보를 점수화한 결과입니다.
+        </p>
+      </div>
+
+      <div class="schema-grid">
+        <div>
+          <h3 class="schema-title">8-1. 검색 문서 생성</h3>
+          <pre><code>diseases_cleaned.json
+  - 아산병원 질환 백과 기반 질환/증상 설명
+
+symptom_index.json
+  - 표준 증상명, alias, slot_id
+
+Lambda cold-start
+  - 위 두 JSON을 읽어 증상별 검색 문서 생성
+  - 별도 LLM 가공 데이터셋은 사용하지 않음
+
+symptom_embeddings_...json
+  - 같은 증상 문서를 Titan으로 미리 임베딩한 벡터 인덱스</code></pre>
+        </div>
+        <div class="mini-card tint-green">
+          <h3>확장성 의미</h3>
+          <p>
+            호흡기계만 손으로 조합한 폐쇄 구조가 아닙니다.
+            같은 구조의 <code>diseases_cleaned.json</code>과 <code>symptom_index.json</code>가 있으면
+            다른 진료계 질환도 같은 방식으로 확장할 수 있습니다.
+          </p>
+        </div>
+      </div>
+
+      <h3 class="schema-title">8-2. 점수에 들어가는 요소</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>요소</th>
+            <th>의미</th>
+            <th>예시</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>bm25_score</code></td>
+            <td>환자 표현과 증상 문서가 글자/토큰 수준에서 얼마나 맞는지 보는 lexical 검색</td>
+            <td>“기침”, “콜록”, “목이 칼칼” 같은 표현 매칭</td>
+          </tr>
+          <tr>
+            <td><code>vector_score</code></td>
+            <td>Titan embedding으로 의미 벡터 거리를 비교한 점수</td>
+            <td>단어가 완전히 같지 않아도 의미가 가까운 증상을 찾음</td>
+          </tr>
+          <tr>
+            <td><code>label_score</code></td>
+            <td>LLM이 추출한 <code>slot_ref</code>, <code>name</code>이 표준명/alias와 얼마나 맞는지 보는 힌트</td>
+            <td><code>slot_ref=cough</code>이면 기침 후보를 우선 고려</td>
+          </tr>
+          <tr>
+            <td><code>rank_score</code></td>
+            <td>후보 정렬용 종합 점수</td>
+            <td>BM25 0.35, vector 0.65, label hint를 함께 반영</td>
+          </tr>
+          <tr>
+            <td><code>score</code></td>
+            <td>원페이퍼에 보이는 신뢰도 점수</td>
+            <td>보통 0.85~1.00처럼 표시됨</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        LLM이 “이건 기침이다”라고 말하면 끝나는 구조가 아닙니다.
+        LLM의 <code>slot_ref</code>는 검색 질의의 힌트이고, 최종 표준 증상명은 BM25 + Titan 검색 후보 중에서 선택됩니다.
+        다만 <code>preferred_alias</code>가 강하게 맞으면 점수가 높게 보일 수 있으므로, 이상하면 DynamoDB의 <code>ir_trace.top_candidates</code>를 확인해야 합니다.
+      </div>
+
+      <h3 class="schema-title">8-3. matched_slots 예시</h3>
+      <pre><code>"matched_slots": [
+  {
+    "slot_id": "cough",
+    "name": "기침",
+    "source_question": "Q1",
+    "source_quote": "기침이 계속 나요",
+    "normalized_text": "기침이 있음",
+    "status": "있음",
+    "score": 0.9,
+    "alert": false,
+    "ir_method": "bm25_titan_hybrid",
+    "ir_trace": {
+      "query": "기침이 계속 나요 기침",
+      "bm25_score": 1.0,
+      "vector_score": 0.46,
+      "vector_norm": 0.72,
+      "label_score": 1.0,
+      "rank_score": 1.07,
+      "retrieval_branch": "preferred_alias",
+      "top_candidates": [
+        {
+          "slot_id": "cough",
+          "display_name": "기침",
+          "bm25_score": 1.0,
+          "vector_score": 0.46,
+          "rank_score": 1.07
+        }
+      ]
+    }
+  }
+]</code></pre>
+    </section>
+
+    <section id="schemas" class="section">
+      <div class="section-title">
+        <div>
+          <p class="kicker">JSON Schema</p>
+          <h2>9. 내부 JSON 스키마</h2>
+        </div>
+        <p>
+          DynamoDB에는 아래 구조가 한 세션 item으로 저장됩니다.
+          원페이퍼와 안내문이 이상하면 이 JSON을 먼저 확인하면 됩니다.
+        </p>
+      </div>
+
+      <h3 class="schema-title">9-1. 세션 전체 구조</h3>
+      <div class="schema-grid">
+        <pre><code>{
+  "session_id": "s_1780...",
+  "queue_number": 1,
+  "created_at": "2026-06-01T...",
+  "updated_at": "2026-06-01T...",
+  "status": "waiting_tablet | in_progress | completed | needs_priority | staff_help | reviewed",
+  "visit_type": "initial | followup",
+  "risk": "none | high",
+  "patient": { "...": "환자 기본 정보" },
+  "audio": { "Q1": { "...": "S3 audio 정보" } },
+  "responses": { "Q1": { "...": "문항별 처리 결과" } },
+  "question_results": { "...": "프론트 호환용 결과" },
+  "onepager": { "...": "의사용 요약" },
+  "doctor_review": { "...": "의사 답변" },
+  "patient_guide": { "...": "환자 안내문" },
+  "safety_flag": { "...": "우선 확인 flag" }
+}</code></pre>
+        <div class="mini-card tint-blue">
+          <h3>상태값 의미</h3>
+          <ul class="callout-list">
+            <li><code>waiting_tablet</code>: 접수 완료, 환자 문진 대기</li>
+            <li><code>in_progress</code>: 환자가 태블릿 문진 중</li>
+            <li><code>completed</code>: 문진 완료, 의사 확인 대기</li>
+            <li><code>needs_priority</code>: 객혈 등 우선 확인 필요</li>
+            <li><code>staff_help</code>: 직원 도움 요청 또는 직접 입력 필요</li>
+            <li><code>reviewed</code>: 의사 답변 저장 및 안내문 생성 완료</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="schema-title">9-2. 환자 기본 정보</h3>
+      <pre><code>"patient": {
+  "name": "김*동",
+  "full_name": "김길동",
+  "birth_date": "1950-09-17",
+  "age": 75,
+  "gender": "여성",
+  "receipt_id": "R-9596",
+  "department": "이비인후과",
+  "doctor": "이민우",
+  "phone": "010-0000-0000"
+}</code></pre>
+
+      <h3 class="schema-title">9-3. 문항별 responses.Qx</h3>
+      <div class="schema-grid">
+        <pre><code>"responses": {
+  "Q1": {
+    "text": "어제부터 목도 칼칼하고 코막힘도 있어요",
+    "spans": [
+      {
+        "source_quote": "목도 칼칼하고",
+        "type": "symptom",
+        "slot_ref": "throat_irritation",
+        "name": "목 불편감",
+        "normalized_text": "목 불편감이 있음",
+        "status": "있음",
+        "score": 0.86,
+        "alert": false
+      }
+    ],
+    "matched_slots": [ "... /match 결과" ],
+    "structured": {
+      "standardized_text": "어제부터 목 불편감과 코막힘이 있음",
+      "clinical_clues": [ "... 맥락 단서" ],
+      "questions": [],
+      "unresolved_items": []
+    },
+    "method": "bedrock_nova",
+    "llm_meta": {
+      "model_id": "apac.amazon.nova-pro-v1:0",
+      "validation_errors": []
+    },
+    "confirmed": true
+  }
+}</code></pre>
+        <div class="mini-card tint-orange">
+          <h3>중요 검증 규칙</h3>
+          <ul class="callout-list">
+            <li><code>source_quote</code>와 <code>original_quote</code>는 환자 발화의 실제 부분 문자열이어야 합니다.</li>
+            <li>LLM이 없는 말을 만들면 quote repair/validation에서 버려집니다.</li>
+            <li><code>standardized_text</code>는 Q1뿐 아니라 Q2~Q4에도 생성됩니다.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="schema-title">9-4. clinical_clues와 agenda</h3>
+      <div class="schema-grid">
+        <pre><code>"clinical_clues": [
+  {
+    "category": "증상맥락",
+    "label": "시작시점",
+    "summary": "어제부터 증상 시작",
+    "source_quote": "어제부터",
+    "source_question": "Q2",
+    "priority": "일반",
+    "related_symptoms": ["목 불편감", "코막힘"]
+  }
+]
+
+"agenda": [
+  {
+    "type": "supplement_drug_interaction",
+    "category": "supplement_drug_interaction",
+    "type_label": "복약 상호작용",
+    "summary": "처방약과 영양제 병용 가능 여부 문의",
+    "original_quote": "약이랑 영양제 같이 먹어도 되나요",
+    "source_question": "Q4"
+  }
+]</code></pre>
+        <div class="mini-card tint-green">
+          <h3>화면 표시 위치</h3>
+          <ul class="callout-list">
+            <li><code>clinical_clues</code>: 원페이퍼 왼쪽 “문진 맥락”과 증상 카드의 맥락 chip</li>
+            <li><code>agenda</code>: 원페이퍼 오른쪽 “환자 질문 + 답변 입력” 카드</li>
+            <li>Q4 질문이 여러 개면 각각 별도 agenda item으로 분리되어야 합니다.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="schema-title">9-5. onepager</h3>
+      <pre><code>"onepager": {
+  "patient_summary": {
+    "display_name": "김*동",
+    "age_text": "75세",
+    "sex": "여성",
+    "department": "이비인후과",
+    "received_at": "15:05",
+    "audio_duration_text": "음성 42초",
+    "visit_type": "initial"
+  },
+  "symptom_slots": [ "... matched_slots 집계" ],
+  "clinical_clues": [ "... Q1~Q4에서 추출된 단서" ],
+  "agenda": [ "... 환자 질문" ],
+  "review_items": [
+    "목의 통증, 코막힘, 콧물 증상의 시작 시점과 악화 요인 확인",
+    "처방약과 영양제 병용 가능 여부 안내"
+  ],
+  "review_item_generation": {
+    "method": "bedrock_nova_pro",
+    "model_id": "apac.amazon.nova-pro-v1:0"
+  },
+  "doctor_brief": {
+    "headline": "짧은 진료 브리프",
+    "sections": []
+  },
+  "transfer_text": "75세 여성 초진 환자...",
+  "safety_flags": [],
+  "unresolved_items": []
+}</code></pre>
+
+      <div class="note green">
+        체크리스트인 <code>review_items</code>는 rule-base로 전부 만드는 것이 아니라,
+        Nova Pro가 <code>symptom_slots</code>, <code>clinical_clues</code>, <code>agenda</code>, <code>safety_flags</code>, 원문 Q1~Q4를 보고
+        “의사가 다음에 확인하거나 답해야 할 task”로 생성합니다.
+      </div>
+
+      <h3 class="schema-title">9-6. doctor_review와 patient_guide</h3>
+      <div class="schema-grid">
+        <pre><code>"doctor_review": {
+  "reviewer_id": "doctor",
+  "answers": [
+    {
+      "question_summary": "처방약과 영양제 병용 가능 여부 문의",
+      "original_quote": "약이랑 영양제 같이 먹어도 되나요",
+      "answer_text": "문제 없이 복용 가능합니다. 다만 추후 다른 약을 추가하면 다시 확인하세요."
+    }
+  ],
+  "patient_instruction": "약이랑 영양제 같이 꼭 아침 저녁으로 드세요.",
+  "additional_notes": "약이랑 영양제 같이 꼭 아침 저녁으로 드세요.",
+  "reviewed_at": "2026-06-01T..."
+}</code></pre>
+        <pre><code>"patient_guide": {
+  "generated_at": "2026-06-01T...",
+  "generation_method": "bedrock_nova_lite_grounded",
+  "items": [
+    {
+      "question": "처방약과 영양제 병용 가능 여부 문의",
+      "answer_simple": [
+        "처방받은 약과 영양제는 함께 복용할 수 있습니다.",
+        "추후 다른 약을 추가하는 경우 다시 확인해야 합니다."
+      ],
+      "tts_emphasis_words": ["처방받은 약", "영양제", "함께 복용"]
+    }
+  ],
+  "delivery_options": ["screen", "tts", "print"]
+}</code></pre>
+      </div>
+    </section>
+
+    <section id="deploy" class="section">
+      <div class="section-title">
+        <div>
+          <p class="kicker">Deploy</p>
+          <h2>10. 배포 구조와 환경 변수</h2>
+        </div>
+        <p>
+          프론트는 Amplify, 백엔드는 SAM/Lambda/API Gateway로 배포합니다.
+          Amplify에는 API Gateway 주소가 환경 변수로 들어갑니다.
+        </p>
+      </div>
+
+      <div class="schema-grid">
+        <pre><code>Amplify
+Repository: CHOIGIBUM/munjin-talk-talk-mvp
+Branch: main
+App root: frontend
+Build command: npm run build
+Output directory: dist
+
+Frontend env
+VITE_API_BASE_URL=https://ll45vqa5u9.execute-api.ap-northeast-2.amazonaws.com
+VITE_ENABLE_MOCKS=false</code></pre>
+        <pre><code>Backend env
+USE_BEDROCK_LLM=true
+ALLOW_RULE_FALLBACK=false
+ENABLE_BEDROCK_REVIEW=true
+ENABLE_BEDROCK_GUIDE=true
+STRONG_MODEL_ID=apac.amazon.nova-pro-v1:0
+LIGHT_MODEL_ID=apac.amazon.nova-lite-v1:0
+REVIEWER_MODEL_ID=apac.amazon.nova-pro-v1:0
+GUIDE_MODEL_ID=apac.amazon.nova-lite-v1:0
+USE_TITAN_EMBEDDING=true
+EMBEDDING_MODEL_ID=amazon.titan-embed-text-v2:0
+EMBEDDING_DIMENSIONS=512</code></pre>
+      </div>
+
+      <div class="note">
+        운영 전 필수 보강: 직원/의사 화면 인증, 환자 개인정보 보존 기간 정책, CloudWatch 개인정보 로그 마스킹,
+        S3/DynamoDB lifecycle 또는 TTL, API CORS origin 제한이 필요합니다.
+      </div>
+    </section>
+
+    <section id="debug" class="section">
+      <div class="section-title">
+        <div>
+          <p class="kicker">Debug</p>
+          <h2>11. 이상할 때 확인하는 순서</h2>
+        </div>
+        <p>
+          UI가 이상해 보이면 프론트 문제가 아니라 session JSON 생성 단계 문제일 수 있습니다.
+          아래 순서로 보면 원인을 빠르게 좁힐 수 있습니다.
+        </p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>증상</th>
+            <th>먼저 볼 곳</th>
+            <th>확인할 JSON/서비스</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>환자 목록이 안 보임</td>
+            <td>DynamoDB</td>
+            <td><code>MunjinSessions</code>에 session item이 있는지 확인</td>
+          </tr>
+          <tr>
+            <td>음성이 텍스트로 안 바뀜</td>
+            <td>S3, Transcribe</td>
+            <td>audio key 존재 여부, Transcribe job 상태, S3 CORS</td>
+          </tr>
+          <tr>
+            <td>원문 quote가 이상함</td>
+            <td>DynamoDB <code>responses.Qx</code></td>
+            <td><code>source_quote</code>, <code>original_quote</code>, <code>llm_meta.validation_errors</code></td>
+          </tr>
+          <tr>
+            <td>증상명/점수가 이상함</td>
+            <td><code>matched_slots.ir_trace</code></td>
+            <td><code>bm25_score</code>, <code>vector_score</code>, <code>label_score</code>, <code>top_candidates</code></td>
+          </tr>
+          <tr>
+            <td>환자 질문이 합쳐짐</td>
+            <td><code>structured.questions</code></td>
+            <td>Q4에서 질문이 배열로 분리됐는지 확인</td>
+          </tr>
+          <tr>
+            <td>의료진 체크리스트가 부자연스러움</td>
+            <td><code>onepager.review_items</code></td>
+            <td><code>review_item_generation.method</code>가 <code>bedrock_nova_pro</code>인지 확인</td>
+          </tr>
+          <tr>
+            <td>안내문이 원문 그대로임</td>
+            <td><code>patient_guide</code></td>
+            <td><code>generation_method</code>, <code>doctor_review.answers</code>, <code>additional_notes</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="grid-3" style="margin-top: 18px;">
+        <div class="mini-card tint-blue">
+          <h3>프론트 확인</h3>
+          <p>브라우저 개발자도구 Network에서 API 요청/응답과 status code를 봅니다.</p>
+        </div>
+        <div class="mini-card tint-teal">
+          <h3>백엔드 확인</h3>
+          <p>CloudWatch Logs의 Lambda log group에서 예외와 Bedrock/Transcribe 오류를 확인합니다.</p>
+        </div>
+        <div class="mini-card tint-green">
+          <h3>데이터 확인</h3>
+          <p>DynamoDB item의 <code>responses</code>, <code>onepager</code>, <code>patient_guide</code>를 직접 봅니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <p class="kicker">One Sentence</p>
+          <h2>마지막으로 한 문장 정리</h2>
+        </div>
+      </div>
+      <div class="mini-card tint-green">
+        <h3>
+          문진톡톡은 환자 음성을 session JSON으로 구조화하고, 그 JSON을 기반으로 의사에게는 확인할 task를,
+          환자에게는 쉬운 안내문을 제공하는 AWS 서버리스 문진 MVP입니다.
+        </h3>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

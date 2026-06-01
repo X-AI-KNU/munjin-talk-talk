@@ -37,10 +37,14 @@ export default function DoctorView() {
   }, [sessionId])
 
   const handleSubmitResponse = async ({ answers, additionalNotes }) => {
+    if (!sessionId) {
+      setSubmitStatus('error')
+      return
+    }
     setSubmitStatus('submitting')
     try {
       const result = await submitDoctorResponse({
-        sessionId: sessionId || 'demo-session',
+        sessionId,
         reviewerId: 'DR-DEMO',
         answers,
         additionalNotes

@@ -14,15 +14,21 @@ import {
 //   POST /upload-url          → S3 presigned PUT URL 발급
 //   GET  /transcribe-result   → Transcribe 결과 폴링
 //   POST /extract             → Span 추출 (Claude or 규칙 기반)
-//   POST /match               → 벡터 매칭 (Titan Embed, Q1만)
+//   POST /match               → BM25 + Titan hybrid 증상 매칭 (Q1/Q3)
 //   POST /validate            → 4단 검증 + DDB 저장
 //   GET  /onepager/{id}       → 의사 원페이퍼 조회
 //   POST /doctor-response     → 의사 답변 수신 + Patient Guide 생성
 //   GET  /guide/{id}          → 환자 안내문 조회
 //
-// API_BASE_URL이 비어있으면 mock 응답 (개발·시연용).
+// VITE_ENABLE_MOCKS=true일 때만 mock 응답을 사용합니다.
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
+const ENABLE_MOCKS = import.meta.env.VITE_ENABLE_MOCKS === 'true'
+const useMockApi = () => !API_BASE_URL && ENABLE_MOCKS
+
+export function isMockApiEnabled() {
+  return useMockApi()
+}
 
 export function isRemoteApiEnabled() {
   return Boolean(API_BASE_URL)
@@ -37,9 +43,10 @@ export function createSession() {
 }
 
 export async function createIntakeSession(form) {
-  if (!API_BASE_URL) {
+  if (useMockApi()) {
     return createDemoSession(form)
   }
+  if (!API_BASE_URL) throw new Error('API endpoint is not configured.')
 
   const res = await fetch(`${API_BASE_URL}/sessions`, {
     method: 'POST',
@@ -62,9 +69,10 @@ export async function createIntakeSession(form) {
 }
 
 export async function getDoctorQueue() {
-  if (!API_BASE_URL) {
+  if (useMockApi()) {
     return listDemoSessions()
   }
+  if (!API_BASE_URL) return []
 
   const res = await fetch(`${API_BASE_URL}/doctor/queue`)
   if (!res.ok) return []
@@ -73,9 +81,9 @@ export async function getDoctorQueue() {
 }
 
 export async function getIntakeSession(sessionId) {
-  if (!API_BASE_URL || !sessionId) {
-    return sessionId ? getDemoSession(sessionId) : null
-  }
+  if (!sessionId) return null
+  if (useMockApi()) return getDemoSession(sessionId)
+  if (!API_BASE_URL) return null
 
   const res = await fetch(`${API_BASE_URL}/sessions/${encodeURIComponent(sessionId)}`)
   if (!res.ok) return null
@@ -83,9 +91,10 @@ export async function getIntakeSession(sessionId) {
 }
 
 export async function requestStaffHelp(sessionId) {
-  if (!API_BASE_URL) {
+  if (useMockApi()) {
     return markStaffRequested(sessionId)
   }
+  if (!API_BASE_URL) return null
 
   const res = await fetch(`${API_BASE_URL}/sessions/${encodeURIComponent(sessionId)}/staff-help`, {
     method: 'POST',
@@ -98,10 +107,11 @@ export async function requestStaffHelp(sessionId) {
 // Phase A: 음성 업로드 + Transcribe
 // ─────────────────────────────────
 export async function uploadAudio(audioBlob, sessionId, questionId, visitType = 'initial') {
-  if (!API_BASE_URL) {
+  if (useMockApi()) {
     await new Promise(r => setTimeout(r, 800))
     return { transcribeJobName: `mock-${sessionId}-${questionId}`, s3Key: `sessions/${sessionId}/${questionId}.webm` }
   }
+  if (!API_BASE_URL) throw new Error('API endpoint is not configured.')
 
   const contentType = audioBlob?.type || 'audio/wav'
 
@@ -137,7 +147,7 @@ export async function uploadAudio(audioBlob, sessionId, questionId, visitType = 
 }
 
 export async function getTranscript(jobName) {
-  if (!API_BASE_URL) {
+  if (useMockApi()) {
     await new Promise(r => setTimeout(r, 1200))
 
     // v4: flag 강제 트리거 시 객혈 발화로 응답
@@ -171,6 +181,7 @@ export async function getTranscript(jobName) {
       confidence: 0.93
     }
   }
+  if (!API_BASE_URL) throw new Error('API endpoint is not configured.')
 
   let latest = null
   for (let i = 0; i < 30; i += 1) {
@@ -190,10 +201,11 @@ export async function getTranscript(jobName) {
 export async function processTranscript({
   sessionId, questionId, questionType, visitType, transcript
 }) {
-  if (!API_BASE_URL) {
+  if (useMockApi()) {
     await new Promise(r => setTimeout(r, 600))
     return mockProcessResponse(questionType, visitType, transcript)
   }
+  if (!API_BASE_URL) throw new Error('API endpoint is not configured.')
 
   // 1) extract
   const extractRes = await fetch(`${API_BASE_URL}/extract`, {
@@ -254,9 +266,9 @@ export async function processTranscript({
 // 의사 원페이퍼 조회 (Doctor View)
 // ─────────────────────────────────
 export async function getOnePager(sessionId) {
-  if (!API_BASE_URL || !sessionId) {
-    return sessionId ? getDemoOnePager(sessionId) : null
-  }
+  if (!sessionId) return null
+  if (useMockApi()) return getDemoOnePager(sessionId)
+  if (!API_BASE_URL) return null
   const res = await fetch(`${API_BASE_URL}/onepager/${sessionId}`)
   if (!res.ok) return null
   return res.json()
@@ -268,7 +280,7 @@ export async function getOnePager(sessionId) {
 export async function submitDoctorResponse({
   sessionId, reviewerId, answers, additionalNotes
 }) {
-  if (!API_BASE_URL) {
+  if (useMockApi()) {
     await new Promise(r => setTimeout(r, 1500))
     saveDoctorResponse(sessionId, {
       reviewerId,
@@ -283,6 +295,7 @@ export async function submitDoctorResponse({
       patient_guide: mockPatientGuide(answers)
     }
   }
+  if (!API_BASE_URL) throw new Error('API endpoint is not configured.')
 
   const res = await fetch(`${API_BASE_URL}/doctor-response`, {
     method: 'POST',
@@ -302,9 +315,9 @@ export async function submitDoctorResponse({
 // Phase B: 환자 안내문 조회
 // ─────────────────────────────────
 export async function getPatientGuide(sessionId) {
-  if (!API_BASE_URL || !sessionId) {
-    return sessionId ? getDemoGuide(sessionId) : null
-  }
+  if (!sessionId) return null
+  if (useMockApi()) return getDemoGuide(sessionId)
+  if (!API_BASE_URL) return null
   const res = await fetch(`${API_BASE_URL}/guide/${sessionId}`)
   if (!res.ok) return null
   return res.json()

@@ -8,7 +8,7 @@ import StaffCallScreen from './StaffCallScreen.jsx'
 import DoneScreen from './DoneScreen.jsx'
 import { QUESTIONS } from '../../config/questions.js'
 import { detectSafetyKeyword } from '../../config/safetyKeywords.js'
-import { uploadAudio, getTranscript, processTranscript, createSession, isRemoteApiEnabled } from '../../services/api.js'
+import { uploadAudio, getTranscript, processTranscript, createSession, isRemoteApiEnabled, isMockApiEnabled } from '../../services/api.js'
 
 // v4 변경:
 // - STAFF_CALL 단계 추가 (직원 도움 호출 후 안내 화면)
@@ -24,6 +24,14 @@ const MOCK_PATIENT = {
   receiptId: 'A-0427'
 }
 
+const EMPTY_PATIENT = {
+  name: '환자',
+  honorific: '',
+  age: '-',
+  gender: '-',
+  receiptId: '-'
+}
+
 const STEPS = {
   VISIT_TYPE: 'visit_type',
   Q_VOICE: 'q_voice',
@@ -37,7 +45,7 @@ const STEPS = {
 export default function PatientFlow({
   initialVisitType = null,
   forceFlagAtQ = null,
-  patient = MOCK_PATIENT,
+  patient = null,
   sessionId = null,
   queueNumber = null,
   frameVariant = 'preview',
@@ -63,6 +71,7 @@ export default function PatientFlow({
 
   const questions = visitType ? QUESTIONS[visitType] : []
   const currentQuestion = questions[questionIndex]
+  const displayPatient = patient || (isMockApiEnabled() ? MOCK_PATIENT : EMPTY_PATIENT)
 
 
   // 직원 도움 호출 — 모든 화면에서 사용
@@ -276,7 +285,7 @@ export default function PatientFlow({
       case STEPS.VISIT_TYPE:
         return (
           <VisitTypeScreen
-            patient={patient}
+            patient={displayPatient}
             defaultVisitType={visitType}
             onConfirm={handleVisitTypeConfirm}
             onStaffCall={handleStaffCall}
@@ -286,7 +295,7 @@ export default function PatientFlow({
       case STEPS.Q_VOICE:
         return (
           <VoiceScreen
-            patient={patient}
+            patient={displayPatient}
             visitType={visitType}
             question={currentQuestion}
             stepIndex={questionIndex + 1}
@@ -299,7 +308,7 @@ export default function PatientFlow({
       case STEPS.Q_VERIFY:
         return (
           <VerifyScreen
-            patient={patient}
+            patient={displayPatient}
             visitType={visitType}
             question={currentQuestion}
             transcript={transcript}
@@ -313,7 +322,7 @@ export default function PatientFlow({
       case STEPS.SAFETY_ALERT:
         return (
           <SafetyAlertScreen
-            patient={patient}
+            patient={displayPatient}
             visitType={visitType}
             stepIndex={questionIndex + 1}
             onContinue={handleSafetyContinue}
@@ -325,7 +334,7 @@ export default function PatientFlow({
       case STEPS.STAFF_CALL:
         return (
           <StaffCallScreen
-            patient={patient}
+            patient={displayPatient}
             onReturn={handleStaffCallReturn}
             returnLabel={prevStep === STEPS.VISIT_TYPE ? '진료 화면으로 돌아가기' : '문진 계속하기'}
           />
@@ -334,7 +343,7 @@ export default function PatientFlow({
       case STEPS.DONE:
         return (
           <DoneScreen
-            patient={patient}
+            patient={displayPatient}
             visitType={visitType}
             stopped={intakeStopped}
             queueNumber={queueNumber}

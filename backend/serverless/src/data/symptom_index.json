@@ -1,0 +1,4016 @@
+{
+  "가래": [
+    {
+      "disease_id": "amc:31850",
+      "content_id": "31850",
+      "name_ko": "객혈",
+      "name_en": "Hemoptysis",
+      "display_name": "객혈(Hemoptysis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31850",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32191",
+      "content_id": "32191",
+      "name_ko": "결핵",
+      "name_en": "Tuberculosis",
+      "display_name": "결핵(Tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32191",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32181",
+      "content_id": "32181",
+      "name_ko": "규폐증",
+      "name_en": "Silicosis",
+      "display_name": "규폐증(Silicosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32181",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31810",
+      "content_id": "31810",
+      "name_ko": "급성 기관지염",
+      "name_en": "Acute bronchitis",
+      "display_name": "급성 기관지염(Acute bronchitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31810",
+      "departments": [
+        "호흡기내과",
+        "이비인후과",
+        "소아중환자과"
+      ]
+    },
+    {
+      "disease_id": "amc:31814",
+      "content_id": "31814",
+      "name_ko": "기관지확장증",
+      "name_en": "Bronchiectasis",
+      "display_name": "기관지확장증(Bronchiectasis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31814",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32183",
+      "content_id": "32183",
+      "name_ko": "늑막염",
+      "name_en": "Pleurisy",
+      "display_name": "늑막염(Pleurisy)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32183",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32497",
+      "content_id": "32497",
+      "name_ko": "만성 기관지염",
+      "name_en": "Chronic bronchitis",
+      "display_name": "만성 기관지염(Chronic bronchitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32497",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31528",
+      "content_id": "31528",
+      "name_ko": "만성 폐쇄성 폐질환",
+      "name_en": "Chronic obstructive pulmonary disease",
+      "display_name": "만성 폐쇄성 폐질환(Chronic obstructive pulmonary disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31528",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31813",
+      "content_id": "31813",
+      "name_ko": "만성 폐질환",
+      "name_en": "Chronic lung disease",
+      "display_name": "만성 폐질환(Chronic lung disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31813",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31848",
+      "content_id": "31848",
+      "name_ko": "미만성 간질성 폐질환",
+      "name_en": "Diffuse Interstitial lung disease",
+      "display_name": "미만성 간질성 폐질환(Diffuse Interstitial lung disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31848",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31743",
+      "content_id": "31743",
+      "name_ko": "병원 감염성 폐렴",
+      "name_en": "Hospital acquired pneumonia (HAP)",
+      "display_name": "병원 감염성 폐렴(Hospital acquired pneumonia (HAP))",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31743",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31744",
+      "content_id": "31744",
+      "name_ko": "속립성 결핵",
+      "name_en": "Miliary tuberculosis",
+      "display_name": "속립성 결핵(Miliary tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31744",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31742",
+      "content_id": "31742",
+      "name_ko": "지역사회성 폐렴",
+      "name_en": "Community acquired pneumonia",
+      "display_name": "지역사회성 폐렴(Community acquired pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31742",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31811",
+      "content_id": "31811",
+      "name_ko": "천식",
+      "name_en": "Asthma",
+      "display_name": "천식(Asthma)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31811",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33922",
+      "content_id": "33922",
+      "name_ko": "코로나-19",
+      "name_en": "COVID-19",
+      "display_name": "코로나-19(COVID-19)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33922",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31847",
+      "content_id": "31847",
+      "name_ko": "폐결핵",
+      "name_en": "Pulmonary tuberculosis",
+      "display_name": "폐결핵(Pulmonary tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31847",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31849",
+      "content_id": "31849",
+      "name_ko": "폐기종",
+      "name_en": "Emphysema",
+      "display_name": "폐기종(Emphysema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31849",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31631",
+      "content_id": "31631",
+      "name_ko": "폐렴",
+      "name_en": "Pneumonia",
+      "display_name": "폐렴(Pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31631",
+      "departments": [
+        "노년내과",
+        "호흡기내과"
+      ]
+    }
+  ],
+  "가슴 답답": [
+    {
+      "disease_id": "amc:32195",
+      "content_id": "32195",
+      "name_ko": "농흉",
+      "name_en": "Pyothorax, Empyema",
+      "display_name": "농흉(Pyothorax, Empyema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32195",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32183",
+      "content_id": "32183",
+      "name_ko": "늑막염",
+      "name_en": "Pleurisy",
+      "display_name": "늑막염(Pleurisy)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32183",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32514",
+      "content_id": "32514",
+      "name_ko": "종격동염",
+      "name_en": "Mediastinitis",
+      "display_name": "종격동염(Mediastinitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32514",
+      "departments": [
+        "호흡기내과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:31811",
+      "content_id": "31811",
+      "name_ko": "천식",
+      "name_en": "Asthma",
+      "display_name": "천식(Asthma)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31811",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31849",
+      "content_id": "31849",
+      "name_ko": "폐기종",
+      "name_en": "Emphysema",
+      "display_name": "폐기종(Emphysema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31849",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "가슴 두근거림": [
+    {
+      "disease_id": "amc:31694",
+      "content_id": "31694",
+      "name_ko": "과호흡 증후군",
+      "name_en": "Hyperventilation syndrome",
+      "display_name": "과호흡 증후군(Hyperventilation syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31694",
+      "departments": [
+        "호흡기내과",
+        "응급의학과",
+        "정신건강의학과"
+      ]
+    }
+  ],
+  "감기 증상": [
+    {
+      "disease_id": "amc:31742",
+      "content_id": "31742",
+      "name_ko": "지역사회성 폐렴",
+      "name_en": "Community acquired pneumonia",
+      "display_name": "지역사회성 폐렴(Community acquired pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31742",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "객혈": [
+    {
+      "disease_id": "amc:31850",
+      "content_id": "31850",
+      "name_ko": "객혈",
+      "name_en": "Hemoptysis",
+      "display_name": "객혈(Hemoptysis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31850",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32191",
+      "content_id": "32191",
+      "name_ko": "결핵",
+      "name_en": "Tuberculosis",
+      "display_name": "결핵(Tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32191",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31814",
+      "content_id": "31814",
+      "name_ko": "기관지확장증",
+      "name_en": "Bronchiectasis",
+      "display_name": "기관지확장증(Bronchiectasis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31814",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33562",
+      "content_id": "33562",
+      "name_ko": "낭종성 폐질환",
+      "name_en": "Cystic Lung Disease",
+      "display_name": "낭종성 폐질환(Cystic Lung Disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33562",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32497",
+      "content_id": "32497",
+      "name_ko": "만성 기관지염",
+      "name_en": "Chronic bronchitis",
+      "display_name": "만성 기관지염(Chronic bronchitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32497",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31813",
+      "content_id": "31813",
+      "name_ko": "만성 폐질환",
+      "name_en": "Chronic lung disease",
+      "display_name": "만성 폐질환(Chronic lung disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31813",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30469",
+      "content_id": "30469",
+      "name_ko": "비소세포성 폐암",
+      "name_en": "Non-small cell lung cancer",
+      "display_name": "비소세포성 폐암(Non-small cell lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30469",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:30470",
+      "content_id": "30470",
+      "name_ko": "소세포성 폐암",
+      "name_en": "Small cell lung cancer",
+      "display_name": "소세포성 폐암(Small cell lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30470",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:31744",
+      "content_id": "31744",
+      "name_ko": "속립성 결핵",
+      "name_en": "Miliary tuberculosis",
+      "display_name": "속립성 결핵(Miliary tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31744",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32496",
+      "content_id": "32496",
+      "name_ko": "아스페르길루스증",
+      "name_en": "Aspergillosis",
+      "display_name": "아스페르길루스증(Aspergillosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32496",
+      "departments": [
+        "감염내과",
+        "호흡기내과",
+        "심장혈관흉부외과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31847",
+      "content_id": "31847",
+      "name_ko": "폐결핵",
+      "name_en": "Pulmonary tuberculosis",
+      "display_name": "폐결핵(Pulmonary tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31847",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32495",
+      "content_id": "32495",
+      "name_ko": "폐렴간균에 의한 폐렴",
+      "name_en": "Klebsiella pneumoniae infection",
+      "display_name": "폐렴간균에 의한 폐렴 (Klebsiella pneumoniae infection)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32495",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32257",
+      "content_id": "32257",
+      "name_ko": "폐부종",
+      "name_en": "Pulmonary edema",
+      "display_name": "폐부종(Pulmonary edema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32257",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30468",
+      "content_id": "30468",
+      "name_ko": "폐암",
+      "name_en": "Lung cancer",
+      "display_name": "폐암(Lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30468",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    }
+  ],
+  "거품이 섞인 가래": [
+    {
+      "disease_id": "amc:31850",
+      "content_id": "31850",
+      "name_ko": "객혈",
+      "name_en": "Hemoptysis",
+      "display_name": "객혈(Hemoptysis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31850",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "검은색 가래": [
+    {
+      "disease_id": "amc:32499",
+      "content_id": "32499",
+      "name_ko": "진폐증",
+      "name_en": "Pneumoconiosis",
+      "display_name": "진폐증(Pneumoconiosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32499",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "결막염": [
+    {
+      "disease_id": "amc:31666",
+      "content_id": "31666",
+      "name_ko": "백일해",
+      "name_en": "Pertussis",
+      "display_name": "백일해(Pertussis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31666",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    }
+  ],
+  "경정맥 확장": [
+    {
+      "disease_id": "amc:32560",
+      "content_id": "32560",
+      "name_ko": "상대정맥 증후군",
+      "name_en": "Superior vena cava Syndrome",
+      "display_name": "상대정맥 증후군(Superior vena cava Syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32560",
+      "departments": [
+        "종양내과",
+        "심장혈관흉부외과"
+      ]
+    }
+  ],
+  "고탄산증": [
+    {
+      "disease_id": "amc:31989",
+      "content_id": "31989",
+      "name_ko": "기관지폐 형성이상",
+      "name_en": "Bronchopulmonary dysplasia",
+      "display_name": "기관지폐 형성이상(Bronchopulmonary dysplasia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31989",
+      "departments": [
+        "신생아과"
+      ]
+    }
+  ],
+  "곤봉지": [
+    {
+      "disease_id": "amc:31814",
+      "content_id": "31814",
+      "name_ko": "기관지확장증",
+      "name_en": "Bronchiectasis",
+      "display_name": "기관지확장증(Bronchiectasis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31814",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31528",
+      "content_id": "31528",
+      "name_ko": "만성 폐쇄성 폐질환",
+      "name_en": "Chronic obstructive pulmonary disease",
+      "display_name": "만성 폐쇄성 폐질환(Chronic obstructive pulmonary disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31528",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31848",
+      "content_id": "31848",
+      "name_ko": "미만성 간질성 폐질환",
+      "name_en": "Diffuse Interstitial lung disease",
+      "display_name": "미만성 간질성 폐질환(Diffuse Interstitial lung disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31848",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32186",
+      "content_id": "32186",
+      "name_ko": "특발성 폐섬유화증",
+      "name_en": "Idiopathic pulmonary fibrosis",
+      "display_name": "특발성 폐섬유화증(Idiopathic pulmonary fibrosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32186",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "구토": [
+    {
+      "disease_id": "amc:31666",
+      "content_id": "31666",
+      "name_ko": "백일해",
+      "name_en": "Pertussis",
+      "display_name": "백일해(Pertussis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31666",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31665",
+      "content_id": "31665",
+      "name_ko": "신종 플루",
+      "name_en": "Novel swine-origin influenza A(H1N1)",
+      "display_name": "신종 플루(Novel swine-origin influenza A(H1N1))",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31665",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31620",
+      "content_id": "31620",
+      "name_ko": "인플루엔자",
+      "name_en": "Influenza",
+      "display_name": "인플루엔자(Influenza)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31620",
+      "departments": [
+        "노년내과"
+      ]
+    }
+  ],
+  "권태감": [
+    {
+      "disease_id": "amc:32183",
+      "content_id": "32183",
+      "name_ko": "늑막염",
+      "name_en": "Pleurisy",
+      "display_name": "늑막염(Pleurisy)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32183",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32128",
+      "content_id": "32128",
+      "name_ko": "중증 급성 호흡기 증후군",
+      "name_en": "Severe Acute Respiratory Syndrom",
+      "display_name": "중증 급성 호흡기 증후군(Severe Acute Respiratory Syndrom)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32128",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "근긴장의 이상": [
+    {
+      "disease_id": "amc:33605",
+      "content_id": "33605",
+      "name_ko": "태변 흡인 증후군",
+      "name_en": "Meconium aspiration syndrome",
+      "display_name": "태변 흡인 증후군(Meconium aspiration syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33605",
+      "departments": [
+        "신생아과"
+      ]
+    }
+  ],
+  "근력 약화": [
+    {
+      "disease_id": "amc:32278",
+      "content_id": "32278",
+      "name_ko": "흉선암",
+      "name_en": "Thymus Cancer",
+      "display_name": "흉선암(Thymus Cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32278",
+      "departments": [
+        "종양내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    }
+  ],
+  "근육통": [
+    {
+      "disease_id": "amc:31743",
+      "content_id": "31743",
+      "name_ko": "병원 감염성 폐렴",
+      "name_en": "Hospital acquired pneumonia (HAP)",
+      "display_name": "병원 감염성 폐렴(Hospital acquired pneumonia (HAP))",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31743",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31665",
+      "content_id": "31665",
+      "name_ko": "신종 플루",
+      "name_en": "Novel swine-origin influenza A(H1N1)",
+      "display_name": "신종 플루(Novel swine-origin influenza A(H1N1))",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31665",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31620",
+      "content_id": "31620",
+      "name_ko": "인플루엔자",
+      "name_en": "Influenza",
+      "display_name": "인플루엔자(Influenza)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31620",
+      "departments": [
+        "노년내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32128",
+      "content_id": "32128",
+      "name_ko": "중증 급성 호흡기 증후군",
+      "name_en": "Severe Acute Respiratory Syndrom",
+      "display_name": "중증 급성 호흡기 증후군(Severe Acute Respiratory Syndrom)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32128",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33922",
+      "content_id": "33922",
+      "name_ko": "코로나-19",
+      "name_en": "COVID-19",
+      "display_name": "코로나-19(COVID-19)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33922",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    }
+  ],
+  "급성 신부전": [
+    {
+      "disease_id": "amc:33862",
+      "content_id": "33862",
+      "name_ko": "중동 호흡기 증후군(MERS)",
+      "name_en": "Middle East Respiratory Syndrome",
+      "display_name": "중동 호흡기 증후군(MERS)(Middle East Respiratory Syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33862",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "기운없음": [
+    {
+      "disease_id": "amc:31597",
+      "content_id": "31597",
+      "name_ko": "디프테리아",
+      "name_en": "Diphtheritia",
+      "display_name": "디프테리아(Diphtheritia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31597",
+      "departments": [
+        "감염내과"
+      ]
+    }
+  ],
+  "기침": [
+    {
+      "disease_id": "amc:32152",
+      "content_id": "32152",
+      "name_ko": "가습기 살균제 연관 폐질환",
+      "name_en": "Humidifier disinfectant-associated lung injury",
+      "display_name": "가습기 살균제 연관 폐질환(Humidifier disinfectant-associated lung injury)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32152",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32191",
+      "content_id": "32191",
+      "name_ko": "결핵",
+      "name_en": "Tuberculosis",
+      "display_name": "결핵(Tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32191",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32181",
+      "content_id": "32181",
+      "name_ko": "규폐증",
+      "name_en": "Silicosis",
+      "display_name": "규폐증(Silicosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32181",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31810",
+      "content_id": "31810",
+      "name_ko": "급성 기관지염",
+      "name_en": "Acute bronchitis",
+      "display_name": "급성 기관지염(Acute bronchitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31810",
+      "departments": [
+        "호흡기내과",
+        "이비인후과",
+        "소아중환자과"
+      ]
+    },
+    {
+      "disease_id": "amc:31814",
+      "content_id": "31814",
+      "name_ko": "기관지확장증",
+      "name_en": "Bronchiectasis",
+      "display_name": "기관지확장증(Bronchiectasis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31814",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33702",
+      "content_id": "33702",
+      "name_ko": "꽃가루 알레르기",
+      "name_en": "Pollen allergy",
+      "display_name": "꽃가루 알레르기(Pollen allergy)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33702",
+      "departments": [
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33562",
+      "content_id": "33562",
+      "name_ko": "낭종성 폐질환",
+      "name_en": "Cystic Lung Disease",
+      "display_name": "낭종성 폐질환(Cystic Lung Disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33562",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32195",
+      "content_id": "32195",
+      "name_ko": "농흉",
+      "name_en": "Pyothorax, Empyema",
+      "display_name": "농흉(Pyothorax, Empyema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32195",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32183",
+      "content_id": "32183",
+      "name_ko": "늑막염",
+      "name_en": "Pleurisy",
+      "display_name": "늑막염(Pleurisy)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32183",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31597",
+      "content_id": "31597",
+      "name_ko": "디프테리아",
+      "name_en": "Diphtheritia",
+      "display_name": "디프테리아(Diphtheritia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31597",
+      "departments": [
+        "감염내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32497",
+      "content_id": "32497",
+      "name_ko": "만성 기관지염",
+      "name_en": "Chronic bronchitis",
+      "display_name": "만성 기관지염(Chronic bronchitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32497",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31522",
+      "content_id": "31522",
+      "name_ko": "만성 기침",
+      "name_en": "Chronic cough",
+      "display_name": "만성 기침(Chronic cough)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31522",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31528",
+      "content_id": "31528",
+      "name_ko": "만성 폐쇄성 폐질환",
+      "name_en": "Chronic obstructive pulmonary disease",
+      "display_name": "만성 폐쇄성 폐질환(Chronic obstructive pulmonary disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31528",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31813",
+      "content_id": "31813",
+      "name_ko": "만성 폐질환",
+      "name_en": "Chronic lung disease",
+      "display_name": "만성 폐질환(Chronic lung disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31813",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31848",
+      "content_id": "31848",
+      "name_ko": "미만성 간질성 폐질환",
+      "name_en": "Diffuse Interstitial lung disease",
+      "display_name": "미만성 간질성 폐질환(Diffuse Interstitial lung disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31848",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31666",
+      "content_id": "31666",
+      "name_ko": "백일해",
+      "name_en": "Pertussis",
+      "display_name": "백일해(Pertussis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31666",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31743",
+      "content_id": "31743",
+      "name_ko": "병원 감염성 폐렴",
+      "name_en": "Hospital acquired pneumonia (HAP)",
+      "display_name": "병원 감염성 폐렴(Hospital acquired pneumonia (HAP))",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31743",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30469",
+      "content_id": "30469",
+      "name_ko": "비소세포성 폐암",
+      "name_en": "Non-small cell lung cancer",
+      "display_name": "비소세포성 폐암(Non-small cell lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30469",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:31816",
+      "content_id": "31816",
+      "name_ko": "상기도 감염",
+      "name_en": "Upper respiratory infections",
+      "display_name": "상기도 감염(Upper respiratory infections)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31816",
+      "departments": [
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32560",
+      "content_id": "32560",
+      "name_ko": "상대정맥 증후군",
+      "name_en": "Superior vena cava Syndrome",
+      "display_name": "상대정맥 증후군(Superior vena cava Syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32560",
+      "departments": [
+        "종양내과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:30470",
+      "content_id": "30470",
+      "name_ko": "소세포성 폐암",
+      "name_en": "Small cell lung cancer",
+      "display_name": "소세포성 폐암(Small cell lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30470",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:31744",
+      "content_id": "31744",
+      "name_ko": "속립성 결핵",
+      "name_en": "Miliary tuberculosis",
+      "display_name": "속립성 결핵(Miliary tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31744",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30457",
+      "content_id": "30457",
+      "name_ko": "악성 종격동 종양",
+      "name_en": "Malignant mediastinal tumor",
+      "display_name": "악성 종격동 종양(Malignant mediastinal tumor)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30457",
+      "departments": [
+        "종양내과",
+        "방사선종양학과",
+        "소아청소년종양혈액과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    },
+    {
+      "disease_id": "amc:32113",
+      "content_id": "32113",
+      "name_ko": "악성 중피종",
+      "name_en": "Malignant mesothelioma",
+      "display_name": "악성 중피종(Malignant mesothelioma)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32113",
+      "departments": [
+        "종양내과",
+        "방사선종양학과"
+      ]
+    },
+    {
+      "disease_id": "amc:32014",
+      "content_id": "32014",
+      "name_ko": "악성 흉막 삼출",
+      "name_en": "Malignant pleural effusion",
+      "display_name": "악성 흉막 삼출(Malignant pleural effusion)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32014",
+      "departments": [
+        "종양내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30456",
+      "content_id": "30456",
+      "name_ko": "양성 종격동 종양",
+      "name_en": "Benign mediastinal tumor",
+      "display_name": "양성 종격동 종양(Benign mediastinal tumor)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30456",
+      "departments": [
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:33862",
+      "content_id": "33862",
+      "name_ko": "중동 호흡기 증후군(MERS)",
+      "name_en": "Middle East Respiratory Syndrome",
+      "display_name": "중동 호흡기 증후군(MERS)(Middle East Respiratory Syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33862",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32128",
+      "content_id": "32128",
+      "name_ko": "중증 급성 호흡기 증후군",
+      "name_en": "Severe Acute Respiratory Syndrom",
+      "display_name": "중증 급성 호흡기 증후군(Severe Acute Respiratory Syndrom)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32128",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31742",
+      "content_id": "31742",
+      "name_ko": "지역사회성 폐렴",
+      "name_en": "Community acquired pneumonia",
+      "display_name": "지역사회성 폐렴(Community acquired pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31742",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32499",
+      "content_id": "32499",
+      "name_ko": "진폐증",
+      "name_en": "Pneumoconiosis",
+      "display_name": "진폐증(Pneumoconiosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32499",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31811",
+      "content_id": "31811",
+      "name_ko": "천식",
+      "name_en": "Asthma",
+      "display_name": "천식(Asthma)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31811",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33922",
+      "content_id": "33922",
+      "name_ko": "코로나-19",
+      "name_en": "COVID-19",
+      "display_name": "코로나-19(COVID-19)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33922",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32186",
+      "content_id": "32186",
+      "name_ko": "특발성 폐섬유화증",
+      "name_en": "Idiopathic pulmonary fibrosis",
+      "display_name": "특발성 폐섬유화증(Idiopathic pulmonary fibrosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32186",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32493",
+      "content_id": "32493",
+      "name_ko": "폐 농양",
+      "name_en": "Abscess of lung",
+      "display_name": "폐 농양(Abscess of lung)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32493",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31847",
+      "content_id": "31847",
+      "name_ko": "폐결핵",
+      "name_en": "Pulmonary tuberculosis",
+      "display_name": "폐결핵(Pulmonary tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31847",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31849",
+      "content_id": "31849",
+      "name_ko": "폐기종",
+      "name_en": "Emphysema",
+      "display_name": "폐기종(Emphysema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31849",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31631",
+      "content_id": "31631",
+      "name_ko": "폐렴",
+      "name_en": "Pneumonia",
+      "display_name": "폐렴(Pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31631",
+      "departments": [
+        "노년내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32257",
+      "content_id": "32257",
+      "name_ko": "폐부종",
+      "name_en": "Pulmonary edema",
+      "display_name": "폐부종(Pulmonary edema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32257",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30468",
+      "content_id": "30468",
+      "name_ko": "폐암",
+      "name_en": "Lung cancer",
+      "display_name": "폐암(Lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30468",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    },
+    {
+      "disease_id": "amc:32510",
+      "content_id": "32510",
+      "name_ko": "흉막 삼출",
+      "name_en": "Pleural effusion",
+      "display_name": "흉막 삼출(Pleural effusion)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32510",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32278",
+      "content_id": "32278",
+      "name_ko": "흉선암",
+      "name_en": "Thymus Cancer",
+      "display_name": "흉선암(Thymus Cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32278",
+      "departments": [
+        "종양내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    },
+    {
+      "disease_id": "amc:32757",
+      "content_id": "32757",
+      "name_ko": "히스토플라즈마증",
+      "name_en": "Histoplasmosis",
+      "display_name": "히스토플라즈마증(Histoplasmosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32757",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    }
+  ],
+  "뇌압상승증상": [
+    {
+      "disease_id": "amc:31852",
+      "content_id": "31852",
+      "name_ko": "두통",
+      "name_en": "Headache",
+      "display_name": "두통(Headache)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31852",
+      "departments": [
+        "노년내과",
+        "신경과",
+        "신경외과",
+        "소아신경과"
+      ]
+    }
+  ],
+  "눈꼽": [
+    {
+      "disease_id": "amc:33702",
+      "content_id": "33702",
+      "name_ko": "꽃가루 알레르기",
+      "name_en": "Pollen allergy",
+      "display_name": "꽃가루 알레르기(Pollen allergy)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33702",
+      "departments": [
+        "알레르기내과"
+      ]
+    }
+  ],
+  "눈의 충혈": [
+    {
+      "disease_id": "amc:33702",
+      "content_id": "33702",
+      "name_ko": "꽃가루 알레르기",
+      "name_en": "Pollen allergy",
+      "display_name": "꽃가루 알레르기(Pollen allergy)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33702",
+      "departments": [
+        "알레르기내과"
+      ]
+    }
+  ],
+  "눈이 무거운 느낌": [
+    {
+      "disease_id": "amc:31852",
+      "content_id": "31852",
+      "name_ko": "두통",
+      "name_en": "Headache",
+      "display_name": "두통(Headache)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31852",
+      "departments": [
+        "노년내과",
+        "신경과",
+        "신경외과",
+        "소아신경과"
+      ]
+    }
+  ],
+  "다발성 장기부전 증상": [
+    {
+      "disease_id": "amc:32152",
+      "content_id": "32152",
+      "name_ko": "가습기 살균제 연관 폐질환",
+      "name_en": "Humidifier disinfectant-associated lung injury",
+      "display_name": "가습기 살균제 연관 폐질환(Humidifier disinfectant-associated lung injury)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32152",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "두통": [
+    {
+      "disease_id": "amc:31816",
+      "content_id": "31816",
+      "name_ko": "상기도 감염",
+      "name_en": "Upper respiratory infections",
+      "display_name": "상기도 감염(Upper respiratory infections)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31816",
+      "departments": [
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31665",
+      "content_id": "31665",
+      "name_ko": "신종 플루",
+      "name_en": "Novel swine-origin influenza A(H1N1)",
+      "display_name": "신종 플루(Novel swine-origin influenza A(H1N1))",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31665",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31620",
+      "content_id": "31620",
+      "name_ko": "인플루엔자",
+      "name_en": "Influenza",
+      "display_name": "인플루엔자(Influenza)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31620",
+      "departments": [
+        "노년내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32128",
+      "content_id": "32128",
+      "name_ko": "중증 급성 호흡기 증후군",
+      "name_en": "Severe Acute Respiratory Syndrom",
+      "display_name": "중증 급성 호흡기 증후군(Severe Acute Respiratory Syndrom)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32128",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33922",
+      "content_id": "33922",
+      "name_ko": "코로나-19",
+      "name_en": "COVID-19",
+      "display_name": "코로나-19(COVID-19)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33922",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31631",
+      "content_id": "31631",
+      "name_ko": "폐렴",
+      "name_en": "Pneumonia",
+      "display_name": "폐렴(Pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31631",
+      "departments": [
+        "노년내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32311",
+      "content_id": "32311",
+      "name_ko": "호흡성 산증",
+      "name_en": "Respiratory Acidosis",
+      "display_name": "호흡성 산증(Respiratory Acidosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32311",
+      "departments": [
+        "호흡기내과",
+        "응급의학과"
+      ]
+    },
+    {
+      "disease_id": "amc:32278",
+      "content_id": "32278",
+      "name_ko": "흉선암",
+      "name_en": "Thymus Cancer",
+      "display_name": "흉선암(Thymus Cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32278",
+      "departments": [
+        "종양내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    }
+  ],
+  "마찰음": [
+    {
+      "disease_id": "amc:32195",
+      "content_id": "32195",
+      "name_ko": "농흉",
+      "name_en": "Pyothorax, Empyema",
+      "display_name": "농흉(Pyothorax, Empyema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32195",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "말초부종": [
+    {
+      "disease_id": "amc:32257",
+      "content_id": "32257",
+      "name_ko": "폐부종",
+      "name_en": "Pulmonary edema",
+      "display_name": "폐부종(Pulmonary edema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32257",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "목소리 변화": [
+    {
+      "disease_id": "amc:32113",
+      "content_id": "32113",
+      "name_ko": "악성 중피종",
+      "name_en": "Malignant mesothelioma",
+      "display_name": "악성 중피종(Malignant mesothelioma)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32113",
+      "departments": [
+        "종양내과",
+        "방사선종양학과"
+      ]
+    },
+    {
+      "disease_id": "amc:30456",
+      "content_id": "30456",
+      "name_ko": "양성 종격동 종양",
+      "name_en": "Benign mediastinal tumor",
+      "display_name": "양성 종격동 종양(Benign mediastinal tumor)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30456",
+      "departments": [
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:30468",
+      "content_id": "30468",
+      "name_ko": "폐암",
+      "name_en": "Lung cancer",
+      "display_name": "폐암(Lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30468",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    },
+    {
+      "disease_id": "amc:33899",
+      "content_id": "33899",
+      "name_ko": "후두개염",
+      "name_en": "Epiglottitis",
+      "display_name": "후두개염(Epiglottitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33899",
+      "departments": [
+        "감염내과",
+        "호흡기내과",
+        "이비인후과"
+      ]
+    }
+  ],
+  "목의 통증": [
+    {
+      "disease_id": "amc:31597",
+      "content_id": "31597",
+      "name_ko": "디프테리아",
+      "name_en": "Diphtheritia",
+      "display_name": "디프테리아(Diphtheritia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31597",
+      "departments": [
+        "감염내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31816",
+      "content_id": "31816",
+      "name_ko": "상기도 감염",
+      "name_en": "Upper respiratory infections",
+      "display_name": "상기도 감염(Upper respiratory infections)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31816",
+      "departments": [
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31665",
+      "content_id": "31665",
+      "name_ko": "신종 플루",
+      "name_en": "Novel swine-origin influenza A(H1N1)",
+      "display_name": "신종 플루(Novel swine-origin influenza A(H1N1))",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31665",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31620",
+      "content_id": "31620",
+      "name_ko": "인플루엔자",
+      "name_en": "Influenza",
+      "display_name": "인플루엔자(Influenza)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31620",
+      "departments": [
+        "노년내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33922",
+      "content_id": "33922",
+      "name_ko": "코로나-19",
+      "name_en": "COVID-19",
+      "display_name": "코로나-19(COVID-19)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33922",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    }
+  ],
+  "무증상": [
+    {
+      "disease_id": "amc:30457",
+      "content_id": "30457",
+      "name_ko": "악성 종격동 종양",
+      "name_en": "Malignant mediastinal tumor",
+      "display_name": "악성 종격동 종양(Malignant mediastinal tumor)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30457",
+      "departments": [
+        "종양내과",
+        "방사선종양학과",
+        "소아청소년종양혈액과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    },
+    {
+      "disease_id": "amc:30456",
+      "content_id": "30456",
+      "name_ko": "양성 종격동 종양",
+      "name_en": "Benign mediastinal tumor",
+      "display_name": "양성 종격동 종양(Benign mediastinal tumor)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30456",
+      "departments": [
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:32717",
+      "content_id": "32717",
+      "name_ko": "폐결절",
+      "name_en": "Pulmonary nodule",
+      "display_name": "폐결절(Pulmonary nodule)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32717",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30468",
+      "content_id": "30468",
+      "name_ko": "폐암",
+      "name_en": "Lung cancer",
+      "display_name": "폐암(Lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30468",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    },
+    {
+      "disease_id": "amc:32278",
+      "content_id": "32278",
+      "name_ko": "흉선암",
+      "name_en": "Thymus Cancer",
+      "display_name": "흉선암(Thymus Cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32278",
+      "departments": [
+        "종양내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    }
+  ],
+  "박동성 통증": [
+    {
+      "disease_id": "amc:31852",
+      "content_id": "31852",
+      "name_ko": "두통",
+      "name_en": "Headache",
+      "display_name": "두통(Headache)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31852",
+      "departments": [
+        "노년내과",
+        "신경과",
+        "신경외과",
+        "소아신경과"
+      ]
+    }
+  ],
+  "반복되는 폐렴": [
+    {
+      "disease_id": "amc:32513",
+      "content_id": "32513",
+      "name_ko": "기관 협착",
+      "name_en": "Stenosis of trachea",
+      "display_name": "기관 협착(Stenosis of trachea)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32513",
+      "departments": [
+        "호흡기내과",
+        "이비인후과"
+      ]
+    }
+  ],
+  "발한": [
+    {
+      "disease_id": "amc:32311",
+      "content_id": "32311",
+      "name_ko": "호흡성 산증",
+      "name_en": "Respiratory Acidosis",
+      "display_name": "호흡성 산증(Respiratory Acidosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32311",
+      "departments": [
+        "호흡기내과",
+        "응급의학과"
+      ]
+    }
+  ],
+  "방사통": [
+    {
+      "disease_id": "amc:32113",
+      "content_id": "32113",
+      "name_ko": "악성 중피종",
+      "name_en": "Malignant mesothelioma",
+      "display_name": "악성 중피종(Malignant mesothelioma)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32113",
+      "departments": [
+        "종양내과",
+        "방사선종양학과"
+      ]
+    }
+  ],
+  "복벽이 움푹 들어감": [
+    {
+      "disease_id": "amc:31997",
+      "content_id": "31997",
+      "name_ko": "횡격막 탈장",
+      "name_en": "Diaphragmatic hernia",
+      "display_name": "횡격막 탈장(Diaphragmatic hernia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31997",
+      "departments": [
+        "소아외과",
+        "소아전문응급센터"
+      ]
+    }
+  ],
+  "복부 통증": [
+    {
+      "disease_id": "amc:31694",
+      "content_id": "31694",
+      "name_ko": "과호흡 증후군",
+      "name_en": "Hyperventilation syndrome",
+      "display_name": "과호흡 증후군(Hyperventilation syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31694",
+      "departments": [
+        "호흡기내과",
+        "응급의학과",
+        "정신건강의학과"
+      ]
+    }
+  ],
+  "복부팽만감": [
+    {
+      "disease_id": "amc:31694",
+      "content_id": "31694",
+      "name_ko": "과호흡 증후군",
+      "name_en": "Hyperventilation syndrome",
+      "display_name": "과호흡 증후군(Hyperventilation syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31694",
+      "departments": [
+        "호흡기내과",
+        "응급의학과",
+        "정신건강의학과"
+      ]
+    }
+  ],
+  "부정맥": [
+    {
+      "disease_id": "amc:31694",
+      "content_id": "31694",
+      "name_ko": "과호흡 증후군",
+      "name_en": "Hyperventilation syndrome",
+      "display_name": "과호흡 증후군(Hyperventilation syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31694",
+      "departments": [
+        "호흡기내과",
+        "응급의학과",
+        "정신건강의학과"
+      ]
+    }
+  ],
+  "불안": [
+    {
+      "disease_id": "amc:31694",
+      "content_id": "31694",
+      "name_ko": "과호흡 증후군",
+      "name_en": "Hyperventilation syndrome",
+      "display_name": "과호흡 증후군(Hyperventilation syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31694",
+      "departments": [
+        "호흡기내과",
+        "응급의학과",
+        "정신건강의학과"
+      ]
+    },
+    {
+      "disease_id": "amc:32014",
+      "content_id": "32014",
+      "name_ko": "악성 흉막 삼출",
+      "name_en": "Malignant pleural effusion",
+      "display_name": "악성 흉막 삼출(Malignant pleural effusion)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32014",
+      "departments": [
+        "종양내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32311",
+      "content_id": "32311",
+      "name_ko": "호흡성 산증",
+      "name_en": "Respiratory Acidosis",
+      "display_name": "호흡성 산증(Respiratory Acidosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32311",
+      "departments": [
+        "호흡기내과",
+        "응급의학과"
+      ]
+    }
+  ],
+  "빈맥": [
+    {
+      "disease_id": "amc:32195",
+      "content_id": "32195",
+      "name_ko": "농흉",
+      "name_en": "Pyothorax, Empyema",
+      "display_name": "농흉(Pyothorax, Empyema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32195",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31597",
+      "content_id": "31597",
+      "name_ko": "디프테리아",
+      "name_en": "Diphtheritia",
+      "display_name": "디프테리아(Diphtheritia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31597",
+      "departments": [
+        "감염내과"
+      ]
+    }
+  ],
+  "빈혈": [
+    {
+      "disease_id": "amc:31814",
+      "content_id": "31814",
+      "name_ko": "기관지확장증",
+      "name_en": "Bronchiectasis",
+      "display_name": "기관지확장증(Bronchiectasis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31814",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "빈호흡": [
+    {
+      "disease_id": "amc:32195",
+      "content_id": "32195",
+      "name_ko": "농흉",
+      "name_en": "Pyothorax, Empyema",
+      "display_name": "농흉(Pyothorax, Empyema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32195",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33605",
+      "content_id": "33605",
+      "name_ko": "태변 흡인 증후군",
+      "name_en": "Meconium aspiration syndrome",
+      "display_name": "태변 흡인 증후군(Meconium aspiration syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33605",
+      "departments": [
+        "신생아과"
+      ]
+    },
+    {
+      "disease_id": "amc:32510",
+      "content_id": "32510",
+      "name_ko": "흉막 삼출",
+      "name_en": "Pleural effusion",
+      "display_name": "흉막 삼출(Pleural effusion)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32510",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "사래걸림": [
+    {
+      "disease_id": "amc:32513",
+      "content_id": "32513",
+      "name_ko": "기관 협착",
+      "name_en": "Stenosis of trachea",
+      "display_name": "기관 협착(Stenosis of trachea)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32513",
+      "departments": [
+        "호흡기내과",
+        "이비인후과"
+      ]
+    }
+  ],
+  "사망": [
+    {
+      "disease_id": "amc:33899",
+      "content_id": "33899",
+      "name_ko": "후두개염",
+      "name_en": "Epiglottitis",
+      "display_name": "후두개염(Epiglottitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33899",
+      "departments": [
+        "감염내과",
+        "호흡기내과",
+        "이비인후과"
+      ]
+    }
+  ],
+  "사지 부종": [
+    {
+      "disease_id": "amc:32560",
+      "content_id": "32560",
+      "name_ko": "상대정맥 증후군",
+      "name_en": "Superior vena cava Syndrome",
+      "display_name": "상대정맥 증후군(Superior vena cava Syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32560",
+      "departments": [
+        "종양내과",
+        "심장혈관흉부외과"
+      ]
+    }
+  ],
+  "삼키기 곤란": [
+    {
+      "disease_id": "amc:32560",
+      "content_id": "32560",
+      "name_ko": "상대정맥 증후군",
+      "name_en": "Superior vena cava Syndrome",
+      "display_name": "상대정맥 증후군(Superior vena cava Syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32560",
+      "departments": [
+        "종양내과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:30456",
+      "content_id": "30456",
+      "name_ko": "양성 종격동 종양",
+      "name_en": "Benign mediastinal tumor",
+      "display_name": "양성 종격동 종양(Benign mediastinal tumor)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30456",
+      "departments": [
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:32514",
+      "content_id": "32514",
+      "name_ko": "종격동염",
+      "name_en": "Mediastinitis",
+      "display_name": "종격동염(Mediastinitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32514",
+      "departments": [
+        "호흡기내과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:32278",
+      "content_id": "32278",
+      "name_ko": "흉선암",
+      "name_en": "Thymus Cancer",
+      "display_name": "흉선암(Thymus Cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32278",
+      "departments": [
+        "종양내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    }
+  ],
+  "서맥": [
+    {
+      "disease_id": "amc:33605",
+      "content_id": "33605",
+      "name_ko": "태변 흡인 증후군",
+      "name_en": "Meconium aspiration syndrome",
+      "display_name": "태변 흡인 증후군(Meconium aspiration syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33605",
+      "departments": [
+        "신생아과"
+      ]
+    }
+  ],
+  "설사": [
+    {
+      "disease_id": "amc:31665",
+      "content_id": "31665",
+      "name_ko": "신종 플루",
+      "name_en": "Novel swine-origin influenza A(H1N1)",
+      "display_name": "신종 플루(Novel swine-origin influenza A(H1N1))",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31665",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31620",
+      "content_id": "31620",
+      "name_ko": "인플루엔자",
+      "name_en": "Influenza",
+      "display_name": "인플루엔자(Influenza)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31620",
+      "departments": [
+        "노년내과"
+      ]
+    }
+  ],
+  "수유 곤란": [
+    {
+      "disease_id": "amc:31989",
+      "content_id": "31989",
+      "name_ko": "기관지폐 형성이상",
+      "name_en": "Bronchopulmonary dysplasia",
+      "display_name": "기관지폐 형성이상(Bronchopulmonary dysplasia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31989",
+      "departments": [
+        "신생아과"
+      ]
+    }
+  ],
+  "식욕부진": [
+    {
+      "disease_id": "amc:31744",
+      "content_id": "31744",
+      "name_ko": "속립성 결핵",
+      "name_en": "Miliary tuberculosis",
+      "display_name": "속립성 결핵(Miliary tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31744",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    }
+  ],
+  "심부전": [
+    {
+      "disease_id": "amc:32152",
+      "content_id": "32152",
+      "name_ko": "가습기 살균제 연관 폐질환",
+      "name_en": "Humidifier disinfectant-associated lung injury",
+      "display_name": "가습기 살균제 연관 폐질환(Humidifier disinfectant-associated lung injury)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32152",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "압통": [
+    {
+      "disease_id": "amc:31852",
+      "content_id": "31852",
+      "name_ko": "두통",
+      "name_en": "Headache",
+      "display_name": "두통(Headache)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31852",
+      "departments": [
+        "노년내과",
+        "신경과",
+        "신경외과",
+        "소아신경과"
+      ]
+    }
+  ],
+  "어지러움": [
+    {
+      "disease_id": "amc:32278",
+      "content_id": "32278",
+      "name_ko": "흉선암",
+      "name_en": "Thymus Cancer",
+      "display_name": "흉선암(Thymus Cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32278",
+      "departments": [
+        "종양내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    }
+  ],
+  "열": [
+    {
+      "disease_id": "amc:32191",
+      "content_id": "32191",
+      "name_ko": "결핵",
+      "name_en": "Tuberculosis",
+      "display_name": "결핵(Tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32191",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32183",
+      "content_id": "32183",
+      "name_ko": "늑막염",
+      "name_en": "Pleurisy",
+      "display_name": "늑막염(Pleurisy)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32183",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31597",
+      "content_id": "31597",
+      "name_ko": "디프테리아",
+      "name_en": "Diphtheritia",
+      "display_name": "디프테리아(Diphtheritia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31597",
+      "departments": [
+        "감염내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31848",
+      "content_id": "31848",
+      "name_ko": "미만성 간질성 폐질환",
+      "name_en": "Diffuse Interstitial lung disease",
+      "display_name": "미만성 간질성 폐질환(Diffuse Interstitial lung disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31848",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31743",
+      "content_id": "31743",
+      "name_ko": "병원 감염성 폐렴",
+      "name_en": "Hospital acquired pneumonia (HAP)",
+      "display_name": "병원 감염성 폐렴(Hospital acquired pneumonia (HAP))",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31743",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31816",
+      "content_id": "31816",
+      "name_ko": "상기도 감염",
+      "name_en": "Upper respiratory infections",
+      "display_name": "상기도 감염(Upper respiratory infections)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31816",
+      "departments": [
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31744",
+      "content_id": "31744",
+      "name_ko": "속립성 결핵",
+      "name_en": "Miliary tuberculosis",
+      "display_name": "속립성 결핵(Miliary tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31744",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32496",
+      "content_id": "32496",
+      "name_ko": "아스페르길루스증",
+      "name_en": "Aspergillosis",
+      "display_name": "아스페르길루스증(Aspergillosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32496",
+      "departments": [
+        "감염내과",
+        "호흡기내과",
+        "심장혈관흉부외과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30457",
+      "content_id": "30457",
+      "name_ko": "악성 종격동 종양",
+      "name_en": "Malignant mediastinal tumor",
+      "display_name": "악성 종격동 종양(Malignant mediastinal tumor)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30457",
+      "departments": [
+        "종양내과",
+        "방사선종양학과",
+        "소아청소년종양혈액과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    },
+    {
+      "disease_id": "amc:31620",
+      "content_id": "31620",
+      "name_ko": "인플루엔자",
+      "name_en": "Influenza",
+      "display_name": "인플루엔자(Influenza)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31620",
+      "departments": [
+        "노년내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32514",
+      "content_id": "32514",
+      "name_ko": "종격동염",
+      "name_en": "Mediastinitis",
+      "display_name": "종격동염(Mediastinitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32514",
+      "departments": [
+        "호흡기내과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:33862",
+      "content_id": "33862",
+      "name_ko": "중동 호흡기 증후군(MERS)",
+      "name_en": "Middle East Respiratory Syndrome",
+      "display_name": "중동 호흡기 증후군(MERS)(Middle East Respiratory Syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33862",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32128",
+      "content_id": "32128",
+      "name_ko": "중증 급성 호흡기 증후군",
+      "name_en": "Severe Acute Respiratory Syndrom",
+      "display_name": "중증 급성 호흡기 증후군(Severe Acute Respiratory Syndrom)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32128",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33922",
+      "content_id": "33922",
+      "name_ko": "코로나-19",
+      "name_en": "COVID-19",
+      "display_name": "코로나-19(COVID-19)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33922",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32493",
+      "content_id": "32493",
+      "name_ko": "폐 농양",
+      "name_en": "Abscess of lung",
+      "display_name": "폐 농양(Abscess of lung)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32493",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31847",
+      "content_id": "31847",
+      "name_ko": "폐결핵",
+      "name_en": "Pulmonary tuberculosis",
+      "display_name": "폐결핵(Pulmonary tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31847",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31631",
+      "content_id": "31631",
+      "name_ko": "폐렴",
+      "name_en": "Pneumonia",
+      "display_name": "폐렴(Pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31631",
+      "departments": [
+        "노년내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32495",
+      "content_id": "32495",
+      "name_ko": "폐렴간균에 의한 폐렴",
+      "name_en": "Klebsiella pneumoniae infection",
+      "display_name": "폐렴간균에 의한 폐렴 (Klebsiella pneumoniae infection)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32495",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33899",
+      "content_id": "33899",
+      "name_ko": "후두개염",
+      "name_en": "Epiglottitis",
+      "display_name": "후두개염(Epiglottitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33899",
+      "departments": [
+        "감염내과",
+        "호흡기내과",
+        "이비인후과"
+      ]
+    },
+    {
+      "disease_id": "amc:32757",
+      "content_id": "32757",
+      "name_ko": "히스토플라즈마증",
+      "name_en": "Histoplasmosis",
+      "display_name": "히스토플라즈마증(Histoplasmosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32757",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    }
+  ],
+  "오한": [
+    {
+      "disease_id": "amc:32183",
+      "content_id": "32183",
+      "name_ko": "늑막염",
+      "name_en": "Pleurisy",
+      "display_name": "늑막염(Pleurisy)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32183",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31743",
+      "content_id": "31743",
+      "name_ko": "병원 감염성 폐렴",
+      "name_en": "Hospital acquired pneumonia (HAP)",
+      "display_name": "병원 감염성 폐렴(Hospital acquired pneumonia (HAP))",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31743",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31665",
+      "content_id": "31665",
+      "name_ko": "신종 플루",
+      "name_en": "Novel swine-origin influenza A(H1N1)",
+      "display_name": "신종 플루(Novel swine-origin influenza A(H1N1))",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31665",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32496",
+      "content_id": "32496",
+      "name_ko": "아스페르길루스증",
+      "name_en": "Aspergillosis",
+      "display_name": "아스페르길루스증(Aspergillosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32496",
+      "departments": [
+        "감염내과",
+        "호흡기내과",
+        "심장혈관흉부외과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31620",
+      "content_id": "31620",
+      "name_ko": "인플루엔자",
+      "name_en": "Influenza",
+      "display_name": "인플루엔자(Influenza)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31620",
+      "departments": [
+        "노년내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32514",
+      "content_id": "32514",
+      "name_ko": "종격동염",
+      "name_en": "Mediastinitis",
+      "display_name": "종격동염(Mediastinitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32514",
+      "departments": [
+        "호흡기내과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:32128",
+      "content_id": "32128",
+      "name_ko": "중증 급성 호흡기 증후군",
+      "name_en": "Severe Acute Respiratory Syndrom",
+      "display_name": "중증 급성 호흡기 증후군(Severe Acute Respiratory Syndrom)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32128",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31631",
+      "content_id": "31631",
+      "name_ko": "폐렴",
+      "name_en": "Pneumonia",
+      "display_name": "폐렴(Pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31631",
+      "departments": [
+        "노년내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32495",
+      "content_id": "32495",
+      "name_ko": "폐렴간균에 의한 폐렴",
+      "name_en": "Klebsiella pneumoniae infection",
+      "display_name": "폐렴간균에 의한 폐렴 (Klebsiella pneumoniae infection)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32495",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32757",
+      "content_id": "32757",
+      "name_ko": "히스토플라즈마증",
+      "name_en": "Histoplasmosis",
+      "display_name": "히스토플라즈마증(Histoplasmosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32757",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    }
+  ],
+  "온몸이 떨림": [
+    {
+      "disease_id": "amc:32311",
+      "content_id": "32311",
+      "name_ko": "호흡성 산증",
+      "name_en": "Respiratory Acidosis",
+      "display_name": "호흡성 산증(Respiratory Acidosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32311",
+      "departments": [
+        "호흡기내과",
+        "응급의학과"
+      ]
+    }
+  ],
+  "운동 시 호흡곤란": [
+    {
+      "disease_id": "amc:32181",
+      "content_id": "32181",
+      "name_ko": "규폐증",
+      "name_en": "Silicosis",
+      "display_name": "규폐증(Silicosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32181",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32497",
+      "content_id": "32497",
+      "name_ko": "만성 기관지염",
+      "name_en": "Chronic bronchitis",
+      "display_name": "만성 기관지염(Chronic bronchitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32497",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31528",
+      "content_id": "31528",
+      "name_ko": "만성 폐쇄성 폐질환",
+      "name_en": "Chronic obstructive pulmonary disease",
+      "display_name": "만성 폐쇄성 폐질환(Chronic obstructive pulmonary disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31528",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31848",
+      "content_id": "31848",
+      "name_ko": "미만성 간질성 폐질환",
+      "name_en": "Diffuse Interstitial lung disease",
+      "display_name": "미만성 간질성 폐질환(Diffuse Interstitial lung disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31848",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32499",
+      "content_id": "32499",
+      "name_ko": "진폐증",
+      "name_en": "Pneumoconiosis",
+      "display_name": "진폐증(Pneumoconiosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32499",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32186",
+      "content_id": "32186",
+      "name_ko": "특발성 폐섬유화증",
+      "name_en": "Idiopathic pulmonary fibrosis",
+      "display_name": "특발성 폐섬유화증(Idiopathic pulmonary fibrosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32186",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "의식 변화": [
+    {
+      "disease_id": "amc:31694",
+      "content_id": "31694",
+      "name_ko": "과호흡 증후군",
+      "name_en": "Hyperventilation syndrome",
+      "display_name": "과호흡 증후군(Hyperventilation syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31694",
+      "departments": [
+        "호흡기내과",
+        "응급의학과",
+        "정신건강의학과"
+      ]
+    },
+    {
+      "disease_id": "amc:32320",
+      "content_id": "32320",
+      "name_ko": "이물질에 의한 기도 막힘",
+      "name_en": "Airway obstruction",
+      "display_name": "이물질에 의한 기도 막힘(Airway obstruction)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32320",
+      "departments": [
+        "응급의학과"
+      ]
+    },
+    {
+      "disease_id": "amc:32311",
+      "content_id": "32311",
+      "name_ko": "호흡성 산증",
+      "name_en": "Respiratory Acidosis",
+      "display_name": "호흡성 산증(Respiratory Acidosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32311",
+      "departments": [
+        "호흡기내과",
+        "응급의학과"
+      ]
+    }
+  ],
+  "의식 저하": [
+    {
+      "disease_id": "amc:32511",
+      "content_id": "32511",
+      "name_ko": "성인 호흡곤란 증후군",
+      "name_en": "Adult respiratory distress syndrome",
+      "display_name": "성인 호흡곤란 증후군(Adult respiratory distress syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32511",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "인지장애": [
+    {
+      "disease_id": "amc:31694",
+      "content_id": "31694",
+      "name_ko": "과호흡 증후군",
+      "name_en": "Hyperventilation syndrome",
+      "display_name": "과호흡 증후군(Hyperventilation syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31694",
+      "departments": [
+        "호흡기내과",
+        "응급의학과",
+        "정신건강의학과"
+      ]
+    }
+  ],
+  "재채기": [
+    {
+      "disease_id": "amc:33702",
+      "content_id": "33702",
+      "name_ko": "꽃가루 알레르기",
+      "name_en": "Pollen allergy",
+      "display_name": "꽃가루 알레르기(Pollen allergy)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33702",
+      "departments": [
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31816",
+      "content_id": "31816",
+      "name_ko": "상기도 감염",
+      "name_en": "Upper respiratory infections",
+      "display_name": "상기도 감염(Upper respiratory infections)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31816",
+      "departments": [
+        "알레르기내과"
+      ]
+    }
+  ],
+  "저산소증": [
+    {
+      "disease_id": "amc:31989",
+      "content_id": "31989",
+      "name_ko": "기관지폐 형성이상",
+      "name_en": "Bronchopulmonary dysplasia",
+      "display_name": "기관지폐 형성이상(Bronchopulmonary dysplasia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31989",
+      "departments": [
+        "신생아과"
+      ]
+    },
+    {
+      "disease_id": "amc:33605",
+      "content_id": "33605",
+      "name_ko": "태변 흡인 증후군",
+      "name_en": "Meconium aspiration syndrome",
+      "display_name": "태변 흡인 증후군(Meconium aspiration syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33605",
+      "departments": [
+        "신생아과"
+      ]
+    },
+    {
+      "disease_id": "amc:32186",
+      "content_id": "32186",
+      "name_ko": "특발성 폐섬유화증",
+      "name_en": "Idiopathic pulmonary fibrosis",
+      "display_name": "특발성 폐섬유화증(Idiopathic pulmonary fibrosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32186",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "지남력 장애": [
+    {
+      "disease_id": "amc:32311",
+      "content_id": "32311",
+      "name_ko": "호흡성 산증",
+      "name_en": "Respiratory Acidosis",
+      "display_name": "호흡성 산증(Respiratory Acidosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32311",
+      "departments": [
+        "호흡기내과",
+        "응급의학과"
+      ]
+    }
+  ],
+  "질식": [
+    {
+      "disease_id": "amc:32320",
+      "content_id": "32320",
+      "name_ko": "이물질에 의한 기도 막힘",
+      "name_en": "Airway obstruction",
+      "display_name": "이물질에 의한 기도 막힘(Airway obstruction)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32320",
+      "departments": [
+        "응급의학과"
+      ]
+    }
+  ],
+  "창백": [
+    {
+      "disease_id": "amc:31997",
+      "content_id": "31997",
+      "name_ko": "횡격막 탈장",
+      "name_en": "Diaphragmatic hernia",
+      "display_name": "횡격막 탈장(Diaphragmatic hernia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31997",
+      "departments": [
+        "소아외과",
+        "소아전문응급센터"
+      ]
+    }
+  ],
+  "천명음": [
+    {
+      "disease_id": "amc:31810",
+      "content_id": "31810",
+      "name_ko": "급성 기관지염",
+      "name_en": "Acute bronchitis",
+      "display_name": "급성 기관지염(Acute bronchitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31810",
+      "departments": [
+        "호흡기내과",
+        "이비인후과",
+        "소아중환자과"
+      ]
+    },
+    {
+      "disease_id": "amc:31814",
+      "content_id": "31814",
+      "name_ko": "기관지확장증",
+      "name_en": "Bronchiectasis",
+      "display_name": "기관지확장증(Bronchiectasis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31814",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31528",
+      "content_id": "31528",
+      "name_ko": "만성 폐쇄성 폐질환",
+      "name_en": "Chronic obstructive pulmonary disease",
+      "display_name": "만성 폐쇄성 폐질환(Chronic obstructive pulmonary disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31528",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32511",
+      "content_id": "32511",
+      "name_ko": "성인 호흡곤란 증후군",
+      "name_en": "Adult respiratory distress syndrome",
+      "display_name": "성인 호흡곤란 증후군(Adult respiratory distress syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32511",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30470",
+      "content_id": "30470",
+      "name_ko": "소세포성 폐암",
+      "name_en": "Small cell lung cancer",
+      "display_name": "소세포성 폐암(Small cell lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30470",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:32496",
+      "content_id": "32496",
+      "name_ko": "아스페르길루스증",
+      "name_en": "Aspergillosis",
+      "display_name": "아스페르길루스증(Aspergillosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32496",
+      "departments": [
+        "감염내과",
+        "호흡기내과",
+        "심장혈관흉부외과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30456",
+      "content_id": "30456",
+      "name_ko": "양성 종격동 종양",
+      "name_en": "Benign mediastinal tumor",
+      "display_name": "양성 종격동 종양(Benign mediastinal tumor)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30456",
+      "departments": [
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:31812",
+      "content_id": "31812",
+      "name_ko": "재발성 천명",
+      "name_en": "Recurrent wheeze",
+      "display_name": "재발성 천명(Recurrent wheeze)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31812",
+      "departments": [
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31811",
+      "content_id": "31811",
+      "name_ko": "천식",
+      "name_en": "Asthma",
+      "display_name": "천식(Asthma)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31811",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    }
+  ],
+  "천식": [
+    {
+      "disease_id": "amc:31989",
+      "content_id": "31989",
+      "name_ko": "기관지폐 형성이상",
+      "name_en": "Bronchopulmonary dysplasia",
+      "display_name": "기관지폐 형성이상(Bronchopulmonary dysplasia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31989",
+      "departments": [
+        "신생아과"
+      ]
+    }
+  ],
+  "청색증": [
+    {
+      "disease_id": "amc:32560",
+      "content_id": "32560",
+      "name_ko": "상대정맥 증후군",
+      "name_en": "Superior vena cava Syndrome",
+      "display_name": "상대정맥 증후군(Superior vena cava Syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32560",
+      "departments": [
+        "종양내과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:32511",
+      "content_id": "32511",
+      "name_ko": "성인 호흡곤란 증후군",
+      "name_en": "Adult respiratory distress syndrome",
+      "display_name": "성인 호흡곤란 증후군(Adult respiratory distress syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32511",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32031",
+      "content_id": "32031",
+      "name_ko": "신생아 호흡곤란증후군",
+      "name_en": "Neonatal respiratory distress syndrome",
+      "display_name": "신생아 호흡곤란증후군(Neonatal respiratory distress syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32031",
+      "departments": [
+        "신생아과",
+        "어린이병원",
+        "소아재활의학과"
+      ]
+    },
+    {
+      "disease_id": "amc:32320",
+      "content_id": "32320",
+      "name_ko": "이물질에 의한 기도 막힘",
+      "name_en": "Airway obstruction",
+      "display_name": "이물질에 의한 기도 막힘(Airway obstruction)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32320",
+      "departments": [
+        "응급의학과"
+      ]
+    },
+    {
+      "disease_id": "amc:33605",
+      "content_id": "33605",
+      "name_ko": "태변 흡인 증후군",
+      "name_en": "Meconium aspiration syndrome",
+      "display_name": "태변 흡인 증후군(Meconium aspiration syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33605",
+      "departments": [
+        "신생아과"
+      ]
+    },
+    {
+      "disease_id": "amc:31849",
+      "content_id": "31849",
+      "name_ko": "폐기종",
+      "name_en": "Emphysema",
+      "display_name": "폐기종(Emphysema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31849",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32257",
+      "content_id": "32257",
+      "name_ko": "폐부종",
+      "name_en": "Pulmonary edema",
+      "display_name": "폐부종(Pulmonary edema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32257",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31997",
+      "content_id": "31997",
+      "name_ko": "횡격막 탈장",
+      "name_en": "Diaphragmatic hernia",
+      "display_name": "횡격막 탈장(Diaphragmatic hernia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31997",
+      "departments": [
+        "소아외과",
+        "소아전문응급센터"
+      ]
+    },
+    {
+      "disease_id": "amc:33899",
+      "content_id": "33899",
+      "name_ko": "후두개염",
+      "name_en": "Epiglottitis",
+      "display_name": "후두개염(Epiglottitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33899",
+      "departments": [
+        "감염내과",
+        "호흡기내과",
+        "이비인후과"
+      ]
+    }
+  ],
+  "체중감소": [
+    {
+      "disease_id": "amc:32191",
+      "content_id": "32191",
+      "name_ko": "결핵",
+      "name_en": "Tuberculosis",
+      "display_name": "결핵(Tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32191",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31814",
+      "content_id": "31814",
+      "name_ko": "기관지확장증",
+      "name_en": "Bronchiectasis",
+      "display_name": "기관지확장증(Bronchiectasis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31814",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31848",
+      "content_id": "31848",
+      "name_ko": "미만성 간질성 폐질환",
+      "name_en": "Diffuse Interstitial lung disease",
+      "display_name": "미만성 간질성 폐질환(Diffuse Interstitial lung disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31848",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31744",
+      "content_id": "31744",
+      "name_ko": "속립성 결핵",
+      "name_en": "Miliary tuberculosis",
+      "display_name": "속립성 결핵(Miliary tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31744",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32113",
+      "content_id": "32113",
+      "name_ko": "악성 중피종",
+      "name_en": "Malignant mesothelioma",
+      "display_name": "악성 중피종(Malignant mesothelioma)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32113",
+      "departments": [
+        "종양내과",
+        "방사선종양학과"
+      ]
+    },
+    {
+      "disease_id": "amc:32493",
+      "content_id": "32493",
+      "name_ko": "폐 농양",
+      "name_en": "Abscess of lung",
+      "display_name": "폐 농양(Abscess of lung)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32493",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31847",
+      "content_id": "31847",
+      "name_ko": "폐결핵",
+      "name_en": "Pulmonary tuberculosis",
+      "display_name": "폐결핵(Pulmonary tuberculosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31847",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30468",
+      "content_id": "30468",
+      "name_ko": "폐암",
+      "name_en": "Lung cancer",
+      "display_name": "폐암(Lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30468",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    }
+  ],
+  "코막힘": [
+    {
+      "disease_id": "amc:31522",
+      "content_id": "31522",
+      "name_ko": "만성 기침",
+      "name_en": "Chronic cough",
+      "display_name": "만성 기침(Chronic cough)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31522",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31816",
+      "content_id": "31816",
+      "name_ko": "상기도 감염",
+      "name_en": "Upper respiratory infections",
+      "display_name": "상기도 감염(Upper respiratory infections)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31816",
+      "departments": [
+        "알레르기내과"
+      ]
+    }
+  ],
+  "콧물": [
+    {
+      "disease_id": "amc:31597",
+      "content_id": "31597",
+      "name_ko": "디프테리아",
+      "name_en": "Diphtheritia",
+      "display_name": "디프테리아(Diphtheritia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31597",
+      "departments": [
+        "감염내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31666",
+      "content_id": "31666",
+      "name_ko": "백일해",
+      "name_en": "Pertussis",
+      "display_name": "백일해(Pertussis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31666",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31816",
+      "content_id": "31816",
+      "name_ko": "상기도 감염",
+      "name_en": "Upper respiratory infections",
+      "display_name": "상기도 감염(Upper respiratory infections)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31816",
+      "departments": [
+        "알레르기내과"
+      ]
+    }
+  ],
+  "탈장": [
+    {
+      "disease_id": "amc:31997",
+      "content_id": "31997",
+      "name_ko": "횡격막 탈장",
+      "name_en": "Diaphragmatic hernia",
+      "display_name": "횡격막 탈장(Diaphragmatic hernia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31997",
+      "departments": [
+        "소아외과",
+        "소아전문응급센터"
+      ]
+    }
+  ],
+  "폐기능저하": [
+    {
+      "disease_id": "amc:32510",
+      "content_id": "32510",
+      "name_ko": "흉막 삼출",
+      "name_en": "Pleural effusion",
+      "display_name": "흉막 삼출(Pleural effusion)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32510",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "폐동맥 고혈압": [
+    {
+      "disease_id": "amc:32152",
+      "content_id": "32152",
+      "name_ko": "가습기 살균제 연관 폐질환",
+      "name_en": "Humidifier disinfectant-associated lung injury",
+      "display_name": "가습기 살균제 연관 폐질환(Humidifier disinfectant-associated lung injury)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32152",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "폐부종": [
+    {
+      "disease_id": "amc:32257",
+      "content_id": "32257",
+      "name_ko": "폐부종",
+      "name_en": "Pulmonary edema",
+      "display_name": "폐부종(Pulmonary edema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32257",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "피로감": [
+    {
+      "disease_id": "amc:31528",
+      "content_id": "31528",
+      "name_ko": "만성 폐쇄성 폐질환",
+      "name_en": "Chronic obstructive pulmonary disease",
+      "display_name": "만성 폐쇄성 폐질환(Chronic obstructive pulmonary disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31528",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31816",
+      "content_id": "31816",
+      "name_ko": "상기도 감염",
+      "name_en": "Upper respiratory infections",
+      "display_name": "상기도 감염(Upper respiratory infections)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31816",
+      "departments": [
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32113",
+      "content_id": "32113",
+      "name_ko": "악성 중피종",
+      "name_en": "Malignant mesothelioma",
+      "display_name": "악성 중피종(Malignant mesothelioma)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32113",
+      "departments": [
+        "종양내과",
+        "방사선종양학과"
+      ]
+    },
+    {
+      "disease_id": "amc:33922",
+      "content_id": "33922",
+      "name_ko": "코로나-19",
+      "name_en": "COVID-19",
+      "display_name": "코로나-19(COVID-19)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33922",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31631",
+      "content_id": "31631",
+      "name_ko": "폐렴",
+      "name_en": "Pneumonia",
+      "display_name": "폐렴(Pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31631",
+      "departments": [
+        "노년내과",
+        "호흡기내과"
+      ]
+    }
+  ],
+  "피부홍조": [
+    {
+      "disease_id": "amc:32311",
+      "content_id": "32311",
+      "name_ko": "호흡성 산증",
+      "name_en": "Respiratory Acidosis",
+      "display_name": "호흡성 산증(Respiratory Acidosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32311",
+      "departments": [
+        "호흡기내과",
+        "응급의학과"
+      ]
+    }
+  ],
+  "하지부종": [
+    {
+      "disease_id": "amc:31849",
+      "content_id": "31849",
+      "name_ko": "폐기종",
+      "name_en": "Emphysema",
+      "display_name": "폐기종(Emphysema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31849",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "함몰가슴": [
+    {
+      "disease_id": "amc:32031",
+      "content_id": "32031",
+      "name_ko": "신생아 호흡곤란증후군",
+      "name_en": "Neonatal respiratory distress syndrome",
+      "display_name": "신생아 호흡곤란증후군(Neonatal respiratory distress syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32031",
+      "departments": [
+        "신생아과",
+        "어린이병원",
+        "소아재활의학과"
+      ]
+    }
+  ],
+  "호기의 증가": [
+    {
+      "disease_id": "amc:31989",
+      "content_id": "31989",
+      "name_ko": "기관지폐 형성이상",
+      "name_en": "Bronchopulmonary dysplasia",
+      "display_name": "기관지폐 형성이상(Bronchopulmonary dysplasia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31989",
+      "departments": [
+        "신생아과"
+      ]
+    }
+  ],
+  "호흡곤란": [
+    {
+      "disease_id": "amc:32152",
+      "content_id": "32152",
+      "name_ko": "가습기 살균제 연관 폐질환",
+      "name_en": "Humidifier disinfectant-associated lung injury",
+      "display_name": "가습기 살균제 연관 폐질환(Humidifier disinfectant-associated lung injury)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32152",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30455",
+      "content_id": "30455",
+      "name_ko": "공기가슴증(기흉)",
+      "name_en": "Pneumothorax",
+      "display_name": "공기가슴증(기흉)(Pneumothorax)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30455",
+      "departments": [
+        "호흡기내과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:31694",
+      "content_id": "31694",
+      "name_ko": "과호흡 증후군",
+      "name_en": "Hyperventilation syndrome",
+      "display_name": "과호흡 증후군(Hyperventilation syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31694",
+      "departments": [
+        "호흡기내과",
+        "응급의학과",
+        "정신건강의학과"
+      ]
+    },
+    {
+      "disease_id": "amc:31810",
+      "content_id": "31810",
+      "name_ko": "급성 기관지염",
+      "name_en": "Acute bronchitis",
+      "display_name": "급성 기관지염(Acute bronchitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31810",
+      "departments": [
+        "호흡기내과",
+        "이비인후과",
+        "소아중환자과"
+      ]
+    },
+    {
+      "disease_id": "amc:32513",
+      "content_id": "32513",
+      "name_ko": "기관 협착",
+      "name_en": "Stenosis of trachea",
+      "display_name": "기관 협착(Stenosis of trachea)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32513",
+      "departments": [
+        "호흡기내과",
+        "이비인후과"
+      ]
+    },
+    {
+      "disease_id": "amc:33702",
+      "content_id": "33702",
+      "name_ko": "꽃가루 알레르기",
+      "name_en": "Pollen allergy",
+      "display_name": "꽃가루 알레르기(Pollen allergy)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33702",
+      "departments": [
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33562",
+      "content_id": "33562",
+      "name_ko": "낭종성 폐질환",
+      "name_en": "Cystic Lung Disease",
+      "display_name": "낭종성 폐질환(Cystic Lung Disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33562",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32195",
+      "content_id": "32195",
+      "name_ko": "농흉",
+      "name_en": "Pyothorax, Empyema",
+      "display_name": "농흉(Pyothorax, Empyema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32195",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32183",
+      "content_id": "32183",
+      "name_ko": "늑막염",
+      "name_en": "Pleurisy",
+      "display_name": "늑막염(Pleurisy)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32183",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31528",
+      "content_id": "31528",
+      "name_ko": "만성 폐쇄성 폐질환",
+      "name_en": "Chronic obstructive pulmonary disease",
+      "display_name": "만성 폐쇄성 폐질환(Chronic obstructive pulmonary disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31528",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31848",
+      "content_id": "31848",
+      "name_ko": "미만성 간질성 폐질환",
+      "name_en": "Diffuse Interstitial lung disease",
+      "display_name": "미만성 간질성 폐질환(Diffuse Interstitial lung disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31848",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30469",
+      "content_id": "30469",
+      "name_ko": "비소세포성 폐암",
+      "name_en": "Non-small cell lung cancer",
+      "display_name": "비소세포성 폐암(Non-small cell lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30469",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:32560",
+      "content_id": "32560",
+      "name_ko": "상대정맥 증후군",
+      "name_en": "Superior vena cava Syndrome",
+      "display_name": "상대정맥 증후군(Superior vena cava Syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32560",
+      "departments": [
+        "종양내과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:32511",
+      "content_id": "32511",
+      "name_ko": "성인 호흡곤란 증후군",
+      "name_en": "Adult respiratory distress syndrome",
+      "display_name": "성인 호흡곤란 증후군(Adult respiratory distress syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32511",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32031",
+      "content_id": "32031",
+      "name_ko": "신생아 호흡곤란증후군",
+      "name_en": "Neonatal respiratory distress syndrome",
+      "display_name": "신생아 호흡곤란증후군(Neonatal respiratory distress syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32031",
+      "departments": [
+        "신생아과",
+        "어린이병원",
+        "소아재활의학과"
+      ]
+    },
+    {
+      "disease_id": "amc:32496",
+      "content_id": "32496",
+      "name_ko": "아스페르길루스증",
+      "name_en": "Aspergillosis",
+      "display_name": "아스페르길루스증(Aspergillosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32496",
+      "departments": [
+        "감염내과",
+        "호흡기내과",
+        "심장혈관흉부외과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32113",
+      "content_id": "32113",
+      "name_ko": "악성 중피종",
+      "name_en": "Malignant mesothelioma",
+      "display_name": "악성 중피종(Malignant mesothelioma)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32113",
+      "departments": [
+        "종양내과",
+        "방사선종양학과"
+      ]
+    },
+    {
+      "disease_id": "amc:32014",
+      "content_id": "32014",
+      "name_ko": "악성 흉막 삼출",
+      "name_en": "Malignant pleural effusion",
+      "display_name": "악성 흉막 삼출(Malignant pleural effusion)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32014",
+      "departments": [
+        "종양내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30456",
+      "content_id": "30456",
+      "name_ko": "양성 종격동 종양",
+      "name_en": "Benign mediastinal tumor",
+      "display_name": "양성 종격동 종양(Benign mediastinal tumor)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30456",
+      "departments": [
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:32320",
+      "content_id": "32320",
+      "name_ko": "이물질에 의한 기도 막힘",
+      "name_en": "Airway obstruction",
+      "display_name": "이물질에 의한 기도 막힘(Airway obstruction)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32320",
+      "departments": [
+        "응급의학과"
+      ]
+    },
+    {
+      "disease_id": "amc:32514",
+      "content_id": "32514",
+      "name_ko": "종격동염",
+      "name_en": "Mediastinitis",
+      "display_name": "종격동염(Mediastinitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32514",
+      "departments": [
+        "호흡기내과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:33862",
+      "content_id": "33862",
+      "name_ko": "중동 호흡기 증후군(MERS)",
+      "name_en": "Middle East Respiratory Syndrome",
+      "display_name": "중동 호흡기 증후군(MERS)(Middle East Respiratory Syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33862",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32128",
+      "content_id": "32128",
+      "name_ko": "중증 급성 호흡기 증후군",
+      "name_en": "Severe Acute Respiratory Syndrom",
+      "display_name": "중증 급성 호흡기 증후군(Severe Acute Respiratory Syndrom)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32128",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31742",
+      "content_id": "31742",
+      "name_ko": "지역사회성 폐렴",
+      "name_en": "Community acquired pneumonia",
+      "display_name": "지역사회성 폐렴(Community acquired pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31742",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31811",
+      "content_id": "31811",
+      "name_ko": "천식",
+      "name_en": "Asthma",
+      "display_name": "천식(Asthma)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31811",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33922",
+      "content_id": "33922",
+      "name_ko": "코로나-19",
+      "name_en": "COVID-19",
+      "display_name": "코로나-19(COVID-19)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33922",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:33605",
+      "content_id": "33605",
+      "name_ko": "태변 흡인 증후군",
+      "name_en": "Meconium aspiration syndrome",
+      "display_name": "태변 흡인 증후군(Meconium aspiration syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33605",
+      "departments": [
+        "신생아과"
+      ]
+    },
+    {
+      "disease_id": "amc:32186",
+      "content_id": "32186",
+      "name_ko": "특발성 폐섬유화증",
+      "name_en": "Idiopathic pulmonary fibrosis",
+      "display_name": "특발성 폐섬유화증(Idiopathic pulmonary fibrosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32186",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32493",
+      "content_id": "32493",
+      "name_ko": "폐 농양",
+      "name_en": "Abscess of lung",
+      "display_name": "폐 농양(Abscess of lung)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32493",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31849",
+      "content_id": "31849",
+      "name_ko": "폐기종",
+      "name_en": "Emphysema",
+      "display_name": "폐기종(Emphysema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31849",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31631",
+      "content_id": "31631",
+      "name_ko": "폐렴",
+      "name_en": "Pneumonia",
+      "display_name": "폐렴(Pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31631",
+      "departments": [
+        "노년내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32495",
+      "content_id": "32495",
+      "name_ko": "폐렴간균에 의한 폐렴",
+      "name_en": "Klebsiella pneumoniae infection",
+      "display_name": "폐렴간균에 의한 폐렴 (Klebsiella pneumoniae infection)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32495",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30468",
+      "content_id": "30468",
+      "name_ko": "폐암",
+      "name_en": "Lung cancer",
+      "display_name": "폐암(Lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30468",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    },
+    {
+      "disease_id": "amc:32311",
+      "content_id": "32311",
+      "name_ko": "호흡성 산증",
+      "name_en": "Respiratory Acidosis",
+      "display_name": "호흡성 산증(Respiratory Acidosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32311",
+      "departments": [
+        "호흡기내과",
+        "응급의학과"
+      ]
+    },
+    {
+      "disease_id": "amc:31997",
+      "content_id": "31997",
+      "name_ko": "횡격막 탈장",
+      "name_en": "Diaphragmatic hernia",
+      "display_name": "횡격막 탈장(Diaphragmatic hernia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31997",
+      "departments": [
+        "소아외과",
+        "소아전문응급센터"
+      ]
+    },
+    {
+      "disease_id": "amc:33899",
+      "content_id": "33899",
+      "name_ko": "후두개염",
+      "name_en": "Epiglottitis",
+      "display_name": "후두개염(Epiglottitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33899",
+      "departments": [
+        "감염내과",
+        "호흡기내과",
+        "이비인후과"
+      ]
+    },
+    {
+      "disease_id": "amc:32510",
+      "content_id": "32510",
+      "name_ko": "흉막 삼출",
+      "name_en": "Pleural effusion",
+      "display_name": "흉막 삼출(Pleural effusion)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32510",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32278",
+      "content_id": "32278",
+      "name_ko": "흉선암",
+      "name_en": "Thymus Cancer",
+      "display_name": "흉선암(Thymus Cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32278",
+      "departments": [
+        "종양내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    },
+    {
+      "disease_id": "amc:32757",
+      "content_id": "32757",
+      "name_ko": "히스토플라즈마증",
+      "name_en": "Histoplasmosis",
+      "display_name": "히스토플라즈마증(Histoplasmosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32757",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    }
+  ],
+  "호흡기감염": [
+    {
+      "disease_id": "amc:33562",
+      "content_id": "33562",
+      "name_ko": "낭종성 폐질환",
+      "name_en": "Cystic Lung Disease",
+      "display_name": "낭종성 폐질환(Cystic Lung Disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=33562",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "화농성 객담": [
+    {
+      "disease_id": "amc:32195",
+      "content_id": "32195",
+      "name_ko": "농흉",
+      "name_en": "Pyothorax, Empyema",
+      "display_name": "농흉(Pyothorax, Empyema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32195",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32493",
+      "content_id": "32493",
+      "name_ko": "폐 농양",
+      "name_en": "Abscess of lung",
+      "display_name": "폐 농양(Abscess of lung)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32493",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "흉곽 팽윤": [
+    {
+      "disease_id": "amc:31989",
+      "content_id": "31989",
+      "name_ko": "기관지폐 형성이상",
+      "name_en": "Bronchopulmonary dysplasia",
+      "display_name": "기관지폐 형성이상(Bronchopulmonary dysplasia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31989",
+      "departments": [
+        "신생아과"
+      ]
+    },
+    {
+      "disease_id": "amc:31528",
+      "content_id": "31528",
+      "name_ko": "만성 폐쇄성 폐질환",
+      "name_en": "Chronic obstructive pulmonary disease",
+      "display_name": "만성 폐쇄성 폐질환(Chronic obstructive pulmonary disease)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31528",
+      "departments": [
+        "호흡기내과",
+        "알레르기내과"
+      ]
+    }
+  ],
+  "흉부압박감": [
+    {
+      "disease_id": "amc:31694",
+      "content_id": "31694",
+      "name_ko": "과호흡 증후군",
+      "name_en": "Hyperventilation syndrome",
+      "display_name": "과호흡 증후군(Hyperventilation syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31694",
+      "departments": [
+        "호흡기내과",
+        "응급의학과",
+        "정신건강의학과"
+      ]
+    },
+    {
+      "disease_id": "amc:32195",
+      "content_id": "32195",
+      "name_ko": "농흉",
+      "name_en": "Pyothorax, Empyema",
+      "display_name": "농흉(Pyothorax, Empyema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32195",
+      "departments": [
+        "호흡기내과"
+      ]
+    }
+  ],
+  "흉수": [
+    {
+      "disease_id": "amc:31631",
+      "content_id": "31631",
+      "name_ko": "폐렴",
+      "name_en": "Pneumonia",
+      "display_name": "폐렴(Pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31631",
+      "departments": [
+        "노년내과",
+        "호흡기내과"
+      ]
+    }
+  ],
+  "흉통": [
+    {
+      "disease_id": "amc:30455",
+      "content_id": "30455",
+      "name_ko": "공기가슴증(기흉)",
+      "name_en": "Pneumothorax",
+      "display_name": "공기가슴증(기흉)(Pneumothorax)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30455",
+      "departments": [
+        "호흡기내과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:32195",
+      "content_id": "32195",
+      "name_ko": "농흉",
+      "name_en": "Pyothorax, Empyema",
+      "display_name": "농흉(Pyothorax, Empyema)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32195",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32183",
+      "content_id": "32183",
+      "name_ko": "늑막염",
+      "name_en": "Pleurisy",
+      "display_name": "늑막염(Pleurisy)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32183",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31743",
+      "content_id": "31743",
+      "name_ko": "병원 감염성 폐렴",
+      "name_en": "Hospital acquired pneumonia (HAP)",
+      "display_name": "병원 감염성 폐렴(Hospital acquired pneumonia (HAP))",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31743",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30469",
+      "content_id": "30469",
+      "name_ko": "비소세포성 폐암",
+      "name_en": "Non-small cell lung cancer",
+      "display_name": "비소세포성 폐암(Non-small cell lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30469",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:32560",
+      "content_id": "32560",
+      "name_ko": "상대정맥 증후군",
+      "name_en": "Superior vena cava Syndrome",
+      "display_name": "상대정맥 증후군(Superior vena cava Syndrome)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32560",
+      "departments": [
+        "종양내과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:30457",
+      "content_id": "30457",
+      "name_ko": "악성 종격동 종양",
+      "name_en": "Malignant mediastinal tumor",
+      "display_name": "악성 종격동 종양(Malignant mediastinal tumor)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30457",
+      "departments": [
+        "종양내과",
+        "방사선종양학과",
+        "소아청소년종양혈액과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    },
+    {
+      "disease_id": "amc:32113",
+      "content_id": "32113",
+      "name_ko": "악성 중피종",
+      "name_en": "Malignant mesothelioma",
+      "display_name": "악성 중피종(Malignant mesothelioma)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32113",
+      "departments": [
+        "종양내과",
+        "방사선종양학과"
+      ]
+    },
+    {
+      "disease_id": "amc:32014",
+      "content_id": "32014",
+      "name_ko": "악성 흉막 삼출",
+      "name_en": "Malignant pleural effusion",
+      "display_name": "악성 흉막 삼출(Malignant pleural effusion)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32014",
+      "departments": [
+        "종양내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30456",
+      "content_id": "30456",
+      "name_ko": "양성 종격동 종양",
+      "name_en": "Benign mediastinal tumor",
+      "display_name": "양성 종격동 종양(Benign mediastinal tumor)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30456",
+      "departments": [
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:32514",
+      "content_id": "32514",
+      "name_ko": "종격동염",
+      "name_en": "Mediastinitis",
+      "display_name": "종격동염(Mediastinitis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32514",
+      "departments": [
+        "호흡기내과",
+        "심장혈관흉부외과"
+      ]
+    },
+    {
+      "disease_id": "amc:31742",
+      "content_id": "31742",
+      "name_ko": "지역사회성 폐렴",
+      "name_en": "Community acquired pneumonia",
+      "display_name": "지역사회성 폐렴(Community acquired pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31742",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:31631",
+      "content_id": "31631",
+      "name_ko": "폐렴",
+      "name_en": "Pneumonia",
+      "display_name": "폐렴(Pneumonia)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=31631",
+      "departments": [
+        "노년내과",
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32495",
+      "content_id": "32495",
+      "name_ko": "폐렴간균에 의한 폐렴",
+      "name_en": "Klebsiella pneumoniae infection",
+      "display_name": "폐렴간균에 의한 폐렴 (Klebsiella pneumoniae infection)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32495",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:30468",
+      "content_id": "30468",
+      "name_ko": "폐암",
+      "name_en": "Lung cancer",
+      "display_name": "폐암(Lung cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=30468",
+      "departments": [
+        "종양내과",
+        "호흡기내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    },
+    {
+      "disease_id": "amc:32510",
+      "content_id": "32510",
+      "name_ko": "흉막 삼출",
+      "name_en": "Pleural effusion",
+      "display_name": "흉막 삼출(Pleural effusion)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32510",
+      "departments": [
+        "호흡기내과"
+      ]
+    },
+    {
+      "disease_id": "amc:32278",
+      "content_id": "32278",
+      "name_ko": "흉선암",
+      "name_en": "Thymus Cancer",
+      "display_name": "흉선암(Thymus Cancer)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32278",
+      "departments": [
+        "종양내과",
+        "방사선종양학과",
+        "심장혈관흉부외과",
+        "암병원"
+      ]
+    },
+    {
+      "disease_id": "amc:32757",
+      "content_id": "32757",
+      "name_ko": "히스토플라즈마증",
+      "name_en": "Histoplasmosis",
+      "display_name": "히스토플라즈마증(Histoplasmosis)",
+      "source_url": "https://www.amc.seoul.kr/asan/healthinfo/disease/diseaseDetail.do?contentId=32757",
+      "departments": [
+        "감염내과",
+        "호흡기내과"
+      ]
+    }
+  ]
+}

@@ -8,33 +8,6 @@ import './PatientGuideScreen.css'
 // 의사 답변을 LLM이 어르신 친화적 문장으로 변환한 결과를 큰 글씨로 표시.
 // TTS 음성 안내, 보호자 공유(SMS), 종이 출력 옵션 제공.
 
-const MOCK_GUIDE = {
-  patient_name_masked: '김*자',
-  patient_guide: {
-    generated_at: new Date().toISOString(),
-    items: [
-      {
-        question: '혈압약이랑 감기약 같이 먹어도 되는지',
-        answer_simple: [
-          '혈압약은 평소처럼 계속 드세요.',
-          '일반 감기약은 5일까지 같이 드셔도 괜찮아요.',
-          '약 사실 때 약사님께 "혈압약 먹는데 같이 먹을 수 있는 거 주세요"라고 꼭 말씀하세요.'
-        ],
-        tts_emphasis_words: ['혈압약', '5일', '약사님']
-      },
-      {
-        question: '양파즙도 같이 먹어도 되는지',
-        answer_simple: [
-          '양파즙은 약이랑 같이 드셔도 됩니다.',
-          '다만 하루에 한 잔 정도만 드시는 게 좋아요.'
-        ],
-        tts_emphasis_words: ['하루 한 잔']
-      }
-    ]
-  },
-  doctor_additional_notes: '5일 후 다시 한 번 들러주세요. 호전 없으면 X-ray 검토.'
-}
-
 function normalizeGuideItems(guide) {
   const baseItems = guide?.patient_guide?.items || []
   const doctorNote = (guide?.doctor_additional_notes || '').trim()
@@ -62,14 +35,21 @@ function guideQuestionLabel(item) {
 
 export default function PatientGuideScreen() {
   const { sessionId } = useParams()
-  const [guide, setGuide] = useState(MOCK_GUIDE)
+  const [guide, setGuide] = useState(null)
+  const [loading, setLoading] = useState(Boolean(sessionId))
   const [playingIdx, setPlayingIdx] = useState(null)  // 현재 재생 중 인덱스
 
   useEffect(() => {
-    if (!sessionId) return
+    if (!sessionId) {
+      setGuide(null)
+      setLoading(false)
+      return
+    }
+    setLoading(true)
     getPatientGuide(sessionId).then(data => {
       if (data) setGuide(data)
-    })
+      else setGuide(null)
+    }).finally(() => setLoading(false))
   }, [sessionId])
 
   // 컴포넌트 언마운트 시 정지
@@ -120,7 +100,13 @@ export default function PatientGuideScreen() {
     window.print()
   }
 
-  const items = normalizeGuideItems(guide)
+  const items = guide ? normalizeGuideItems(guide) : []
+  const generatedAt = guide?.patient_guide?.generated_at || new Date().toISOString()
+  const emptyMessage = loading
+    ? '안내문을 불러오는 중입니다.'
+    : sessionId
+      ? '안내문이 아직 준비되지 않았습니다.\n의료진 답변 저장 후 다시 확인해 주세요.'
+      : '선택된 문진 세션이 없습니다.\n직원 접수에서 문진 세션을 생성한 뒤 안내문을 확인해 주세요.'
 
   return (
     <div className="guide-print-page">
@@ -128,14 +114,14 @@ export default function PatientGuideScreen() {
         <header className="pg-header pg-print-header">
           <div>
             <p className="pg-kicker">진료 후 안내문</p>
-            <h1>{guide.patient_name_masked || '환자'} 어르신 안내문</h1>
+            <h1>{guide?.patient_name_masked ? `${guide.patient_name_masked} 어르신 안내문` : '환자 안내문'}</h1>
             <p className="pg-sub">오늘 진료에서 안내받은 내용을 집에서도 다시 확인하실 수 있게 정리했습니다</p>
           </div>
           <div className="pg-print-meta">
             <img className="pg-logo-svg" src={logoUrl} alt="" aria-hidden="true" />
             <div className="pg-meta-text">
               <span>문진톡톡</span>
-              <small>{new Date(guide.patient_guide.generated_at).toLocaleDateString('ko-KR')}</small>
+              <small>{new Date(generatedAt).toLocaleDateString('ko-KR')}</small>
             </div>
           </div>
         </header>
@@ -143,8 +129,12 @@ export default function PatientGuideScreen() {
         <div className="pg-items">
           {items.length === 0 && (
             <div className="pg-empty">
-              안내문이 아직 준비되지 않았습니다.<br />
-              잠시만 기다려 주세요.
+              {emptyMessage.split('\n').map((line) => (
+                <span key={line}>
+                  {line}
+                  <br />
+                </span>
+              ))}
             </div>
           )}
 
@@ -174,14 +164,16 @@ export default function PatientGuideScreen() {
           ))}
         </div>
 
-        <div className="pg-action-bar no-print">
-          <button className="pg-action-btn pg-action-share" onClick={handleShareSMS}>
-            <span>💬</span> 가족에게 보내기
-          </button>
-          <button className="pg-action-btn pg-action-print" onClick={handlePrint}>
-            <span>📄</span> 종이로 출력
-          </button>
-        </div>
+        {items.length > 0 && (
+          <div className="pg-action-bar no-print">
+            <button className="pg-action-btn pg-action-share" onClick={handleShareSMS}>
+              <span>💬</span> 가족에게 보내기
+            </button>
+            <button className="pg-action-btn pg-action-print" onClick={handlePrint}>
+              <span>📄</span> 종이로 출력
+            </button>
+          </div>
+        )}
 
         <footer className="pg-footer">
           궁금한 점이 더 있으시면 접수처 직원에게 말씀해 주세요.
