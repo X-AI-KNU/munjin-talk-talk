@@ -18,6 +18,14 @@ from sessions import create_session, get_session, update_session
 from utils import normalize_visit_type, response
 
 
+def configured_custom_vocabulary():
+    """실제 등록된 사용자 어휘집 이름이 있을 때만 Transcribe에 전달합니다."""
+    value = str(CUSTOM_VOCABULARY or "").strip()
+    if value.lower() in ("", "unused", "none", "null", "-"):
+        return ""
+    return value
+
+
 def make_audio_key(session_id, question_id, content_type):
     """Legacy helper retained only for old imports; audio keys are not used."""
     ext = "webm"
@@ -64,8 +72,9 @@ def generate_streaming_transcribe_url(body):
         "sample-rate": str(sample_rate),
         "session-id": stream_session_id,
     }
-    if CUSTOM_VOCABULARY:
-        params["vocabulary-name"] = CUSTOM_VOCABULARY
+    vocabulary_name = configured_custom_vocabulary()
+    if vocabulary_name:
+        params["vocabulary-name"] = vocabulary_name
 
     url = (
         f"https://transcribestreaming.{REGION}.amazonaws.com:8443"
