@@ -1856,7 +1856,7 @@ def apply_bedrock_onepager_review(session, onepager, fallback_review_items=None)
         transfer = clean_quote(obj.get("transfer_text") or "")
         if transfer:
             reviewed["transfer_text"] = transfer
-        if isinstance(obj.get("doctor_brief"), dict):
+        if isinstance(obj.get("doctor_brief"), dict) and is_grounded_text(json.dumps(obj.get("doctor_brief"), ensure_ascii=False), onepager):
             reviewed["doctor_brief"] = obj.get("doctor_brief")
         reviewed["llm_review"] = {
             "model_id": REVIEWER_MODEL_ID,
@@ -1887,8 +1887,9 @@ def build_onepager_review_prompt(session, onepager, heuristic_candidates=None):
         "heuristic_candidates_do_not_copy_blindly": heuristic_candidates or [],
     }
     return f"""
-You are the physician-facing task orchestration LLM for a Korean outpatient intake one-paper.
-Your job is NOT to diagnose. Your job is to read the full structured intake data and create the tasks a doctor should handle during the visit.
+You are a senior Korean outpatient physician preparing the next-step checklist before seeing this patient.
+Your job is NOT to diagnose in place of the doctor and NOT to write treatment orders.
+Your job is to read the full intake record like a clinician, identify what must be clarified or answered in the visit, and create practical physician tasks.
 
 You will receive:
 - patient metadata
@@ -1900,25 +1901,37 @@ You will receive:
 - safety flags
 - heuristic_candidates_do_not_copy_blindly: rough code-generated candidates that may be incomplete or wrong
 
-Core rules:
-1. Generate review_items from the full evidence, not from fixed templates.
-2. Use heuristic candidates only as hints. Do not copy them blindly.
-3. Every review_item must be grounded in at least one of: symptom_slots, clinical_clues, agenda, safety_flags, or raw responses.
-4. Do not add generic tasks unless the transcript supports them.
-   - Do NOT mention fever/temperature unless fever, heat, high fever, chills, or antipyretic issue appears.
-   - Do NOT mention X-ray, TB, pneumonia, cancer, antibiotics, or tests unless safety flags or patient wording supports it.
-5. If Q4 contains patient questions, create a clinician task to answer each distinct question.
-6. If medication/supplement/adherence information appears, create a task only when it changes counseling or safety.
-7. Use the prefix "[우선]" only when safety_flags is non-empty or the raw patient wording clearly describes a red flag. Do not use "[우선]" for ordinary sore throat, nasal obstruction, or runny nose.
-8. Keep each review_item short, concrete, and action-oriented in Korean.
-9. Avoid vague tasks such as "원인 규명", "진단 필요", or "평가 필요" by themselves. Specify what to check, ask, counsel, or answer.
-10. Preserve uncertainty. Use "확인" or "평가" rather than asserting unsupported facts.
-11. Return JSON only. No markdown, no prose outside JSON.
+Clinical tasking method:
+Before writing JSON, silently run this checklist. Do not output the checklist or your reasoning.
+A. What is the patient's main complaint and what details are still missing for a doctor to act?
+B. What time course, progression, severity, trigger, or relieving factor needs clarification?
+C. Are there medication, supplement, adherence, allergy, pregnancy, chronic disease, or interaction issues that change counseling?
+D. What exact patient questions from Q4 must be answered by the doctor?
+E. Are there red flags or safety issues that require priority handling?
+F. Which tasks are actually supported by the transcript? Remove unsupported generic tasks.
+
+Review item rules:
+1. Generate review_items as the doctor's next actions, not as labels or summaries.
+2. Each review_item must be grounded in at least one of: raw Q1-Q4 text, symptom_slots, clinical_clues, agenda, safety_flags, or matched_slots.ir_trace.
+3. Use heuristic candidates only as weak hints. If they are not supported, ignore them.
+4. Prefer concrete verbs: "확인", "질문", "안내", "상담", "검토", "평가". Avoid passive summaries.
+5. Avoid vague items such as "원인 규명", "진단 필요", "상태 평가" by themselves. Specify what to check or answer.
+6. Do NOT add fever/temperature tasks unless fever, heat, chill, high fever, antipyretic use, or body temperature appears in evidence.
+7. Do NOT add X-ray, TB, pneumonia, cancer, antibiotics, or lab/test tasks unless safety_flags, patient wording, or clinician agenda explicitly supports them.
+8. If Q4 contains patient questions, create one task per distinct question so the doctor can answer it.
+   - The task must preserve the same medication/food/test names as the agenda.
+   - Never introduce new drug classes, sprays, tests, or disease names that are absent from the evidence.
+9. If medication/supplement/adherence appears, create a task only when it affects patient counseling, safety, interactions, or adherence.
+10. Use "[우선]" only when safety_flags is non-empty or the raw patient wording clearly describes a red flag. Ordinary sore throat, nasal obstruction, cough, or runny nose must not be marked urgent.
+11. Keep review_items short, Korean, and directly actionable. Good style: "콧물/코막힘 지속 정도와 알레르기 병력 확인".
+12. Preserve uncertainty. Do not assert unsupported diagnoses or treatment decisions.
+13. Return JSON only. No markdown, no prose outside JSON.
 
 Output quality target:
-- 2 to 6 review_items for ordinary cases.
-- 1 to 3 doctor_brief sections.
-- transfer_text should be one concise Korean EMR-style sentence or two short sentences.
+- Ordinary low-risk cases: 2 to 5 review_items.
+- Safety or complex cases: up to 8 review_items, urgent items first.
+- doctor_brief: 1 to 3 sections that summarize why those tasks matter.
+- transfer_text: one concise Korean EMR-style sentence or two short sentences, grounded only in intake data.
 
 Return schema:
 {{
@@ -1947,8 +1960,48 @@ def sanitize_review_items(items, onepager):
             continue
         if not has_safety:
             text = re.sub(r"^\[우선\]\s*", "", text)
+        if not is_grounded_text(text, onepager):
+            continue
         sanitized.append(text)
     return sanitized
+
+
+UNSUPPORTED_TERM_PATTERNS = [
+    r"항히스타민",
+    r"비강\s*스프레이",
+    r"스테로이드",
+    r"항생제",
+    r"항바이러스",
+    r"X-ray|x-ray|엑스레이|흉부\s*방사선",
+    r"\bCT\b|씨티",
+    r"혈액\s*검사",
+    r"결핵",
+    r"폐렴",
+    r"폐암|암",
+]
+
+
+def evidence_text(onepager):
+    parts = []
+    for slot in onepager.get("symptom_slots", []) or []:
+        parts.extend([slot.get("name", ""), slot.get("source_quote", ""), slot.get("normalized_text", "")])
+    for clue_item in onepager.get("clinical_clues", []) or []:
+        parts.extend([clue_item.get("summary", ""), clue_item.get("source_quote", ""), clue_item.get("label", "")])
+    for item in onepager.get("agenda", []) or []:
+        parts.extend([item.get("summary", ""), item.get("original_quote", ""), item.get("type_label", "")])
+    for flag in onepager.get("safety_flags", []) or []:
+        parts.extend([flag.get("message", ""), flag.get("matched_pattern", ""), flag.get("label", "")])
+    return normalize_text(" ".join(parts))
+
+
+def is_grounded_text(text, onepager):
+    evidence = evidence_text(onepager)
+    if not evidence:
+        return True
+    for pattern in UNSUPPORTED_TERM_PATTERNS:
+        if re.search(pattern, text, flags=re.I) and not re.search(pattern, evidence, flags=re.I):
+            return False
+    return True
 
 
 def unique(values):
