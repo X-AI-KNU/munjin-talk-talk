@@ -50,6 +50,11 @@ Critical rules:
 - For medication, medication_denial, adherence_gap, and context spans, slot_ref MUST be "other".
 - Only symptom/new/progress spans may use symptom slot_ref values such as cough or fever.
 - For Q4 patient_questions/unresolved_questions, a denial such as "없어요", "따로 없어요", "별로 없어요", or "궁금한 건 없어요" is NOT a patient question. Return questions: [].
+- For symptom questions (chief_complaint, progress, new_symptoms), spans MUST contain at least one grounded meaning unit unless the patient clearly denies symptoms.
+- clinical_clues are optional helper context. Include them only when category, label, and source_quote are all valid.
+- clinical_clues.category MUST be exactly one of: 증상맥락, 복약정보, 복약순응도, 재진경과.
+- clinical_clues.label MUST be exactly one of: 시작시점, 기간, 현재양상, 악화요인, 완화요인, 복용중, 처방약 없음, 건강보조제, 누락, 악화, 호전, 새 증상.
+- clinical_clues.source_quote MUST NOT be empty. If no exact quote exists, omit that clinical_clue.
 - The backend validates your output with a strict Pydantic schema. Missing required fields, invalid enum values, or extra fields will fail.
 
 Visit type: {visit}
@@ -294,9 +299,17 @@ Repair instructions:
 - Re-read the patient answer exactly as written.
 - Every source_quote/original_quote must be copied as an exact continuous substring.
 - Remove any item whose quote cannot be copied from the answer.
+- If a clinical_clue has an invalid category/label or empty source_quote, either repair it to the exact allowed literal or remove that clinical_clue.
+- For symptom questions, do not return spans: [] unless the answer clearly means no symptoms.
 - Keep the same fixed JSON schema.
 - Do not add facts, symptoms, medications, tests, or diagnoses that are absent.
 - Do not output score, confidence, probability, certainty, or percentage fields.
+
+Allowed clinical_clues.category literals:
+증상맥락, 복약정보, 복약순응도, 재진경과
+
+Allowed clinical_clues.label literals:
+시작시점, 기간, 현재양상, 악화요인, 완화요인, 복용중, 처방약 없음, 건강보조제, 누락, 악화, 호전, 새 증상
 
 Patient answer for exact quote checking:
 {transcript}

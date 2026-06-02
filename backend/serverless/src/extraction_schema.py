@@ -12,8 +12,14 @@ from schemas.extraction import SymptomSlotRef, validate_extraction_payload
 
 
 SYMPTOM_SLOT_REFS = set(SymptomSlotRef.__args__)
+SYMPTOM_QUESTION_TYPES = {"chief_complaint", "progress", "new_symptoms"}
 NON_SYMPTOM_SPAN_TYPES = {"medication", "medication_denial", "adherence_gap", "context"}
 PATIENT_QUESTION_TYPES = {"patient_questions", "unresolved_questions"}
+NEGATIVE_SYMPTOM_PATTERNS = [
+    r"^(없어요|없습니다|없다|아니요|괜찮아요|괜찮습니다)[.!?\s]*$",
+    r"(아픈|불편|증상).{0,12}(없|아니|괜찮)",
+    r"(없|아니|괜찮).{0,12}(아픈|불편|증상)",
+]
 NEGATIVE_PATIENT_QUESTION_PATTERNS = [
     r"^(없어요|없습니다|없다|아니요|괜찮아요|괜찮습니다)[.!?\s]*$",
     r"(따로|별로|딱히).{0,8}(없|아니)",
@@ -31,6 +37,8 @@ def normalize_extraction_output(obj, transcript, question_id, question_type=""):
     """
     prepared = prepare_extraction_payload(obj, question_id, question_type)
     normalized, errors = validate_extraction_payload(prepared, transcript)
+    if not errors:
+        errors.extend(validate_question_level_requirements(normalized, transcript, question_type))
     if errors:
         return {"spans": [], "structured": empty_structured(transcript)}, errors
     return normalized, []
@@ -118,6 +126,34 @@ def is_negative_patient_question_item(item):
         str(item.get("original_quote") or ""),
     ]).strip()
     return bool(text and any(re.search(pattern, text) for pattern in NEGATIVE_PATIENT_QUESTION_PATTERNS))
+
+
+def validate_question_level_requirements(normalized, transcript, question_type=""):
+    """문항 단위에서만 판단 가능한 최소 요구사항을 검사합니다.
+
+    Pydantic은 "형식이 맞는가"를 잘 보지만, Q1/Q2/Q3 재진처럼 증상 문항에서
+    spans를 빈 배열로 내놓는 의미 누락까지는 알 수 없습니다. 이 함수는 값을
+    새로 만들지 않고, 명백히 비어 있으면 retry loop가 LLM에게 다시 추출을
+    요청하도록 오류만 추가합니다.
+    """
+    if question_type not in SYMPTOM_QUESTION_TYPES:
+        return []
+    if is_negative_symptom_answer(transcript):
+        return []
+    if normalized.get("spans"):
+        return []
+    return [
+        {
+            "loc": ["spans"],
+            "msg": "Symptom question answers must include at least one grounded span unless the patient clearly denies symptoms.",
+        }
+    ]
+
+
+def is_negative_symptom_answer(transcript):
+    """'증상 없음'처럼 span이 없어도 되는 답변인지 최소 패턴으로 확인합니다."""
+    text = str(transcript or "").strip()
+    return bool(text and any(re.search(pattern, text) for pattern in NEGATIVE_SYMPTOM_PATTERNS))
 
 
 def empty_structured(transcript):
