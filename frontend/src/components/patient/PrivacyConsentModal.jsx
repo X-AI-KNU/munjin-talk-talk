@@ -16,8 +16,8 @@ export const SENSITIVE_NOTICE_ITEMS = [
 
 export const RETENTION_NOTICE = 'MVP 시연 및 검증 목적의 세션 데이터는 최대 3일 보관 후 삭제하는 정책을 적용합니다.'
 
-// 환자가 문진을 시작하기 전 개인정보와 건강정보 처리 범위를 확인하는 차단형 팝업입니다.
-// 법률 자문 문구가 아니라 MVP 심사/시연에서 필요한 최소 고지 항목을 명확히 보여주는 용도입니다.
+// 환자 태블릿 진입 전 보여주는 앱형 동의 팝업입니다.
+// 핵심 문구는 짧고 크게, 법정 고지에 가까운 상세 내용은 [전문보기] 안에 둡니다.
 export default function PrivacyConsentModal({
   patientName = '환자',
   isSaving = false,
@@ -27,71 +27,92 @@ export default function PrivacyConsentModal({
   onReject,
   onStaffHelp,
 }) {
+  const [detailOpen, setDetailOpen] = useState(false)
   const [privacyChecked, setPrivacyChecked] = useState(false)
   const [sensitiveChecked, setSensitiveChecked] = useState(false)
   const canAccept = privacyChecked && sensitiveChecked && !isSaving
 
   return (
-    <div className="privacy-consent-backdrop" role="dialog" aria-modal="true" aria-labelledby="privacy-consent-title">
-      <section className="privacy-consent-modal">
-        <div className="privacy-consent-kicker">문진 시작 전 확인</div>
-        <h2 id="privacy-consent-title">개인정보 수집·이용 및 건강정보 처리 동의</h2>
+    <div className="privacy-consent-backdrop" role="presentation">
+      <section className="privacy-consent-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-consent-title">
+        <div className="privacy-consent-icon" aria-hidden="true">
+          <span>동의</span>
+        </div>
+
+        <h2 id="privacy-consent-title">문진톡톡 이용 동의</h2>
         <p className="privacy-consent-lead">
-          {patientName}님의 음성 문진은 의료진 확인을 돕기 위한 참고자료로만 사용됩니다.
-          동의하지 않으셔도 직원에게 말씀하시면 수기 문진으로 도와드릴 수 있습니다.
+          {patientName}님의 음성 문진 내용을 의료진 확인용 원페이퍼와 진료 후 안내문 생성에 사용합니다.
+        </p>
+        <p className="privacy-consent-note">
+          음성 원본 파일은 저장하지 않고, 확인된 문진 텍스트만 임시로 기록합니다.
+          동의하지 않아도 직원이 수기 문진으로 도와드릴 수 있습니다.
         </p>
 
-        <div className="privacy-consent-section">
-          <h3>수집·이용 목적</h3>
-          <ul>
-            {PRIVACY_NOTICE_ITEMS.map((item) => <li key={item}>{item}</li>)}
-          </ul>
-        </div>
+        <button
+          type="button"
+          className="privacy-consent-detail-toggle"
+          onClick={() => setDetailOpen((next) => !next)}
+          aria-expanded={detailOpen}
+        >
+          {detailOpen ? '전문 접기' : '[전문보기]'}
+        </button>
 
-        <div className="privacy-consent-grid">
-          <div className="privacy-consent-section">
-            <h3>수집 항목</h3>
-            <p>
-              이름 또는 표시명, 생년월일/연령, 성별, 접수번호, 진료과, 문진 답변 텍스트,
-              실시간 전사 결과, 의료진 답변 및 안내문 내용
-            </p>
+        {detailOpen && (
+          <div className="privacy-consent-detail">
+            <section>
+              <h3>개인정보 수집·이용 목적</h3>
+              <ul>
+                {PRIVACY_NOTICE_ITEMS.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </section>
+            <section>
+              <h3>수집 항목</h3>
+              <p>
+                이름 또는 표시명, 생년월일/연령, 성별, 접수번호, 진료과, 문진 답변 텍스트,
+                실시간 전사 결과, 의료진 답변 및 안내문 내용
+              </p>
+            </section>
+            <section>
+              <h3>민감정보 처리 항목</h3>
+              <p>
+                문진 답변에는 증상, 복약, 병력 등 건강에 관한 정보가 포함될 수 있습니다.
+                해당 정보는 의료진 확인과 안내문 생성을 위해서만 처리합니다.
+              </p>
+              <ul>
+                {SENSITIVE_NOTICE_ITEMS.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </section>
+            <section>
+              <h3>보유 및 삭제</h3>
+              <p>{RETENTION_NOTICE}</p>
+              <p>동의를 거부할 권리가 있으며, 거부 시 음성 문진 대신 직원 수기 문진을 이용할 수 있습니다.</p>
+            </section>
           </div>
-          <div className="privacy-consent-section">
-            <h3>보유 및 삭제</h3>
-            <p>{RETENTION_NOTICE}</p>
-            <p>음성 원본 파일은 저장하지 않고, 문진에 필요한 텍스트만 세션에 기록합니다.</p>
-          </div>
-        </div>
+        )}
 
-        <div className="privacy-consent-section privacy-consent-warning">
-          <h3>민감정보 처리 항목</h3>
-          <p>
-            문진 답변에는 증상, 복약, 병력 등 건강에 관한 정보가 포함될 수 있습니다.
-            해당 정보는 의료진이 확인할 원페이퍼와 환자 안내문 생성을 위해서만 처리합니다.
-          </p>
+        <div className="privacy-consent-checks">
+          <label className="privacy-consent-check">
+            <input
+              type="checkbox"
+              checked={privacyChecked}
+              onChange={(event) => setPrivacyChecked(event.target.checked)}
+            />
+            <span>개인정보 수집·이용 안내를 확인했고 동의합니다.</span>
+          </label>
+          <label className="privacy-consent-check">
+            <input
+              type="checkbox"
+              checked={sensitiveChecked}
+              onChange={(event) => setSensitiveChecked(event.target.checked)}
+            />
+            <span>증상·복약·병력 등 건강정보 처리에 동의합니다.</span>
+          </label>
         </div>
-
-        <label className="privacy-consent-check">
-          <input
-            type="checkbox"
-            checked={privacyChecked}
-            onChange={(event) => setPrivacyChecked(event.target.checked)}
-          />
-          <span>개인정보 수집·이용 목적, 항목, 보유 기간, 동의 거부 권리를 확인했고 이에 동의합니다.</span>
-        </label>
-        <label className="privacy-consent-check">
-          <input
-            type="checkbox"
-            checked={sensitiveChecked}
-            onChange={(event) => setSensitiveChecked(event.target.checked)}
-          />
-          <span>증상·복약·병력 등 건강정보가 포함될 수 있음을 확인했고 민감정보 처리에 동의합니다.</span>
-        </label>
 
         {error && <p className="privacy-consent-error">{error}</p>}
         {rejected && (
           <p className="privacy-consent-rejected">
-            동의하지 않으신 경우 음성 문진은 진행하지 않습니다. 접수 직원에게 수기 문진을 요청해 주세요.
+            음성 문진은 시작하지 않습니다. 접수 직원에게 수기 문진을 요청해 주세요.
           </p>
         )}
 
@@ -100,10 +121,10 @@ export default function PrivacyConsentModal({
             동의하지 않음
           </button>
           <button type="button" className="privacy-consent-help" onClick={onStaffHelp} disabled={isSaving}>
-            직원 도움 요청
+            직원 도움
           </button>
           <button type="button" className="privacy-consent-primary" onClick={onAccept} disabled={!canAccept}>
-            {isSaving ? '저장 중...' : '동의하고 문진 시작'}
+            {isSaving ? '저장 중' : '동의'}
           </button>
         </div>
       </section>
