@@ -35,13 +35,9 @@ export default function PrivacyConsentModal({
   return (
     <div className="privacy-consent-backdrop" role="presentation">
       <section className="privacy-consent-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-consent-title">
-        <div className="privacy-consent-icon" aria-hidden="true">
-          <span>동의</span>
-        </div>
-
-        <h2 id="privacy-consent-title">문진톡톡 이용 동의</h2>
+        <h2 id="privacy-consent-title">서비스 이용 동의</h2>
         <p className="privacy-consent-lead">
-          {patientName}님의 음성 문진 내용을 의료진 확인용 원페이퍼와 진료 후 안내문 생성에 사용합니다.
+          {patientName}님의 음성 문진 내용을 서비스 이용에 사용합니다.
         </p>
         <p className="privacy-consent-note">
           음성 원본 파일은 저장하지 않고, 확인된 문진 텍스트만 임시로 기록합니다.
@@ -73,7 +69,7 @@ export default function PrivacyConsentModal({
               </p>
             </section>
             <section>
-              <h3>민감정보 처리 항목</h3>
+              <h3>건강 관련 문진 정보 처리</h3>
               <p>
                 문진 답변에는 증상, 복약, 병력 등 건강에 관한 정보가 포함될 수 있습니다.
                 해당 정보는 의료진 확인과 안내문 생성을 위해서만 처리합니다.
@@ -105,7 +101,7 @@ export default function PrivacyConsentModal({
               checked={sensitiveChecked}
               onChange={(event) => setSensitiveChecked(event.target.checked)}
             />
-            <span>증상·복약·병력 등 건강정보 처리에 동의합니다.</span>
+            <span>증상·복약·병력 등 건강 관련 문진 정보 처리에 동의합니다.</span>
           </label>
         </div>
 
