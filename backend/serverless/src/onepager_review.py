@@ -156,7 +156,7 @@ Review item rules:
    - Avoid low-value tasks such as "현재 복용 중인 약이 없는지 재확인" or "환자가 추가 질문이 없는지 확인" when the only evidence is a negative answer.
 9. If medication/supplement/adherence appears, create a task only when it affects patient counseling, safety, interactions, or adherence.
 10. Do NOT revive improved/resolved symptoms as current complaints.
-   - If clinical_clues says "호전", "없음", "내렸음", or "해소", treat it as follow-up context.
+   - If clinical_clues says "호전", "없음", "내렸음", "해소", or the source span was symptom_absent/progress_improved, treat it as follow-up context.
    - Create a task only when the remaining current symptom, safety flag, or patient question requires clarification.
 11. Use "[우선]" only when safety_flags is non-empty or the raw patient wording clearly describes a red flag. Ordinary sore throat, nasal obstruction, cough, or runny nose must not be marked urgent.
 12. Keep review_items short, Korean, and directly actionable. Good style: "콧물/코막힘 지속 정도와 알레르기 병력 확인".

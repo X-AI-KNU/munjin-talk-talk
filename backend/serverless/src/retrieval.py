@@ -7,6 +7,7 @@ hint를 조합해 표준 증상명으로 매칭합니다.
 
 from decimal import Decimal
 
+from clinical_state import is_non_active_symptom_state
 from clinical_terms import (
     IR_RED_FLAG_NAMES,
     SYMPTOM_RULES,
@@ -227,16 +228,12 @@ def match_slots(body):
 def should_skip_active_symptom_ir(span):
     """호전/부재로 검증된 span은 현재 불편함 카드용 IR에서 제외합니다.
 
-    LLM이 "열은 내렸다", "두통은 없어졌다"처럼 과거 또는 호전 맥락을
-    올바르게 `progress_improved`나 `status=없음`으로 태깅했다면, 해당 표현은
-    의사용 원페이퍼의 "오늘 말한 불편함"에 올라가면 안 됩니다. 대신
-    answers artifact와 clinical_clues에서 재진 경과 단서로 확인합니다.
+    LLM이 "열은 내렸다", "두통은 없어졌다", "지금 열은 없다"처럼
+    호전/부재 맥락을 `progress_improved`, `symptom_absent`, `status=없음`
+    조합으로 태깅했다면, 해당 표현은 "오늘 말한 불편함" 카드로 올리지 않습니다.
+    대신 answers artifact와 clinical_clues에서 재진 경과/현재 부재 단서로 확인합니다.
     """
-    span_type = str(span.get("type") or "")
-    status = str(span.get("status") or "")
-    if status == "없음":
-        return True
-    return span_type == "progress_improved"
+    return is_non_active_symptom_state(span)
 
 
 def slot_to_name(slot_id):

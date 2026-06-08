@@ -8,6 +8,11 @@ LangGraph의 `schema_quote_validation_node`가 쓰는 얇은 adapter입니다.
 import re
 from copy import deepcopy
 
+from clinical_state import (
+    ABSENT_STATUS,
+    ACTIVE_SYMPTOM_SPAN_TYPES,
+    NON_ACTIVE_SYMPTOM_SPAN_TYPES,
+)
 from schemas.extraction import SymptomSlotRef, validate_extraction_payload
 
 
@@ -39,6 +44,8 @@ def normalize_extraction_output(obj, transcript, question_id, question_type=""):
     normalized, errors = validate_extraction_payload(prepared, transcript)
     if not errors:
         errors.extend(validate_question_level_requirements(normalized, transcript, question_type))
+    if not errors:
+        errors.extend(validate_span_state_consistency(normalized))
     if errors:
         return {"spans": [], "structured": empty_structured(transcript)}, errors
     return normalized, []
@@ -148,6 +155,38 @@ def validate_question_level_requirements(normalized, transcript, question_type="
             "msg": "Symptom question answers must include at least one grounded span unless the patient clearly denies symptoms.",
         }
     ]
+
+
+def validate_span_state_consistency(normalized):
+    """증상 span의 type/status 조합이 임상적으로 일관적인지 검사합니다.
+
+    이 함수는 새 증상을 추출하지 않습니다. LLM이 이미 만든 span이
+    "현재 있음", "현재 없음", "호전", "악화/지속" 중 어디에 속하는지
+    스키마 규칙과 맞는지만 확인합니다. 틀린 조합은 저장하지 않고 retry loop가
+    다시 생성하도록 오류를 반환합니다.
+    """
+    errors = []
+    for idx, span in enumerate(normalized.get("spans") or []):
+        span_type = str(span.get("type") or "")
+        status = str(span.get("status") or "")
+        if span_type in NON_ACTIVE_SYMPTOM_SPAN_TYPES and status != ABSENT_STATUS:
+            errors.append({
+                "loc": ["spans", idx, "status"],
+                "msg": (
+                    "Non-active symptom states such as progress_improved or symptom_absent "
+                    "must use status '없음'. If the symptom is still present, add a separate "
+                    "active symptom span with status '있음'."
+                ),
+            })
+        if span_type in ACTIVE_SYMPTOM_SPAN_TYPES and status == ABSENT_STATUS:
+            errors.append({
+                "loc": ["spans", idx, "type"],
+                "msg": (
+                    "Active symptom span types cannot use status '없음'. Use symptom_absent "
+                    "for explicit absence, or progress_improved for resolved/improved previous symptoms."
+                ),
+            })
+    return errors
 
 
 def is_negative_symptom_answer(transcript):

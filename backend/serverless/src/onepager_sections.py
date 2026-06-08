@@ -5,6 +5,12 @@ S3에 저장된 문항 결과를 의사 화면에서 읽기 쉬운 카드 구조
 근거가 필요할 때는 별도 `llm_trace.redacted.json`의 최소 설명 trace를 봅니다.
 """
 
+from clinical_state import (
+    is_absent_symptom_state,
+    is_non_active_symptom_state,
+    is_progress_improved_state,
+    span_type_of,
+)
 from clinical_terms import find_symptom_quote, is_symptom_like_span, slot_to_name
 from utils import clean_quote, unique, visit_label
 
@@ -62,30 +68,32 @@ def span_progress_clues(spans, qid, visit_type):
     """호전/부재 span을 현재 증상 카드 대신 문진 맥락 단서로 보존합니다.
 
     이 함수는 새로운 증상을 rule-base로 추출하지 않습니다. 이미 LLM과 Pydantic
-    검증을 통과한 span 중 `progress_improved` 또는 `status=없음`으로 표시된
-    항목만 원페이퍼 단서로 재배치합니다.
+    검증을 통과한 span 중 `progress_improved`, `symptom_absent`처럼 현재 불편함이
+    아닌 상태로 표시된 항목만 원페이퍼 단서로 재배치합니다.
     """
     clues = []
     for span in spans:
         if not isinstance(span, dict):
             continue
-        span_type = str(span.get("type") or "")
-        status = str(span.get("status") or "")
+        span_type = span_type_of(span)
         slot_ref = span.get("slot_ref")
-        is_absent_symptom = status == "없음" and is_symptom_like_span(span_type, slot_ref)
-        if span_type != "progress_improved" and not is_absent_symptom:
+        if not is_non_active_symptom_state(span):
+            continue
+        if not is_symptom_like_span(span_type, slot_ref):
             continue
         source_quote = clean_quote(span.get("source_quote") or "")
         if not source_quote:
             continue
         name = clean_quote(span.get("name") or slot_to_name(span.get("slot_ref")) or "증상")
-        if span_type == "progress_improved":
+        if is_progress_improved_state(span):
             label = "호전"
-            summary = f"{name} 호전 또는 해소"
-        else:
+            summary = f"{name} 호전됨"
+        elif is_absent_symptom_state(span):
             label = "현재양상"
             summary = f"{name} 없음"
-        category = "재진경과" if visit_type == "followup" or span_type == "progress_improved" else "증상맥락"
+        else:
+            continue
+        category = "재진경과" if visit_type == "followup" or is_progress_improved_state(span) else "증상맥락"
         clues.append({
             "id": f"{qid}-{label}-{source_quote}",
             "category": category,

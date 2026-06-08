@@ -605,8 +605,24 @@ sessions/YYYY-MM-DD/{session_id}/llm_trace.redacted.json
 - `matched_slots`와 `unmatched_spans` 생성
 - 운영 artifact에는 숫자 점수와 전체 후보 목록을 저장하지 않고, 최소 설명 trace에 확정 근거 요약만 저장
 
-`progress_improved` 또는 `status="없음"`으로 검증된 span은 현재 불편함 카드용 IR에서 제외됩니다.
-예를 들어 “열은 내렸다”, “두통은 없어졌다”는 증상 카드가 아니라 `clinical_clues`의 재진경과/호전 단서로 남깁니다.
+### IR 진입 전 증상 상태 필터
+
+LLM이 추출한 모든 증상 후보가 IR로 들어가지는 않습니다. 먼저 공통 상태 정책
+`clinical_state.py`가 현재 불편함인지, 문진 맥락인지 구분합니다.
+
+| span 상태 | IR 진입 여부 | 이유 |
+| --- | --- | --- |
+| `symptom`, `new`, `progress_worsened`, `progress_unchanged` + `status="있음"` | 진입 | 현재 불편함 카드 후보 |
+| `symptom_absent` + `status="없음"` | 제외 | 현재 없다고 말한 증상 |
+| `progress_improved` + `status="없음"` | 제외 | 현재 불편함 카드로 올리지 않을 호전 맥락 |
+
+예를 들어 “열은 안 나요”, “두통은 없어졌어요”는 중요한 정보지만 현재 불편함
+카드가 아닙니다. 이 정보는 `clinical_clues`의 현재양상/부재 또는 재진경과/호전
+단서로 남기고, “아직 숨이 차요”, “기침이 계속 나요”처럼 현재 남은 증상만
+Hybrid IR로 표준 증상 매칭을 수행합니다.
+“기침은 줄었지만 아직 조금 나요”처럼 호전과 현재 지속이 함께 있는 경우에는
+호전 맥락은 `clinical_clues`로 남기고, 현재 남은 기침은 별도 active span으로
+IR에 진입해야 합니다.
 
 ---
 

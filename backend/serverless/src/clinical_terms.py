@@ -24,6 +24,7 @@ VALID_SYMPTOM_SLOT_IDS = {slot_id for _, slot_id, _, _ in SYMPTOM_RULES}
 SYMPTOM_SPAN_TYPES = {
     "symptom",
     "new",
+    "symptom_absent",
     "worsening",
     "progress_improved",
     "progress_worsened",

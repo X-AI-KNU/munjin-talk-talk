@@ -14,6 +14,7 @@ from utils import clean_quote
 SpanType = Literal[
     "symptom",
     "new",
+    "symptom_absent",
     "progress_improved",
     "progress_worsened",
     "progress_unchanged",
