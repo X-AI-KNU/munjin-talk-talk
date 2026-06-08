@@ -37,6 +37,18 @@
 
 ## 문서별 핵심 내용
 
+### 메인 README
+
+프로젝트를 처음 여는 사람이 전체 목적과 현재 구현 상태를 빠르게 파악하는 입구 문서입니다.
+
+포함 내용:
+
+- 서비스가 해결하려는 진료 전 문진 흐름
+- 프론트엔드, 백엔드, AWS 서비스 구성
+- LangChain/LangGraph, Pydantic validation, Hybrid IR의 역할
+- DynamoDB/S3 하이브리드 저장 원칙
+- 로컬 실행과 AWS 배포로 넘어가기 위한 기본 명령
+
 ### PROJECT_STRUCTURE.md
 
 저장소를 유지보수하는 개발자를 위한 파일 지도입니다.
@@ -56,6 +68,7 @@
 포함 내용:
 
 - `input_transcript`부터 `response_payload`까지 노드 흐름
+- LangGraph `StateGraph` 안에서 LangChain Runnable node가 실행되는 방식
 - LLM extraction, schema validation, Hybrid IR, onepaper refresh 연결
 - safety flag 분기
 - LangChain과 LangGraph 역할 차이
@@ -133,6 +146,8 @@ AWS 배포 담당자를 위한 절차 문서입니다.
 - 문진 원문, 원페이퍼, 안내문은 DynamoDB가 아니라 가명처리 S3 artifact로 저장한다는 원칙을 명시합니다.
 - LLM extraction fallback이 제거되어 실패가 조용히 대체되지 않음을 명시합니다.
 - 실제 계정 ID, 실제 API endpoint, 실제 bucket 이름, access key는 문서에 고정하지 않습니다.
+- LangChain은 "LLM 호출 chain", LangGraph는 "문진 처리 흐름 graph"로 구분해서 설명합니다.
+- DynamoDB에는 최소 상태와 S3 pointer만 저장하고, 문진 산출물은 S3 artifact에 저장한다는 현재 구현 상태를 기준으로 설명합니다.
 
 ---
 

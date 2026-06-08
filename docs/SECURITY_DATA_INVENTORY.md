@@ -202,13 +202,28 @@ Macie는 DynamoDB 내부 필드를 직접 가명처리하는 도구가 아닙니
 
 즉, Macie는 "저장 전 필터"가 아니라 "저장 후 감사 장치"입니다. 저장 전 차단은 Lambda 내부 가명처리 코드와 schema validator가 담당해야 합니다.
 
-## 9. 이 표를 기준으로 보는 현재 부족한 부분
+## 9. 현재 구현 기준 점검
 
-현재 MVP는 기능 흐름은 대부분 구현되어 있지만, 보안 관점에서는 DynamoDB에 너무 많은 데이터를 저장하고 있습니다. 특히 환자 식별정보, Q별 발화 원문, LLM 추출 결과, 원페이퍼, 환자 안내문이 한 세션 레코드에 직접 들어가는 구조는 개선이 필요합니다.
+2026-06-08 기준 `test` 브랜치 코드는 이 전수조사 표의 핵심 저장 경계를 반영한 상태입니다. 즉, 이전 MVP처럼 DynamoDB 한 item에 환자 식별정보, 문항별 원문, LLM 추출 결과, 원페이퍼, 환자 안내문을 모두 직접 저장하는 구조가 아닙니다.
 
-따라서 다음 수정의 핵심은 기능을 새로 만드는 것이 아니라 저장 경계를 다시 긋는 것입니다.
+현재 코드에서 적용된 기준은 다음과 같습니다.
 
-- DynamoDB는 "누가 대기 중인지, 어떤 상태인지, 어디 S3 artifact를 보면 되는지"만 가진다.
-- S3는 "가명처리된 문진 산출물"을 짧은 기간 보관한다.
-- 음성 원본과 직접식별정보는 저장하지 않는다.
-- Macie는 S3에 남은 민감정보를 찾아내는 사후 감사 장치로 둔다.
+- DynamoDB는 "누가 대기 중인지, 어떤 상태인지, 어디 S3 artifact를 보면 되는지"를 확인하기 위한 최소 세션 상태만 가집니다.
+- 문진 답변, LLM extraction 결과, LangGraph trace, Hybrid IR 결과, 원페이퍼, 의사 답변, 환자 안내문은 가명처리 후 S3 artifact로 저장합니다.
+- 음성 원본 파일은 S3에 저장하지 않습니다. 환자 음성은 Transcribe Streaming을 거쳐 텍스트만 문진 처리 흐름에 들어갑니다.
+- 실명, 생년월일, 연락처 원문은 세션 생성 시 마스킹 또는 요약 정보로 변환하며 DynamoDB에 그대로 남기지 않습니다.
+- Macie는 S3에 남은 민감정보를 찾아내는 사후 감사 장치로 둡니다. 저장 전 차단은 Lambda의 `privacy.py`, schema validator, 저장 경계 코드가 담당합니다.
+
+다만 다음 항목은 코드만으로 끝나는 문제가 아니라 AWS 운영 설정이 필요합니다.
+
+| 항목 | 현재 코드 상태 | AWS에서 추가 확인할 것 |
+| --- | --- | --- |
+| S3 공개 차단 | 프론트는 S3에 직접 접근하지 않고 Lambda만 artifact를 읽음 | bucket Block Public Access 활성화 |
+| S3 암호화 | artifact bucket 이름을 SAM 파라미터로 주입 | SSE-S3 또는 SSE-KMS 기본 암호화 |
+| S3 보존 기간 | artifact key가 세션별 prefix로 분리됨 | `sessions/` prefix Lifecycle 3일 삭제 |
+| Macie | S3 artifact 구조로 민감정보 감사 가능 | artifact bucket에 Macie sensitive data discovery 설정 |
+| DynamoDB 보존 기간 | `expires_at` 필드 구조 사용 | TTL 속성 이름을 `expires_at`으로 활성화 |
+| CloudWatch 로그 | 코드에서 원문 로그를 남기지 않는 방향으로 정리 | 로그 그룹 보존 기간 3~7일 설정 |
+| Bedrock/Transcribe 데이터 정책 | 코드상 음성 원본 저장 없음 | AWS Organizations AI services opt-out 정책 확인 |
+
+따라서 이 문서는 "앞으로 해야 할 목표"만 적은 문서가 아니라, 현재 `test` 브랜치 코드가 어떤 저장 경계를 지키도록 정리되었는지와 AWS 콘솔에서 어떤 운영 설정을 추가해야 하는지를 함께 확인하는 기준 문서입니다.

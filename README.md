@@ -191,6 +191,15 @@ flowchart LR
 - rule-based extraction fallback으로 LLM 실패를 조용히 대체하지 않습니다.
 - validator 실패는 retry 후 실패 응답으로 드러냅니다.
 
+### LangChain과 LangGraph 적용 상태
+
+현재 `test` 브랜치의 백엔드는 LangChain과 LangGraph를 문서상 용어로만 쓰지 않고 실제 코드 경로에 포함합니다.
+
+- `backend/serverless/src/langchain_prompting.py`는 `ChatPromptTemplate -> RunnableLambda(Bedrock converse) -> JsonOutputParser` 구조로 LLM 호출 chain을 구성합니다.
+- `backend/serverless/src/pipeline_graph.py`는 LangGraph `StateGraph`로 문항 처리 노드와 retry edge를 정의합니다.
+- `backend/serverless/src/pipeline_nodes.py`는 RAG 참고 문맥 검색, LLM extraction, Pydantic/source_quote 검증, Hybrid IR, S3 artifact 저장을 각 node 함수로 나눕니다.
+- `docs/LANGGRAPH_PIPELINE.md`는 환자 답변 1개가 어떤 노드를 거쳐 처리되는지와 trace가 어디에 남는지를 설명합니다.
+
 ---
 
 ## 5. Hybrid IR 개요
