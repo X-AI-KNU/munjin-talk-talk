@@ -278,6 +278,7 @@ def compact_trace_details(details: dict[str, Any]) -> dict[str, Any]:
     allowed = [
         "question_id",
         "question_type",
+        "question_text_chars",
         "visit_type",
         "transcript_chars",
         "has_flag",

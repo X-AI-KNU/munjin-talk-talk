@@ -19,6 +19,10 @@ Parameters:
     Type: String
     Default: ''
     Description: Optional Amazon Transcribe custom vocabulary name.
+  CorsAllowOrigin:
+    Type: String
+    Default: '*'
+    Description: Frontend HTTPS origin allowed to call the API. Use the Amplify branch domain for production-like tests.
 
 Globals:
   Function:
@@ -33,6 +37,7 @@ Globals:
         SESSIONS_TABLE: !Ref SessionsTableName
         ARTIFACTS_BUCKET: !Ref ArtifactsBucketName
         CUSTOM_VOCABULARY: !Ref CustomVocabularyName
+        ALLOWED_ORIGINS: !Ref CorsAllowOrigin
         STRONG_MODEL_ID: apac.amazon.nova-pro-v1:0
         LIGHT_MODEL_ID: apac.amazon.nova-lite-v1:0
         REVIEWER_MODEL_ID: apac.amazon.nova-pro-v1:0
@@ -60,7 +65,7 @@ Resources:
     Properties:
       CorsConfiguration:
         AllowOrigins:
-          - '*'
+          - !Ref CorsAllowOrigin
         AllowHeaders:
           - Content-Type
           - Authorization

@@ -14,7 +14,7 @@
 - Macie, S3 Lifecycle, KMS, IAM, CloudWatch 로그 정책을 어디에 적용해야 하는지 결정한다.
 - 향후 코드 수정 시 삭제, 이동, 가명처리 대상이 되는 필드를 명확히 한다.
 
-## 1-1. 2026-06-08 코드 반영 상태
+## 1-1. 2026-06-11 코드 반영 상태
 
 이 문서를 기준으로 다음 변경이 현재 코드에 반영되었습니다.
 
@@ -29,6 +29,10 @@
 | 의사 답변/환자 안내문 S3 저장 | 완료 | `guide.py` |
 | 저장 전 1차 가명처리 helper 추가 | 완료 | `privacy.py` |
 | SAM `ArtifactsBucketName` 파라미터 추가 | 완료 | `backend/serverless/template.yaml` |
+| API CORS origin 제한 파라미터 추가 | 완료 | `backend/serverless/template.yaml`, `utils.py` |
+| 환자 화면 질문 문구를 백엔드 extraction에 전달 | 완료 | `frontend/src/services/api/transcripts.js`, `pipeline_nodes.py`, `extraction_prompts.py` |
+| 증상 slot, alias, safety flag를 도메인팩으로 분리 | 완료 | `domain_config.py`, `data/domain_pack_respiratory.json`, `clinical_terms.py` |
+| LLM 임의 confidence/score 필드 차단 회귀 테스트 | 완료 | `backend/serverless/tests/test_schema_and_artifact_policy.py` |
 
 남은 운영 설정은 AWS 콘솔에서 처리해야 합니다.
 
@@ -46,7 +50,7 @@
 | 구분 | 역할 | 저장 예시 | 이유 |
 | --- | --- | --- | --- |
 | DynamoDB | 세션 목록, 대기열, 상태 조회용 최소 데이터 | session_id, status, queue_number, patient_display, age_band, gender, risk, s3_prefix | 화면 목록과 빠른 조회에 필요합니다. 민감 원문은 저장하지 않습니다. |
-| S3 | 가명처리된 문진 산출물 보관 | answers.redacted.json, onepaper.redacted.json, patient_guide.redacted.json, trace.redacted.json | 구조화된 큰 JSON 산출물을 분리 보관하고 Lifecycle, Macie, KMS를 적용합니다. |
+| S3 | 가명처리된 문진 산출물 보관 | answers.redacted.json, onepaper.redacted.json, patient_guide.redacted.json, llm_trace.redacted.json | 구조화된 큰 JSON 산출물을 분리 보관하고 Lifecycle, Macie, KMS를 적용합니다. |
 | 메모리 | 처리 중 임시 데이터 | 실시간 STT 원문, LLM 입력 직전 원문 | 처리 후 가명처리 산출물만 남기고 원문은 폐기합니다. |
 | 저장 금지 | 원칙적으로 저장하지 않는 데이터 | 음성 원본 파일, 불필요한 실명, 생년월일, 연락처 원문 | 의료 데이터 및 식별정보 위험을 줄이기 위해 저장하지 않습니다. |
 
@@ -62,7 +66,7 @@
 | 음성 원본 | 현재 스트리밍 구조에서는 저장하지 않음 | 환자 음성 파일 | 저장하지 않음 | 고위험 건강정보 | S3 업로드 방식으로 되돌아가면 위험 | 저장 금지 | 실시간 스트리밍 유지. 음성 파일 S3 저장 금지 |
 | STT 결과 텍스트 | `frontend/src/hooks/useStreamingTranscribe.js`, `backend/serverless/src/pipeline_nodes.py` | 환자 발화 원문 텍스트 | DynamoDB `responses.Qx.text` | 건강정보 | 문진 원문이 DynamoDB에 누적됨 | 메모리 처리 후 S3 `answers.redacted.json` | 저장 전 가명처리. DynamoDB에는 완료 여부와 S3 key만 저장 |
 | Q별 의미 추출 | `backend/serverless/src/onepager.py`, `pipeline_graph.py`, `pipeline_nodes.py` | spans, source_quote, normalized_text, structured, clinical_clues, patient_questions | DynamoDB `question_results` | 건강정보 | LLM 추출 산출물이 DynamoDB에 직접 저장됨 | S3 `answers.redacted.json`, `llm_trace.redacted.json` | 운영 답변은 S3로 이동. trace는 최소 node event만 유지 |
-| 증상 IR 매칭 | `backend/serverless/src/retrieval.py` | matched_slots, symptom label, alias, rank_score, 근거 문구 | DynamoDB `onepager.symptom_slots` | 건강정보 | 매칭 근거와 quote가 DynamoDB에 저장됨 | S3 `onepaper.redacted.json`, `llm_trace.redacted.json` | 운영 onepaper에는 점수 제거. 확정 IR 근거 요약은 최소 trace에만 저장 |
+| 증상 IR 매칭 | `backend/serverless/src/retrieval.py` | matched_slots, symptom label, alias, rank_score, 근거 문구 | S3 `answers.redacted.json`, `onepaper.redacted.json`, `llm_trace.redacted.json` | 건강정보 | 운영 artifact와 UI에 숫자 점수나 후보 목록이 노출되면 과신을 유발할 수 있음 | S3 운영 artifact + 최소 trace | 운영 onepaper에는 점수 제거. 확정 IR 근거 요약은 최소 trace에만 저장 |
 | Safety Flag | `backend/serverless/src/clinical_terms.py`, `onepager.py`, `pipeline_nodes.py` | 객혈, 피 표현 등 위험 플래그, risk | DynamoDB | 건강정보 요약 | 상세 원문이 함께 묶일 수 있음 | DynamoDB 요약 + S3 상세 | DynamoDB에는 risk level, flag code만 유지. 상세 근거는 S3 |
 | 원페이퍼 생성 | `backend/serverless/src/onepager.py` `build_onepager` | 환자 요약, 증상 목록, 문진 맥락, 체크리스트, EMR 문장 | DynamoDB `onepager` | 건강정보 | 원페이퍼 전체가 DynamoDB에 저장됨 | S3 `onepaper.redacted.json` | DynamoDB에는 s3 key, ready status, risk 요약만 저장 |
 | 의사 답변 저장 | `backend/serverless/src/guide.py` `save_doctor_response` | 의사 답변, 환자 안내 강조사항, 추가 메모 | DynamoDB `doctor_review` | 건강정보 | 의사 입력 전문이 DynamoDB에 저장됨 | S3 `doctor_review.redacted.json` | DynamoDB에는 reviewed_at, guide_ready만 유지 |
@@ -104,7 +108,7 @@
 | `clinical_clues` | DynamoDB | 문진 맥락 | 건강정보 | S3 이동 |
 | `patient_questions` | DynamoDB | 환자 질문 | 건강정보 | S3 이동 |
 | `matched_slots` | DynamoDB | 증상 매칭 결과 | 건강정보 | S3 이동. DDB에는 count/status만 유지 |
-| `rank_score` | DynamoDB 또는 응답 | IR 내부 계산값 | 낮음 | 운영 artifact와 UI 응답에서 제거. 확정 매칭의 감사용 요약에만 제한 저장 |
+| `rank_score` | S3 최소 trace | IR 내부 계산값 | 낮음 | 운영 artifact와 UI 응답에서 제거. 확정 매칭의 감사용 trace에만 제한 저장 |
 | `onepager` | DynamoDB | 의사용 원페이퍼 | 건강정보 | S3 `onepaper.redacted.json` 이동 |
 | `review_items` | DynamoDB | 의료진 확인 항목 | 건강정보 | S3 이동 |
 | `transfer_text` | DynamoDB | EMR 초안 | 건강정보 | S3 이동 |

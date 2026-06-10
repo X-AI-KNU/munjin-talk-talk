@@ -6,6 +6,8 @@
 """
 
 from settings import LIGHT_MODEL_ID, STRONG_MODEL_ID
+from clinical_terms import allowed_symptom_slot_refs
+from domain_config import question_text_for
 from utils import visit_label
 
 
@@ -16,23 +18,19 @@ def select_extraction_model(visit_type, question_id, question_type):
     return LIGHT_MODEL_ID
 
 
-def build_extraction_prompt(visit_type, question_id, question_type, transcript, repair_note="", rag_context_note=""):
+def build_extraction_prompt(
+    visit_type,
+    question_id,
+    question_type,
+    transcript,
+    repair_note="",
+    rag_context_note="",
+    question_text_override="",
+):
     """Nova가 반드시 지켜야 할 quote grounding과 fixed schema를 명시합니다."""
     visit = visit_label(visit_type)
-    question_text = {
-        "initial": {
-            "Q1": "어디가 불편하셔서 오셨어요?",
-            "Q2": "그 증상은 언제부터 그러셨어요?",
-            "Q3": "지금 드시는 약이 있으세요?",
-            "Q4": "의사선생님께 묻고 싶은 점이 있으세요?",
-        },
-        "followup": {
-            "Q1": "지난번 진료 이후 어떻게 지내셨어요?",
-            "Q2": "처방받은 약은 잘 드시고 계세요?",
-            "Q3": "그동안 새로 생긴 증상은 없으세요?",
-            "Q4": "지난번에 못 여쭤본 점이 있으신가요?",
-        },
-    }.get(visit_type, {}).get(question_id, "")
+    question_text = str(question_text_override or question_text_for(visit_type, question_id) or "")
+    allowed_slots = ", ".join(sorted(allowed_symptom_slot_refs()))
     return f"""
 You are the semantic parsing LLM for a Korean clinic intake MVP.
 Task: standardize dialect/colloquial speech, split meaning units, and tag the answer into the fixed schema.
@@ -82,7 +80,7 @@ Patient answer:
 {repair_note}
 
 Allowed symptom slot_ref values when relevant:
-hemoptysis, cough, throat_irritation, nasal_obstruction, rhinorrhea, fever, sputum, dyspnea, chest_pain, headache, other
+{allowed_slots}
 
 Allowed agenda categories:
 drug_drug_interaction, supplement_drug_interaction, food_drug_interaction, treatment_duration, followup_visit, test_question, lifestyle, other

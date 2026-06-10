@@ -1,0 +1,107 @@
+{
+  "version": "respiratory-v1",
+  "description": "문진톡톡 MVP에서 사용하는 호흡기계 문진 도메인 설정입니다. 환자 발화 추출은 LLM이 수행하고, 이 파일은 허용 slot, alias hint, 안전 플래그, 기본 질문 문구를 정의합니다.",
+  "questions": {
+    "initial": {
+      "Q1": "어디가 불편하셔서 오셨어요?",
+      "Q2": "그 증상은 언제부터 그러셨어요?",
+      "Q3": "지금 드시는 약이 있으세요?",
+      "Q4": "의사선생님께 묻고 싶은 점이 있으세요?"
+    },
+    "followup": {
+      "Q1": "지난번 진료 이후 어떻게 지내셨어요?",
+      "Q2": "처방받은 약은 잘 드시고 계세요?",
+      "Q3": "그동안 새로 생긴 증상은 없으세요?",
+      "Q4": "지난번에 못 여쭤본 점이 있으신가요?"
+    }
+  },
+  "symptom_rules": [
+    {"name": "객혈", "slot_id": "hemoptysis", "keywords": ["피", "피가", "객혈", "피섞", "피 섞", "묻어"], "alert": true},
+    {"name": "기침", "slot_id": "cough", "keywords": ["기침", "콜록"], "alert": false},
+    {"name": "목 불편감", "slot_id": "throat_irritation", "keywords": ["목", "칼칼", "따끔", "인후"], "alert": false},
+    {"name": "코막힘", "slot_id": "nasal_obstruction", "keywords": ["코가 막", "코막", "맥혀", "막혀"], "alert": false},
+    {"name": "콧물", "slot_id": "rhinorrhea", "keywords": ["콧물", "코물"], "alert": false},
+    {"name": "발열", "slot_id": "fever", "keywords": ["열", "뜨거", "발열"], "alert": false},
+    {"name": "가래", "slot_id": "sputum", "keywords": ["가래", "痰"], "alert": false},
+    {"name": "호흡곤란", "slot_id": "dyspnea", "keywords": ["숨", "호흡", "답답"], "alert": true},
+    {"name": "흉통", "slot_id": "chest_pain", "keywords": ["가슴", "흉통"], "alert": true},
+    {"name": "두통", "slot_id": "headache", "keywords": ["머리", "두통"], "alert": false}
+  ],
+  "symptom_quote_patterns": {
+    "throat_irritation": [
+      "목(?:이|은|도)?\\s*(?:좀\\s*)?(?:칼칼(?:하고|해요|합니다)?|따끔(?:해요|하고|합니다)?|아파요?|불편해요?|간질간질해요?)"
+    ],
+    "nasal_obstruction": [
+      "코\\S{0,4}\\s*(?:막혀요|막혀|막힙니다|맥혀요|맥혀|답답해요)"
+    ],
+    "rhinorrhea": [
+      "콧물(?:이|은|도)?\\s*(?:줄줄\\s*)?(?:흐르네요|흘러요|나와요|나요)",
+      "코물(?:이|은|도)?\\s*(?:줄줄\\s*)?(?:흐르네요|흘러요|나와요|나요)"
+    ],
+    "cough": [
+      "기침(?:이|은|도)?\\s*(?:조금\\s*)?(?:나요|나와요|심해요|심해졌어요|해요)",
+      "콜록(?:거려요|거립니다|해요)"
+    ],
+    "fever": [
+      "(?:열|발열)(?:이|은|도)?\\s*(?:나요|있어요|나는 것 같아요)"
+    ],
+    "sputum": [
+      "가래(?:가|는|도)?\\s*(?:나요|나와요|있어요|껴요)"
+    ]
+  },
+  "ir_stable_slot_ids": {
+    "객혈": "hemoptysis",
+    "기침": "cough",
+    "목의 통증": "sore_throat",
+    "목 자극": "throat_irritation",
+    "가래": "sputum",
+    "호흡곤란": "dyspnea",
+    "숨참": "dyspnea",
+    "흉통": "chest_pain",
+    "가슴 답답": "chest_discomfort",
+    "콧물": "rhinorrhea",
+    "코막힘": "nasal_obstruction",
+    "발열": "fever",
+    "열": "fever",
+    "두통": "headache",
+    "천명음": "wheezing",
+    "목소리 변화": "voice_change",
+    "삼키기 곤란": "dysphagia"
+  },
+  "ir_slot_to_canonical_name": {
+    "hemoptysis": "객혈",
+    "cough": "기침",
+    "throat_irritation": "목의 통증",
+    "sore_throat": "목의 통증",
+    "nasal_obstruction": "코막힘",
+    "rhinorrhea": "콧물",
+    "sputum": "가래",
+    "fever": "열",
+    "dyspnea": "호흡곤란",
+    "chest_pain": "흉통",
+    "wheezing": "천명음",
+    "headache": "두통",
+    "voice_change": "목소리 변화"
+  },
+  "ir_text_aliases": [
+    {"pattern": "목|인후|칼칼|따끔", "canonical_name": "목의 통증"},
+    {"pattern": "코.{0,3}(막|맥)|비폐색", "canonical_name": "코막힘"},
+    {"pattern": "콧물|코물", "canonical_name": "콧물"},
+    {"pattern": "가래|객담", "canonical_name": "가래"},
+    {"pattern": "기침|콜록", "canonical_name": "기침"},
+    {"pattern": "피.{0,4}(가래|섞|묻)|객혈", "canonical_name": "객혈"},
+    {"pattern": "숨|호흡곤란|숨참", "canonical_name": "호흡곤란"},
+    {"pattern": "가슴.{0,4}(아프|통증)|흉통", "canonical_name": "흉통"},
+    {"pattern": "쌕쌕|천명", "canonical_name": "천명음"},
+    {"pattern": "열|발열|고열", "canonical_name": "열"}
+  ],
+  "ir_red_flag_names": ["객혈", "호흡곤란", "흉통", "청색증", "의식 변화"],
+  "safety_flags": [
+    {"category": "hemoptysis", "label": "객혈 의심", "severity": "high", "pattern": "객혈|피(?:가)?\\s*(섞인|섞여|나온|나와)|피가래|가래.*피|피.*가래|피를\\s*토|피\\s*토"},
+    {"category": "dyspnea", "label": "호흡곤란", "severity": "high", "pattern": "숨이\\s*(안|너무|많이)\\s*(차|막|막혀)|숨\\s*못\\s*쉬|호흡\\s*곤란|말을\\s*못\\s*할"},
+    {"category": "chest_pain", "label": "흉통", "severity": "high", "pattern": "가슴(?:이)?\\s*(통증|아프|아파|아픈|쥐어|답답)|흉통|쥐어짜"},
+    {"category": "cyanosis", "label": "청색증", "severity": "high", "pattern": "입술.*(파래|푸르)|손끝.*(파래|푸르)|청색증"},
+    {"category": "consciousness", "label": "의식 변화", "severity": "high", "pattern": "의식|기절|쓰러졌|정신.*(없|잃)|깨워도"},
+    {"category": "high_fever", "label": "고열", "severity": "medium", "pattern": "고열|열이\\s*너무|40도|39도"}
+  ]
+}

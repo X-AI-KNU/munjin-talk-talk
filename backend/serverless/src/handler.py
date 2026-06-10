@@ -6,6 +6,7 @@
 """
 
 import re
+import json
 from urllib.parse import unquote_plus
 
 from audio import generate_streaming_transcribe_url
@@ -28,7 +29,21 @@ def handler(event, context):
     try:
         return route(method, path, event)
     except Exception as exc:
-        return response(500, {"error": "internal_error", "message": str(exc)})
+        print(json.dumps({
+            "level": "error",
+            "error": "unhandled_exception",
+            "path": path,
+            "method": method,
+            "exception_type": exc.__class__.__name__,
+            "aws_request_id": getattr(context, "aws_request_id", ""),
+        }, ensure_ascii=False))
+        return response(
+            500,
+            {
+                "error": "internal_error",
+                "message": "요청 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.",
+            },
+        )
 
 
 def route(method, path, event):

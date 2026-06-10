@@ -221,6 +221,7 @@ Parameter SessionsTableName: MunjinSessionsTest
 Parameter ArtifactsBucketName: <s3-artifact-bucket-name>
 Parameter LambdaRoleArn: <lambda-role-arn>
 Parameter CustomVocabularyName:
+Parameter CorsAllowOrigin: https://<amplify-branch-domain>
 Confirm changes before deploy: y
 Allow SAM CLI IAM role creation: n
 MunjinApiFunction has no authentication. Is this okay?: y
@@ -233,6 +234,10 @@ ApiEndpoint = https://<api-id>.execute-api.ap-northeast-2.amazonaws.com
 ```
 
 이 값을 Amplify 환경 변수 `VITE_API_BASE_URL`에 넣습니다.
+
+`CorsAllowOrigin`은 해당 백엔드를 호출할 프론트엔드 HTTPS origin입니다. 예를 들어 test 브랜치 Amplify URL이
+`https://<test-branch>.<amplify-app-id>.amplifyapp.com`이면 backend test stack에도 같은 값을 넣습니다. 개발 중에는 `*`로 둘 수 있지만,
+공개 시연 또는 제출용 환경에서는 Amplify branch domain으로 좁히는 것을 권장합니다.
 
 주의:
 

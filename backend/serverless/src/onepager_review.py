@@ -46,16 +46,16 @@ def apply_bedrock_onepager_review(session, onepager):
                 prompt += (
                     "\n\nPrevious final-review output failed validation: "
                     f"{last_error}. Regenerate grounded JSON only."
-                )
+            )
             obj, raw_text, chain_meta = call_bedrock_json_with_meta(prompt, REVIEWER_MODEL_ID, REVIEW_MAX_TOKENS)
         except Exception as exc:
-            last_error = str(exc)
+            last_error = f"bedrock_exception:{exc.__class__.__name__}"
             continue
 
         # LLM이 만든 checklist JSON도 fixed schema를 통과해야만 다음 근거 검증으로 넘어갑니다.
         validated_obj, schema_errors = validate_review_payload(obj)
         if schema_errors:
-            last_error = f"pydantic_schema_failed: {schema_errors}"
+            last_error = f"pydantic_schema_failed:{len(schema_errors)}_errors"
             continue
 
         reviewed = merge_review_output(onepager, validated_obj, raw_text, chain_meta, attempt)

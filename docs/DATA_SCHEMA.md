@@ -10,6 +10,8 @@ LLM은 그 틀 안의 값만 채워야 합니다.
 ```
 
 LLM이 매번 새로운 형식을 마음대로 만드는 구조가 아닙니다. 백엔드는 Pydantic schema로 필드, 타입, enum, extra field, source_quote를 검증합니다.
+증상 `slot_ref`, alias hint, safety flag, 기본 질문 문구는 `backend/serverless/src/data/domain_pack_respiratory.json`에서 읽습니다.
+즉, LLM이 schema 자체를 생성하는 것이 아니라, 코드와 도메인팩이 허용한 틀 안에 값만 채우는 방식입니다.
 
 또한 현재 구조에서는 DynamoDB와 S3의 역할을 분리합니다.
 

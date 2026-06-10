@@ -133,9 +133,11 @@ frontend/
   -> 질문 화면
   -> Transcribe Streaming 실시간 인식
   -> 환자 확인 화면
-  -> /process-answer 전송
+  -> /process-answer 전송(text + question_id + question_text)
   -> 다음 질문 또는 완료
 ```
+
+`question_text`는 환자 화면에 실제 표시된 질문 문구입니다. 백엔드는 이 값을 extraction prompt에 넣어 LLM이 “어떤 질문에 대한 답변인지”를 잃지 않도록 합니다. 프론트가 보내지 못한 경우에는 백엔드 도메인팩의 기본 질문 문구를 fallback으로 사용합니다.
 
 ### 의료진 화면
 
@@ -177,7 +179,7 @@ src/services/
 | --- | --- |
 | `services/api/client.js` | API base URL, 공통 helper |
 | `services/api/sessions.js` | 세션 생성·조회·대기열·직원 도움 요청 |
-| `services/api/transcripts.js` | `/process-answer` 호출 |
+| `services/api/transcripts.js` | `/process-answer` 호출. 답변 텍스트와 함께 `question_text`를 전송 |
 | `services/api/doctor.js` | 원페이퍼 조회, 의사 답변 저장, 안내문 조회 |
 | `services/transcribeStreaming.js` | Amazon Transcribe Streaming WebSocket 통신 |
 | `services/onepagerAdapter.js` | 백엔드 onepaper JSON을 화면용 구조로 변환 |

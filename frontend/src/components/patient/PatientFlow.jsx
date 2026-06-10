@@ -199,6 +199,7 @@ export default function PatientFlow({
       sessionId: activeSessionId,
       questionId: currentQuestion.id,
       questionType: currentQuestion.question_type,
+      questionText: questionTextForBackend(currentQuestion),
       visitType,
       transcript: answerText,
     })
@@ -451,4 +452,13 @@ export default function PatientFlow({
       {!consentAccepted && renderConsentGate()}
     </TabletFrame>
   )
+}
+
+function questionTextForBackend(question) {
+  if (!question) return ''
+  return [question.badge, question.title, question.sub]
+    .filter(Boolean)
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim()
 }

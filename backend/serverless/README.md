@@ -94,36 +94,43 @@ sessions/YYYY-MM-DD/{session_id}/
 
 ```text
 backend/serverless/
-├── README.md
-├── template.yaml
-└── src/
-    ├── handler.py
-    ├── settings.py
-    ├── artifact_store.py
-    ├── privacy.py
-    ├── sessions.py
-    ├── audio.py
-    ├── orchestration.py
-    ├── pipeline_graph.py
-    ├── pipeline_nodes.py
-    ├── pipeline_state.py
-    ├── pipeline_trace.py
-    ├── rag_context.py
-    ├── extraction_prompts.py
-    ├── extraction_schema.py
-    ├── langchain_prompting.py
-    ├── llm.py
-    ├── retrieval.py
-    ├── retrieval_documents.py
-    ├── retrieval_embeddings.py
-    ├── retrieval_scoring.py
-    ├── clinical_terms.py
-    ├── onepager.py
-    ├── onepager_sections.py
-    ├── onepager_review.py
-    ├── guide.py
-    ├── schemas/
-    └── data/
+|-- README.md
+|-- template.yaml
+|-- src/
+|   |-- handler.py
+|   |-- settings.py
+|   |-- artifact_store.py
+|   |-- privacy.py
+|   |-- sessions.py
+|   |-- audio.py
+|   |-- orchestration.py
+|   |-- pipeline_graph.py
+|   |-- pipeline_nodes.py
+|   |-- pipeline_state.py
+|   |-- pipeline_trace.py
+|   |-- rag_context.py
+|   |-- extraction_prompts.py
+|   |-- extraction_schema.py
+|   |-- langchain_prompting.py
+|   |-- llm.py
+|   |-- retrieval.py
+|   |-- retrieval_documents.py
+|   |-- retrieval_embeddings.py
+|   |-- retrieval_scoring.py
+|   |-- clinical_terms.py
+|   |-- domain_config.py
+|   |-- onepager.py
+|   |-- onepager_sections.py
+|   |-- onepager_review.py
+|   |-- guide.py
+|   |-- schemas/
+|   `-- data/
+|       |-- domain_pack_respiratory.json
+|       |-- diseases_cleaned.json
+|       |-- symptom_index.json
+|       `-- symptom_embeddings_*.json
+`-- tests/
+    `-- test_schema_and_artifact_policy.py
 ```
 
 ---
@@ -146,6 +153,8 @@ backend/serverless/
 | `pipeline_trace.py` | active path와 trace 저장 |
 | `rag_context.py` | 원천 JSON과 제한 alias bridge 기반 RAG 참고 문맥 검색 |
 | `extraction_prompts.py` | Q별 영어 prompt |
+| `domain_config.py` | 도메인팩 JSON 로딩, 기본 질문 문구 fallback, 허용 symptom slot 제공 |
+| `data/domain_pack_respiratory.json` | 호흡기계 MVP의 증상 slot, alias, safety flag, 기본 질문 문구 |
 | `langchain_prompting.py` | LangChain PromptTemplate, Bedrock Runnable, JSON parser chain |
 | `llm.py` | LLM JSON 호출 호환 wrapper와 chain meta 반환 |
 | `schemas/extraction.py` | Pydantic extraction schema |
@@ -215,14 +224,28 @@ schema_quote_validation
 | --- | --- | --- |
 | `SESSIONS_TABLE` | 예 | DynamoDB table name |
 | `ARTIFACTS_BUCKET` | 예 | 가명처리 artifact를 저장할 S3 bucket |
-| `AWS_REGION` | 예 | AWS region, 기본 `ap-northeast-2` |
-| `BEDROCK_REGION` | 아니오 | Bedrock region, 미설정 시 `AWS_REGION` 사용 |
-| `EXTRACTION_MODEL_ID` | 아니오 | extraction 기본 모델 |
-| `EXTRACTION_LIGHT_MODEL_ID` | 아니오 | 가벼운 extraction 모델 |
-| `REVIEW_MODEL_ID` | 아니오 | 원페이퍼 리뷰 모델 |
-| `GUIDE_MODEL_ID` | 아니오 | 환자 안내문 모델 |
+| `AWS_REGION` | 아니오 | AWS region, 기본 `ap-northeast-2` |
+| `CUSTOM_VOCABULARY` | 아니오 | Transcribe custom vocabulary 이름 |
+| `ALLOWED_ORIGINS` | 아니오 | API 응답 CORS origin. SAM `CorsAllowOrigin`에서 주입 |
+| `STRONG_MODEL_ID` | 아니오 | 고난도 의미 추출과 검토용 Bedrock 모델. 기본 Nova Pro |
+| `LIGHT_MODEL_ID` | 아니오 | 가벼운 구조화와 안내문 변환용 Bedrock 모델. 기본 Nova Lite |
+| `REVIEWER_MODEL_ID` | 아니오 | 원페이퍼 리뷰 모델. 미설정 시 `STRONG_MODEL_ID` 사용 |
+| `GUIDE_MODEL_ID` | 아니오 | 환자 안내문 모델. 미설정 시 `LIGHT_MODEL_ID` 사용 |
+| `MAX_LLM_TOKENS` | 아니오 | 문항 extraction 최대 출력 토큰 |
+| `REVIEW_MAX_TOKENS` | 아니오 | 원페이퍼 review 최대 출력 토큰 |
+| `GUIDE_MAX_TOKENS` | 아니오 | 환자 안내문 최대 출력 토큰 |
+| `EXTRACTION_RETRY_ATTEMPTS` | 아니오 | schema/source_quote 검증 실패 시 extraction 재시도 횟수 |
+| `REVIEW_RETRY_ATTEMPTS` | 아니오 | 원페이퍼 review 재시도 횟수 |
 | `EMBEDDING_MODEL_ID` | 아니오 | Titan embedding 모델 |
-| `CUSTOM_VOCABULARY_NAME` | 아니오 | Transcribe custom vocabulary 이름 |
+| `EMBEDDING_DIMENSIONS` | 아니오 | embedding 차원. 기본 512 |
+| `HYBRID_TOP_K` | 아니오 | 최종 IR 후보 반환 개수 |
+| `HYBRID_CANDIDATE_K` | 아니오 | 내부 검색 후보 개수 |
+| `HYBRID_ACCEPT_THRESHOLD` | 아니오 | IR 후보 채택 최소 기준 |
+| `HYBRID_BM25_WEIGHT` | 아니오 | BM25 정규화 점수 가중치 |
+| `HYBRID_VECTOR_WEIGHT` | 아니오 | Titan vector 정규화 점수 가중치 |
+| `HYBRID_MIN_VECTOR_SCORE` | 아니오 | 후보 채택 최소 vector 기준 |
+| `HYBRID_MIN_BM25_SCORE` | 아니오 | 후보 채택 최소 BM25 기준 |
+| `HYBRID_MIN_LABEL_SCORE` | 아니오 | 후보 채택 최소 label 기준 |
 
 ---
 
@@ -243,6 +266,7 @@ Parameter SessionsTableName: MunjinSessionsTest
 Parameter ArtifactsBucketName: <s3-artifact-bucket-name>
 Parameter LambdaRoleArn: <lambda-role-arn>
 Parameter CustomVocabularyName:
+Parameter CorsAllowOrigin: https://<amplify-branch-domain>
 Confirm changes before deploy: y
 Allow SAM CLI IAM role creation: n
 MunjinApiFunction has no authentication. Is this okay?: y

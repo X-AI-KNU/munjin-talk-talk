@@ -9,6 +9,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, ValidationInfo, field_validator
 
+from clinical_terms import allowed_symptom_slot_refs
 from utils import clean_quote
 
 SpanType = Literal[
@@ -24,19 +25,10 @@ SpanType = Literal[
     "context",
 ]
 
-SymptomSlotRef = Literal[
-    "hemoptysis",
-    "cough",
-    "throat_irritation",
-    "nasal_obstruction",
-    "rhinorrhea",
-    "fever",
-    "sputum",
-    "dyspnea",
-    "chest_pain",
-    "headache",
-    "other",
-]
+# slot_ref 허용 목록은 domain_pack_respiratory.json에서 읽습니다.
+# Literal로 고정하지 않는 이유는 타 진료계 domain pack을 추가할 때 schema 코드를
+# 매번 수정하지 않기 위해서입니다. 실제 허용 여부는 아래 validator가 검사합니다.
+SymptomSlotRef = str
 
 Status = Literal["있음", "없음", "확인필요"]
 Priority = Literal["일반", "우선"]
@@ -125,6 +117,14 @@ class ExtractionSpan(StrictModel):
     status: Status
     alert: bool
     explain: str = Field(min_length=1)
+
+    @field_validator("slot_ref", mode="before")
+    @classmethod
+    def validate_slot_ref(cls, value):
+        slot_ref = clean_quote(value or "other") or "other"
+        if slot_ref not in allowed_symptom_slot_refs():
+            raise ValueError(f"slot_ref is not allowed by active domain pack: {slot_ref}")
+        return slot_ref
 
     @field_validator("source_quote", mode="before")
     @classmethod

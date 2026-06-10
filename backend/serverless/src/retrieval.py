@@ -48,7 +48,9 @@ def retrieve_symptom_docs(source_quote, normalized_text, span_name="", preferred
     try:
         q_emb = embed_text(query)
     except Exception as exc:
-        vector_error = str(exc)
+        # 운영 trace에는 원문 예외 메시지를 남기지 않는다.
+        # AWS/라이브러리 예외에는 요청 본문 일부가 섞일 수 있어 타입만 보존한다.
+        vector_error = f"embedding_exception:{exc.__class__.__name__}"
 
     doc_embeddings = get_doc_embeddings(docs) if q_emb is not None else {}
     if q_emb is not None and doc_embeddings:
@@ -73,7 +75,8 @@ def retrieve_symptom_docs(source_quote, normalized_text, span_name="", preferred
                 emb = embed_text(docs[idx].get("embedding_text", ""))
                 vector_raw[idx] = max(0.0, cosine(q_emb, emb))
             except Exception as exc:
-                vector_error = str(exc)
+                # 재시도 실패도 같은 정책으로 예외 타입만 남긴다.
+                vector_error = f"embedding_retry_exception:{exc.__class__.__name__}"
         candidate_vectors = [vector_raw[idx] for idx in candidate_ids]
         norm_lookup = dict(zip(candidate_ids, minmax_norm(candidate_vectors)))
         vector_norm = [norm_lookup.get(idx, 0.0) for idx in range(len(docs))]

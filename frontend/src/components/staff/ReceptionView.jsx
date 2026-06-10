@@ -86,6 +86,7 @@ export default function ReceptionView() {
           sessionId: manualSession.sessionId,
           questionId: question.id,
           questionType: question.question_type,
+          questionText: questionTextForBackend(question),
           visitType: manualSession.visitType,
           transcript,
         })
@@ -147,6 +148,15 @@ export default function ReceptionView() {
       />
     </div>
   )
+}
+
+function questionTextForBackend(question) {
+  if (!question) return ''
+  return [question.badge, question.title, question.sub]
+    .filter(Boolean)
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
 function makeManualTextState(session) {

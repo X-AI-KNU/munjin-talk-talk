@@ -22,6 +22,7 @@
 | LangChain | 구현 | PromptTemplate, Bedrock Runnable, JSON parser를 묶은 LLM 호출 chain |
 | LangGraph | 구현 | 문항 처리 노드, 분기, trace를 명시적으로 구성 |
 | RAG 참고 컨텍스트 | 구현 | 원천 JSON과 제한 alias bridge를 LLM extraction 앞단에 약한 참고 문맥으로 제공 |
+| 도메인팩 | 구현 | 호흡기계 증상 slot, alias, safety flag, 기본 질문 문구를 `domain_pack_respiratory.json`로 분리 |
 | Hybrid IR | 구현 | BM25 + Titan Vector + label bridge 기반 표준 증상 매칭 |
 | 의료진 원페이퍼 | 구현 | 증상, 원문 quote, 문진 맥락, 확인 항목, EMR 초안 표시 |
 | 환자 안내문 | 구현 | 의사 답변과 강조사항 기반 안내문 표시 |
@@ -186,6 +187,7 @@ flowchart LR
 - LLM이 만든 임의 `score`, `confidence`, `probability` 값은 사용하지 않습니다.
 - `source_quote`는 환자 원문에 실제 존재해야 합니다.
 - 스키마에 없는 JSON 필드는 거부합니다.
+- 증상 `slot_ref`, 안전 플래그, alias hint, fallback 질문 문구는 도메인팩에서 읽습니다.
 - 증상 매칭은 LLM 단독 판단이 아니라 원천 JSON 기반 Hybrid IR을 통과해야 합니다.
 - RAG 결과는 LLM 표준화 참고 문맥일 뿐, source_quote나 최종 증상 매칭 근거가 아닙니다.
 - rule-based extraction fallback으로 LLM 실패를 조용히 대체하지 않습니다.

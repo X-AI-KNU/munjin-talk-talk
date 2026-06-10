@@ -23,6 +23,7 @@ class AnswerPipelineState(TypedDict, total=False):
     session_id: str
     question_id: str
     question_type: str
+    question_text: str
     visit_type: str
     transcript: str
     preliminary_safety_flag: dict[str, Any] | None

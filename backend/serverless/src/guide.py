@@ -86,7 +86,7 @@ def generate_patient_guide(
             return guide
         guide_error = "bedrock_output_failed_quality_validation"
     except Exception as exc:
-        guide_error = str(exc)
+        guide_error = f"bedrock_exception:{exc.__class__.__name__}"
 
     return {
         "generated_at": now_iso(),

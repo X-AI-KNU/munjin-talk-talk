@@ -170,6 +170,10 @@ trace와 orchestration metadata를 담당합니다.
 - `visit_type`
 - `transcript`
 
+선택값:
+
+- `question_text`: 프론트엔드에 실제 표시된 질문 문구. 누락되면 도메인팩의 기본 질문 문구를 사용합니다.
+
 실패 조건:
 
 - 필수값 누락: 400 `missing_required_fields`
@@ -184,6 +188,7 @@ trace 예시:
   "details": {
     "question_id": "Q1",
     "question_type": "chief_complaint",
+    "question_text_chars": 32,
     "visit_type": "initial",
     "transcript_chars": 20
   }

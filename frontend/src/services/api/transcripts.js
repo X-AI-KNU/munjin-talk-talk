@@ -7,6 +7,7 @@ export async function processTranscript({
   sessionId,
   questionId,
   questionType,
+  questionText = '',
   visitType,
   transcript,
 }) {
@@ -19,6 +20,7 @@ export async function processTranscript({
       session_id: sessionId,
       question_id: questionId,
       question_type: questionType,
+      question_text: questionText,
       visit_type: visitType,
       transcript,
     }),

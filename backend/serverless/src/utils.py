@@ -5,6 +5,7 @@
 """
 
 import json
+import os
 import re
 from datetime import datetime, timezone
 from decimal import Decimal
@@ -19,12 +20,26 @@ def response(status, body):
         "statusCode": status,
         "headers": {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": cors_allow_origin(),
             "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type,Authorization",
+            "Vary": "Origin",
         },
         "body": json.dumps(body, ensure_ascii=False, default=json_default),
     }
+
+
+def cors_allow_origin():
+    """환경 변수 기반 CORS origin을 반환합니다.
+
+    개발/기존 배포 호환을 위해 기본값은 `*`입니다. 제출용 또는 공개 테스트용
+    배포에서는 SAM parameter `CorsAllowOrigin`을 Amplify HTTPS 도메인으로
+    지정해 API 호출 출처를 좁히는 것을 권장합니다.
+    """
+    origins = [item.strip() for item in os.environ.get("ALLOWED_ORIGINS", "*").split(",") if item.strip()]
+    if not origins or "*" in origins:
+        return "*"
+    return origins[0]
 
 
 def json_default(value):
