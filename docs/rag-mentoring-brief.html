@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>문진톡톡 RAG 구조 설명</title>
+  <style>
+    :root {
+      --ink: #0b2447;
+      --muted: #5c6f89;
+      --line: #dbe6f3;
+      --soft: #f5f8fc;
+      --blue: #1f66e5;
+      --teal: #079f9d;
+      --green: #0f9f5f;
+      --orange: #c75f00;
+      --red: #b42318;
+      --panel: #ffffff;
+      --code: #0f172a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #eaf2fb;
+      font-family: "Pretendard", "Noto Sans KR", "Segoe UI", Arial, sans-serif;
+      line-height: 1.62;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 48px));
+      margin: 32px auto 64px;
+    }
+
+    header {
+      padding: 34px 38px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 18px 45px rgba(31, 79, 139, 0.08);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      letter-spacing: 0;
+      line-height: 1.28;
+    }
+
+    h1 {
+      font-size: 34px;
+    }
+
+    h2 {
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--line);
+      font-size: 26px;
+    }
+
+    h3 {
+      margin-top: 24px;
+      font-size: 19px;
+    }
+
+    p {
+      margin: 10px 0 0;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      margin-top: 18px;
+      padding: 30px 38px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(31, 79, 139, 0.06);
+    }
+
+    ul,
+    ol {
+      margin: 12px 0 0 22px;
+      padding: 0;
+    }
+
+    li {
+      margin: 7px 0;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 16px;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    th,
+    td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #ffffff;
+      background: #122a50;
+      font-weight: 800;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    code {
+      padding: 1px 5px;
+      border-radius: 5px;
+      color: #10213d;
+      background: #eef4ff;
+      font-family: "Cascadia Mono", "Consolas", monospace;
+      font-size: 0.94em;
+    }
+
+    pre {
+      margin: 14px 0 0;
+      padding: 16px;
+      overflow: auto;
+      color: #d6e2ff;
+      background: var(--code);
+      border-radius: 10px;
+      font-family: "Cascadia Mono", "Consolas", monospace;
+      font-size: 13px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    pre code {
+      padding: 0;
+      color: inherit;
+      background: transparent;
+      font-size: inherit;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 10px;
+      color: #0d4f80;
+      background: #e8f5ff;
+      border: 1px solid #c9e6ff;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .lead {
+      max-width: 920px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .box {
+      padding: 16px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    .box strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .warn {
+      margin-top: 16px;
+      padding: 16px 18px;
+      color: #7a3200;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid var(--orange);
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .ok {
+      margin-top: 16px;
+      padding: 16px 18px;
+      color: #07513b;
+      background: #ecfdf5;
+      border: 1px solid #bbf7d0;
+      border-left: 5px solid var(--green);
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .danger {
+      margin-top: 16px;
+      padding: 16px 18px;
+      color: #7a1b13;
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+      border-left: 5px solid var(--red);
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+      counter-reset: step;
+    }
+
+    .step {
+      position: relative;
+      padding: 15px 16px 15px 54px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      top: 15px;
+      left: 16px;
+      width: 26px;
+      height: 26px;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      background: var(--blue);
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .flow span {
+      padding: 8px 10px;
+      background: #eef4ff;
+      border: 1px solid #cfe0ff;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .caption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .compact td,
+    .compact th {
+      padding: 10px 12px;
+    }
+
+    @media (max-width: 780px) {
+      main {
+        width: min(100% - 24px, 1180px);
+        margin-top: 16px;
+      }
+
+      header,
+      section {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>문진톡톡 RAG 구조 설명</h1>
+      <p class="lead">
+        이 문서는 현재 코드 기준으로 RAG가 어디에서 사용되고, 어떤 데이터를 참고하며,
+        LLM 추출 결과와 Hybrid IR 결과가 어떻게 검증되는지 설명한다.
+      </p>
+      <div class="meta">
+        <span class="pill">대상: RAG 기술 검토</span>
+        <span class="pill">기준 브랜치: test</span>
+        <span class="pill">저장 원칙: 운영 최소 JSON + 최소 추적 정보</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>1. 현재 구현에서 RAG가 의미하는 범위</h2>
+      <p>
+        현재 코드에서 RAG는 두 곳에 나뉘어 있다. 첫 번째는 LLM 추출 전에 참고 문맥을 붙이는
+        <code>intake RAG</code>이고, 두 번째는 추출된 증상 후보를 표준 증상 데이터와 맞추는
+        <code>Hybrid IR</code>이다.
+      </p>
+
+      <div class="grid">
+        <div class="box">
+          <strong>intake RAG</strong>
+          환자 발화 텍스트를 기준으로 증상 사전과 질환 설명에서 관련 문맥을 검색한다.
+          검색 결과는 LLM 추출 프롬프트에 약한 참고 자료로만 들어간다.
+        </div>
+        <div class="box">
+          <strong>Hybrid IR</strong>
+          LLM이 추출한 증상 후보를 표준 증상명과 매칭한다.
+          BM25, Titan embedding vector, 직접 명칭 일치 신호를 함께 사용한다.
+        </div>
+      </div>
+
+      <div class="warn">
+        RAG 결과는 환자가 말한 사실이 아니다. <code>source_quote</code>는 반드시 환자 원문에서 나온 문자열이어야 한다.
+        RAG 문서에 있는 표현을 환자 발화처럼 복사하면 검증 실패로 보아야 한다.
+      </div>
+    </section>
+
+    <section>
+      <h2>2. 관련 코드 위치</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>파일</th>
+            <th>역할</th>
+            <th>확인할 함수 또는 객체</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>backend/serverless/src/munjin/core/pipeline_graph.py</code></td>
+            <td>LangGraph 기반 전체 파이프라인 순서 정의</td>
+            <td><code>build_pipeline_graph</code></td>
+          </tr>
+          <tr>
+            <td><code>backend/serverless/src/munjin/core/pipeline_nodes.py</code></td>
+            <td>각 노드의 실제 실행 함수</td>
+            <td><code>rag_context_retrieval_node</code>, <code>semantic_extraction_node</code>, <code>hybrid_ir_match_node</code></td>
+          </tr>
+          <tr>
+            <td><code>backend/serverless/src/munjin/ai/rag_context.py</code></td>
+            <td>LLM 추출 전에 붙일 참고 문맥 생성</td>
+            <td><code>retrieve_intake_rag_context</code></td>
+          </tr>
+          <tr>
+            <td><code>backend/serverless/src/munjin/retrieval/retrieval_documents.py</code></td>
+            <td>질환 JSON과 증상 JSON으로 검색 문서 생성</td>
+            <td><code>build_symptom_docs_from_sources</code></td>
+          </tr>
+          <tr>
+            <td><code>backend/serverless/src/munjin/retrieval/retrieval_scoring.py</code></td>
+            <td>BM25와 직접 명칭 일치 점수 계산</td>
+            <td><code>BM25Index</code>, <code>direct_label_score</code></td>
+          </tr>
+          <tr>
+            <td><code>backend/serverless/src/munjin/retrieval/retrieval_embeddings.py</code></td>
+            <td>Titan embedding 호출과 벡터 캐시 관리</td>
+            <td><code>embed_query</code>, <code>get_document_embeddings</code></td>
+          </tr>
+          <tr>
+            <td><code>backend/serverless/src/munjin/retrieval/retrieval.py</code></td>
+            <td>BM25, vector, label 신호를 합쳐 표준 증상 후보 결정</td>
+            <td><code>retrieve_symptom_docs</code>, <code>match_slots</code>, <code>is_hybrid_candidate_accepted</code></td>
+          </tr>
+          <tr>
+            <td><code>backend/serverless/src/munjin/ai/extraction_prompts.py</code></td>
+            <td>LLM 추출 프롬프트 작성</td>
+            <td><code>build_extraction_messages</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>3. 한 환자 답변의 처리 순서</h2>
+      <div class="flow">
+        <span>환자 발화</span>
+        <span>STT 텍스트</span>
+        <span>안전 플래그</span>
+        <span>intake RAG</span>
+        <span>LLM 추출</span>
+        <span>Schema 검증</span>
+        <span>Hybrid IR</span>
+        <span>운영 JSON 저장</span>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <strong>환자 발화가 텍스트로 들어온다.</strong>
+          현재 배포 구조에서는 프론트에서 Web Speech API로 음성을 텍스트화하고, 답변 텍스트를 백엔드에 보낸다.
+        </div>
+        <div class="step">
+          <strong>안전 플래그를 먼저 확인한다.</strong>
+          객혈, 피 섞인 가래처럼 즉시 직원 확인이 필요한 표현은 별도 플래그로 잡는다.
+        </div>
+        <div class="step">
+          <strong><code>retrieve_intake_rag_context</code>가 참고 문맥을 만든다.</strong>
+          환자 발화와 질문 유형을 입력으로 받아 alias hint와 증상 참고 문서를 만든다.
+        </div>
+        <div class="step">
+          <strong>LLM 추출 프롬프트에 RAG 문맥을 붙인다.</strong>
+          프롬프트는 RAG 문맥을 환자 사실로 쓰지 말라고 명시한다.
+          <code>source_quote</code>는 환자 원문에서만 뽑아야 한다.
+        </div>
+        <div class="step">
+          <strong>Bedrock Nova 계열 모델이 고정 스키마에 맞춰 추출한다.</strong>
+          Q1, Q2, Q3, Q4의 난이도와 역할에 따라 모델 라우팅이 달라질 수 있다.
+        </div>
+        <div class="step">
+          <strong>Pydantic 기반 검증이 결과를 확인한다.</strong>
+          필수 키, enum, 타입, 원문 인용 존재 여부를 확인한다.
+          실패하면 같은 입력으로 재시도하거나 안전한 오류로 반환한다.
+        </div>
+        <div class="step">
+          <strong>증상 후보는 Hybrid IR을 거친다.</strong>
+          LLM이 낸 증상 후보가 표준 증상 데이터와 충분히 맞을 때만 원페이퍼의 불편함 카드로 남는다.
+        </div>
+        <div class="step">
+          <strong>운영에 필요한 최소 JSON만 저장한다.</strong>
+          원페이퍼, 답변, 환자 안내문, 의사 리뷰, 동의 기록, 최소 추적 정보가 S3와 DynamoDB에 분리 저장된다.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. 예제 1: 목 칼칼함과 코막힘</h2>
+      <p><strong>입력 질문:</strong> Q1 주호소</p>
+      <pre><code>어제부터 목이 칼칼하고 코가 막혀요.</code></pre>
+
+      <h3>4-1. intake RAG가 실제로 만든 참고 문맥</h3>
+      <pre><code>{
+  "alias_hints": [
+    {
+      "matched_text": "목",
+      "canonical_hint": "목의 통증",
+      "pattern": "목|인후|칼칼|따끔"
+    },
+    {
+      "matched_text": "코가 막",
+      "canonical_hint": "코막힘",
+      "pattern": "코.{0,3}(막|맥)|비폐색"
+    }
+  ],
+  "symptom_references": [
+    {
+      "symptom_id": "nasal_obstruction",
+      "display": "코막힘",
+      "bm25_score": 10.5293,
+      "evidence": {
+        "disease_name_ko": "상기도 감염",
+        "section": "symptom",
+        "text": "콧물과 코막힘이 계속되면 구강으로 호흡을 하게 되어 목이 마르고 붓습니다"
+      }
+    },
+    {
+      "symptom_id": "fever",
+      "display": "열",
+      "bm25_score": 8.4013,
+      "evidence": {
+        "disease_name_ko": "결핵",
+        "section": "symptom",
+        "text": "체중이 감소하고 미열이 있거나 잠잘 때 식은땀을 흘리기도 합니다"
+      }
+    },
+    {
+      "symptom_id": "rhinorrhea",
+      "display": "콧물",
+      "bm25_score": 6.9515,
+      "evidence": {
+        "disease_name_ko": "디프테리아",
+        "section": "symptom",
+        "text": "인두와 편도의 디프테리아 전신 권태, 미열..."
+      }
+    }
+  ]
+}</code></pre>
+
+      <h3>4-2. 프롬프트에 같이 들어가는 제한 문구</h3>
+      <pre><code>Retrieved reference context for normalization.
+Use this only as weak context, not as patient facts.
+The patient transcript remains the only source for source_quote/original_quote.
+Do not add symptoms, diagnoses, tests, or medications just because they appear below.</code></pre>
+
+      <h3>4-3. 이 예제에서 허용되는 추출 결과</h3>
+      <p>
+        LLM은 RAG 문서의 질환명이나 증거 문장을 환자 사실로 가져오면 안 된다.
+        아래처럼 환자 원문에 있는 표현만 <code>source_quote</code>로 남겨야 한다.
+      </p>
+      <pre><code>{
+  "spans": [
+    {
+      "type": "symptom_present",
+      "name_ko": "목 불편감",
+      "source_quote": "목이 칼칼하고"
+    },
+    {
+      "type": "symptom_present",
+      "name_ko": "코막힘",
+      "source_quote": "코가 막혀요"
+    }
+  ],
+  "clinical_clues": [
+    {
+      "type": "onset",
+      "source_quote": "어제부터",
+      "summary": "어제부터 증상 시작"
+    }
+  ]
+}</code></pre>
+
+      <h3>4-4. Hybrid IR에서 비교되는 문구</h3>
+      <table class="compact">
+        <thead>
+          <tr>
+            <th>LLM 추출 후보</th>
+            <th>IR query 구성</th>
+            <th>비교 대상</th>
+            <th>기대 결과</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>목 불편감</td>
+            <td><code>목이 칼칼하고 목 불편감</code></td>
+            <td>증상 문서의 표준명, alias, 질환 백과 근거 문장</td>
+            <td>목 통증 또는 인후 자극 계열 후보가 올라와야 한다.</td>
+          </tr>
+          <tr>
+            <td>코막힘</td>
+            <td><code>코가 막혀요 코막힘</code></td>
+            <td><code>코막힘</code> 표준 증상 문서와 관련 evidence</td>
+            <td>label 일치와 vector 유사도가 함께 잡히면 표준 증상 <code>코막힘</code>으로 채택한다.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="ok">
+        이 예제의 핵심 검증점은 “코막힘”이 환자 원문과 표준 증상 데이터 양쪽에서 모두 설명 가능해야 한다는 점이다.
+      </div>
+    </section>
+
+    <section>
+      <h2>5. 예제 2: 부정 표현과 사레</h2>
+      <p><strong>입력 질문:</strong> Q3 새 증상</p>
+      <pre><code>열은 안 나는데 물 마시면 자꾸 사레가 걸려서 캑캑거려요.</code></pre>
+
+      <h3>5-1. intake RAG가 실제로 만든 참고 문맥</h3>
+      <pre><code>{
+  "alias_hints": [
+    {
+      "matched_text": "열",
+      "canonical_hint": "열",
+      "pattern": "열|발열|고열"
+    }
+  ],
+  "symptom_references": [
+    {
+      "symptom_id": "dysphagia",
+      "display": "삼키기 곤란",
+      "bm25_score": 4.8003,
+      "evidence": {
+        "disease_name_ko": "흉선암",
+        "section": "symptom",
+        "text": "호흡이 곤란하거나 기침이 나는 경우, 가슴 통증과 삼키기 곤란한 느낌이 있을 수 있습니다"
+      }
+    },
+    {
+      "symptom_id": "symptom:f0ff1b70a5",
+      "display": "재채기",
+      "bm25_score": 4.3467,
+      "evidence": {
+        "disease_name_ko": "꽃가루 알레르기",
+        "section": "symptom",
+        "text": "콧물이나 재채기, 코막힘, 코 가려움증..."
+      }
+    },
+    {
+      "symptom_id": "symptom:ade69fdbb3",
+      "display": "반복되는 폐렴",
+      "bm25_score": 4.2853,
+      "evidence": {
+        "disease_name_ko": "기관 협착",
+        "section": "symptom",
+        "text": "기관 협착의 증상으로는 호흡곤란, 식사 시 반복되는 사레들림, 반복되는 폐렴 등이 있습니다"
+      }
+    }
+  ]
+}</code></pre>
+
+      <h3>5-2. “열”이 원페이퍼 증상으로 들어가면 안 되는 이유</h3>
+      <ul>
+        <li><code>열은 안 나는데</code>는 현재 증상이 아니라 부정 표현이다.</li>
+        <li>RAG가 <code>열</code> alias를 찾았더라도, 환자 발화의 의미는 “발열 없음”이다.</li>
+        <li>LLM 추출 결과는 <code>symptom_absent</code> 또는 clinical clue로 표현되어야 한다.</li>
+        <li>원페이퍼의 “오늘 말한 불편함”에는 active symptom만 들어가야 한다.</li>
+      </ul>
+
+      <h3>5-3. 이 예제에서 허용되는 처리 형태</h3>
+      <pre><code>{
+  "spans": [
+    {
+      "type": "symptom_absent",
+      "name_ko": "열",
+      "source_quote": "열은 안 나는데"
+    },
+    {
+      "type": "symptom_present",
+      "name_ko": "사레 또는 기침",
+      "source_quote": "물 마시면 자꾸 사레가 걸려서 캑캑거려요"
+    }
+  ],
+  "clinical_clues": [
+    {
+      "type": "trigger",
+      "source_quote": "물 마시면",
+      "summary": "물 섭취 시 증상 유발"
+    }
+  ]
+}</code></pre>
+
+      <h3>5-4. 이 예제에서 검토해야 할 RAG 설계 지점</h3>
+      <p>
+        “사레”는 일반 호흡기 증상만으로 처리하기 어렵다. 삼킴 곤란, 흡인 위험, 반복되는 폐렴 같은 문맥과 연결된다.
+        따라서 RAG 문서가 호흡기계에만 좁게 묶이면 매칭 품질이 흔들릴 수 있다.
+      </p>
+      <div class="warn">
+        이 케이스는 RAG 전문가에게 확인할 가치가 있다. “사레”를 표준 증상으로 둘지,
+        임상 단서로 둘지, 또는 흡인 위험 관련 별도 clinical clue로 둘지 결정해야 한다.
+      </div>
+    </section>
+
+    <section>
+      <h2>6. Hybrid IR 점수 산출 방식</h2>
+      <p>
+        UI에는 숫자 점수를 표시하지 않는다. 내부에서는 후보 정렬과 채택 여부를 위해 점수를 계산한다.
+        이 값은 진단 확률이나 의학적 확신도가 아니다.
+      </p>
+
+      <h3>6-1. 비교 문구 생성</h3>
+      <pre><code>query_text = normalize_text(
+  source_quote + " " + normalized_answer + " " + span_name
+)</code></pre>
+      <p>
+        환자 원문 인용, 표준화 답변, LLM이 붙인 증상명을 함께 사용한다.
+        한쪽 표현만 사용할 때보다 방언, 짧은 발화, 비문에 덜 흔들리게 하기 위한 구성이다.
+      </p>
+
+      <h3>6-2. 후보 문서 생성</h3>
+      <p>
+        검색 문서는 <code>diseases_cleaned.json</code>과 <code>symptom_index.json</code>에서 생성된다.
+        별도의 LLM 가공 데이터셋을 전제로 하지 않는다.
+      </p>
+      <table class="compact">
+        <thead>
+          <tr>
+            <th>데이터</th>
+            <th>사용 방식</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>symptom_index.json</code></td>
+            <td>표준 증상명, 증상 ID, alias 후보의 기준으로 사용한다.</td>
+          </tr>
+          <tr>
+            <td><code>diseases_cleaned.json</code></td>
+            <td>질환 백과의 증상 설명 문장을 evidence로 사용한다.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>6-3. 계산 신호</h3>
+      <table class="compact">
+        <thead>
+          <tr>
+            <th>신호</th>
+            <th>의미</th>
+            <th>역할</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BM25</td>
+            <td>단어 기반 검색 점수</td>
+            <td>환자 표현과 문서 문구가 직접적으로 겹치는지 본다.</td>
+          </tr>
+          <tr>
+            <td>Titan vector</td>
+            <td>의미 기반 유사도</td>
+            <td>단어가 정확히 같지 않아도 의미가 가까운 후보를 찾는다.</td>
+          </tr>
+          <tr>
+            <td>label score</td>
+            <td>표준명 또는 alias 직접 일치</td>
+            <td>“코막힘”처럼 명확한 직접 표현이 있을 때 후보를 보강한다.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>6-4. 내부 rank score</h3>
+      <pre><code>rank_score =
+  0.35 * bm25_norm
+  + 0.65 * vector_norm
+  + 0.25 * label_score
+  + preferred_alias_bonus
+  + agreement_bonus
+  - bm25_only_penalty</code></pre>
+
+      <p>
+        <code>rank_score</code>는 후보 정렬용이다. 화면에 보여주는 의료적 점수가 아니다.
+        현재 UI에서는 숫자를 숨기고 “매칭됨” 또는 표준 증상명 중심으로 보여주는 방향이 맞다.
+      </p>
+
+      <h3>6-5. 채택 gate</h3>
+      <pre><code>accepted =
+  vector_score &gt;= 0.12
+  and (
+    bm25_score &gt;= 0.04
+    or label_score &gt;= 0.55
+  )</code></pre>
+
+      <div class="danger">
+        BM25만 높고 vector가 거의 맞지 않는 후보는 채택하면 안 된다.
+        반대로 vector만 높고 원문 또는 표준명 근거가 약한 후보도 검토 대상이다.
+      </div>
+    </section>
+
+    <section>
+      <h2>7. 사투리 RAG 추가 설계</h2>
+      <p>
+        현재 사투리 표준화는 LLM의 일반 언어 이해에 많이 의존한다.
+        강원 방언 문맥을 안정적으로 처리하려면 별도 RAG 노드가 필요하다.
+      </p>
+
+      <h3>7-1. 추가될 위치</h3>
+      <div class="flow">
+        <span>환자 발화</span>
+        <span>안전 플래그</span>
+        <span>사투리 RAG</span>
+        <span>intake RAG</span>
+        <span>LLM 추출</span>
+        <span>검증</span>
+      </div>
+
+      <h3>7-2. 방언 RAG 데이터 예시</h3>
+      <pre><code>{
+  "dialect_term": "마카",
+  "standard_candidates": ["모두", "전부"],
+  "region": "강원",
+  "examples": [
+    {
+      "dialect_sentence": "열은 마카 싹 내렸소.",
+      "standard_sentence": "열은 전부 싹 내렸습니다."
+    }
+  ],
+  "notes": "문맥에 따라 강조 부사로만 처리한다. 증상명으로 추출하지 않는다."
+}</code></pre>
+
+      <h3>7-3. 허용 규칙</h3>
+      <ul>
+        <li>방언 RAG는 표준어 변환 후보만 제공한다.</li>
+        <li>방언 RAG는 증상, 질환, 처방, 검사를 새로 만들지 않는다.</li>
+        <li>방언 예문은 <code>source_quote</code>로 사용할 수 없다.</li>
+        <li>최종 source quote는 환자가 실제 말한 원문에서만 가져온다.</li>
+      </ul>
+
+      <h3>7-4. 남겨야 할 최소 추적 정보</h3>
+      <table class="compact">
+        <thead>
+          <tr>
+            <th>필드</th>
+            <th>필요 이유</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>dialect_matches</code></td>
+            <td>어떤 방언 표현이 표준화에 참고되었는지 확인한다.</td>
+          </tr>
+          <tr>
+            <td><code>standardization_rationale</code></td>
+            <td>표준화가 환자 의미를 바꾸지 않았는지 검토한다.</td>
+          </tr>
+          <tr>
+            <td><code>source_quote_map</code></td>
+            <td>원문 표현과 표준화 표현의 연결을 확인한다.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>8. 저장해야 할 RAG 관련 최소 정보</h2>
+      <p>
+        운영 저장은 서비스 실행과 사후 검토에 필요한 최소 정보만 남긴다.
+        디버깅용 전체 프롬프트, 불필요한 boolean 플래그, 화면에서 쓰지 않는 중간값은 운영 저장 대상이 아니다.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>정보</th>
+            <th>저장 여부</th>
+            <th>이유</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>환자 원문 답변</td>
+            <td>저장</td>
+            <td>의료진 확인과 source quote 검증에 필요하다. 가명 처리와 보존 기간 제한이 필요하다.</td>
+          </tr>
+          <tr>
+            <td>표준화 답변</td>
+            <td>저장</td>
+            <td>원페이퍼와 안내문 생성에 필요하다.</td>
+          </tr>
+          <tr>
+            <td>추출 span과 source quote</td>
+            <td>저장</td>
+            <td>LLM 결과가 원문에 근거했는지 확인한다.</td>
+          </tr>
+          <tr>
+            <td>선택된 표준 증상 ID와 표준명</td>
+            <td>저장</td>
+            <td>원페이퍼 표시와 추후 통계에 필요하다.</td>
+          </tr>
+          <tr>
+            <td>채택된 evidence 요약</td>
+            <td>최소 저장</td>
+            <td>왜 해당 표준 증상으로 매칭됐는지 설명하기 위한 최소 근거다.</td>
+          </tr>
+          <tr>
+            <td>전체 RAG 후보 목록</td>
+            <td>운영 저장 제외</td>
+            <td>화면과 운영에는 불필요하다. 필요하면 개발 환경 로그에서만 본다.</td>
+          </tr>
+          <tr>
+            <td>전체 프롬프트와 전체 LLM 응답 원문</td>
+            <td>운영 저장 제외</td>
+            <td>개인정보와 민감정보 노출 위험이 크다.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>9. RAG 검토 질문</h2>
+      <ul>
+        <li>LLM 추출 전에 넣는 weak RAG 문맥이 현재 수준으로 충분한가.</li>
+        <li>방언 RAG를 별도 노드로 분리할 때, 표준화 후보와 의료 증상 후보를 어떻게 분리할 것인가.</li>
+        <li>“사레”, “숨 넘어갈 것 같음”, “기운 없음” 같은 표현을 증상으로 둘지 clinical clue로 둘지 기준이 필요한가.</li>
+        <li>질환 백과 문장의 evidence를 증상 매칭에 사용할 때 오매칭 위험을 어떻게 줄일 것인가.</li>
+        <li>RAG 후보를 얼마나 저장해야 설명 가능성과 개인정보 최소 저장 원칙이 동시에 충족되는가.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
