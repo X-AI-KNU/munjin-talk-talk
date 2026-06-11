@@ -15,6 +15,12 @@
       "Q4": "지난번에 못 여쭤본 점이 있으신가요?"
     }
   },
+  "excluded_ir_symptom_names": ["사망", "무증상"],
+  "alert_slot_ids": [
+    "hemoptysis",
+    "dyspnea",
+    "chest_pain"
+  ],
   "symptom_rules": [
     {"name": "객혈", "slot_id": "hemoptysis", "keywords": ["피", "피가", "객혈", "피섞", "피 섞", "묻어"], "alert": true},
     {"name": "기침", "slot_id": "cough", "keywords": ["기침", "콜록"], "alert": false},

@@ -6,7 +6,7 @@ LLM/IR이 공유하는 증상 slot, alias, 안전 플래그 후보를 모아둡�
 
 import re
 
-from domain_config import get_domain_pack
+from domain_config import alert_slot_ids, get_domain_pack
 from utils import clean_quote, find_keyword_quote
 
 _DOMAIN_PACK = get_domain_pack()
@@ -50,6 +50,7 @@ IR_TEXT_ALIASES = [
     if isinstance(item, dict) and item.get("pattern") and item.get("canonical_name")
 ]
 IR_RED_FLAG_NAMES = {str(item) for item in _DOMAIN_PACK.get("ir_red_flag_names", [])}
+ALERT_SLOT_IDS = alert_slot_ids()
 
 # 안전 플래그는 의도적으로 deterministic 규칙으로 둡니다.
 # 진단 목적이 아니라 문진을 잠시 멈추고 직원/의료진 확인으로 넘기기 위한 장치입니다.
@@ -70,7 +71,7 @@ def find_safety_flag(text, matched_slots=None):
     text = str(text or "")
     for slot in matched_slots or []:
         slot_id = slot.get("slot_id") or slot.get("slot_ref")
-        if slot_id in ("hemoptysis", "dyspnea", "chest_pain"):
+        if slot_id in ALERT_SLOT_IDS:
             return {
                 "category": slot_id,
                 "label": slot.get("name") or slot_id,

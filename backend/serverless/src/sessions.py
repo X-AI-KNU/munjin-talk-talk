@@ -17,6 +17,8 @@ from privacy import consent_summary, sanitize_reception_patient
 from settings import table
 from utils import ddb_value, mask_name, normalize_visit_type, now_iso
 
+QUEUE_COUNTER_SESSION_ID = "__meta_queue_counter__"
+
 
 def make_session_id() -> str:
     """새 문진 세션의 고유 ID를 만듭니다."""
@@ -38,14 +40,45 @@ def put_session(item: dict[str, Any]) -> dict[str, Any]:
     return converted
 
 
-def next_queue_number() -> int:
-    """오늘 대기열 표시용 순번을 단순 증가 방식으로 계산합니다."""
+def _scan_max_queue_number() -> int:
+    """기존 세션의 최대 대기번호를 읽어 counter 초기값으로 사용합니다."""
     try:
         res = table.scan(ProjectionExpression="queue_number", Limit=1000)
         numbers = [int(item.get("queue_number") or 0) for item in res.get("Items", [])]
-        return max(numbers or [0]) + 1
+        return max(numbers or [0])
     except Exception:
-        return int(time.time()) % 10000
+        return 0
+
+
+def next_queue_number() -> int:
+    """오늘 대기열 표시용 순번을 DynamoDB 원자 counter로 발급합니다.
+
+    scan 후 max+1 방식은 동시 접수에서 같은 번호가 나올 수 있습니다.
+    별도 meta item에 `ADD queue_counter :one`을 적용하면 DynamoDB가 증가를
+    원자적으로 처리합니다. 실패 시에만 보수적인 fallback을 사용합니다.
+    """
+    try:
+        try:
+            table.put_item(
+                Item={
+                    "session_id": QUEUE_COUNTER_SESSION_ID,
+                    "queue_counter": _scan_max_queue_number(),
+                },
+                ConditionExpression="attribute_not_exists(session_id)",
+            )
+        except Exception:
+            # 이미 다른 요청이 counter를 만들었다면 정상 경합입니다.
+            pass
+        res = table.update_item(
+            Key={"session_id": QUEUE_COUNTER_SESSION_ID},
+            UpdateExpression="ADD queue_counter :one",
+            ExpressionAttributeValues={":one": 1},
+            ReturnValues="UPDATED_NEW",
+        )
+        return int(res["Attributes"]["queue_counter"])
+    except Exception:
+        fallback = _scan_max_queue_number()
+        return fallback + 1 if fallback else int(time.time()) % 10000
 
 
 def update_session(session_id: str, updates: dict[str, Any]) -> dict[str, Any] | None:
@@ -179,6 +212,9 @@ def public_session(session: dict[str, Any], include_artifacts: bool = False) -> 
 def list_sessions() -> list[dict[str, Any]]:
     """접수처와 의사 대기열에서 사용할 최신 세션 목록을 반환합니다."""
     res = table.scan(Limit=100)
-    items = res.get("Items", [])
+    items = [
+        item for item in res.get("Items", [])
+        if not str(item.get("session_id") or "").startswith("__meta")
+    ]
     items.sort(key=lambda x: x.get("created_at", ""), reverse=True)
     return [public_session(item) for item in items]

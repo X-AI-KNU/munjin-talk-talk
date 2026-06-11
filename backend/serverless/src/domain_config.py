@@ -62,3 +62,17 @@ def symptom_slot_ids() -> set[str]:
     ids.update(str(item) for item in (pack.get("ir_slot_to_canonical_name") or {}).keys())
     ids.add("other")
     return ids
+
+
+def excluded_ir_symptom_names() -> set[str]:
+    """IR/RAG 후보로 보여주면 안 되는 원천 증상 표시명을 반환합니다.
+
+    원천 JSON에는 통계적/분류용 항목인 `사망`, `무증상` 등이 포함될 수 있습니다.
+    인덱스와 embedding hash는 유지하고, 실제 후보 채택 단계에서만 제외합니다.
+    """
+    return {str(item) for item in get_domain_pack().get("excluded_ir_symptom_names", [])}
+
+
+def alert_slot_ids() -> tuple[str, ...]:
+    """문진 중 즉시 확인 대상으로 볼 위험 증상 slot id입니다."""
+    return tuple(str(item) for item in get_domain_pack().get("alert_slot_ids", []))

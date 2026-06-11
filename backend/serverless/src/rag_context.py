@@ -16,8 +16,12 @@ import re
 from typing import Any
 
 from clinical_terms import IR_TEXT_ALIASES
+from domain_config import excluded_ir_symptom_names
 from retrieval_documents import get_ir_index
 from utils import clean_quote, normalize_text
+
+
+EXCLUDED_IR_SYMPTOM_NAMES = excluded_ir_symptom_names()
 
 
 def retrieve_intake_rag_context(
@@ -63,10 +67,14 @@ def retrieve_symptom_references(query: str, top_k: int = 4) -> list[dict[str, An
     scores = bm25.scores(query)
     ranked = sorted(enumerate(scores), key=lambda item: item[1], reverse=True)
     refs: list[dict[str, Any]] = []
-    for idx, score in ranked[: max(0, top_k)]:
+    for idx, score in ranked:
+        if len(refs) >= max(0, top_k):
+            break
         if score <= 0:
             continue
         doc = docs[idx]
+        if doc.get("display_name") in EXCLUDED_IR_SYMPTOM_NAMES:
+            continue
         refs.append(
             {
                 "symptom_id": doc.get("symptom_id"),
