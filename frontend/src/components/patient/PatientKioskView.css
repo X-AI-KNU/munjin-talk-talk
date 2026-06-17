@@ -31,3 +31,196 @@
   font-weight: 1000;
   text-decoration: none;
 }
+
+/* 여러 태블릿이 공통으로 열어 두는 환자 문진 대기열 화면입니다. */
+.tablet-queue-page {
+  width: min(920px, calc(100vw - 36px));
+  color: var(--ink);
+}
+.tablet-queue-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.tablet-queue-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tablet-queue-brand img {
+  width: 66px;
+  height: 68px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 18px rgba(37, 99, 235, 0.13));
+}
+.tablet-queue-brand p {
+  margin: 0;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 1000;
+}
+.tablet-queue-brand h1 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 36px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.tablet-queue-header button {
+  min-width: 128px;
+  height: 48px;
+  border: 1px solid var(--line2);
+  border-radius: 10px;
+  background: white;
+  color: var(--navy);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 1000;
+  cursor: pointer;
+  box-shadow: var(--shadow3);
+}
+.tablet-queue-panel {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: white;
+  box-shadow: var(--shadow2);
+}
+.tablet-queue-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #edf2f7;
+}
+.tablet-queue-title h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 22px;
+}
+.tablet-queue-title span {
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 1000;
+}
+.tablet-queue-error {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border: 1px solid #fecaca;
+  border-radius: 9px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-weight: 900;
+}
+.tablet-queue-list {
+  display: grid;
+  gap: 12px;
+}
+.tablet-queue-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+.tablet-queue-card.staff_help,
+.tablet-queue-card.consent_rejected {
+  border-color: #fdba74;
+  background: #fff7ed;
+}
+.tablet-queue-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 11px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 1000;
+}
+.tablet-queue-card.staff_help .tablet-queue-badge,
+.tablet-queue-card.consent_rejected .tablet-queue-badge {
+  background: #ffedd5;
+  color: #c2410c;
+}
+.tablet-queue-card h3 {
+  margin: 10px 0 3px;
+  color: var(--navy);
+  font-size: 24px;
+  line-height: 1.2;
+}
+.tablet-queue-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 900;
+}
+.tablet-queue-card a,
+.tablet-queue-empty a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 142px;
+  min-height: 52px;
+  padding: 0 18px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue), var(--teal));
+  color: white;
+  font-size: 15px;
+  font-weight: 1000;
+  text-decoration: none;
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.2);
+}
+.tablet-queue-empty {
+  padding: 32px 18px;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 900;
+}
+.tablet-queue-empty strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--navy);
+  font-size: 20px;
+}
+.tablet-queue-empty p {
+  margin: 0 0 16px;
+}
+
+@media (max-width: 700px) {
+  .tablet-queue-page {
+    width: min(100vw - 24px, 620px);
+  }
+  .tablet-queue-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .tablet-queue-brand h1 {
+    font-size: 30px;
+  }
+  .tablet-queue-header button {
+    width: 100%;
+  }
+  .tablet-queue-title {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .tablet-queue-card {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .tablet-queue-card a {
+    width: 100%;
+  }
+}

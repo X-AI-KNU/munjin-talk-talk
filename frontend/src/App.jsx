@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, Routes, Route, useLocation } from 'react-router-dom'
 import PatientKioskView from './components/patient/PatientKioskView.jsx'
+import PatientTabletQueueView from './components/patient/PatientTabletQueueView.jsx'
 import DoctorView from './components/doctor/DoctorView.jsx'
 import DoctorQueueView from './components/doctor/DoctorQueueView.jsx'
 import PatientGuideScreen from './components/patient/PatientGuideScreen.jsx'
@@ -49,20 +50,17 @@ export default function App() {
       }
     }
 
-    const tablet = sessions.find((session) => session.status === 'waiting_tablet')
-      || sessions.find((session) => session.status === 'in_progress')
-      || sessions[0]
     const doctor = sessions.find((session) => ['needs_priority', 'completed', 'reviewed'].includes(session.status))
-      || tablet
+      || sessions[0]
     return {
-      patient: tablet ? `/patient/${tablet.sessionId}` : null,
+      patient: '/patient',
       doctor: doctor ? `/doctor/${doctor.sessionId}` : null,
       guide: doctor ? `/guide/${doctor.sessionId}` : null,
     }
   }, [activeSessionId, sessions])
 
   const navClass = (active) => (active ? 'active' : '')
-  const patientRoute = path.startsWith('/patient/')
+  const patientRoute = path === '/patient' || path.startsWith('/patient/')
 
   return (
     <>
@@ -86,6 +84,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<ReceptionView />} />
           <Route path="/staff" element={<ReceptionView />} />
+          <Route path="/patient" element={<PatientTabletQueueView />} />
           <Route path="/patient/:sessionId" element={<PatientKioskView />} />
           <Route path="/doctor/queue" element={<DoctorQueueView />} />
           <Route path="/doctor" element={<DoctorView />} />

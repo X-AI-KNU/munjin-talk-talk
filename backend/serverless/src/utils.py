@@ -99,9 +99,13 @@ def calculate_age(birth_date):
     except ValueError:
         return ""
     today = datetime.now().date()
+    if birth > today or birth.year < 1900:
+        return ""
     age = today.year - birth.year
     if (today.month, today.day) < (birth.month, birth.day):
         age -= 1
+    if age < 0 or age > 130:
+        return ""
     return age
 
 

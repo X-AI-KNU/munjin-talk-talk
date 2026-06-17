@@ -114,6 +114,29 @@
   font-size: 12px;
   font-weight: 900;
 }
+.rp-form small {
+  display: block;
+  min-height: 18px;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+.rp-field-hint {
+  color: #64748b;
+}
+.rp-field-error,
+.rp-form-error {
+  color: #b91c1c;
+}
+.rp-form-error {
+  margin: -2px 0 0;
+  padding: 9px 11px;
+  border: 1px solid #fecaca;
+  border-radius: 7px;
+  background: #fef2f2;
+  font-size: 12px;
+  font-weight: 900;
+}
 .rp-form input,
 .rp-form select {
   width: 100%;
@@ -160,6 +183,11 @@
   font-size: 14px;
   font-weight: 1000;
   cursor: pointer;
+}
+.rp-primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+  box-shadow: none;
 }
 .rp-created {
   margin-top: 14px;
