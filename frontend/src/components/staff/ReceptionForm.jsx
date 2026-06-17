@@ -30,9 +30,7 @@ export default function ReceptionForm({ form, created, updateField, onSubmit, on
             value={form.birthDate}
             onChange={(e) => updateField('birthDate', formatBirthDate(e.target.value))}
           />
-          <small className={birthDateError ? 'rp-field-error' : 'rp-field-hint'}>
-            {birthDateError || '숫자 8자리를 입력하면 자동으로 날짜 형식이 맞춰집니다.'}
-          </small>
+          {birthDateError && <small className="rp-field-error">{birthDateError}</small>}
         </label>
         <label>
           <span>성별</span>

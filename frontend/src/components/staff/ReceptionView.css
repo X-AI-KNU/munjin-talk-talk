@@ -116,13 +116,9 @@
 }
 .rp-form small {
   display: block;
-  min-height: 18px;
   font-size: 11px;
   font-weight: 800;
   line-height: 1.35;
-}
-.rp-field-hint {
-  color: #64748b;
 }
 .rp-field-error,
 .rp-form-error {
