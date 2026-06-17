@@ -28,7 +28,7 @@ export default function ReceptionForm({ form, created, updateField, onSubmit, on
             placeholder="YYYY-MM-DD"
             aria-invalid={Boolean(birthDateError)}
             value={form.birthDate}
-            onChange={(e) => updateField('birthDate', formatBirthDate(e.target.value))}
+            onChange={(e) => updateField('birthDate', formatBirthDate(e.target.value, form.birthDate))}
           />
           {birthDateError && <small className="rp-field-error">{birthDateError}</small>}
         </label>

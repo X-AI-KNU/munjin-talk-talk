@@ -45,8 +45,10 @@ export default function ReceptionView() {
   )
 
   const updateField = (key, value) => {
-    const nextValue = key === 'birthDate' ? formatBirthDate(value) : value
-    setForm((prev) => ({ ...prev, [key]: nextValue }))
+    setForm((prev) => {
+      const nextValue = key === 'birthDate' ? formatBirthDate(value, prev.birthDate) : value
+      return { ...prev, [key]: nextValue }
+    })
     if (key === 'birthDate') setFormError('')
   }
 

@@ -31,12 +31,60 @@ export const MANUAL_INPUT_STATUSES = new Set([
 ])
 
 // 생년월일은 브라우저 date input에 맡기면 일부 환경에서 5자리 이상 연도가 입력될 수 있습니다.
-// 접수처에서는 숫자 8자리만 받아 YYYY-MM-DD로 고정해, 잘못된 나이가 저장되는 일을 막습니다.
-export function formatBirthDate(value) {
+// 접수처에서는 숫자 8자리만 받아 YYYY-MM-DD로 고정하고, 명백히 불가능한 월/일은 입력 중에도 막습니다.
+export function formatBirthDate(value, previousValue = '') {
   const digits = String(value || '').replace(/\D/g, '').slice(0, 8)
+  const formatted = formatBirthDateDigits(digits)
+  if (!isBirthDateDraftAllowed(formatted)) {
+    return String(previousValue || '').slice(0, 10)
+  }
+  return formatted
+}
+
+function formatBirthDateDigits(digits) {
   if (digits.length <= 4) return digits
   if (digits.length <= 6) return `${digits.slice(0, 4)}-${digits.slice(4)}`
   return `${digits.slice(0, 4)}-${digits.slice(4, 6)}-${digits.slice(6)}`
+}
+
+function isBirthDateDraftAllowed(value) {
+  const digits = String(value || '').replace(/\D/g, '')
+  if (!digits) return true
+
+  if (digits.length >= 4) {
+    const year = Number(digits.slice(0, 4))
+    const currentYear = new Date().getFullYear()
+    if (year < 1900 || year > currentYear) return false
+  }
+
+  if (digits.length >= 5 && !['0', '1'].includes(digits[4])) return false
+  if (digits.length >= 6) {
+    const month = Number(digits.slice(4, 6))
+    if (month < 1 || month > 12) return false
+  }
+
+  if (digits.length >= 7 && Number(digits[6]) > 3) return false
+  if (digits.length >= 8) {
+    const year = Number(digits.slice(0, 4))
+    const month = Number(digits.slice(4, 6))
+    const day = Number(digits.slice(6, 8))
+    const date = new Date(year, month - 1, day)
+    const today = new Date()
+    if (
+      date.getFullYear() !== year
+      || date.getMonth() !== month - 1
+      || date.getDate() !== day
+      || date > today
+    ) {
+      return false
+    }
+    let age = today.getFullYear() - year
+    if ((today.getMonth() + 1 < month) || (today.getMonth() + 1 === month && today.getDate() < day)) {
+      age -= 1
+    }
+    if (age > 130) return false
+  }
+  return true
 }
 
 export function getBirthDateError(value) {
