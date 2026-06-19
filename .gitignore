@@ -13,6 +13,12 @@ backend/.env
 backend/serverless/.aws-sam/
 backend/serverless/samconfig.toml
 
+# Private runtime datasets
+# 공개 저장소에는 원천 의료 백과 본문, 파생 symptom index, embedding cache를 올리지 않습니다.
+backend/serverless/src/data/diseases_cleaned.json
+backend/serverless/src/data/symptom_index.json
+backend/serverless/src/data/symptom_embeddings_*.json
+
 # Frontend generated files
 frontend/node_modules/
 frontend/dist/

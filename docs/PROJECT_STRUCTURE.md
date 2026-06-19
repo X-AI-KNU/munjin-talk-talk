@@ -324,21 +324,24 @@ backend/serverless/src/
 
 ```text
 backend/serverless/src/data/
-├── domain_pack_respiratory.json
-├── diseases_cleaned.json
-├── symptom_index.json
-└── symptom_embeddings_amazon.titan-embed-text-v2_0_512.json
+├── README.md
+├── domain_packs/respiratory.json
+├── domain_packs/respiratory_fewshot.txt
+├── question_sets/default.json
+└── (비공개 배치) diseases_cleaned / symptom_index / embedding cache
 ```
 
 | 파일 | 역할 |
 | --- | --- |
-| `domain_pack_respiratory.json` | 호흡기계 MVP의 증상 slot, 제한 alias bridge, safety flag, 기본 질문 문구 |
-| `diseases_cleaned.json` | 질환별 설명, 증상, 관련 정보 원천 데이터 |
-| `symptom_index.json` | 표준 증상명, alias, slot id |
-| `symptom_embeddings_*.json` | 검색 문서의 Titan embedding cache |
+| `domain_packs/respiratory.json` | 호흡기계 MVP의 증상 slot, 제한 alias bridge, safety flag |
+| `domain_packs/respiratory_fewshot.txt` | LLM extraction few-shot 예시 |
+| `question_sets/default.json` | 초진/재진 문진 질문 세트 |
+| `diseases_cleaned.json` | 비공개 배치 파일. 질환별 설명, 증상, 관련 정보 원천 데이터 |
+| `symptom_index.json` | 비공개 배치 파일. 표준 증상명과 질환 문서 연결 인덱스 |
+| `symptom_embeddings_*.json` | 비공개 배치 파일. 검색 문서의 Titan embedding cache |
 
 `symptom_retrieval_dataset`처럼 LLM이 가공한 검색 dataset은 runtime 필수 데이터로 사용하지 않습니다.
-도메인 확장은 `diseases_cleaned.json`, `symptom_index.json`, `domain_pack_*.json`을 같은 구조로 추가하는 방식이 기본입니다.
+도메인 확장은 같은 구조의 비공개 원천 데이터와 공개 가능한 domain pack/question set을 함께 추가하는 방식이 기본입니다.
 
 ---
 
@@ -355,8 +358,8 @@ backend/serverless/src/data/
 | source_quote 검증 수정 | `schemas/extraction.py`, `extraction_schema.py` |
 | LangGraph 노드 추가 | `pipeline_state.py`, `pipeline_nodes.py`, `pipeline_graph.py` |
 | 증상 매칭 점수 조정 | `retrieval_scoring.py`, `settings.py` |
-| 도메인 slot/alias/safety 수정 | `data/domain_pack_respiratory.json` |
-| 표준 증상 인덱스 수정 | `data/symptom_index.json` |
+| 도메인 slot/alias/safety 수정 | `data/domain_packs/respiratory.json` |
+| 표준 증상 인덱스 수정 | 비공개 런타임 데이터 `data/symptom_index.json` |
 | 원페이퍼 화면 표시 수정 | `frontend/src/components/doctor/DoctorOnePager.jsx` |
 | onepaper JSON 조립 수정 | `onepager.py`, `onepager_sections.py` |
 | 환자 안내문 표시 수정 | `PatientGuideScreen.jsx`, `guide.py` |

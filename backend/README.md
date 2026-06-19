@@ -59,15 +59,14 @@ backend/
     │   ├── utils.py
     │   ├── schemas/             # extraction.py, review.py, guide.py
     │   └── data/
-    │       ├── diseases_cleaned.json
-    │       ├── symptom_index.json
-    │       ├── symptom_embeddings_amazon.titan-embed-text-v2_0_512.json
+    │       ├── README.md
     │       ├── domain_packs/respiratory.json   (+ respiratory_fewshot.txt)
-    │       └── question_sets/default.json
+    │       ├── question_sets/default.json
+    │       └── (비공개 배치) diseases_cleaned / symptom_index / embedding cache
     └── tests/                   # pytest (6 파일, 25 케이스)
 ```
 
-> ℹ️ 도메인팩과 질문셋은 각각 `data/domain_packs/`, `data/question_sets/` 폴더로 분리되어 있습니다 (이전 평면 파일 구조에서 변경됨). `backend/serverless/.aws-sam/`과 `samconfig.toml`은 로컬 산출물이라 저장소에 포함하지 않습니다.
+> ℹ️ 도메인팩과 질문셋은 각각 `data/domain_packs/`, `data/question_sets/` 폴더로 분리되어 있습니다. 원천 의료 백과 본문과 그 파생 증상 인덱스·embedding cache는 저작권/이용 범위 검토 대상이라 공개 저장소에 포함하지 않고, 배포 시 팀 내부 비공개 데이터로 주입합니다. `backend/serverless/.aws-sam/`과 `samconfig.toml`은 로컬 산출물이라 저장소에 포함하지 않습니다.
 
 ---
 
@@ -136,7 +135,7 @@ input_transcript → quick_safety_flag → rag_context_retrieval
 
 ## 🔍 Hybrid IR
 
-원천: `data/diseases_cleaned.json`, `data/symptom_index.json` / 사전계산 embedding: `data/symptom_embeddings_amazon.titan-embed-text-v2_0_512.json`
+원천 데이터는 내부 배포 환경의 `data/diseases_cleaned.json`, `data/symptom_index.json`과 사전계산 embedding cache를 사용합니다. 이 3개 파일은 공개 저장소에는 포함하지 않습니다.
 
 1. LLM span의 `source_quote`·`normalized_text`·`name`·`slot_ref`를 query로 구성
 2. `symptom_index.json`·`diseases_cleaned.json`에서 검색 문서 생성

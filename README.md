@@ -151,11 +151,7 @@ flowchart LR
 
 LLM이 뽑은 증상 후보를 원천 데이터의 표준 증상명에 deterministic하게 맞춥니다.
 
-```text
-src/data/diseases_cleaned.json
-src/data/symptom_index.json
-src/data/symptom_embeddings_amazon.titan-embed-text-v2_0_512.json
-```
+IR은 내부 배포 환경의 비공개 런타임 데이터(`diseases_cleaned.json`, `symptom_index.json`, Titan embedding cache)를 사용합니다. 이 데이터는 원천 의료 백과 본문과 그 파생물이라 공개 Git 저장소에는 포함하지 않습니다. 공개 저장소에는 데이터 구조와 배치 기준만 남기고, 실제 배포 시에는 팀 내부 비공개 저장소에서 Lambda 패키지에 주입합니다.
 
 1. LLM extraction이 증상 후보 span 생성
 2. `source_quote`·`normalized_text`·`name`·`slot_ref`로 검색 query 구성
@@ -180,19 +176,13 @@ src/data/symptom_embeddings_amazon.titan-embed-text-v2_0_512.json
 
 ---
 
-## 📊 측정 결과
-
-<!-- ───────────────────────────────────────────────
-  실측한 시스템 메트릭을 채워 넣으세요. 숫자 1~2개가 README 신뢰도를 크게 올립니다.
-  (멘토링 발표 때 측정한 값 활용 가능 / 측정 못 한 항목은 줄째로 삭제)
-─────────────────────────────────────────────── -->
+## 📊 검증 현황
 
 | 지표 | 값 | 측정 조건 |
 | --- | --- | --- |
-| 문항 1개 처리 지연(p50/p95) | `_._s` / `_._s` | <!-- 예: Nova Lite, ap-northeast-2 --> |
-| Extraction 스키마 검증 통과율 | `__%` | <!-- 예: 샘플 N건 --> |
-| Hybrid IR 표준 증상 매칭 정확도 | `__%` | <!-- gold span 기준 --> |
 | 자동 테스트 | **25 passed** | `pytest` |
+| 프론트 빌드 | 통과 | `npm run build` |
+| SAM 템플릿 검증 | 통과 | `sam validate` |
 
 ---
 
@@ -263,7 +253,7 @@ munjin-talk-talk-mvp/
 │       ├── langchain_prompting.py# Bedrock JSON chain
 │       ├── retrieval*.py         # Hybrid IR
 │       ├── schemas/              # Pydantic 스키마
-│       └── data/                 # 도메인팩 · 질문셋 · 증상 인덱스
+│       └── data/                 # 공개 도메인팩 · 질문셋 / 비공개 IR 데이터 배치 위치
 └── docs/                  # 아키텍처 · 파이프라인 · 데이터 · 보안 문서
 ```
 
@@ -280,9 +270,9 @@ munjin-talk-talk-mvp/
 
 ---
 
-## 🧭 한계와 다음 단계
+## 🧭 상용화 확장 계획
 
-현재는 연구·시연 목적의 MVP입니다. 실제 환자 데이터로 공개 테스트하기 전 다음이 필요합니다.
+현재 저장소는 해커톤 시연과 구조 검증을 위한 MVP입니다. 실제 의료기관 운영 전에는 다음 항목을 병원 정책과 보안 기준에 맞춰 추가해야 합니다.
 
 - [ ] 직원/의사 화면 인증 + 역할 기반 접근 제어
 - [ ] DynamoDB TTL · S3 Lifecycle · Block Public Access · KMS 암호화
@@ -306,4 +296,4 @@ munjin-talk-talk-mvp/
 
 문진톡톡은 의료적 진단·처방·질병 예측을 수행하지 않습니다. 환자 발화를 구조화해 의료진 확인을 돕는 MVP이며, 모든 진료 판단은 의료진이 수행해야 합니다.
 
-<!-- 라이선스를 정했다면 여기에 명시 (예: MIT). 미정이면 "내부 해커톤 제출용, 별도 라이선스 미지정" 로 남겨두세요. -->
+코드는 해커톤 제출 및 심사용 공개를 목적으로 정리되어 있습니다. 원천 의료 백과 데이터와 그 파생 인덱스·embedding cache는 공개 저장소에 포함하지 않습니다.

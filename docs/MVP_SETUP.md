@@ -100,6 +100,12 @@ npm.cmd run dev -- --host 127.0.0.1 --port 5173
 
 ## 6. 백엔드 빌드와 배포
 
+공개 저장소에는 원천 의료 백과 본문과 파생 증상 인덱스·embedding cache가 포함되지 않습니다. Hybrid IR까지 포함해 배포하려면 `sam build` 전에 팀 내부 비공개 데이터 저장소에서 아래 파일을 `backend/serverless/src/data/`에 배치합니다.
+
+- `diseases_cleaned.json`
+- `symptom_index.json`
+- `symptom_embeddings_amazon.titan-embed-text-v2_0_512.json`
+
 ```powershell
 cd C:\Users\CGB\munjin-talk-talk-mvp\backend\serverless
 sam build

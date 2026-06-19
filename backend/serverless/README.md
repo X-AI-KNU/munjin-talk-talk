@@ -62,10 +62,10 @@ backend/serverless/
 │   ├── onepager.py  onepager_sections.py  onepager_review.py  guide.py
 │   ├── schemas/  ├─ extraction.py ├─ review.py └─ guide.py
 │   └── data/
-│       ├── diseases_cleaned.json  symptom_index.json
-│       ├── symptom_embeddings_amazon.titan-embed-text-v2_0_512.json
+│       ├── README.md
 │       ├── domain_packs/respiratory.json (+ respiratory_fewshot.txt)
-│       └── question_sets/default.json
+│       ├── question_sets/default.json
+│       └── (비공개 배치) diseases_cleaned / symptom_index / embedding cache
 └── tests/
     ├── test_schema_and_artifact_policy.py   test_schema_slots.py
     ├── test_ir_noise_and_safety.py          test_prompts_golden.py
@@ -150,6 +150,8 @@ safety 분기: schema_quote_validation → safety_guardrail_save → response_pa
 | `HYBRID_ACCEPT_THRESHOLD` | | IR 후보 채택 최소 기준 |
 | `HYBRID_BM25_WEIGHT` / `HYBRID_VECTOR_WEIGHT` | | 점수 가중치 |
 | `HYBRID_MIN_VECTOR_SCORE` / `HYBRID_MIN_BM25_SCORE` / `HYBRID_MIN_LABEL_SCORE` | | 채택 최소 기준 |
+
+공개 저장소에는 원천 의료 백과 본문과 파생 인덱스·embedding cache가 포함되지 않습니다. SAM 배포 전 팀 내부 비공개 데이터 저장소에서 `src/data/diseases_cleaned.json`, `src/data/symptom_index.json`, `src/data/symptom_embeddings_amazon.titan-embed-text-v2_0_512.json`을 배치해야 Hybrid IR이 정상 동작합니다.
 
 ---
 

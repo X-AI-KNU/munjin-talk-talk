@@ -232,12 +232,13 @@ LLM extraction 전에 원천 JSON과 제한 alias bridge에서 참고 문맥을 
 rag_context.py
 retrieval_documents.py
 clinical_terms.py
-data/diseases_cleaned.json
-data/symptom_index.json
+data/diseases_cleaned.json        # 비공개 배치
+data/symptom_index.json           # 비공개 배치
 ```
 
 중요:
 
+- 공개 저장소에는 원천 의료 백과 본문과 파생 인덱스를 포함하지 않습니다. 배포 환경에서 비공개 데이터로 배치합니다.
 - RAG 결과는 환자 사실이 아닙니다.
 - RAG 결과만 보고 증상, 진단, 검사, 약제를 추가할 수 없습니다.
 - `source_quote`와 `original_quote`는 여전히 환자 원문에서만 나와야 합니다.

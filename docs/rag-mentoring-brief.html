@@ -414,7 +414,7 @@
             <td><code>build_extraction_messages</code></td>
           </tr>
           <tr>
-            <td><code>backend/serverless/src/domain_config.py</code>, <code>backend/serverless/src/data/domain_pack_respiratory.json</code></td>
+            <td><code>backend/serverless/src/domain_config.py</code>, <code>backend/serverless/src/data/domain_packs/respiratory.json</code></td>
             <td>허용 symptom slot, 제한 alias bridge, safety flag, 기본 질문 문구 관리</td>
             <td><code>get_domain_pack</code>, <code>symptom_slot_ids</code></td>
           </tr>
@@ -699,8 +699,9 @@ Do not add symptoms, diagnoses, tests, or medications just because they appear b
 
       <h3>6-2. 후보 문서 생성</h3>
       <p>
-        검색 문서는 <code>diseases_cleaned.json</code>과 <code>symptom_index.json</code>에서 생성된다.
-        별도의 LLM 가공 데이터셋을 전제로 하지 않는다.
+        검색 문서는 배포 환경에 비공개로 배치한 <code>diseases_cleaned.json</code>과
+        <code>symptom_index.json</code>에서 생성된다. 공개 Git 저장소에는 원천 의료 백과 본문과
+        파생 인덱스를 포함하지 않는다. 별도의 LLM 가공 데이터셋을 전제로 하지 않는다.
       </p>
       <table class="compact">
         <thead>
