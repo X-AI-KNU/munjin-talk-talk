@@ -212,6 +212,6 @@ sam validate
 
 ## 🔒 보안 주의
 
-현재 MVP 백엔드는 인증·권한 분리가 없습니다. 공개 URL에 실제 환자 정보를 입력하면 안 됩니다. 공개 테스트 전: Cognito 또는 병원 인증, 직원/의사 권한 분리, DynamoDB TTL, CloudWatch Logs 보존, API Gateway throttling, WAF/IP 제한, 환자 동의 절차, 의료정보 처리 기준 검토.
+현재 MVP 백엔드는 `security.py`에서 직원/의료진 접근 코드와 환자 세션 토큰을 검증합니다. 다만 이는 해커톤 MVP 수준의 1차 접근 제어이므로, 실제 의료기관 운영 전에는 Cognito 또는 병원 SSO, 사용자별 계정, 감사 로그, DynamoDB TTL 콘솔 활성화, S3 Lifecycle/KMS/Macie, CloudWatch Logs 보존, API Gateway throttling, WAF/IP 제한, 환자 동의 절차, 의료정보 처리 기준 검토가 필요합니다.
 
 자세한 내용: [serverless README](serverless/README.md) · [데이터 전수조사](../docs/SECURITY_DATA_INVENTORY.md)
