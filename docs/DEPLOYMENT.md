@@ -215,6 +215,12 @@ AWS Console에서 Bedrock model access를 확인합니다.
 
 ## 7. SAM backend 배포
 
+공개 저장소에는 저작권/이용 범위 검토가 필요한 원천 의료 백과 본문과 파생 인덱스·embedding cache가 포함되지 않습니다. `sam build` 전에 팀 내부 비공개 데이터 저장소에서 아래 파일을 `backend/serverless/src/data/`에 배치합니다.
+
+- `diseases_cleaned.json`
+- `symptom_index.json`
+- `symptom_embeddings_amazon.titan-embed-text-v2_0_512.json`
+
 ```powershell
 cd C:\Users\CGB\munjin-talk-talk-mvp\backend\serverless
 sam build

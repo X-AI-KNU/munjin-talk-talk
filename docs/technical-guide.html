@@ -619,7 +619,7 @@
 
       <div class="note blue">
         중요한 정정: 현재 증상 매칭은 단순 단어 포함 점수가 아닙니다.
-        <code>diseases_cleaned.json</code>과 <code>symptom_index.json</code>에서 rule-base로 만든 증상 문서를 대상으로
+        배포 환경에 비공개로 배치한 <code>diseases_cleaned.json</code>과 <code>symptom_index.json</code>에서 rule-base로 만든 증상 문서를 대상으로
         BM25 lexical 검색, Titan embedding vector 검색, LLM이 추출한 slot_ref/name 힌트를 함께 반영합니다.
         생성형 LLM이 IR 안에서 새 증상을 만들어내는 구조는 아닙니다.
       </div>
@@ -770,10 +770,10 @@
 │     ├─ domain_config.py # 도메인팩 로딩과 slot 허용 목록
 │     ├─ requirements.txt
 │     └─ data/
-│        ├─ domain_pack_respiratory.json
-│        ├─ diseases_cleaned.json
-│        ├─ symptom_index.json
-│        └─ symptom_embeddings_amazon.titan-embed-text-v2_0_512.json
+│        ├─ README.md
+│        ├─ domain_packs/respiratory.json
+│        ├─ question_sets/default.json
+│        └─ 비공개 배치: diseases_cleaned / symptom_index / embedding cache
 ├─ docs/
 │  ├─ technical-guide.html
 │  ├─ architecture.drawio
@@ -792,7 +792,7 @@
           </div>
           <div class="mini-card tint-green">
             <h3>IR 데이터</h3>
-            <p>증상 검색은 <code>diseases_cleaned.json</code>, <code>symptom_index.json</code>, 사전 계산된 Titan 벡터를 사용합니다.</p>
+            <p>증상 검색은 배포 환경에 비공개로 배치한 <code>diseases_cleaned.json</code>, <code>symptom_index.json</code>, 사전 계산된 Titan 벡터를 사용합니다. 공개 저장소에는 원천/파생 데이터 파일을 포함하지 않습니다.</p>
           </div>
           <div class="mini-card tint-orange">
             <h3>문서</h3>
@@ -1145,12 +1145,12 @@
         <div>
           <h3 class="schema-title">8-1. 검색 문서 생성</h3>
           <pre><code>diseases_cleaned.json
-  - 아산병원 질환 백과 기반 질환/증상 설명
+  - 비공개 배치 파일. 질환 백과 기반 질환/증상 설명
 
 symptom_index.json
-  - 표준 증상명, alias, slot_id
+  - 비공개 배치 파일. 표준 증상명과 질환 문서 연결 인덱스
 
-domain_pack_respiratory.json
+domain_packs/respiratory.json
   - 호흡기계 MVP에서 허용하는 symptom slot
   - 제한 alias bridge, safety flag, 기본 질문 문구
 
@@ -1159,14 +1159,13 @@ Lambda cold-start
   - 별도 LLM 가공 데이터셋은 사용하지 않음
 
 symptom_embeddings_...json
-  - 같은 증상 문서를 Titan으로 미리 임베딩한 벡터 인덱스</code></pre>
+  - 비공개 배치 파일. 같은 증상 문서를 Titan으로 미리 임베딩한 벡터 인덱스</code></pre>
         </div>
         <div class="mini-card tint-green">
           <h3>확장성 의미</h3>
           <p>
             호흡기계만 손으로 조합한 폐쇄 구조가 아닙니다.
-            같은 구조의 <code>diseases_cleaned.json</code>, <code>symptom_index.json</code>,
-            <code>domain_pack_*.json</code>를 준비하면 다른 진료계 질환도 같은 방식으로 확장할 수 있습니다.
+            같은 구조의 비공개 원천 데이터와 <code>domain_packs/*.json</code>, <code>question_sets/*.json</code>를 준비하면 다른 진료계 질환도 같은 방식으로 확장할 수 있습니다.
           </p>
         </div>
       </div>
