@@ -193,8 +193,8 @@
   align-self: flex-end;
   display: inline-flex;
   align-items: center;
-  max-width: min(560px, 100%);
-  margin: -4px 0 10px auto;
+  max-width: min(520px, calc(100% - 170px));
+  margin: -4px 112px 10px auto;
   padding: 11px 16px;
   border: 1px solid #bfdbfe;
   border-radius: 999px;
@@ -205,6 +205,13 @@
   line-height: 1.35;
   box-shadow: 0 12px 26px rgba(15, 35, 71, 0.12);
   animation: opSlideToastIn 180ms ease-out;
+}
+
+@media (max-width: 900px) {
+  .op-slide-toast {
+    max-width: calc(100% - 24px);
+    margin-right: 12px;
+  }
 }
 .op-slide-toast.refreshed,
 .op-slide-toast.reviewed,

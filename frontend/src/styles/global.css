@@ -83,8 +83,21 @@ body {
   opacity: 0;
   pointer-events: none;
 }
+.mode-switcher.collapsed {
+  padding: 3px;
+  border-radius: 999px;
+  box-shadow: 0 8px 22px rgba(15, 35, 71, 0.12);
+}
 .mode-switcher.collapsed .mode-switcher-toggle {
-  padding: 7px 13px;
+  min-height: 28px;
+  padding: 5px 10px;
+  gap: 4px;
+}
+.mode-switcher.collapsed .mode-switcher-toggle-icon {
+  font-size: 15px;
+}
+.mode-switcher.collapsed .mode-switcher-toggle-text {
+  font-size: 10.5px;
 }
 .mode-switcher a,
 .mode-switcher-items span {
