@@ -225,6 +225,13 @@ def schema_quote_validation_node(state: AnswerPipelineState) -> dict[str, Any]:
                 )
             )
             return update
+        preserved = preserve_non_symptom_context(
+            state,
+            reason="bedrock_or_schema_failed_before_payload",
+            extracted_error=extracted.get("error"),
+        )
+        if preserved:
+            return preserved
         update = {
             "error_response": response(
                 422,
@@ -367,6 +374,15 @@ def schema_quote_validation_node(state: AnswerPipelineState) -> dict[str, Any]:
         )
         return update
 
+    preserved = preserve_non_symptom_context(
+        state,
+        reason="schema_quote_failed_after_retries",
+        validation_errors=validation_errors,
+        extracted_error=extracted.get("error"),
+    )
+    if preserved:
+        return preserved
+
     update = {
         "extracted": extracted,
         "semantic_failed": True,
@@ -398,6 +414,131 @@ def schema_quote_validation_node(state: AnswerPipelineState) -> dict[str, Any]:
         )
     )
     return update
+
+
+NON_SYMPTOM_FALLBACK_CONFIG = {
+    "onset": {
+        "category": "증상맥락",
+        "label": "시작시점",
+    },
+    "current_medications": {
+        "category": "복약정보",
+        "label": "복용중",
+    },
+    "adherence": {
+        "category": "복약순응도",
+        "label": "복용중",
+    },
+}
+
+
+def preserve_non_symptom_context(
+    state: AnswerPipelineState,
+    reason: str,
+    validation_errors: list[dict[str, Any]] | None = None,
+    extracted_error: str | None = None,
+) -> dict[str, Any] | None:
+    """비증상 문항의 LLM 구조화 실패 시 원문 답변을 임상 맥락으로 보존합니다.
+
+    Q2 시작 시점, Q3 복약 정보처럼 증상 IR 대상이 아닌 문항은 실패하더라도
+    환자 흐름을 멈출 이유가 적습니다. 여기서는 새로운 의학적 사실을 만들지 않고
+    환자가 확인한 원문 전체를 source_quote/summary로 남겨 의사가 볼 수 있게 합니다.
+    증상 문항은 이 우회 경로를 타지 않으므로, 증상 매칭 품질 검증은 그대로 엄격하게
+    유지됩니다.
+    """
+    question_type = state.get("question_type") or ""
+    transcript = (state.get("transcript") or "").strip()
+    if not transcript or question_type in SYMPTOM_QUESTION_TYPES:
+        return None
+
+    question_id = state.get("question_id") or ""
+    chain_meta = state.get("extraction_chain_meta") or {}
+    attempt = int(state.get("extraction_attempt") or 1)
+    structured = fallback_structured(question_type, question_id, transcript)
+    if structured is None:
+        return None
+
+    extracted = {
+        "spans": [],
+        "structured": structured,
+        "transcript": transcript,
+        "method": "bedrock_nova_context_preserve",
+        "validator_passed": True,
+        "llm_meta": {
+            "model_id": chain_meta.get("model_id"),
+            "raw_sha256": hashlib.sha256((state.get("extraction_raw_text") or "").encode("utf-8")).hexdigest(),
+            "langchain": chain_meta,
+            "rag_context": summarize_rag_context(state.get("rag_context") or {}),
+            "validation_errors": validation_errors or [],
+            "attempts": attempt,
+            "retry_loop": "langgraph_schema_quote_repair",
+            "fallback": {
+                "type": "non_symptom_context_preserve",
+                "reason": reason,
+                "error": extracted_error,
+            },
+        },
+    }
+    update = {
+        "extracted": extracted,
+        "semantic_failed": False,
+        "safety_only": False,
+        "retry_extraction": False,
+        "extraction_validation_errors": validation_errors or [],
+        "repair_note": "",
+    }
+    update.update(
+        trace_update(
+            state,
+            "schema_quote_validation",
+            "preserved_context",
+            {
+                "reason": reason,
+                "question_type": question_type,
+                "fallback": "non_symptom_context_preserve",
+                "validation_error_count": len(validation_errors or []),
+                "attempt": attempt,
+            },
+        )
+    )
+    return update
+
+
+def fallback_structured(question_type: str, question_id: str, transcript: str) -> dict[str, Any] | None:
+    """검증 실패한 비증상 문항을 onepaper가 읽을 수 있는 최소 구조로 바꿉니다."""
+    if question_type in {"patient_questions", "unresolved_questions"}:
+        return {
+            "standardized_text": transcript,
+            "clinical_clues": [],
+            "questions": [
+                {
+                    "category": "other",
+                    "summary": transcript,
+                    "original_quote": transcript,
+                }
+            ],
+            "unresolved_items": [],
+        }
+
+    config = NON_SYMPTOM_FALLBACK_CONFIG.get(question_type)
+    if not config:
+        return None
+    return {
+        "standardized_text": transcript,
+        "clinical_clues": [
+            {
+                "category": config["category"],
+                "label": config["label"],
+                "summary": transcript,
+                "source_quote": transcript,
+                "source_question": question_id,
+                "priority": "일반",
+                "related_symptoms": [],
+            }
+        ],
+        "questions": [],
+        "unresolved_items": [],
+    }
 
 
 def summarize_rag_context(rag_context: dict[str, Any]) -> dict[str, Any]:

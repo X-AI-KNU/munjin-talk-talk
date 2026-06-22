@@ -70,7 +70,15 @@ export async function processTranscriptsBatch({
     error.payload = payload
     throw error
   }
-  if (payload.validator_passed === false) {
+  const criticalFailures = (payload.failed_results || []).some((item) =>
+    ['chief_complaint', 'progress', 'new_symptoms', 'patient_questions', 'unresolved_questions'].includes(
+      item?.question_type,
+    ),
+  )
+  // 일괄 처리에서는 Q2/Q3 같은 보조 맥락 문항이 일부 실패하더라도,
+  // 핵심 증상/질문 문항과 원페이퍼가 준비되었다면 환자 화면을 오류로 되돌리지 않습니다.
+  // 반대로 Q1/Q4처럼 의사 확인에 필수인 문항이 실패하면 기존처럼 다시 확인시킵니다.
+  if (payload.validator_passed === false && (!payload.onepager_ready || criticalFailures)) {
     const error = new Error('문진 결과 검증에 실패했습니다. 다시 확인해 주세요.')
     error.payload = payload
     throw error
