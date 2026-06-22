@@ -90,6 +90,26 @@ def test_excluding_noise_does_not_change_packaged_embedding_docs_hash():
     assert packaged["docs_hash"] == docs_hash(docs)
 
 
+def test_ir_index_falls_back_to_domain_pack_when_source_json_missing(tmp_path):
+    """공개 배포 패키지에 비공개 IR 원천 JSON이 없어도 최소 IR 문서가 만들어져야 합니다."""
+    install_settings_stub()
+    import settings  # noqa: E402
+
+    settings.DISEASES_PATH = tmp_path / "missing_diseases_cleaned.json"
+    settings.SYMPTOM_INDEX_PATH = tmp_path / "missing_symptom_index.json"
+
+    from retrieval_documents import get_ir_index  # noqa: E402
+
+    docs, bm25 = get_ir_index()
+    display_names = {doc["display_name"] for doc in docs}
+    sources = {doc.get("source") for doc in docs}
+
+    assert "기침" in display_names
+    assert "코막힘" in display_names
+    assert "domain_pack_fallback" in sources
+    assert max(bm25.scores("기침 콜록")) > 0
+
+
 def test_find_safety_flag_uses_domain_pack_alert_slots():
     install_settings_stub()
     from clinical_terms import find_safety_flag  # noqa: E402

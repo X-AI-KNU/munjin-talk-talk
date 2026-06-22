@@ -162,7 +162,7 @@ def retrieve_symptom_docs(source_quote, normalized_text, span_name="", preferred
             "vector_norm": round(float(vector_norm[idx]), 4),
             "label_score": round(float(label), 4),
             "retrieval_branch": branch,
-            "source": "diseases_cleaned+symptom_index",
+            "source": doc.get("source", "diseases_cleaned+symptom_index"),
             "evidence": doc.get("evidence", [])[:3],
             "linked_disease_names": doc.get("linked_disease_names", [])[:8],
             "domain_candidates": doc.get("domain_candidates", []),

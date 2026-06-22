@@ -12,7 +12,9 @@ from clinical_terms import (
     IR_SLOT_TO_CANONICAL_NAME,
     IR_STABLE_SLOT_IDS,
     IR_TEXT_ALIASES,
+    SYMPTOM_RULES,
 )
+from domain_config import get_domain_pack
 from settings import DISEASES_PATH, SYMPTOM_INDEX_PATH
 from retrieval_scoring import BM25Index
 from utils import (
@@ -37,12 +39,88 @@ def make_symptom_id(symptom_name):
     return f"symptom:{digest}"
 
 
+def _candidate_names_from_domain_pack():
+    """공개 가능한 domain pack만으로 최소 IR 후보명을 구성합니다."""
+    names = set(IR_STABLE_SLOT_IDS.keys())
+    names.update(name for name in IR_SLOT_TO_CANONICAL_NAME.values() if name)
+    names.update(name for name, _, _, _ in SYMPTOM_RULES if name)
+    return sorted(names)
+
+
+def _aliases_for_domain_name(symptom_name):
+    """domain pack의 rule keyword와 alias pattern을 한 증상 후보의 검색 텍스트로 묶습니다."""
+    aliases = []
+    canonical_slot_ids = {
+        slot_id
+        for slot_id, canonical_name in IR_SLOT_TO_CANONICAL_NAME.items()
+        if canonical_name == symptom_name
+    }
+    stable_slot_id = IR_STABLE_SLOT_IDS.get(symptom_name)
+    if stable_slot_id:
+        canonical_slot_ids.add(stable_slot_id)
+    for rule_name, slot_id, keywords, _alert in SYMPTOM_RULES:
+        if rule_name == symptom_name or slot_id in canonical_slot_ids:
+            aliases.extend(keywords)
+    for pattern, canonical_name in IR_TEXT_ALIASES:
+        if canonical_name == symptom_name:
+            aliases.append(pattern)
+    return sorted({normalize_text(alias) for alias in aliases if normalize_text(alias)})
+
+
+def build_symptom_docs_from_domain_pack():
+    """비공개 원천 JSON이 없을 때 사용하는 공개 domain-pack 기반 IR 문서입니다.
+
+    이 폴백은 새 증상을 환자 발화에서 규칙으로 추출하지 않습니다. LLM이 만든 span을
+    표준 증상 후보와 비교하기 위한 최소 검색 표면만 제공하며, 전체 성능 고도화는
+    비공개 참조 JSON 또는 별도 private layer/S3 번들에서 담당합니다.
+    """
+    pack = get_domain_pack()
+    docs = []
+    for symptom_name in _candidate_names_from_domain_pack():
+        symptom_id = make_symptom_id(symptom_name)
+        aliases = _aliases_for_domain_name(symptom_name)
+        alias_text = " ".join(aliases)
+        retrieval_text = normalize_text(
+            " ".join(
+                [
+                    f"표준 증상명 {symptom_name}.",
+                    f"도메인팩 기반 공개 증상 후보 {symptom_name}.",
+                    f"관련 표현 {alias_text}.",
+                ]
+            )
+        )
+        docs.append({
+            "symptom_id": symptom_id,
+            "display_name": symptom_name,
+            "bm25_text": normalize_text(" ".join([symptom_name, alias_text])),
+            "retrieval_text": retrieval_text,
+            "embedding_text": retrieval_text,
+            "evidence": [
+                {
+                    "content_id": pack.get("version", "domain_pack"),
+                    "disease_name": "domain_pack",
+                    "section": "symptom_alias",
+                    "text": normalize_text(" ".join([symptom_name, alias_text])),
+                }
+            ],
+            "evidence_refs": [],
+            "linked_disease_names": [],
+            "domain_candidates": [pack.get("description", "domain_pack")],
+            "departments": [],
+            "source": "domain_pack_fallback",
+        })
+    return docs
+
+
 def build_symptom_docs_from_sources():
     """diseases_cleaned + symptom_index만으로 검색 문서를 생성합니다.
 
     여기서 말하는 rule-base는 "새 증상 추출"이 아니라 원천 JSON을 검색 가능한
     문서 형태로 접는 작업입니다. 환자 발화에서 증상을 뽑는 일은 LLM이 담당합니다.
     """
+    if not DISEASES_PATH.exists() or not SYMPTOM_INDEX_PATH.exists():
+        return build_symptom_docs_from_domain_pack()
+
     diseases = load_json_file(DISEASES_PATH)
     symptom_index = load_json_file(SYMPTOM_INDEX_PATH)
     disease_by_content_id = {}
@@ -144,6 +222,7 @@ def build_symptom_docs_from_sources():
             "linked_disease_names": top_diseases,
             "domain_candidates": top_categories,
             "departments": top_departments,
+            "source": "diseases_cleaned+symptom_index",
         })
     return docs
 

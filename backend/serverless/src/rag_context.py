@@ -16,12 +16,20 @@ import re
 from typing import Any
 
 from clinical_terms import IR_TEXT_ALIASES
-from domain_config import excluded_ir_symptom_names
+from domain_config import excluded_ir_symptom_names, selected_domain_pack_id
 from retrieval_documents import get_ir_index
+from settings import DISEASES_PATH, SYMPTOM_INDEX_PATH
 from utils import clean_quote, normalize_text
 
 
 EXCLUDED_IR_SYMPTOM_NAMES = excluded_ir_symptom_names()
+
+
+def rag_source_files() -> list[str]:
+    """현재 배포 패키지에 맞는 RAG 참조 출처를 trace에 남깁니다."""
+    if DISEASES_PATH.exists() and SYMPTOM_INDEX_PATH.exists():
+        return ["diseases_cleaned.json", "symptom_index.json", "clinical_terms.IR_TEXT_ALIASES"]
+    return [f"domain_packs/{selected_domain_pack_id()}.json", "clinical_terms.IR_TEXT_ALIASES"]
 
 
 def retrieve_intake_rag_context(
@@ -38,7 +46,7 @@ def retrieve_intake_rag_context(
     alias_hints = retrieve_alias_hints(query)
     context = {
         "retriever": "local_reference_rag",
-        "source_files": ["diseases_cleaned.json", "symptom_index.json", "clinical_terms.IR_TEXT_ALIASES"],
+        "source_files": rag_source_files(),
         "question_type": question_type or "",
         "query_chars": len(query),
         "alias_hints": alias_hints,
@@ -52,7 +60,7 @@ def empty_rag_context() -> dict[str, Any]:
     """검색할 원문이 없을 때도 trace 구조를 일정하게 유지합니다."""
     return {
         "retriever": "local_reference_rag",
-        "source_files": ["diseases_cleaned.json", "symptom_index.json", "clinical_terms.IR_TEXT_ALIASES"],
+        "source_files": rag_source_files(),
         "question_type": "",
         "query_chars": 0,
         "alias_hints": [],
