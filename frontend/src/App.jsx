@@ -23,6 +23,7 @@ function sessionIdFromPath(path) {
 // 이렇게 해야 대기열이 갱신되어도 이전 환자 원페이퍼/안내문이 다른 환자로 바뀌지 않습니다.
 export default function App() {
   const [sessions, setSessions] = useState([])
+  const [navCollapsed, setNavCollapsed] = useState(false)
   const location = useLocation()
   const path = location.pathname
   const activeSessionId = useMemo(() => sessionIdFromPath(path), [path])
@@ -74,20 +75,34 @@ export default function App() {
 
   return (
     <>
-      <nav className={`mode-switcher ${patientRoute ? 'patient-mode-switcher' : ''}`}>
-        <Link to="/staff" className={navClass(path === '/staff' || path === '/')}>
-          직원 접수
-        </Link>
-        <NavItem to={navTargets.patient} active={path.startsWith('/patient/')} label="환자 태블릿" />
-        <Link to="/doctor/queue" className={navClass(path === '/doctor/queue')}>
-          의사 대기열
-        </Link>
-        <NavItem
-          to={navTargets.doctor}
-          active={path.startsWith('/doctor/') && path !== '/doctor/queue'}
-          label="원페이퍼"
-        />
-        <NavItem to={navTargets.guide} active={path.startsWith('/guide/')} label="안내문 출력" />
+      <nav className={`mode-switcher ${patientRoute ? 'patient-mode-switcher' : ''} ${navCollapsed ? 'collapsed' : ''}`}>
+        <button
+          type="button"
+          className="mode-switcher-toggle"
+          onClick={() => setNavCollapsed(prev => !prev)}
+          aria-expanded={!navCollapsed}
+          aria-label={navCollapsed ? '상단 메뉴 펼치기' : '상단 메뉴 접기'}
+        >
+          <span className="mode-switcher-toggle-icon" aria-hidden="true">
+            {navCollapsed ? '›' : '‹'}
+          </span>
+          <span className="mode-switcher-toggle-text">{navCollapsed ? '메뉴' : '접기'}</span>
+        </button>
+        <div className="mode-switcher-items" aria-hidden={navCollapsed}>
+          <Link to="/staff" className={navClass(path === '/staff' || path === '/')}>
+            직원 접수
+          </Link>
+          <NavItem to={navTargets.patient} active={path.startsWith('/patient/')} label="환자 태블릿" />
+          <Link to="/doctor/queue" className={navClass(path === '/doctor/queue')}>
+            의사 대기열
+          </Link>
+          <NavItem
+            to={navTargets.doctor}
+            active={path.startsWith('/doctor/') && path !== '/doctor/queue'}
+            label="원페이퍼"
+          />
+          <NavItem to={navTargets.guide} active={path.startsWith('/guide/')} label="안내문 출력" />
+        </div>
       </nav>
 
       <main className="app-stage">
