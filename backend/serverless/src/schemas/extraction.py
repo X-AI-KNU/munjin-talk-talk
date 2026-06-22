@@ -7,7 +7,7 @@ LLM은 fixed JSON schema 안의 값을 채우는 역할만 합니다. 이 파일
 import re
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, ValidationInfo, field_validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, ValidationInfo, field_validator, model_validator
 
 from domain_config import llm_symptom_slot_ids
 from utils import clean_quote
@@ -32,6 +32,34 @@ SymptomSlotRef = str
 
 Status = Literal["있음", "없음", "확인필요"]
 Priority = Literal["일반", "우선"]
+
+ACTIVE_SYMPTOM_TYPES = {"symptom", "new", "progress_worsened", "progress_unchanged"}
+NON_ACTIVE_SYMPTOM_TYPES = {"symptom_absent", "progress_improved"}
+NON_SYMPTOM_TYPES = {"medication", "medication_denial", "adherence_gap", "context"}
+
+# LLM이 "불편함", "증상"처럼 너무 넓은 검색 힌트만 남기면 IR 단계가
+# 거의 모든 표준 증상과 약하게 맞아버립니다. 이 목록은 정답 alias가 아니라,
+# 실제 증상 의미가 없는 일반어를 repair loop로 돌리기 위한 방어막입니다.
+GENERIC_HINTS = {
+    "불편",
+    "불편함",
+    "불편 증상",
+    "증상",
+    "증세",
+    "문제",
+    "이상",
+    "느낌",
+    "몸살",
+    "몸살 느낌",
+    "통증",
+    "아픔",
+}
+GENERIC_HINT_PATTERNS = [
+    r"^(일반적인\s*)?불편(함|감| 증상)?$",
+    r"^(증상|증세|문제|이상|느낌)$",
+    r"^(몸살|몸살\s*느낌)$",
+    r"^(통증|아픔)$",
+]
 
 ClinicalCategory = Literal["증상맥락", "복약정보", "복약순응도", "재진경과"]
 ClinicalLabel = Literal[
@@ -100,6 +128,20 @@ def clean_required_text(value: Any) -> str:
     return text
 
 
+def is_generic_hint(value: Any) -> bool:
+    """증상 위치/양상 없이 너무 넓은 단어만 있는지 확인합니다."""
+    text = clean_quote(value)
+    if not text:
+        return True
+    normalized = re.sub(r"\s+", " ", text).strip()
+    if normalized in GENERIC_HINTS:
+        return True
+    if any(re.fullmatch(pattern, normalized) for pattern in GENERIC_HINT_PATTERNS):
+        return True
+    tokens = [token for token in re.split(r"[\s,/|]+", normalized) if token]
+    return bool(tokens) and all(token in GENERIC_HINTS for token in tokens)
+
+
 class StrictModel(BaseModel):
     """예상하지 않은 LLM 필드를 허용하지 않는 공통 base model입니다."""
 
@@ -136,6 +178,25 @@ class ExtractionSpan(StrictModel):
     @classmethod
     def validate_required_text(cls, value):
         return clean_required_text(value)
+
+    @model_validator(mode="after")
+    def validate_span_state(self):
+        """type/status/slot_ref 조합이 임상 상태와 맞는지 교차 검증합니다.
+
+        이 검증은 LLM 자유 생성을 막는 핵심 안전장치입니다. 예를 들어
+        `symptom + 없음`, `medication + cough`, `progress_improved + 있음`
+        같은 조합은 schema 형식만 보면 통과할 수 있지만 서비스 의미상 틀립니다.
+        """
+        if self.type in ACTIVE_SYMPTOM_TYPES and self.status == "없음":
+            raise ValueError("active symptom types must not use status 없음")
+        if self.type in NON_ACTIVE_SYMPTOM_TYPES and self.status != "없음":
+            raise ValueError("non-active symptom types must use status 없음")
+        if self.type in NON_SYMPTOM_TYPES and self.slot_ref != "other":
+            raise ValueError("non-symptom spans must use slot_ref other")
+        if self.type in ACTIVE_SYMPTOM_TYPES:
+            if is_generic_hint(self.name) and is_generic_hint(self.normalized_text):
+                raise ValueError("active symptom span is too generic for IR")
+        return self
 
 
 class ClinicalClue(StrictModel):
