@@ -216,21 +216,42 @@ export default function PatientFlow({
     } catch (err) {
       console.error('batch intake processing failed:', err)
       const failedIndex = Math.max(0, Number(err?.payload?.batch_index || pendingAnswers.length) - 1)
-      const failedAnswer = pendingAnswers[failedIndex] || pendingAnswers[pendingAnswers.length - 1]
-      setAnswers(pendingAnswers.slice(0, failedIndex))
-      setQuestionIndex(Math.min(failedIndex, Math.max(0, questions.length - 1)))
-      setTranscript(failedAnswer?.transcript || '')
+      const completedAnswers = pendingAnswers.map((answer) => ({
+        ...answer,
+        result: answer.result || null,
+      }))
+
+      // 최종 일괄 분석이 실패해도 환자 화면을 이전 질문으로 되돌리지 않는다.
+      // 이미 확인한 답변은 보존하고, 직원/의료진이 이어서 확인할 수 있게 완료 상태로 전환한다.
+      setAnswers(completedAnswers)
+      completedAnswers.forEach((answer) => onTranscriptConfirmed?.(answer))
+      notifyStaff({
+        sessionId: activeSessionId,
+        questionId: pendingAnswers[failedIndex]?.questionId || pendingAnswers[failedIndex]?.id || null,
+        step: 'batch_processing_failed',
+        reason: 'batch_processing_failed',
+        batchIndex: failedIndex + 1,
+      })
+      onComplete?.({
+        sessionId: activeSessionId,
+        visitType,
+        answers: completedAnswers,
+        stopped: true,
+        processingError: err?.payload?.error || err?.message || 'batch_processing_failed',
+      })
+      setTranscript('')
       setSafetyKeyword(null)
-      setStep(STEPS.Q_CONFIRM)
+      setIntakeStopped(true)
+      setStep(STEPS.DONE)
     } finally {
       setIsTranscribing(false)
     }
   }, [
     activeSessionId,
+    notifyStaff,
     onComplete,
     onTranscriptConfirmed,
     questionSetId,
-    questions.length,
     visitType,
   ])
 

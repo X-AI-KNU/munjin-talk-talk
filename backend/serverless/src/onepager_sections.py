@@ -15,6 +15,23 @@ from clinical_terms import find_symptom_quote, is_symptom_like_span, slot_to_nam
 from utils import clean_quote, unique, visit_label
 
 
+def original_source_quote(candidate, transcript, slot_id, hints=None):
+    """원페이퍼에는 표준화 문장이 아니라 실제 환자 발화 원문만 인용한다."""
+    candidate = clean_quote(candidate or "")
+    transcript = clean_quote(transcript or "")
+    hints = [clean_quote(hint or "") for hint in (hints or []) if clean_quote(hint or "")]
+
+    if candidate and (not transcript or candidate in transcript):
+        return candidate
+
+    if transcript and slot_id:
+        restored = find_symptom_quote(transcript, slot_id, hints)
+        if restored:
+            return restored
+
+    return "" if transcript else candidate
+
+
 def slot_to_symptom_slot(slot, qid, transcript=""):
     """IR matched_slot을 원페이퍼 증상 카드 schema로 변환합니다."""
     slot_id = slot.get("slot_id") or slot.get("slot_ref")
@@ -22,9 +39,12 @@ def slot_to_symptom_slot(slot, qid, transcript=""):
     if not is_symptom_like_span(span_type, slot_id):
         return None
 
-    source_quote = clean_quote(slot.get("source_quote", ""))
-    if not source_quote and transcript and slot_id:
-        source_quote = find_symptom_quote(transcript, slot_id, [slot.get("name", "")]) or source_quote
+    source_quote = original_source_quote(
+        slot.get("source_quote", ""),
+        transcript,
+        slot_id,
+        [slot.get("name", ""), slot.get("normalized_text", "")],
+    )
 
     return {
         "slot_id": slot_id,
