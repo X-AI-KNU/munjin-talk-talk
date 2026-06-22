@@ -109,13 +109,15 @@ session_id (String)
   "guide_ready": false,
   "privacy_consent": {
     "accepted": true,
-    "version": "munjin-privacy-consent-v1",
+    "version": "munjin-privacy-consent-2026-06-07",
     "method": "patient_tablet_modal",
     "accepted_at": "2026-06-08T01:21:00+00:00",
     "recorded_at": "2026-06-08T01:21:00+00:00"
   }
 }
 ```
+
+> `privacy_consent.version`은 환자 태블릿 동의 모달이 보내는 값(`munjin-privacy-consent-2026-06-07`)으로 저장됩니다. 요청에 `version`이 없을 때만 백엔드(`sessions.py`)가 `munjin-privacy-consent-v1`로 fallback합니다.
 
 ### DynamoDB에 저장하지 않는 필드
 

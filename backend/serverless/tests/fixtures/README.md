@@ -8,11 +8,10 @@
 
 ## 재생성 절차
 
-저장소 루트에서 fixture 생성 로직을 실행합니다.
+> ℹ️ 현재 저장소에는 재생성용 실행 스크립트(`regenerate_prompts_golden.py`)를 **별도로 두지 않습니다.** fixture는 `test_prompts_golden.py`가 검증하는 것과 동일한 prompt 빌드 로직으로 수동 생성합니다.
 
-```bash
-cd <repo-root>
-python backend/serverless/tests/fixtures/regenerate_prompts_golden.py
-```
+재생성이 필요하면 다음 기준으로 진행합니다.
 
-> ℹ️ 현재 저장소에는 재생성 스크립트를 별도 실행 파일로 두지 않고, 작업 지시문에 명시된 절차와 동일한 로직으로 fixture를 생성했습니다. 새 스크립트를 추가할 경우 `settings`·`utils`·`llm`·`schemas.review` 같은 AWS 의존 모듈은 fixture 생성용 stub으로 대체해야 로컬 환경 차이에 흔들리지 않습니다.
+- `settings`·`utils`·`llm`·`schemas.review` 같은 AWS 의존 모듈은 fixture 생성용 stub으로 대체해 로컬 환경 차이에 흔들리지 않게 합니다.
+- extraction/onepager review prompt 빌더를 호출해 얻은 출력을 `prompts_golden.json`에 갱신하고, 기준 커밋 해시를 fixture 내부에 함께 기록합니다.
+- 별도 실행 스크립트를 추가하는 경우 이 README의 절차도 같이 업데이트합니다.

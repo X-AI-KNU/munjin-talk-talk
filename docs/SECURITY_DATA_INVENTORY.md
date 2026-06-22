@@ -170,7 +170,7 @@ sessions/YYYY-MM-DD/{session_id}/
   "risk": "none",
   "privacy_consent": {
     "accepted": true,
-    "version": "privacy-consent-2026-06",
+    "version": "munjin-privacy-consent-2026-06-07",
     "accepted_at": "2026-06-08T10:20:30+09:00"
   },
   "artifact": {

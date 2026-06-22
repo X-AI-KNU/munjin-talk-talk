@@ -73,7 +73,10 @@ def install_handler_stubs():
     sys.modules["onepager"] = onepager
 
     orchestration = types.ModuleType("orchestration")
+    orchestration.handle_internal_event = lambda _event, _context: {}
     orchestration.process_answer = lambda _body: ({}, None)
+    orchestration.process_answers = lambda _body: ({}, None)
+    orchestration.retry_answer_analysis = lambda _session_id: ({}, None)
     sys.modules["orchestration"] = orchestration
 
     sessions = types.ModuleType("sessions")

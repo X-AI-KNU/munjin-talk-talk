@@ -9,7 +9,7 @@
 ## 전체 구조
 
 ```text
-munjin-talk-talk-mvp/
+munjin-talk-talk/
 ├── README.md
 ├── amplify.yml
 ├── frontend/
@@ -209,7 +209,9 @@ backend/
 backend/serverless/src/
 ├── handler.py
 ├── settings.py
+├── security.py
 ├── artifact_store.py
+├── artifact_policy.py
 ├── privacy.py
 ├── sessions.py
 ├── audio.py
@@ -228,7 +230,9 @@ backend/serverless/src/
 ├── retrieval_embeddings.py
 ├── retrieval_scoring.py
 ├── clinical_terms.py
+├── clinical_state.py
 ├── domain_config.py
+├── question_sets.py
 ├── onepager.py
 ├── onepager_sections.py
 ├── onepager_review.py
@@ -244,6 +248,7 @@ backend/serverless/src/
 | --- | --- |
 | `handler.py` | Lambda entrypoint. HTTP route 정의 |
 | `settings.py` | 환경 변수, AWS client, 모델 ID, 데이터 경로 |
+| `security.py` | 직원/의사 접근 코드 검증, HMAC 세션 토큰, 환자 세션 토큰 |
 | `utils.py` | 응답, 시간, 텍스트 정리 공통 함수 |
 
 ### 저장 계층
@@ -252,6 +257,7 @@ backend/serverless/src/
 | --- | --- |
 | `sessions.py` | DynamoDB 최소 session item 생성, 조회, update, queue list |
 | `artifact_store.py` | S3 artifact 저장·조회, 세션별 key 생성 |
+| `artifact_policy.py` | S3 저장 직전 파일별 운영 필드 최소화(sanitize) |
 | `privacy.py` | 접수 정보 최소화, 저장 전 텍스트 가명처리 |
 
 ### 음성 인식
@@ -305,7 +311,9 @@ backend/serverless/src/
 | `retrieval_embeddings.py` | Titan embedding과 cache |
 | `retrieval_scoring.py` | BM25, vector, label score |
 | `clinical_terms.py` | 도메인팩 기반 표준 증상, safety flag, quote pattern 구성 |
+| `clinical_state.py` | 증상 span의 active/non-active 분류 정책 (IR·원페이퍼 진입 필터) |
 | `domain_config.py` | 도메인팩 JSON 로딩, 기본 질문 문구 fallback, 허용 symptom slot 제공 |
+| `question_sets.py` | 질문셋 JSON 로딩, API 공개 형태·LLM prompt 질문 문구 제공 |
 
 ### 원페이퍼와 안내문
 
@@ -351,7 +359,7 @@ backend/serverless/src/data/
 | --- | --- |
 | API endpoint 추가 | `handler.py` |
 | Lambda 환경 변수 추가 | `template.yaml`, `settings.py` |
-| 질문 문구 수정 | `frontend/src/config/questions.js` |
+| 질문 문구 수정 | 백엔드 `backend/serverless/src/data/question_sets/default.json` (환자 태블릿이 API로 사용), 오프라인 fallback `frontend/src/config/questions.js` |
 | Bedrock prompt 수정 | `extraction_prompts.py`, `onepager_review.py`, `guide.py` |
 | RAG 참고 문맥 수정 | `rag_context.py`, `retrieval_documents.py`, `domain_config.py`, `clinical_terms.py` |
 | LLM JSON schema 수정 | `schemas/extraction.py`, `schemas/review.py`, `schemas/guide.py` |

@@ -49,6 +49,9 @@ def sanitize_answers(payload: Any) -> dict[str, Any]:
             continue
         item = {
             "text": clean_quote(record.get("text") or record.get("transcript") or ""),
+            "dialect_normalization": sanitize_dialect_normalization(
+                record.get("dialect_normalization") or {}
+            ),
             "spans": [sanitize_span(span) for span in record.get("spans", []) if isinstance(span, dict)],
             "matched_slots": [
                 sanitize_matched_slot(slot)
@@ -126,6 +129,38 @@ def sanitize_structured(structured: Any) -> dict[str, Any]:
             if isinstance(question, dict)
         ],
         "unresolved_items": deepcopy(structured.get("unresolved_items") or []),
+    }
+
+
+
+def sanitize_dialect_normalization(payload: Any) -> dict[str, Any]:
+    """사투리 표준어 변환 결과에서 운영 저장에 필요한 값만 남깁니다."""
+    if not isinstance(payload, dict):
+        return {}
+
+    return {
+        "original_text": clean_quote(payload.get("original_text") or ""),
+        "standardized_text": clean_quote(payload.get("standardized_text") or ""),
+        "replacements": [
+            keep_keys(
+                item,
+                [
+                    "source_quote",
+                    "standard_text",
+                    "evidence_dialect",
+                    "evidence_standard",
+                    "match_type",
+                ],
+            )
+            for item in payload.get("replacements", [])
+            if isinstance(item, dict)
+        ],
+        "unmatched_phrases": [
+            clean_quote(item)
+            for item in payload.get("unmatched_phrases", [])
+            if clean_quote(item)
+        ],
+        "validator_passed": bool(payload.get("validator_passed", True)),
     }
 
 
@@ -311,6 +346,9 @@ def compact_trace_details(details: dict[str, Any]) -> dict[str, Any]:
         "has_safety_flag",
         "refresh_source",
         "reason",
+        "standardized_chars",
+        "replacement_count",
+        "hint_count",
     ]
     return {key: normalize_scalar(details.get(key)) for key in allowed if key in details}
 

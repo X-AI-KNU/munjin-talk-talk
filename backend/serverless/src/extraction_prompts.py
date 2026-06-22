@@ -27,6 +27,8 @@ def build_extraction_prompt(
     rag_context_note="",
     question_text_override="",
     question_set_id="",
+    dialect_standardized_text="",
+    dialect_replacements=None,
 ):
     """Nova가 반드시 지켜야 할 quote grounding과 fixed schema를 명시합니다."""
     visit = visit_label(visit_type)
@@ -35,6 +37,15 @@ def build_extraction_prompt(
     # 클라이언트 override는 서버에 정의되지 않은 커스텀 문항 전용 fallback입니다.
     question_text = str(server_text or question_text_override or "").strip()
     allowed_slots = ", ".join(llm_symptom_slot_ids() + ["other"])
+    dialect_note = build_dialect_helper_note(dialect_standardized_text, dialect_replacements or [])
+    if dialect_note:
+        patient_answer_block = f"""Patient original answer:
+{transcript}
+
+{dialect_note}"""
+    else:
+        patient_answer_block = f"""Patient answer:
+{transcript}"""
     return f"""
 You are the semantic parsing LLM for a Korean clinic intake MVP.
 Task: standardize dialect/colloquial speech, split meaning units, and tag the answer into the fixed schema.
@@ -86,8 +97,7 @@ Visit type: {visit}
 Question id: {question_id}
 Question type: {question_type}
 Question asked: {question_text}
-Patient answer:
-{transcript}
+{patient_answer_block}
 
 {rag_context_note}
 
@@ -453,6 +463,37 @@ Return exactly:
   ]
 }}
 """.strip()
+
+def build_dialect_helper_note(standardized_text, replacements):
+    """extraction LLM이 사투리 의미를 이해하도록 주는 참고 문단입니다."""
+    standardized_text = str(standardized_text or "").strip()
+    replacements = replacements if isinstance(replacements, list) else []
+
+    if not standardized_text and not replacements:
+        return ""
+
+    lines = [
+        "Dialect-standardized helper text:",
+        standardized_text or "(none)",
+        "",
+        "Important rules for using dialect helper:",
+        "- This helper text is only for understanding dialect/colloquial meaning.",
+        "- source_quote and original_quote MUST still be copied from the original patient answer.",
+        "- Do not add symptoms, medications, dates, diagnoses, tests, or severity that are absent from the original patient answer.",
+    ]
+
+    if replacements:
+        lines.append("Dialect replacements:")
+        for item in replacements[:8]:
+            if not isinstance(item, dict):
+                continue
+            source = item.get("source_quote") or ""
+            target = item.get("standard_text") or ""
+            evidence = item.get("evidence_dialect") or ""
+            if source or target:
+                lines.append(f"- '{source}' → '{target}' (evidence: {evidence})")
+
+    return "\n".join(lines)
 
 
 def build_extraction_repair_note(validation_errors, transcript):

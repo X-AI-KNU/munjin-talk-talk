@@ -11,6 +11,7 @@ from langgraph.graph import END, START, StateGraph
 from langchain_core.runnables import RunnableLambda
 
 from pipeline_nodes import (
+    dialect_normalization_node,
     hybrid_ir_match_node,
     input_transcript_node,
     onepaper_refresh_node,
@@ -60,6 +61,7 @@ def _compiled_graph():
         workflow = StateGraph(AnswerPipelineState)
         workflow.add_node("input_transcript", RunnableLambda(input_transcript_node))
         workflow.add_node("quick_safety_flag", RunnableLambda(quick_safety_flag_node))
+        workflow.add_node("dialect_normalization", RunnableLambda(dialect_normalization_node))
         workflow.add_node("rag_context_retrieval", RunnableLambda(rag_context_retrieval_node))
         workflow.add_node("semantic_extraction", RunnableLambda(semantic_extraction_node))
         workflow.add_node("schema_quote_validation", RunnableLambda(schema_quote_validation_node))
@@ -75,7 +77,8 @@ def _compiled_graph():
             route_after_required_input,
             {"continue": "quick_safety_flag", "stop": END},
         )
-        workflow.add_edge("quick_safety_flag", "rag_context_retrieval")
+        workflow.add_edge("quick_safety_flag", "dialect_normalization")
+        workflow.add_edge("dialect_normalization", "rag_context_retrieval")
         workflow.add_edge("rag_context_retrieval", "semantic_extraction")
         workflow.add_edge("semantic_extraction", "schema_quote_validation")
         workflow.add_conditional_edges(

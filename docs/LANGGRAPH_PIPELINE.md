@@ -273,6 +273,7 @@ LangChain Runnable chain으로 Bedrock Nova를 호출하여 환자 답변을 fix
 
 사용 파일:
 
+```text
 extraction_prompts.py
 extraction_schema.py
 schemas/extraction.py

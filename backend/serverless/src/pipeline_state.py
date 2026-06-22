@@ -45,6 +45,7 @@ class AnswerPipelineState(TypedDict, total=False):
     result_payload: dict[str, Any]
     active_path: list[str]
     trace: list[dict[str, Any]]
+    dialect_normalization: dict[str, Any]
 
 
 # 프론트/문서/API 응답에 노출되는 파이프라인 설명입니다.
@@ -56,6 +57,7 @@ PIPELINE_GRAPH = {
     "nodes": [
         "input_transcript",
         "quick_safety_flag",
+        "dialect_normalization",
         "rag_context_retrieval",
         "semantic_extraction",
         "schema_quote_validation",
@@ -68,7 +70,8 @@ PIPELINE_GRAPH = {
     "edges": [
         ["__start__", "input_transcript"],
         ["input_transcript", "quick_safety_flag"],
-        ["quick_safety_flag", "rag_context_retrieval"],
+        ["quick_safety_flag", "dialect_normalization"],
+        ["dialect_normalization", "rag_context_retrieval"],
         ["rag_context_retrieval", "semantic_extraction"],
         ["semantic_extraction", "schema_quote_validation"],
         ["schema_quote_validation", "semantic_extraction"],

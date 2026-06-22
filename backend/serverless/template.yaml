@@ -54,6 +54,14 @@ Parameters:
     Type: String
     Default: default
     Description: Question set id under src/data/question_sets.
+  DialectPack:
+    Type: String
+    Default: dialect_kangwon
+    Description: Dialect pack id under src/data/dialect_packs.
+  DialectTopK:
+    Type: Number
+    Default: 8
+    Description: Number of dialect RAG hints to retrieve.
 
 Globals:
   Function:
@@ -96,6 +104,10 @@ Globals:
         HYBRID_MIN_VECTOR_SCORE: '0.12'
         HYBRID_MIN_BM25_SCORE: '0.04'
         HYBRID_MIN_LABEL_SCORE: '0.55'
+        DIALECT_PACK: !Ref DialectPack
+        DIALECT_TOP_K: !Ref DialectTopK
+        DIALECT_NORMALIZER_MODEL_ID: apac.amazon.nova-lite-v1:0
+        DIALECT_MAX_TOKENS: '700'
 
 Resources:
   # 프론트엔드가 호출하는 HTTP API Gateway입니다.

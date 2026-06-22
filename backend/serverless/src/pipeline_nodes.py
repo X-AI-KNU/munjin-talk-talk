@@ -7,7 +7,8 @@
 import hashlib
 from typing import Any
 
-from artifact_policy import sanitize_matched_slot, sanitize_span
+from artifact_policy import sanitize_dialect_normalization, sanitize_matched_slot, sanitize_span
+from dialect_normalization import normalize_dialect_text
 from clinical_terms import find_safety_flag
 from extraction_prompts import build_extraction_prompt, build_extraction_repair_note, select_extraction_model
 from extraction_schema import empty_structured, normalize_extraction_output
@@ -95,13 +96,51 @@ def quick_safety_flag_node(state: AnswerPipelineState) -> dict[str, Any]:
     )
     return update
 
+def dialect_normalization_node(state: AnswerPipelineState) -> dict[str, Any]:
+    """
+    환자 사투리 원문을 RAG + LLM으로 표준어 문장으로 변환합니다.
+
+    중요:
+    - state["transcript"]는 절대 바꾸지 않습니다.
+    - 변환 결과는 state["dialect_normalization"]에 별도로 저장합니다.
+    """
+    transcript = state.get("transcript") or ""
+    result = normalize_dialect_text(transcript)
+
+    update = {
+        "dialect_normalization": result,
+    }
+
+    update.update(
+        trace_update(
+            state,
+            "dialect_normalization",
+            "passed" if result.get("validator_passed") else "failed",
+            {
+                "standardized_chars": len(result.get("standardized_text") or ""),
+                "replacement_count": len(result.get("replacements") or []),
+                "hint_count": len((result.get("dialect_context") or {}).get("hints") or []),
+                "model_id": (result.get("llm_meta") or {}).get("model_id"),
+            },
+        )
+    )
+
+    return update
+
 
 def rag_context_retrieval_node(state: AnswerPipelineState) -> dict[str, Any]:
     """LLM extraction 전에 원천 JSON 기반 RAG 참고 문맥을 검색합니다."""
-    rag_context = retrieve_intake_rag_context(
-        state.get("transcript") or "",
-        question_type=state.get("question_type"),
+    raw_text = state.get("transcript") or ""
+    dialect_normalization = state.get("dialect_normalization") or {}
+    dialect_standardized_text = dialect_normalization.get("standardized_text") or ""
+
+    rag_query = " ".join(
+        text
+        for text in [raw_text, dialect_standardized_text]
+        if text
     )
+
+    rag_context = retrieve_intake_rag_context(rag_query, question_type=state.get("question_type"))
     update = {"rag_context": rag_context}
     update.update(
         trace_update(
@@ -138,6 +177,8 @@ def semantic_extraction_node(state: AnswerPipelineState) -> dict[str, Any]:
             rag_context_note=rag_context.get("prompt_note") or "",
             question_text_override=state.get("question_text") or "",
             question_set_id=state.get("question_set_id") or "",
+            dialect_standardized_text=dialect_normalization.get("standardized_text") or "",
+            dialect_replacements=dialect_normalization.get("replacements") or [],
         )
         obj, raw_text, chain_meta = call_bedrock_json_with_meta(prompt, model_id, MAX_LLM_TOKENS)
     except Exception as exc:
@@ -635,6 +676,7 @@ def session_validation_save_node(state: AnswerPipelineState) -> dict[str, Any]:
             "question_type": state.get("question_type"),
             "visit_type": state.get("visit_type"),
             "transcript": state.get("transcript"),
+            "dialect_normalization": state.get("dialect_normalization") or {},
             "spans": extracted.get("spans", []),
             "matched_slots": matched.get("matched_slots", []),
             "structured": extracted.get("structured", {}),
@@ -695,6 +737,7 @@ def safety_guardrail_save_node(state: AnswerPipelineState) -> dict[str, Any]:
             "question_type": state.get("question_type"),
             "visit_type": state.get("visit_type"),
             "transcript": transcript,
+            "dialect_normalization": state.get("dialect_normalization") or {},
             "spans": [],
             "matched_slots": [],
             "structured": structured,
@@ -759,6 +802,9 @@ def response_payload_node(state: AnswerPipelineState) -> dict[str, Any]:
     )
     persist_final_trace(state, final_trace)
     payload = {
+        "dialect_normalization": sanitize_dialect_normalization(
+            state.get("dialect_normalization") or {}
+        ),
         "spans": [sanitize_span(span) for span in extracted.get("spans", []) if isinstance(span, dict)],
         "structured": extracted.get("structured", {}),
         "matched_slots": [

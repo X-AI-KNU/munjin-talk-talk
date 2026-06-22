@@ -124,6 +124,7 @@ def build_onepager_review_prompt(session, onepager):
         "responses": {
             qid: {
                 "text": value.get("text", ""),
+                "dialect_normalization": value.get("dialect_normalization", {}),
                 "structured": value.get("structured", {}),
                 "matched_slots": value.get("matched_slots", []),
             }

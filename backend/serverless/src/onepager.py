@@ -55,6 +55,7 @@ def validate_and_save(body: dict[str, Any]):
     answers = load_answers(session)
     answers[question_id] = {
         "text": transcript,
+        "dialect_normalization": body.get("dialect_normalization") or {},
         "spans": spans,
         "matched_slots": matched_slots,
         "structured": structured,

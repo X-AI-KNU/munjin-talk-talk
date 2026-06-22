@@ -255,6 +255,8 @@ Invoke-RestMethod -Method Post -Uri "$base/sessions" -ContentType "application/j
 $answer = @{
   session_id = "<session_id>"
   question_id = "Q1"
+  question_type = "chief_complaint"
+  question_set_id = "default"
   transcript = "어제부터 목이 칼칼하고 코가 막혀요"
   visit_type = "initial"
 } | ConvertTo-Json -Depth 10

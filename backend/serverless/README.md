@@ -103,6 +103,7 @@ backend/serverless/
 
 | Method | Path | 역할 |
 | --- | --- | --- |
+| `POST` | `/auth/login` | 직원/의사 접근 코드 로그인, Bearer 세션 토큰 발급 |
 | `POST` | `/sessions` | 접수처 문진 세션 생성 |
 | `GET` | `/sessions/{session_id}` | 세션 상세 조회 |
 | `POST` | `/sessions/{session_id}/consent` | 환자 이용 동의 저장 |
@@ -110,7 +111,9 @@ backend/serverless/
 | `GET` | `/doctor/queue` | 의사 대기열 조회 |
 | `POST` | `/transcribe-stream-url` | Transcribe Streaming URL 발급 |
 | `POST` | `/process-answer` | 환자 답변 처리 |
+| `GET` | `/question-sets/{question_set_id}` | 문진 질문셋 조회 |
 | `GET` | `/onepager/{session_id}` | 원페이퍼 조회 |
+| `POST` | `/onepager/{session_id}/review` | 원페이퍼 AI 재검토 재실행 |
 | `POST` | `/doctor-response` | 의사 답변·강조사항 저장 |
 | `GET` | `/guide/{session_id}` | 환자 안내문 조회 |
 

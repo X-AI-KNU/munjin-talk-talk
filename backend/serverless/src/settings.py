@@ -19,6 +19,13 @@ ARTIFACTS_BUCKET = os.environ.get("ARTIFACTS_BUCKET", "")
 CUSTOM_VOCABULARY = os.environ.get("CUSTOM_VOCABULARY", "")
 DOMAIN_PACK = os.environ.get("DOMAIN_PACK", "respiratory")
 QUESTION_SET = os.environ.get("QUESTION_SET", "default")
+
+# 사투리 RAG / 표준어 변환 설정입니다.
+DIALECT_PACK = os.environ.get("DIALECT_PACK", "dialect_kangwon")
+DIALECT_TOP_K = int(os.environ.get("DIALECT_TOP_K", "8"))
+DIALECT_NORMALIZER_MODEL_ID = os.environ.get("DIALECT_NORMALIZER_MODEL_ID", "apac.amazon.nova-lite-v1:0")
+DIALECT_MAX_TOKENS = int(os.environ.get("DIALECT_MAX_TOKENS", "700"))
+
 # 직원/의료진 로그인 설정입니다.
 # 사람이 입력하는 접근 코드는 *_ACCESS_CODE로 받고, 기존 배포 호환을 위해
 # 과거 이름인 *_ACCESS_TOKEN도 fallback으로 읽습니다.

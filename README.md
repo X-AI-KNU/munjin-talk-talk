@@ -242,7 +242,7 @@ cd frontend && npm run build
 ## 🗂️ 저장소 구조
 
 ```text
-munjin-talk-talk-mvp/
+munjin-talk-talk/
 ├── frontend/              # React + Vite SPA (4개 화면)
 │   └── src/{components,hooks,services,config,styles}
 ├── backend/serverless/

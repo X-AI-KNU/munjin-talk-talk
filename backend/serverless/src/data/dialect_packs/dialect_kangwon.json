@@ -1,0 +1,4069 @@
+[
+  {
+    "dialect": "(때를)에우다",
+    "standard": "(끼니를) 잇다",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "여매방아",
+    "standard": "연자방아",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "역부러",
+    "standard": "일부러",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "영깽이",
+    "standard": "여우",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "오랍뜰[오랍드리]",
+    "standard": "마당앞이나 집주변",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "오랍드리",
+    "standard": "마당앞이나 집주변",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "오랍뜰",
+    "standard": "마당앞이나 집주변",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "왕거무",
+    "standard": "왕거미",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "외보구래",
+    "standard": "쟁기",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "웅굴 [웅클]",
+    "standard": "우물",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "웅굴",
+    "standard": "우물",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "웅클",
+    "standard": "우물",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "원생이",
+    "standard": "원숭이",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "은단",
+    "standard": "성게",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "이시미",
+    "standard": "이무기",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "자거품",
+    "standard": "쥐",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "자우름",
+    "standard": "졸음",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "잔다래",
+    "standard": "아이들이 소소하게 쓰는 돈",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "장구카다",
+    "standard": "잠기다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "재간하다",
+    "standard": "저질레하다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "재피",
+    "standard": "산초",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "점방[빵]",
+    "standard": "상점",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "점방",
+    "standard": "상점",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "빵",
+    "standard": "상점",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "제기다",
+    "standard": "(김치 따위를 소금에) 절이다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "줄구다",
+    "standard": "줄이다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "지럭지",
+    "standard": "길이",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "지악",
+    "standard": "저녁",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "진갈비",
+    "standard": "진눈개비",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "질먹기",
+    "standard": "농촌에서 모내기등을 끝내고 일꾼등을 위로하여 음식을 장만하는 행위",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "종곱질",
+    "standard": "소꼽장난",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "촌말",
+    "standard": "사투리",
+    "initial": "ㅊ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "창지",
+    "standard": "창자",
+    "initial": "ㅊ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "춘천이여",
+    "standard": "그네뛸 때 지르는 소리",
+    "initial": "ㅊ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "튕기다",
+    "standard": "튀기다",
+    "initial": "ㅌ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "푸대",
+    "standard": "포대",
+    "initial": "ㅍ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "하누[하늬, 하니]바람",
+    "standard": "서풍",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "하늬, 하니",
+    "standard": "서풍",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "하누[하늬",
+    "standard": "서풍",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "하니]바람",
+    "standard": "서풍",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "하누",
+    "standard": "서풍",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "힌짐치",
+    "standard": "물김치",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "함박꽃",
+    "standard": "철쭉",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "바우",
+    "standard": "바위",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "반짓끌",
+    "standard": "반짓그릇",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "방꽁이",
+    "standard": "(방앗간) 공이",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "버광지",
+    "standard": "아궁이",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "벌거지",
+    "standard": "벌레",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "베나락",
+    "standard": "볏날",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "벵아리",
+    "standard": "병아리",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "보리헤댕이",
+    "standard": "바다나물의 일종",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "본새",
+    "standard": "본래",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "부지깽이",
+    "standard": "곰배",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "불도디깨[불삽,불까래]",
+    "standard": "부삽",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "불도디깨[불삽",
+    "standard": "부삽",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "불삽,불까래",
+    "standard": "부삽",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "불까래]",
+    "standard": "부삽",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "불도디깨",
+    "standard": "부삽",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "빳지",
+    "standard": "딱지",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뻐꾸녕놓다",
+    "standard": "(남녀간)희롱하다",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "삐끼지싸",
+    "standard": "벗겨졌어",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "산들머리[산말랭이]",
+    "standard": "산마루",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "산들머리",
+    "standard": "산마루",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "산말랭이",
+    "standard": "산마루",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "새[쇠]꿎다",
+    "standard": "(식물이)너무 자라 쇠다",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쇠",
+    "standard": "(식물이)너무 자라 쇠다",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "새",
+    "standard": "(식물이)너무 자라 쇠다",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "새치",
+    "standard": "이면수",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "솔갈이(치다)",
+    "standard": "거짓말(하다)",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "섭",
+    "standard": "홍합",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "셋바닥",
+    "standard": "혀바닥",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "소래기",
+    "standard": "고함",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "송방",
+    "standard": "가게,점포",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쇳대",
+    "standard": "열쇠",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "시망",
+    "standard": "그물",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "실실",
+    "standard": "살살",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "새[쇠]꿎다",
+    "standard": "(소리가)크고 거칠다",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쇠",
+    "standard": "(소리가)크고 거칠다",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "새",
+    "standard": "(소리가)크고 거칠다",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쌀박상",
+    "standard": "나만이",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "아",
+    "standard": "아이",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "아까맨치로",
+    "standard": "아까처럼",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "아재",
+    "standard": "고모, 이모, 당숙모등을 일컫는 친족어",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "가래비쿨",
+    "standard": "그물(코)",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "가죽지",
+    "standard": "가죽나무",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "간질구다",
+    "standard": "간지럽히다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "갈바람",
+    "standard": "남풍",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "감재",
+    "standard": "감자",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "개",
+    "standard": "갯벌",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "개바늘",
+    "standard": "많다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "개비다",
+    "standard": "고이다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "갱변[한데]",
+    "standard": "바깥",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "갱변",
+    "standard": "바깥",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "한데",
+    "standard": "바깥",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "건추",
+    "standard": "시래기",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "고동",
+    "standard": "골뱅이",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "고뱅이",
+    "standard": "무릎",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "고치",
+    "standard": "고추",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "곤둘배기",
+    "standard": "거꾸로",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "골벵이",
+    "standard": "달팽이",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "곰치",
+    "standard": "바다생선의 일종",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "구넝[구녕,구뎅이]",
+    "standard": "구멍",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "구녕,구뎅이",
+    "standard": "구멍",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "구넝[구녕",
+    "standard": "구멍",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "구뎅이]",
+    "standard": "구멍",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "구넝",
+    "standard": "구멍",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "구서케",
+    "standard": "구석",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "군더데기",
+    "standard": "군더더기",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "귀부랄",
+    "standard": "귓볼",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "구렇구 새구",
+    "standard": "그렇거나 말거나",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "기멍",
+    "standard": "그릇",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "까마구",
+    "standard": "까마귀",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "깍쟁이[깍지,깍지까리]",
+    "standard": "짚(소여물)",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "깍지,깍지까리",
+    "standard": "짚(소여물)",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "깍쟁이[깍지",
+    "standard": "짚(소여물)",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "깍지까리]",
+    "standard": "짚(소여물)",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "깍쟁이",
+    "standard": "짚(소여물)",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꺼끄랭이",
+    "standard": "까끄라기",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꼬라",
+    "standard": "구워라",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꽃새댁",
+    "standard": "어린새댁",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꾹저구[뚝저구,뚝지]",
+    "standard": "민물고기의 일종",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꾹저구[뚝저구",
+    "standard": "민물고기의 일종",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뚝저구,뚝지",
+    "standard": "민물고기의 일종",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꾹저구",
+    "standard": "민물고기의 일종",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뚝지]",
+    "standard": "민물고기의 일종",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "어낭",
+    "standard": "언덕배기",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "어터[어타, 우터]",
+    "standard": "어떻게",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "어타, 우터",
+    "standard": "어떻게",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "어터[어타",
+    "standard": "어떻게",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "우터]",
+    "standard": "어떻게",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "어터",
+    "standard": "어떻게",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "얼개미",
+    "standard": "어래미(굻은체)",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "엉게",
+    "standard": "엄나무",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "여",
+    "standard": "여기",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "여른데서",
+    "standard": "다른곳에서",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "열갱이",
+    "standard": "열기",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "오늘에는",
+    "standard": "오늘은",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "옥씨끼",
+    "standard": "옥수수",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "왕다리",
+    "standard": "큰 멸치",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "용탕",
+    "standard": "추어탕",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "원산내기",
+    "standard": "정북풍",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "이기",
+    "standard": "이것이",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "입성",
+    "standard": "옷",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "작패질[잭패질]",
+    "standard": "작당질",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "작패질",
+    "standard": "작당질",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "잭패질",
+    "standard": "작당질",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "잘구",
+    "standard": "자루",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "장닭",
+    "standard": "수탉",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "(땅을)재다",
+    "standard": "갈다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "저왕",
+    "standard": "경황",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "(가슴이) 제리제리하다",
+    "standard": "저리다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "주벅",
+    "standard": "주걱",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "지렁(물)",
+    "standard": "간장",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "진뗑이",
+    "standard": "진짜",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "질금",
+    "standard": "엿기름",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "짐치",
+    "standard": "김치",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "째보",
+    "standard": "조개",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쪼아먹다",
+    "standard": "주워먹다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "찌울려서",
+    "standard": "기울려서",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "치매[초매]",
+    "standard": "치마",
+    "initial": "ㅊ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "치매",
+    "standard": "치마",
+    "initial": "ㅊ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "초매",
+    "standard": "치마",
+    "initial": "ㅊ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "코빼기",
+    "standard": "코",
+    "initial": "ㅋ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "타개다",
+    "standard": "(콩 따위를 맷돌에)타다",
+    "initial": "ㅌ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "하배",
+    "standard": "종",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "행우",
+    "standard": "멍게",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "할망구, 할머이",
+    "standard": "할머니",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "할망구",
+    "standard": "할머니",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "할머이",
+    "standard": "할머니",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "수레기[응뎅이]",
+    "standard": "수렁",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "수레기",
+    "standard": "수렁",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "응뎅이",
+    "standard": "수렁",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쑥뭉셍이",
+    "standard": "쑥으로 만든 버무리떡",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "나래비로",
+    "standard": "일렬로(가로)",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "낫전",
+    "standard": "잔돈",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "낭청떨다",
+    "standard": "능청떨다",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "내구리",
+    "standard": "먼지",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "비얄",
+    "standard": "비탈",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뺌장우",
+    "standard": "질경이",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뽁쟁이[뽁젼]",
+    "standard": "복어",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뽁쟁이",
+    "standard": "복어",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뽁젼",
+    "standard": "복어",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뽈따구니",
+    "standard": "볼의 비속어",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뿌질구다",
+    "standard": "분지르다",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "사괘",
+    "standard": "사과",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "사발내기",
+    "standard": "4등분 과질",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "상구(도)",
+    "standard": "아직(도)",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "상배",
+    "standard": "자신보다 나이나 신분이 놓은 사람",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "새",
+    "standard": "바다로부터 육지로 들어오는 안개",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "새바람",
+    "standard": "동풍",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "새안들물",
+    "standard": "남서쪽으로부터 동북으로 향하는 조류",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "새째",
+    "standard": "왕겨",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "생우",
+    "standard": "새우",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "서낭당",
+    "standard": "성황당",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "설악산내기",
+    "standard": "북서풍",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "세아리다",
+    "standard": "헤아리다",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "소꼴기[소대끼]",
+    "standard": "누룽지",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "소꼴기",
+    "standard": "누룽지",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "소대끼",
+    "standard": "누룽지",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "소설",
+    "standard": "식구",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "소캐",
+    "standard": "솜",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쇠꼽",
+    "standard": "쇠",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "슁텡이",
+    "standard": "도치",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "슴",
+    "standard": "철",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "시와새끼",
+    "standard": "작은멸치",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "시큰",
+    "standard": "실컷",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "심당구[멍당구, 멍장구, 싱거무]",
+    "standard": "멍",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "멍당구, 멍장구, 싱거무",
+    "standard": "멍",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "심당구[멍당구",
+    "standard": "멍",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "싱거무]",
+    "standard": "멍",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "멍장구",
+    "standard": "멍",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "심당구",
+    "standard": "멍",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "싸리깽이",
+    "standard": "싸리나무",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쌀름박",
+    "standard": "이남박",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쌀림",
+    "standard": "살림",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쎄라",
+    "standard": "씻어라",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쓰개[써개]",
+    "standard": "서캐",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "써개",
+    "standard": "서캐",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쓰개",
+    "standard": "서캐",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쓰레박",
+    "standard": "쓰레받기",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "씨굽다",
+    "standard": "쓰다",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "아궁지",
+    "standard": "아궁이",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "아깨(전에)",
+    "standard": "아까",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "아이짐(매다)",
+    "standard": "애벌 김(매다)",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "아푸나?",
+    "standard": "아프니?",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "안들",
+    "standard": "아내",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "알불",
+    "standard": "불씨",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "알코주다",
+    "standard": "알리다,알려주다",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "수구리",
+    "standard": "수구려라",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "시나매",
+    "standard": "천천히,쉬엄쉬엄",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "싸래기",
+    "standard": "사래",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "싸우",
+    "standard": "사위",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "썩썩물래[나새,난자]",
+    "standard": "빨리 비켜라",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "썩썩물래[나새",
+    "standard": "빨리 비켜라",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "나새,난자",
+    "standard": "빨리 비켜라",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "썩썩물래",
+    "standard": "빨리 비켜라",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "난자]",
+    "standard": "빨리 비켜라",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "씨끄르와",
+    "standard": "시끄럽다",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "아이, 슈완네, 참",
+    "standard": "아이, 참",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "슈완네",
+    "standard": "아이, 참",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "아이",
+    "standard": "아이, 참",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "참",
+    "standard": "아이, 참",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "안질뱅이",
+    "standard": "썰매",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "애가[애발이가, 애성이]나다",
+    "standard": "애가 타다, 애닳아 하다, 조금새 하다",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "애발이가, 애성이",
+    "standard": "애가 타다, 애닳아 하다, 조금새 하다",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "애가[애발이가",
+    "standard": "애가 타다, 애닳아 하다, 조금새 하다",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "애성이]나다",
+    "standard": "애가 타다, 애닳아 하다, 조금새 하다",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "애가",
+    "standard": "애가 타다, 애닳아 하다, 조금새 하다",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "내재(기)다",
+    "standard": "도망치다",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "놀래기",
+    "standard": "바다물고기 이름",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "눈발띠기",
+    "standard": "눈밝은 사람,송사리",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "니",
+    "standard": "너",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "다황",
+    "standard": "성냥",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "달부어엽다",
+    "standard": "어처구니없다, 전혀 거리가 멀다",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "던덕배기",
+    "standard": "언덕",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "도디미",
+    "standard": "도드미(굵은 체)",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "독고리",
+    "standard": "스웨터",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "돌뎅이",
+    "standard": "목말",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "동철",
+    "standard": "감의 일종",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뒤에 오서요",
+    "standard": "나중에 오세요",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "따까리[뚜가리]",
+    "standard": "뚜껑",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뚜가리",
+    "standard": "뚜껑",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "따까리",
+    "standard": "뚜껑",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "때끼지",
+    "standard": "수수",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "또바리[또배]",
+    "standard": "똬리",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "또바리",
+    "standard": "똬리",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "또배",
+    "standard": "똬리",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "마구[간]",
+    "standard": "외양간",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "마구",
+    "standard": "외양간",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "간",
+    "standard": "외양간",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "마카,[마커,모캐,마큰]",
+    "standard": "모두,전부",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "마커,모캐,마큰",
+    "standard": "모두,전부",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "마큰]",
+    "standard": "모두,전부",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "[마커",
+    "standard": "모두,전부",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "마카,",
+    "standard": "모두,전부",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "마카",
+    "standard": "모두,전부",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "모캐",
+    "standard": "모두,전부",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "맞바람",
+    "standard": "남동풍",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "맹글다",
+    "standard": "만들다",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "멀갱이[멀기,멀개,믈기]",
+    "standard": "모래,티끌",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "멀기,멀개,믈기",
+    "standard": "모래,티끌",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "멀갱이[멀기",
+    "standard": "모래,티끌",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "멀갱이",
+    "standard": "모래,티끌",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "믈기]",
+    "standard": "모래,티끌",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "멀개",
+    "standard": "모래,티끌",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "모랭이[모탱이]",
+    "standard": "모퉁이",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "모탱이",
+    "standard": "모퉁이",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "모랭이",
+    "standard": "모퉁이",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "무릎깽이",
+    "standard": "무릎",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "물방개",
+    "standard": "수제비 따먹기",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뭉셍이",
+    "standard": "버무리떡",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "민경",
+    "standard": "거울",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "바루다",
+    "standard": "비교하다",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "발방아",
+    "standard": "디딜방아",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "배찡",
+    "standard": "배에서 말린 오징어",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "베",
+    "standard": "벼",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "베리",
+    "standard": "언덕",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "보애비",
+    "standard": "일꾼",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "복상",
+    "standard": "복숭아",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "부시깃",
+    "standard": "부싯돌",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "불영껭이",
+    "standard": "불여우",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "빡시다",
+    "standard": "(힘이)세다",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뽕돌",
+    "standard": "그물납",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "삐내",
+    "standard": "비녀",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "살코주다",
+    "standard": "살리다,살려주다",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "새구룹다",
+    "standard": "시다",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "샛바람",
+    "standard": "북동풍",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "서숙[수숙, 조이]",
+    "standard": "조",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "수숙, 조이",
+    "standard": "조",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "서숙[수숙",
+    "standard": "조",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "조이]",
+    "standard": "조",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "서숙",
+    "standard": "조",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "소금젱이",
+    "standard": "잠자리",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쇠",
+    "standard": "소",
+    "initial": "ㅅ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "나생이",
+    "standard": "냉이",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "남밭",
+    "standard": "채소밭",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "남사[남새]스럼다",
+    "standard": "부끄럽다",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "남새",
+    "standard": "부끄럽다",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "남사",
+    "standard": "부끄럽다",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "낭구[남그]",
+    "standard": "나무",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "낭구",
+    "standard": "나무",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "남그",
+    "standard": "나무",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "낯반대기",
+    "standard": "낯짝(낯,얼굴의 비속어)",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "낯쎄요",
+    "standard": "얼굴을 씻어요",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "내달구다",
+    "standard": "몰아부치다, 채근하다",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "내바르다",
+    "standard": "(냅다)뛰다, 도망가다",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "냉중",
+    "standard": "나중",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "노을",
+    "standard": "고기가 지나가면서 생기는 물자락",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "놀구다",
+    "standard": "놀리다",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "놀래쿠다",
+    "standard": "놀라게하다",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "농구다",
+    "standard": "나누다",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "느르배기",
+    "standard": "(고무줄)새총",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "느리",
+    "standard": "우박",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "늘개비",
+    "standard": "가랑비",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "능구다",
+    "standard": "(옥수수 껍질 따위를)벗기다",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "다리깽이",
+    "standard": "다리",
+    "initial": "ㄴ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "달겡이",
+    "standard": "달걀",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "당최",
+    "standard": "도대체, 도무지",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "대관령내기",
+    "standard": "하늬바람(서풍)",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "대굴령",
+    "standard": "대관령",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "대맹이",
+    "standard": "큰구렁이",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "댕기다",
+    "standard": "다니다",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "데우[되우]",
+    "standard": "몹시,매우,대단히",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "되우",
+    "standard": "몹시,매우,대단히",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "데우",
+    "standard": "몹시,매우,대단히",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "델코 오다",
+    "standard": "데리고 오다",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "도치",
+    "standard": "물고기 이름",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "도화",
+    "standard": "마당앞,집주변",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "돌감",
+    "standard": "감의 일종",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "돌개바람",
+    "standard": "회오리바람",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "동곳",
+    "standard": "비녀,상투고정용 막대기",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "동오[동애]",
+    "standard": "(물)동이",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "동오",
+    "standard": "(물)동이",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "동애",
+    "standard": "(물)동이",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "용꼭지",
+    "standard": "용고기(논에 사는 물고기의 일종,미꾸라지보다 작음)",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "워대",
+    "standard": "어디",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "으내[우내, 이내]",
+    "standard": "안개[해무]",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "우내, 이내",
+    "standard": "안개[해무]",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "으내[우내",
+    "standard": "안개[해무]",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "이내]",
+    "standard": "안개[해무]",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "으내",
+    "standard": "안개[해무]",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "으찌냑",
+    "standard": "어제 저녁",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "음매나",
+    "standard": "얼마나",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "입새",
+    "standard": "입구",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "자박생이",
+    "standard": "머리채",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "자우롭다",
+    "standard": "졸립다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "잔질구다",
+    "standard": "안정을 취하다, 휴식하다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "잔재",
+    "standard": "잔치",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "잠구키다[장구키다]",
+    "standard": "잠기다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "잠구키다",
+    "standard": "잠기다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "장구키다",
+    "standard": "잠기다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "장게장게",
+    "standard": "곤지곤지",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "장제이",
+    "standard": "장정",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "재룹다",
+    "standard": "저리다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "재앙피우다",
+    "standard": "재롱떨다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "정낭",
+    "standard": "변소",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "정지(깐)",
+    "standard": "부엌",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "제우",
+    "standard": "겨우",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "젯노리[제누리]",
+    "standard": "새참",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "젯노리",
+    "standard": "새참",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "제누리",
+    "standard": "새참",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "주레",
+    "standard": "호두기",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쥐고기",
+    "standard": "쥐치",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "지거리다",
+    "standard": "지껄이다, 떠들다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "지실물",
+    "standard": "낙수물",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "지지바",
+    "standard": "계집애",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "진셍이",
+    "standard": "바보, 얼간이, 모자라는 사람",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "질 모랭이",
+    "standard": "길모퉁이",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "짐새",
+    "standard": "일찍 먹기위해 베어말린 벼",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "째기",
+    "standard": "덫",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쪼매다",
+    "standard": "잡아매다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쪼매다[동거매다]",
+    "standard": "묶다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "동거매다",
+    "standard": "묶다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쪼매다",
+    "standard": "묶다",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쫄로리 서다",
+    "standard": "일렬로 서다(세로)",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쭈떡",
+    "standard": "주르륵",
+    "initial": "ㅈ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "참꽃",
+    "standard": "진달래꽃",
+    "initial": "ㅊ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "창지머리",
+    "standard": "성질,성깔",
+    "initial": "ㅊ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "치",
+    "standard": "키",
+    "initial": "ㅊ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "초군",
+    "standard": "농사 일하는 사람",
+    "initial": "ㅊ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "치녀",
+    "standard": "처녀",
+    "initial": "ㅊ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쿤내",
+    "standard": "구린내, 냄새",
+    "initial": "ㅋ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "택",
+    "standard": "턱",
+    "initial": "ㅌ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "판대",
+    "standard": "바보",
+    "initial": "ㅍ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "펜데이",
+    "standard": "피라미",
+    "initial": "ㅍ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "풀삐",
+    "standard": "풀솔",
+    "initial": "ㅍ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "함아버이",
+    "standard": "할아버지",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "회뜨기",
+    "standard": "호두기",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "~하민",
+    "standard": "~하면서",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "해마듬",
+    "standard": "해마다",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "허리깽이",
+    "standard": "허리",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "흙쟁이",
+    "standard": "극쟁이 (밭가는 연장)",
+    "initial": "ㅎ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "가들",
+    "standard": "그(아이)들",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "어터 그다타나?",
+    "standard": "어떻게 그럴수가 있지?",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "둘게",
+    "standard": "뒷마당",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뒤발받이",
+    "standard": "뒷바라지",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "드래미",
+    "standard": "여드름",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "등겡이",
+    "standard": "등(허리)",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "등지게",
+    "standard": "윗도리",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "따배",
+    "standard": "감의 일종",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "딸구",
+    "standard": "뱀딸기",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "땀바구",
+    "standard": "깜부기",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "떡발",
+    "standard": "풍채",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "또바리",
+    "standard": "또아리",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뜨럭",
+    "standard": "섬돌",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뜨세다",
+    "standard": "따뜻하다",
+    "initial": "ㄷ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "마대바람",
+    "standard": "동남풍",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "마뎅이",
+    "standard": "타작",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "마파람[들바람]",
+    "standard": "동풍",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "마파람",
+    "standard": "동풍",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "들바람",
+    "standard": "동풍",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "막냉이",
+    "standard": "막내아들",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "말윤다",
+    "standard": "말린다",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "매련없다",
+    "standard": "형편없다",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "매해서[매해게 해서]",
+    "standard": "불편하게 해서",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "매해게 해서",
+    "standard": "불편하게 해서",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "매해서",
+    "standard": "불편하게 해서",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "맹금",
+    "standard": "금방",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "머리깽이",
+    "standard": "머리",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "메나리",
+    "standard": "미나리",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "멩이",
+    "standard": "먹이",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "모들떼기",
+    "standard": "두레(모심기,김매기 組)",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "모태[적쐬]",
+    "standard": "석쇠",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "적쐬",
+    "standard": "석쇠",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "모태",
+    "standard": "석쇠",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "몸땡이",
+    "standard": "몸통",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "무꾸",
+    "standard": "무우",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "문데비",
+    "standard": "먼지",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "물꽃",
+    "standard": "산호",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "물방멩이[물빵멩이]",
+    "standard": "빨래방망이",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "물빵멩이",
+    "standard": "빨래방망이",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "물방멩이",
+    "standard": "빨래방망이",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "물외",
+    "standard": "오이",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "미데기",
+    "standard": "해일",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "미시리",
+    "standard": "바보",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "민구스럽다",
+    "standard": "민망하다",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "바쿠끼다",
+    "standard": "바퀴다",
+    "initial": "ㅁ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "바우",
+    "standard": "우뭇가사리",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "바우다",
+    "standard": "(음식을)마련하다",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "발쿠다",
+    "standard": "(휘어진 것을)똑바로 펴다",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "뻐꾸녕 놓다",
+    "standard": "(남녀가)희롱하다",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "백사장골탱이",
+    "standard": "남서풍",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "버덩",
+    "standard": "들(판),넓은 공지",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "버들피리",
+    "standard": "버들치",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "베기다",
+    "standard": "(노를)젓다",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "벼름싹",
+    "standard": "벽",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "보구래",
+    "standard": "쟁기",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "보해",
+    "standard": "천,옷감",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "복쟁이",
+    "standard": "복어",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "봉다리",
+    "standard": "봉지",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "불가",
+    "standard": "바닷가, 백사장",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "불기",
+    "standard": "상추",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "붕어치",
+    "standard": "물고기의 이름",
+    "initial": "ㅂ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "가마이",
+    "standard": "가마니",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "가샛밥[오래기]",
+    "standard": "가위밥",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "오래기",
+    "standard": "가위밥",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "가샛밥",
+    "standard": "가위밥",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "개화",
+    "standard": "주머니",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "간나",
+    "standard": "여자의 속어",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "갈구다",
+    "standard": "험담하다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "갈구치다",
+    "standard": "방해하다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "갈기바람",
+    "standard": "북서풍",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "(소)갈비",
+    "standard": "솔잎(낙엽)",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "갓바람",
+    "standard": "봄바람",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "강중백이(하다)",
+    "standard": "거꾸로 쑤셔 박히다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "개락이다",
+    "standard": "많다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "개바늘",
+    "standard": "도깨비바늘",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "개황이다",
+    "standard": "모두 헛일이다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "갯목",
+    "standard": "삿대",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "거러지",
+    "standard": "거지",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "거이[거우]",
+    "standard": "회(뱃속의)",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "거우",
+    "standard": "회(뱃속의)",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "거이",
+    "standard": "회(뱃속의)",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "고갯말기[말갱이]",
+    "standard": "고갯마루",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "고갯말기",
+    "standard": "고갯마루",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "말갱이",
+    "standard": "고갯마루",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "고냉이",
+    "standard": "고양이",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "고마캐라",
+    "standard": "고마워라",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "고무딱개",
+    "standard": "지우개",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "고지",
+    "standard": "박",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "고칫갈구",
+    "standard": "고춧가루",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "쿠사리주다",
+    "standard": "구박하다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "곤지",
+    "standard": "(명태)내장",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "골구다",
+    "standard": "평평하게 고르담(논)",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "곰배[끌개,고밀개]",
+    "standard": "고물개",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "끌개,고밀개",
+    "standard": "고물개",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "곰배[끌개",
+    "standard": "고물개",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "고밀개]",
+    "standard": "고물개",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "곰배",
+    "standard": "고물개",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "곰솔",
+    "standard": "흑송",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "곱지요",
+    "standard": "구부러지지요",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "광밥[강밥,깡밥,강냉이 박상]",
+    "standard": "튀밥",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "강밥,깡밥,강냉이 박상",
+    "standard": "튀밥",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "강냉이 박상]",
+    "standard": "튀밥",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "광밥[강밥",
+    "standard": "튀밥",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "깡밥",
+    "standard": "튀밥",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "광밥",
+    "standard": "튀밥",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "구들(배이)",
+    "standard": "(온돌)방",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "구람",
+    "standard": "도토리",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "구렝이",
+    "standard": "구렁이",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "구연하다",
+    "standard": "걱정스럽다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "국시",
+    "standard": "국수",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "굴따",
+    "standard": "굵다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "궁뎅이",
+    "standard": "궁둥이",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "귀와지[귀뽀라지]",
+    "standard": "볼",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "귀뽀라지",
+    "standard": "볼",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "귀와지",
+    "standard": "볼",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "글패",
+    "standard": "글피",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "금강산내기",
+    "standard": "북북서풍",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "급새바람",
+    "standard": "북풍",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "기름종아리",
+    "standard": "양수래미(민물고기)",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "기이",
+    "standard": "게",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "까져먹다",
+    "standard": "잊다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "깍개[가새,가왜]",
+    "standard": "가위",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "가새,가왜",
+    "standard": "가위",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "깍개[가새",
+    "standard": "가위",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "가왜]",
+    "standard": "가위",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "깍개",
+    "standard": "가위",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "깔대기",
+    "standard": "딸굴질",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "깜베기",
+    "standard": "깜부기",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "깜초하다",
+    "standard": "거무스레하다,가무잡잡하다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "깨보생이",
+    "standard": "깨소금",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꼬갱이",
+    "standard": "배추속",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꼬뎅이[꼬딩이]",
+    "standard": "끄트머리",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꼬딩이",
+    "standard": "끄트머리",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꼬뎅이",
+    "standard": "끄트머리",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꼬먹다",
+    "standard": "구워먹다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꼽쳐가다",
+    "standard": "돌아가다",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꽤",
+    "standard": "자두",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꽤침이",
+    "standard": "고사리 비슷한 식물",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "꿀밤나무",
+    "standard": "참나무",
+    "initial": "ㄱ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "야",
+    "standard": "애(<이애)",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "야시[여시]",
+    "standard": "여우",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "여시",
+    "standard": "여우",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "야시",
+    "standard": "여우",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "야시비",
+    "standard": "일시적 강우",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "어머이",
+    "standard": "어머니",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "어엽다",
+    "standard": "어렵다",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "어터 [우터]",
+    "standard": "어떻게",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "우터",
+    "standard": "어떻게",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "억실억실하다",
+    "standard": "(눈이)크고 아름답다",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "언나",
+    "standard": "어린아이",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "얼매나",
+    "standard": "얼마나",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "엄방",
+    "standard": "둔덕, 웅덩이",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "에 [외]",
+    "standard": "밥",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "에",
+    "standard": "밥",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "외",
+    "standard": "밥",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "에롭다",
+    "standard": "어렵다",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "여나거나",
+    "standard": "여기나 거기나",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "여물",
+    "standard": "여물",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "여버리",
+    "standard": "바보",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "여비다",
+    "standard": "여위다",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "엿장사",
+    "standard": "소금쟁이",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "오금팽이",
+    "standard": "무릎",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "오부댕이",
+    "standard": "다, 진짜",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "오짐",
+    "standard": "오줌",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "올방개치다",
+    "standard": "가부좌하다",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "옹심(이)",
+    "standard": "팥죽 따위에 넣는 새알",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "왜서[사]",
+    "standard": "왜",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "왜서",
+    "standard": "왜",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  },
+  {
+    "dialect": "사",
+    "standard": "왜",
+    "initial": "ㅇ",
+    "registered_at": "2017-01-16",
+    "source_file": "dialect_kangwon.csv"
+  }
+]
