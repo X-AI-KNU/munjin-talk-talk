@@ -11,7 +11,7 @@
 ![Backend](https://img.shields.io/badge/backend-AWS%20Lambda%20Python%203.12-ff9900)
 ![LLM](https://img.shields.io/badge/LLM-Bedrock%20Nova%20%2B%20Titan-232f3e)
 ![Pipeline](https://img.shields.io/badge/pipeline-LangGraph%20%2B%20LangChain-1c3c3c)
-![Tests](https://img.shields.io/badge/tests-26%20passed%2C%203%20skipped-success)
+![Verification](https://img.shields.io/badge/verification-26%20passed%2C%203%20skipped-success)
 
 </div>
 
@@ -174,7 +174,7 @@ IR은 내부 배포 환경의 비공개 런타임 데이터(`diseases_cleaned.js
 
 | 지표 | 값 | 측정 조건 |
 | --- | --- | --- |
-| 자동 테스트 | **26 passed, 3 skipped** | `pytest` |
+| 자동 검증 | **26 passed, 3 skipped** | `pytest` |
 | 프론트 빌드 | 통과 | `npm run build` |
 | SAM 템플릿 검증 | 통과 | `sam validate` |
 
@@ -221,7 +221,7 @@ sam deploy --guided   # ArtifactsBucketName 에 가명처리 산출물용 S3 버
 ### 검증
 
 ```bash
-# 백엔드 테스트
+# 백엔드 검증
 cd backend/serverless && python -m pytest tests/ -q     # 26 passed, 3 skipped
 # Python 문법
 python -m compileall backend/serverless/src
@@ -257,7 +257,7 @@ munjin-talk-talk/
 | --- | --- |
 | [frontend/README.md](frontend/README.md) | 화면·라우팅·STT·API 연동 |
 | [backend/README.md](backend/README.md) | 백엔드 책임·LangGraph·LLM·IR·저장 |
-| [backend/serverless/README.md](backend/serverless/README.md) | SAM 배포·endpoint·환경변수·테스트 |
+| [backend/serverless/README.md](backend/serverless/README.md) | SAM 배포·endpoint·환경변수·검증 |
 | [docs/LANGGRAPH_PIPELINE.md](docs/LANGGRAPH_PIPELINE.md) | 답변 1개가 거치는 노드 흐름 |
 | [docs/DATA_SCHEMA.md](docs/DATA_SCHEMA.md) | DynamoDB·S3·extraction·onepaper·guide JSON |
 | [docs/SECURITY_DATA_INVENTORY.md](docs/SECURITY_DATA_INVENTORY.md) | 필드별 보안 처리 기준 |

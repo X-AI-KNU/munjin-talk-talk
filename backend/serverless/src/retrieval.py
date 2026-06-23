@@ -299,7 +299,7 @@ def build_symptom_query(source_quote, normalized_text, span_name=""):
     IR 평가에서 원문 방언 quote까지 섞은 A안보다 `normalized_text + name`을 쓰는
     C안이 더 안정적이었습니다. 따라서 source_quote는 검증/trace에는 남기되,
     검색어에는 표준화된 의미와 LLM의 자연어 증상 힌트를 우선 사용합니다.
-    표준화 결과가 비어 있는 예외 상황에서만 원문 quote로 fallback합니다.
+    표준화 결과가 비어 있는 예외 상황에서만 원문 quote를 보조 query로 사용합니다.
     """
     normalized = clean_ir_query_component(normalized_text)
     hint = clean_ir_query_component(span_name)

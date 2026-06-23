@@ -28,7 +28,7 @@ DIALECT_MAX_TOKENS = int(os.environ.get("DIALECT_MAX_TOKENS", "700"))
 
 # 직원/의료진 로그인 설정입니다.
 # 사람이 입력하는 접근 코드는 *_ACCESS_CODE로 받고, 기존 배포 호환을 위해
-# 과거 이름인 *_ACCESS_TOKEN도 fallback으로 읽습니다.
+# 기존 이름인 *_ACCESS_TOKEN도 보조 설정값으로 읽습니다.
 STAFF_ACCESS_CODE = os.environ.get("STAFF_ACCESS_CODE") or os.environ.get("STAFF_ACCESS_TOKEN", "")
 DOCTOR_ACCESS_CODE = os.environ.get("DOCTOR_ACCESS_CODE") or os.environ.get("DOCTOR_ACCESS_TOKEN", "")
 STAFF_ACCESS_CODE_SHA256 = os.environ.get("STAFF_ACCESS_CODE_SHA256", "")

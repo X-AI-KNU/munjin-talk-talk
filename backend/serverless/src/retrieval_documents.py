@@ -107,7 +107,7 @@ def build_symptom_docs_from_domain_pack():
             "linked_disease_names": [],
             "domain_candidates": [pack.get("description", "domain_pack")],
             "departments": [],
-            "source": "domain_pack_fallback",
+            "source": "domain_pack_backup",
         })
     return docs
 

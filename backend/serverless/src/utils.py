@@ -44,7 +44,7 @@ def allowed_origins():
 def cors_allow_origin():
     """환경 변수 기반 CORS origin을 반환합니다.
 
-    개발/기존 배포 호환을 위해 기본값은 `*`입니다. 제출용 또는 공개 테스트용
+    개발/기존 배포 호환을 위해 기본값은 `*`입니다. 제출용 또는 공개 배포용
     배포에서는 SAM parameter `CorsAllowOrigin`을 Amplify HTTPS 도메인으로
     지정해 API 호출 출처를 좁히는 것을 권장합니다.
     """

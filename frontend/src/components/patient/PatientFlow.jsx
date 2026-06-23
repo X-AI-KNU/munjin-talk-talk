@@ -107,7 +107,7 @@ export default function PatientFlow({
         if (active) setQuestionSet(next)
       })
       .catch((error) => {
-        console.warn('question set fallback:', error)
+        console.warn('bundled question set used:', error)
         if (active) setQuestionSet(null)
       })
     return () => {

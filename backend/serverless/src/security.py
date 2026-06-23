@@ -32,7 +32,7 @@ from utils import response
 
 
 PATIENT_HEADER = "x-munjin-patient-token"
-ACCESS_HEADER = "x-munjin-access-token"  # 과거 클라이언트 호환용. 신규 클라이언트는 Authorization을 사용합니다.
+ACCESS_HEADER = "x-munjin-access-token"  # 기존 클라이언트 호환용. 신규 클라이언트는 Authorization을 사용합니다.
 ALLOWED_ROLES = {"staff", "doctor"}
 
 
@@ -150,7 +150,7 @@ def issue_role_token(role: str) -> dict[str, Any]:
 
 
 def token_from_event(event: dict[str, Any]) -> str:
-    """Authorization Bearer 토큰을 읽습니다. 과거 헤더도 세션 토큰이면 허용합니다."""
+    """Authorization Bearer 토큰을 읽습니다. 기존 헤더도 세션 토큰이면 허용합니다."""
     hs = headers(event)
     return _bearer_value(hs.get("authorization") or hs.get(ACCESS_HEADER) or "")
 

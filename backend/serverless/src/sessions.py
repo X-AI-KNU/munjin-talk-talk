@@ -66,7 +66,7 @@ def next_queue_number() -> int:
 
     scan 후 max+1 방식은 동시 접수에서 같은 번호가 나올 수 있습니다.
     별도 meta item에 `ADD queue_counter :one`을 적용하면 DynamoDB가 증가를
-    원자적으로 처리합니다. 실패 시에만 보수적인 fallback을 사용합니다.
+    원자적으로 처리합니다. 실패 시에만 보수적인 보조 계산을 사용합니다.
     """
     try:
         try:
@@ -88,8 +88,8 @@ def next_queue_number() -> int:
         )
         return int(res["Attributes"]["queue_counter"])
     except Exception:
-        fallback = _scan_max_queue_number()
-        return fallback + 1 if fallback else int(time.time()) % 10000
+        backup_number = _scan_max_queue_number()
+        return backup_number + 1 if backup_number else int(time.time()) % 10000
 
 
 def update_session(session_id: str, updates: dict[str, Any]) -> dict[str, Any] | None:

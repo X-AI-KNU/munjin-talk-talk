@@ -573,7 +573,7 @@
       <a href="#ir">증상 매칭</a>
       <a href="#schemas">JSON 스키마</a>
       <a href="#deploy">배포 구조</a>
-      <a href="#debug">확인 방법</a>
+      <a href="#verify">확인 방법</a>
     </div>
   </nav>
 
@@ -586,7 +586,7 @@
         </div>
         <p>
           지금 코드는 단순 데모 UI가 아니라, AWS Transcribe와 Bedrock을 실제 호출하는 서버리스 MVP 구조입니다.
-          다만 인증, 병원 EMR 연동, 개인정보 운영 정책은 아직 프로덕션 이전 단계입니다.
+          제출 환경은 직원/의료진 접근 코드, S3 artifact 분리 저장, DynamoDB TTL, WAF, CloudTrail, GuardDuty, Security Hub, Macie 기준으로 정리되어 있습니다.
         </p>
       </div>
 
@@ -1492,7 +1492,7 @@ Frontend env
 VITE_API_BASE_URL=https://&lt;api-id&gt;.execute-api.&lt;region&gt;.amazonaws.com
 </code></pre>
         <pre><code>Backend env
-SESSIONS_TABLE=MunjinSessionsTest
+SESSIONS_TABLE=MunjinSessions
 ARTIFACTS_BUCKET=&lt;s3-artifact-bucket&gt;
 ALLOWED_ORIGINS=https://&lt;amplify-branch-domain&gt;
 STRONG_MODEL_ID=apac.amazon.nova-pro-v1:0
@@ -1504,15 +1504,15 @@ EMBEDDING_DIMENSIONS=512</code></pre>
       </div>
 
       <div class="note">
-        운영 전 필수 보강: 직원/의사 화면 인증, 환자 개인정보 보존 기간 정책, CloudWatch 개인정보 로그 마스킹,
-        DynamoDB TTL, S3 임시 산출물 lifecycle, API CORS origin 제한이 필요합니다.
+        제출 환경 확인 항목: 직원/의료진 접근 코드, CloudWatch 로그 보존 기간, DynamoDB TTL,
+        S3 lifecycle, API CORS origin, WAF 연결 상태를 배포 전 한 번씩 점검합니다.
       </div>
     </section>
 
-    <section id="debug" class="section">
+    <section id="verify" class="section">
       <div class="section-title">
         <div>
-          <p class="kicker">Debug</p>
+          <p class="kicker">Verification</p>
           <h2>11. 이상할 때 확인하는 순서</h2>
         </div>
         <p>

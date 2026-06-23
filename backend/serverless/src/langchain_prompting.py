@@ -79,7 +79,7 @@ def _parse_bedrock_json_response(payload: dict[str, Any]) -> dict[str, Any]:
         # 실패할 수 있습니다. 이때도 rule-base extraction으로 대체하지 않고,
         # 응답 안의 첫 JSON object만 꺼내 schema validator로 넘깁니다.
         parsed = extract_first_json_object(raw_text)
-        parse_method = "fallback_first_json_object"
+        parse_method = "backup_first_json_object"
 
     payload["parsed"] = parsed if isinstance(parsed, dict) else {}
     payload["meta"] = {

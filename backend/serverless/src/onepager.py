@@ -124,7 +124,7 @@ def scan_safety(transcript: str, matched_slots: list[dict[str, Any]]):
 def get_onepager_payload(session: dict[str, Any]) -> dict[str, Any]:
     """API 응답용 원페이퍼 payload를 반환합니다.
 
-    이미 S3에 저장된 onepaper artifact가 있으면 재사용하고, 과거 세션처럼
+    이미 S3에 저장된 onepaper artifact가 있으면 재사용하고, 기존 세션처럼
     artifact가 없을 때만 재조립합니다.
     """
     responses = load_answers(session)

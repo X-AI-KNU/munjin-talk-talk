@@ -69,10 +69,7 @@ backend/serverless/
 │       ├── question_sets/default.json
 │       └── (비공개 배치) diseases_cleaned / symptom_index / embedding cache
 └── tests/
-    ├── test_schema_and_artifact_policy.py   test_schema_slots.py
-    ├── test_ir_noise_and_safety.py          test_prompts_golden.py
-    ├── test_question_sets.py                test_sessions_queue.py
-    └── fixtures/  ├─ README.md └─ prompts_golden.json
+    └── pytest 기반 회귀 검증 코드와 프롬프트 기준 파일
 ```
 
 ---
@@ -203,7 +200,7 @@ DynamoDB `GetItem`/`PutItem`/`UpdateItem`/`Scan`, S3 artifact bucket `GetObject`
 # Python 문법
 python -m compileall src
 
-# 테스트
+# 검증
 pip install -r src/requirements.txt pytest
 python -m pytest tests/ -q
 ```
@@ -220,7 +217,7 @@ sam build
 
 ---
 
-## 11. Smoke Test 기준
+## 11. 최종 동작 확인 기준
 
 1. `POST /sessions` 성공
 2. DynamoDB item에 `patient.full_name`/`birth_date`/`phone`이 **없어야** 함

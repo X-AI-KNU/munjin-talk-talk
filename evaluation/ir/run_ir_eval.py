@@ -2,8 +2,8 @@
 """문진톡톡 증상 IR 성능 평가 도구.
 
 이 스크립트는 운영 Lambda를 호출하지 않고, backend/serverless/src의 IR 인덱스와
-scoring 함수를 직접 불러와 query 구성별 검색 품질을 비교합니다.
-평가 데이터만 JSONL로 넣으면 A/B/C/D안을 한 번에 비교할 수 있습니다.
+scoring 함수를 직접 불러와 표준 증상 후보 검색과 Pro linker 성능을 확인합니다.
+기본 실행은 제출 기준으로 채택한 G안입니다.
 """
 
 from __future__ import annotations
@@ -53,20 +53,16 @@ VARIANTS = {
     "E": "표준어 span + LLM 증상명 검색 후 deterministic gate",
     "F": "표준어 span + LLM 증상명 검색 후 gate + LLM 최종 판단",
     "G": "MVP 채택안: 표준어 span + LLM 증상명 검색 후 top-k 후보 Pro LLM linker",
-    "H": "실험안: top-k 후보 LLM linker 실패 시 전체 표준 증상 목록 fallback",
-    "I": "실험안: 전체 표준 증상 목록 Pro LLM linker",
-    "J": "실험안: A/B/C query union 후보 + top-k 후보 LLM linker",
 }
 
-LLM_LINKER_VARIANTS = {"D", "F", "G", "H", "I", "J"}
-TOP_K_LINKER_VARIANTS = {"G", "H", "J"}
+LLM_LINKER_VARIANTS = {"D", "F", "G"}
+TOP_K_LINKER_VARIANTS = {"G"}
 IR_PRIMARY_K = 3
 IR_SECONDARY_K = 5
 IR_REPORT_CUTOFFS = (3, 5, 10, 20, 30)
 
-# Gate는 최종 채택 전 실험용 방어막입니다.
-# 운영 파이프라인을 바로 바꾸지 않고, 평가 브랜치에서만 "LLM 추출 span -> IR -> 규칙적 후보 정리"
-# 구조가 실제로 도움이 되는지 확인하기 위해 둡니다.
+# Gate는 후보 선택 전 검증용 방어막입니다.
+# LLM 추출 span을 IR 후보로 좁힌 뒤, 후보와 원문 근거가 지나치게 멀지 않은지 확인합니다.
 GATE_RETRIEVAL_TOP_K = 5
 GATE_MIN_RANK_SCORE = 0.34
 GATE_MIN_SUPPORT_SCORE = 0.24
@@ -222,7 +218,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--include-non-active-spans",
         action="store_true",
-        help="status=없음/호전 span도 검색에 넣어 false-positive 스트레스 테스트를 수행",
+        help="status=없음/호전 span도 검색에 넣어 false-positive 여부를 점검",
     )
     parser.add_argument(
         "--embedding-provider",
@@ -275,7 +271,7 @@ def parse_requested_variants(args: argparse.Namespace) -> list[str]:
         allowed = ", ".join(VARIANTS)
         raise SystemExit(f"지원하지 않는 variant입니다: {unknown}. 사용 가능: {allowed}")
     if args.skip_llm_judge and any(variant in LLM_LINKER_VARIANTS for variant in variants):
-        raise SystemExit("--skip-llm-judge와 D/F/G/H/I/J variant는 함께 사용할 수 없습니다.")
+        raise SystemExit("--skip-llm-judge와 D/F/G variant는 함께 사용할 수 없습니다.")
     return variants
 
 
@@ -324,47 +320,29 @@ def evaluate_case(
     linker_used_count = 0
     linker_no_match_count = 0
     linker_invalid_count = 0
-    linker_fallback_count = 0
-    linker_full_list_count = 0
     linker_selected_slot_ids: list[str] = []
 
     for span_idx, span in enumerate(spans):
         if not include_non_active_spans and is_non_active_symptom_state(span):
             skipped_span_count += 1
             continue
-        if variant == "J":
-            union_queries = build_union_queries(case, span)
-            if not union_queries:
-                continue
-            query = " || ".join(f"{query_variant}:{query_text}" for query_variant, query_text in union_queries)
-        else:
-            query = build_query(case, span, variant)
-            if not query:
-                continue
+        query = build_query(case, span, variant)
+        if not query:
+            continue
         active_span_count += 1
         queries_used.append(query)
         span_names.append(str(span.get("name") or ""))
         span_statuses.append(str(span.get("status") or ""))
         span_types.append(str(span.get("type") or ""))
         retrieval_top_k = max(top_k, GATE_RETRIEVAL_TOP_K) if variant in {"E", "F"} else top_k
-        if variant == "J":
-            candidates, _union_queries = retrieve_union_candidates(
-                case=case,
-                span=span,
-                top_k=retrieval_top_k,
-                preferred_slot_id=span.get("slot_ref", "") if use_slot_hint else "",
-                embedder=embedder,
-                score_mode=score_mode,
-            )
-        else:
-            candidates = retrieve_by_query(
-                query=query,
-                top_k=retrieval_top_k,
-                preferred_slot_id=span.get("slot_ref", "") if use_slot_hint else "",
-                preferred_texts=[span.get("name", ""), span.get("normalized_text", ""), span.get("source_quote", "")],
-                embedder=embedder,
-                score_mode=score_mode,
-            )
+        candidates = retrieve_by_query(
+            query=query,
+            top_k=retrieval_top_k,
+            preferred_slot_id=span.get("slot_ref", "") if use_slot_hint else "",
+            preferred_texts=[span.get("name", ""), span.get("normalized_text", ""), span.get("source_quote", "")],
+            embedder=embedder,
+            score_mode=score_mode,
+        )
         for pool_rank, cand in enumerate(candidates[:top_k], start=1):
             merge_candidate(candidate_pool_merged, cand, pool_rank)
         if variant in {"E", "F"}:
@@ -388,15 +366,6 @@ def evaluate_case(
         if variant in TOP_K_LINKER_VARIANTS:
             linker_result = link_top_candidates(case, span, candidates, top_k)
             linker_used_count += 1
-            if variant == "H" and not linker_result["selected_slot_ids"] and not linker_result.get("invalid_selection"):
-                linker_result = link_full_symptom_list(case, span)
-                linker_used_count += 1
-                linker_fallback_count += 1
-                linker_full_list_count += 1
-        elif variant == "I":
-            linker_result = link_full_symptom_list(case, span)
-            linker_used_count += 1
-            linker_full_list_count += 1
 
         if linker_result is not None:
             selected_slot_ids = set(linker_result["selected_slot_ids"])
@@ -406,7 +375,6 @@ def evaluate_case(
             if linker_result.get("invalid_selection"):
                 linker_invalid_count += 1
 
-        visible_candidate_slot_ids = {str(cand.get("slot_id") or "") for cand in candidates[:top_k]}
         for rank, cand in enumerate(candidates[:top_k], start=1):
             linker_decision = ""
             linker_reason = ""
@@ -441,52 +409,10 @@ def evaluate_case(
                 "linker_reason": linker_reason,
                 "linker_selected": linker_selected,
                 "linker_scope": linker_scope,
-                "union_query_count": cand.get("union_query_count", ""),
-                "union_query_variants": cand.get("union_query_variants", ""),
             }
             candidate_rows.append(row)
-            if variant not in {"G", "H", "I", "J"} or cand.get("slot_id") in selected_slot_ids:
+            if variant != "G" or cand.get("slot_id") in selected_slot_ids:
                 merge_candidate(merged_candidates, cand, rank)
-
-        if (
-            variant in {"H", "I"}
-            and linker_result is not None
-            and linker_result.get("scope") == "full_list"
-        ):
-            for fallback_rank, cand in enumerate(
-                selected_candidates_from_slot_ids(
-                    linker_result["selected_slot_ids"],
-                    exclude_slot_ids=visible_candidate_slot_ids,
-                ),
-                start=top_k + 1,
-            ):
-                row = {
-                    "variant": variant,
-                    "case_id": case.get("case_id", ""),
-                    "span_index": span_idx,
-                    "query": query,
-                    "rank": fallback_rank,
-                    "candidate": cand.get("display_text"),
-                    "slot_id": cand.get("slot_id"),
-                    "rank_score": cand.get("rank_score"),
-                    "bm25_score": cand.get("bm25_score"),
-                    "vector_score": cand.get("vector_score"),
-                    "label_score": cand.get("label_score"),
-                    "retrieval_branch": cand.get("retrieval_branch"),
-                    "embedding_provider": embedder.provider_name,
-                    "embedding_model": embedder.model_name,
-                    "score_mode": score_mode,
-                    "gate_decision": "",
-                    "gate_reason": "",
-                    "gate_support_score": "",
-                    "gate_specificity_score": "",
-                    "linker_decision": str(linker_result.get("decision") or ""),
-                    "linker_reason": str(linker_result.get("reason") or ""),
-                    "linker_selected": "true",
-                    "linker_scope": str(linker_result.get("scope") or ""),
-                }
-                candidate_rows.append(row)
-                merge_candidate(merged_candidates, cand, fallback_rank)
 
     candidate_pool_ranked = sorted(
         candidate_pool_merged.values(),
@@ -541,8 +467,6 @@ def evaluate_case(
         "linker_used_count": linker_used_count,
         "linker_no_match_count": linker_no_match_count,
         "linker_invalid_count": linker_invalid_count,
-        "linker_fallback_count": linker_fallback_count,
-        "linker_full_list_count": linker_full_list_count,
         "linker_selected_slot_ids": linker_selected_slot_ids,
         **final_set_metrics,
         **metric_values,
@@ -567,7 +491,7 @@ def oracle_case_spans(case: dict[str, Any]) -> list[dict[str, Any]]:
     """정답 증상명을 query로 넣어 IR 문서/모델 조합의 상한을 확인합니다.
 
     이 variant는 실제 서비스에서 사용할 수 없습니다. LLM 추출 결과와 무관하게
-    gold label을 직접 넣었을 때도 검색이 실패하는지 확인하는 진단용 실험입니다.
+    gold label을 직접 넣었을 때도 검색이 실패하는지 확인하는 진단용 평가입니다.
     """
     gold_names = sorted(canonical_name_set(case.get("gold_symptoms", []), case.get("gold_slot_ids", [])))
     if not gold_names:
@@ -598,124 +522,15 @@ def build_query(case: dict[str, Any], span: dict[str, Any], variant: str) -> str
         parts = [normalized, span_name]
     elif variant == "D":
         parts = [normalized]
-    elif variant in {"E", "F", "G", "H", "I", "J"}:
+    elif variant in {"E", "F", "G"}:
         return build_symptom_query(source_quote, normalized, span_name)
     else:
         raise ValueError(f"지원하지 않는 variant: {variant}")
     return normalize_text(" ".join(part for part in parts if part))
 
 
-def build_union_queries(case: dict[str, Any], span: dict[str, Any]) -> list[tuple[str, str]]:
-    """J 실험용 query 묶음을 만듭니다.
-
-    실패 케이스 표현을 직접 추가하는 대신, 이미 정의한 A/B/C query 관점을 모두 사용합니다.
-    같은 문장이 중복되면 한 번만 검색해서 비용을 줄입니다.
-    """
-    queries: list[tuple[str, str]] = []
-    seen: set[str] = set()
-    for query_variant in ("A", "B", "C"):
-        query = build_query(case, span, query_variant)
-        if not query or query in seen:
-            continue
-        seen.add(query)
-        queries.append((query_variant, query))
-    return queries
-
-
-def retrieve_union_candidates(
-    case: dict[str, Any],
-    span: dict[str, Any],
-    top_k: int,
-    preferred_slot_id: str,
-    embedder: Any,
-    score_mode: str,
-) -> tuple[list[dict[str, Any]], list[tuple[str, str]]]:
-    """A/B/C 검색 후보를 합쳐 linker에게 전달할 후보군을 만듭니다.
-
-    각 query의 score는 query 내부 정규화 결과라 완전히 같은 척도로 보기 어렵습니다. 따라서
-    1) 동일 후보가 여러 query에서 반복 등장하면 작은 보너스를 주고,
-    2) 단일 query에서의 최고 점수와 최고 순위를 보존하며,
-    3) 최종 top-k만 linker에게 넘깁니다.
-
-    이 방식은 표준 증상 문서나 gold label을 건드리지 않고 candidate recall만 높이는 실험입니다.
-    """
-    union_queries = build_union_queries(case, span)
-    merged: dict[str, dict[str, Any]] = {}
-    preferred_texts = [span.get("name", ""), span.get("normalized_text", ""), span.get("source_quote", "")]
-
-    for query_variant, query in union_queries:
-        candidates = retrieve_by_query(
-            query=query,
-            top_k=top_k,
-            preferred_slot_id=preferred_slot_id,
-            preferred_texts=preferred_texts,
-            embedder=embedder,
-            score_mode=score_mode,
-        )
-        for rank, candidate in enumerate(candidates, start=1):
-            merge_union_candidate(merged, candidate, rank, query_variant)
-
-    ranked = sorted(
-        merged.values(),
-        key=lambda item: (
-            -float(item.get("rank_score") or 0),
-            -int(item.get("union_query_count") or 0),
-            int(item.get("best_rank") or 999),
-        ),
-    )
-    return ranked[:top_k], union_queries
-
-
-def merge_union_candidate(
-    merged: dict[str, dict[str, Any]],
-    candidate: dict[str, Any],
-    rank: int,
-    query_variant: str,
-) -> None:
-    """여러 query에서 나온 같은 후보를 하나로 합칩니다."""
-    slot_id = str(candidate.get("slot_id") or "")
-    if not slot_id:
-        return
-
-    current = merged.get(slot_id)
-    score = float(candidate.get("rank_score") or 0)
-    if current is None:
-        merged[slot_id] = {
-            **candidate,
-            "best_rank": rank,
-            "base_rank_score": round(score, 4),
-            "rank_score": round(score, 4),
-            "union_query_count": 1,
-            "union_query_variants": query_variant,
-            "retrieval_branch": f"union:{query_variant}:{candidate.get('retrieval_branch', '')}",
-        }
-        return
-
-    variants = set(str(current.get("union_query_variants") or "").split(","))
-    variants.discard("")
-    variants.add(query_variant)
-    query_count = len(variants)
-    best_score = max(float(current.get("base_rank_score") or 0), score)
-    best_rank = min(int(current.get("best_rank") or 999), rank)
-
-    # 여러 query 관점에서 반복 등장한 후보는 조금 더 신뢰하되, 점수 자체를 크게 왜곡하지 않습니다.
-    union_score = best_score + min(0.08, 0.03 * (query_count - 1)) - min(0.03, 0.001 * (best_rank - 1))
-    if score > float(current.get("base_rank_score") or 0):
-        current.update({
-            **candidate,
-            "base_rank_score": round(score, 4),
-        })
-    current.update({
-        "best_rank": best_rank,
-        "rank_score": round(float(union_score), 4),
-        "union_query_count": query_count,
-        "union_query_variants": ",".join(sorted(variants)),
-        "retrieval_branch": f"union:{','.join(sorted(variants))}",
-    })
-
-
 def case_text(case: dict[str, Any]) -> str:
-    """평가 데이터가 `text`만 가진 단순 형식이어도 기존 IR 실험에 사용할 수 있게 합니다."""
+    """평가 데이터가 `text`만 가진 단순 형식이어도 IR 평가에 사용할 수 있게 합니다."""
     return str(
         case.get("raw_text")
         or case.get("text")
@@ -755,7 +570,7 @@ def rrf_component(rank_map: dict[int, int], idx: int, weight: float) -> float:
 def select_quota_rrf_rows(rows: list[dict[str, Any]], top_k: int) -> list[dict[str, Any]]:
     """RRF 후보군에서 label/vector/BM25 신호를 일정량씩 보존합니다.
 
-    이 함수는 서비스 코드를 바꾸기 위한 최종 랭킹 로직이 아니라, 평가용 실험입니다.
+    이 함수는 서비스 코드를 바꾸기 위한 최종 랭킹 로직이 아니라, 평가용 비교 기준입니다.
     기존 RRF가 한 신호에 치우쳐 정답 후보를 top-k 밖으로 밀어내는지 확인하기 위해
     직접 표준명/alias 신호, vector 신호, BM25 신호를 각각 일정 개수씩 먼저 담고
     남은 자리는 RRF 순위로 채웁니다.
@@ -817,7 +632,7 @@ def retrieve_by_query(
     embedder: Any | None = None,
     score_mode: str = "hybrid",
 ) -> list[dict[str, Any]]:
-    """운영 IR과 같은 문서/점수 함수를 사용하되, query 문자열만 실험별로 바꿉니다."""
+    """운영 IR과 같은 문서/점수 함수를 사용하되, query 문자열만 평가 variant별로 바꿉니다."""
     if embedder is None:
         raise ValueError("embedding provider가 필요합니다.")
     docs, bm25 = get_ir_index()
@@ -931,8 +746,8 @@ def apply_deterministic_gate(
 ) -> list[dict[str, Any]]:
     """IR 후보를 최종 채택하기 전 규칙적으로 정리합니다.
 
-    평가 브랜치 전용 실험입니다. LLM이 이미 "없음/호전/과거력"으로 분류한 span은 검색 전 단계에서
-    제외되며, 여기서는 top-5 후보 중 실제 span 문구와 후보 표준명이 맞는지 다시 확인합니다.
+    LLM이 이미 "없음/호전/과거력"으로 분류한 span은 검색 전 단계에서 제외되며,
+    여기서는 top-k 후보 중 실제 span 문구와 후보 표준명이 맞는지 다시 확인합니다.
     """
     if not candidates:
         return []
@@ -975,9 +790,9 @@ def apply_deterministic_gate(
             gated.append({**updated, "gate_decision": decision})
 
     if not gated and candidates:
-        fallback = best_threshold_fallback(candidates, evidence_text, allow_semantic_review)
-        if fallback:
-            gated.append(fallback)
+        backup_candidate = best_threshold_backup(candidates, evidence_text, allow_semantic_review)
+        if backup_candidate:
+            gated.append(backup_candidate)
 
     gated.sort(
         key=lambda item: (
@@ -1036,7 +851,7 @@ def is_generic_candidate(candidate: dict[str, Any]) -> bool:
     return display_name in GATE_GENERIC_LABELS or len("".join(KOREAN_TOKEN_RE.findall(display_name))) <= 2
 
 
-def best_threshold_fallback(
+def best_threshold_backup(
     candidates: list[dict[str, Any]],
     evidence_text: str,
     allow_semantic_review: bool,
@@ -1052,7 +867,7 @@ def best_threshold_fallback(
     if not direct_supported and not allow_semantic_review:
         return None
     specificity_score = candidate_specificity_score(str(best.get("display_text") or ""))
-    reason = "fallback_direct_supported" if direct_supported else "fallback_semantic_review"
+    reason = "backup_direct_supported" if direct_supported else "backup_semantic_review"
     return {
         **best,
         "gate_decision": "accepted" if direct_supported else "needs_llm",
@@ -1120,34 +935,6 @@ def link_top_candidates(case: dict[str, Any], span: dict[str, Any], candidates: 
     return result
 
 
-def link_full_symptom_list(case: dict[str, Any], span: dict[str, Any]) -> dict[str, Any]:
-    """H안 fallback: IR top-k가 못 고른 경우 전체 표준 증상 목록 안에서만 다시 고릅니다.
-
-    이 함수도 closed-set linker입니다. LLM이 자유롭게 증상명을 만들 수 없고,
-    `symptom_index.json`에서 만들어진 표준 `slot_id` 중 하나만 선택할 수 있습니다.
-    따라서 IR이 놓친 후보를 구제하되, 표준 목록 밖 hallucination은 validator가 막습니다.
-    """
-    candidate_pack = build_full_symptom_candidate_pack()
-    prompt = build_full_list_linker_prompt(case, span, candidate_pack)
-    try:
-        from llm import call_bedrock_json_with_meta
-
-        obj, _raw, _meta = call_bedrock_json_with_meta(prompt, REVIEWER_MODEL_ID, 900)
-    except Exception as exc:
-        print(f"[WARN] LLM full-list linker 실패: {case.get('case_id')} {exc.__class__.__name__}", file=sys.stderr)
-        return {
-            "decision": "no_match",
-            "selected_slot_ids": [],
-            "reason": f"llm_full_list_linker_error:{exc.__class__.__name__}",
-            "invalid_selection": False,
-            "scope": "full_list",
-        }
-
-    result = validate_linker_output(obj, candidate_pack)
-    result["scope"] = "full_list"
-    return result
-
-
 def build_linker_candidate_pack(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """LLM linker에 전달할 후보 정보를 최소 단위로 정리합니다.
 
@@ -1167,59 +954,6 @@ def build_linker_candidate_pack(candidates: list[dict[str, Any]]) -> list[dict[s
             "retrieval_branch": cand.get("retrieval_branch", ""),
         })
     return pack
-
-
-def build_full_symptom_candidate_pack() -> list[dict[str, Any]]:
-    """전체 표준 증상 목록을 fallback linker 보기로 변환합니다.
-
-    손으로 alias를 추가하지 않고, 운영 IR과 같은 `symptom_index.json` 기반 문서만 사용합니다.
-    후보별 근거 문장은 너무 길어지지 않도록 첫 직접 근거만 짧게 넣어, LLM이 일반 증상보다
-    더 구체적인 표준 증상을 고를 때 참고할 최소 문맥만 제공합니다.
-    """
-    docs, _ = get_ir_index()
-    pack: list[dict[str, Any]] = []
-    for rank, doc in enumerate(sorted(docs, key=lambda item: item["display_name"]), start=1):
-        evidence = doc.get("evidence") or []
-        evidence_hint = ""
-        if evidence and isinstance(evidence[0], dict):
-            evidence_hint = trim_long_text(str(evidence[0].get("text") or ""), 120)
-        pack.append({
-            "rank": rank,
-            "slot_id": doc.get("symptom_id", ""),
-            "name": doc.get("display_name", ""),
-            "evidence_hint": evidence_hint,
-        })
-    return pack
-
-
-def selected_candidates_from_slot_ids(
-    slot_ids: list[str],
-    exclude_slot_ids: set[str] | None = None,
-) -> list[dict[str, Any]]:
-    """full-list fallback이 고른 slot_id를 기존 metric 계산용 후보 row로 바꿉니다."""
-    exclude_slot_ids = exclude_slot_ids or set()
-    docs, _ = get_ir_index()
-    docs_by_id = {str(doc["symptom_id"]): doc for doc in docs}
-    rows: list[dict[str, Any]] = []
-    for idx, slot_id in enumerate(slot_ids, start=1):
-        if slot_id in exclude_slot_ids:
-            continue
-        doc = docs_by_id.get(slot_id)
-        if not doc:
-            continue
-        rows.append({
-            "slot_id": slot_id,
-            "display_text": doc["display_name"],
-            "rank_score": round(1.0 - (idx * 0.001), 4),
-            "bm25_score": "",
-            "vector_score": "",
-            "vector_norm": "",
-            "label_score": "",
-            "retrieval_branch": "full_list_fallback",
-            "_doc_text": doc.get("retrieval_text", ""),
-            "_bm25_text": doc.get("bm25_text", ""),
-        })
-    return rows
 
 
 def trim_long_text(text: str, limit: int) -> str:
@@ -1358,63 +1092,6 @@ Return JSON:
 {{
   "decision": "match or no_match",
   "selected_slot_ids": ["zero or one slot_id from candidate_symptoms"],
-  "reason": "short Korean reason"
-}}
-""".strip()
-
-
-def build_full_list_linker_prompt(case: dict[str, Any], span: dict[str, Any], candidate_pack: list[dict[str, Any]]) -> str:
-    """IR이 정답을 후보에 못 올린 경우 전체 표준 증상 목록에서만 고르는 fallback prompt입니다."""
-    return f"""
-You are a strict Korean clinical symptom linker working in fallback mode.
-The retrieval ranker could not confidently select a symptom from its top-k candidates.
-Your task is still NOT diagnosis. Your task is closed-set entity linking.
-
-Critical rules:
-1. You MUST choose only slot_id values from standard_symptom_options.
-2. You MUST NOT invent a new symptom name, slot_id, disease, diagnosis, or synonym.
-3. If the span is absent, denied, resolved, improved, historical-only, medication-only, or too vague, return no_match.
-4. Prefer no_match over a weak guess.
-5. If a broad symptom and a more specific symptom both fit, choose the more specific option.
-6. If the patient's words include a quality/modifier such as color, swelling location, radiation, swallowing difficulty, purulent sputum, bloody sputum, or black sputum, preserve that modifier when a standard option exists.
-7. Select at most one slot_id. If several candidates look possible, choose the single best one.
-8. Return strict JSON only.
-
-Few-shot examples:
-Input span_normalized_text: "다리가 새로 부었습니다"
-Input symptom_hint: "다리 부기"
-standard_symptom_options include:
-  {{"slot_id": "lower_extremity_edema", "name": "하지부종"}}
-Output: {{"decision": "match", "selected_slot_ids": ["lower_extremity_edema"], "reason": "다리 부기는 하지부종과 직접 대응합니다."}}
-
-Input span_normalized_text: "누런 가래가 나옵니다"
-Input symptom_hint: "누런 가래"
-standard_symptom_options include:
-  {{"slot_id": "sputum", "name": "가래"}}
-  {{"slot_id": "purulent_sputum", "name": "화농성 객담"}}
-Output: {{"decision": "match", "selected_slot_ids": ["purulent_sputum"], "reason": "누런 가래는 일반 가래보다 화농성 객담에 더 구체적으로 대응합니다."}}
-
-Input span_normalized_text: "어제 열은 내렸고 지금은 괜찮습니다"
-Input symptom_hint: "열"
-standard_symptom_options include:
-  {{"slot_id": "fever", "name": "발열"}}
-Output: {{"decision": "no_match", "selected_slot_ids": [], "reason": "호전된 과거 증상이므로 현재 active symptom으로 선택하지 않습니다."}}
-
-Case:
-case_id: {case.get("case_id", "")}
-raw_text: {case_text(case)}
-standard_text: {case_standard_text(case)}
-span_source_quote: {span.get("source_quote", "")}
-span_normalized_text: {span.get("normalized_text", "")}
-symptom_hint: {span.get("name", "")}
-span_status: {span.get("status", "")}
-span_type: {span.get("type", "")}
-standard_symptom_options: {json.dumps(candidate_pack, ensure_ascii=False)}
-
-Return JSON:
-{{
-  "decision": "match or no_match",
-  "selected_slot_ids": ["slot_id from standard_symptom_options"],
   "reason": "short Korean reason"
 }}
 """.strip()
@@ -1594,8 +1271,6 @@ def summarize_variant(variant: str, rows: list[dict[str, Any]], top_k: int) -> d
         "linker_invocation_count": sum(int(row.get("linker_used_count") or 0) for row in rows),
         "linker_no_match_count": sum(int(row.get("linker_no_match_count") or 0) for row in rows),
         "linker_invalid_count": sum(int(row.get("linker_invalid_count") or 0) for row in rows),
-        "linker_fallback_count": sum(int(row.get("linker_fallback_count") or 0) for row in rows),
-        "linker_full_list_count": sum(int(row.get("linker_full_list_count") or 0) for row in rows),
         "linker_micro_precision": round(linker_precision, 4),
         "linker_micro_recall": round(linker_recall, 4),
         "linker_micro_f1": round(f1_score(linker_precision, linker_recall), 4),
@@ -1779,8 +1454,6 @@ def write_candidates_csv(path: Path, rows: list[dict[str, Any]]) -> None:
         "linker_reason",
         "linker_selected",
         "linker_scope",
-        "union_query_count",
-        "union_query_variants",
     ]
     with path.open("w", encoding="utf-8-sig", newline="") as fp:
         writer = csv.DictWriter(fp, fieldnames=fieldnames)

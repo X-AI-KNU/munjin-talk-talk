@@ -34,7 +34,7 @@ def build_extraction_prompt(
     visit = visit_label(visit_type)
     server_text = prompt_question_text(visit_type, question_id, question_set_id or None)
     # 알려진 기본 문항은 서버 정의가 항상 우선입니다.
-    # 클라이언트 override는 서버에 정의되지 않은 커스텀 문항 전용 fallback입니다.
+    # 클라이언트 override는 서버에 정의되지 않은 커스텀 문항 전용 보조 입력입니다.
     question_text = str(server_text or question_text_override or "").strip()
     allowed_slots = ", ".join(llm_symptom_slot_ids() + ["other"])
     dialect_note = build_dialect_helper_note(dialect_standardized_text, dialect_replacements or [])

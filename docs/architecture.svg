@@ -91,7 +91,7 @@
   <text class="tiny" x="750" y="528">Pydantic/source_quote validator</text>
   <text class="tiny" x="750" y="551">검증 실패 시 bounded retry loop</text>
   <text class="tiny" x="750" y="574">Hybrid IR → artifact 저장 → response</text>
-  <text class="warn" x="750" y="610">rule-based extraction fallback 없음</text>
+  <text class="warn" x="750" y="610">rule-based extraction 대체 없음</text>
   <text class="tiny" x="750" y="635">최소 active_path와 node event trace</text>
   <text class="tiny" x="750" y="658">의료진 AI 재검토는 onepager review route</text>
 

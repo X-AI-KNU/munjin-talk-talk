@@ -106,7 +106,7 @@ def test_ir_index_falls_back_to_domain_pack_when_source_json_missing(tmp_path):
 
     assert "기침" in display_names
     assert "코막힘" in display_names
-    assert "domain_pack_fallback" in sources
+    assert "domain_pack_backup" in sources
     assert max(bm25.scores("기침 콜록")) > 0
 
 

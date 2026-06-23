@@ -104,7 +104,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--include-non-active-spans",
         action="store_true",
-        help="없음/호전/과거력 span도 IR 평가에 포함해 false positive를 스트레스 테스트합니다.",
+        help="없음/호전/과거력 span도 IR 평가에 포함해 false positive를 점검합니다.",
     )
     return parser.parse_args()
 

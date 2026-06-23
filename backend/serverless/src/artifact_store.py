@@ -118,7 +118,7 @@ def get_json(session: dict[str, Any], filename: str, default: Any = None) -> Any
 
 
 def load_answers(session: dict[str, Any]) -> dict[str, Any]:
-    """문항별 답변 artifact를 읽고, 과거 DDB 저장 구조가 있으면 fallback합니다."""
+    """문항별 답변 artifact를 읽고, 기존 DDB 저장 구조가 있으면 보조 경로로 읽습니다."""
     answers = get_json(session, ANSWER_FILE, default=None)
     if isinstance(answers, dict):
         return prepare_artifact_payload(ANSWER_FILE, answers)

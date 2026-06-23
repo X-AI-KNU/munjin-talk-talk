@@ -40,7 +40,7 @@
         <mxCell id="lambda" value="AWS Lambda Python 3.12&#xa;handler.py, sessions.py, guide.py, onepager.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#fb923c;fontSize=14;fontStyle=1;fontColor=#0f2347;align=left;spacing=12;" vertex="1" parent="1">
           <mxGeometry x="720" y="320" width="330" height="92" as="geometry"/>
         </mxCell>
-        <mxCell id="langgraph" value="LangGraph StateGraph&#xa;input → safety → RAG → LLM extraction&#xa;Pydantic/source_quote validator&#xa;검증 실패 시 bounded retry loop&#xa;Hybrid IR → artifact 저장 → response&#xa;rule-based extraction fallback 없음&#xa;최소 active_path와 node event trace" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#2563eb;fontSize=14;fontStyle=1;fontColor=#0f2347;align=left;spacing=12;" vertex="1" parent="1">
+        <mxCell id="langgraph" value="LangGraph StateGraph&#xa;input → safety → RAG → LLM extraction&#xa;Pydantic/source_quote validator&#xa;검증 실패 시 bounded retry loop&#xa;Hybrid IR → artifact 저장 → response&#xa;rule-based extraction 대체 없음&#xa;최소 active_path와 node event trace" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#2563eb;fontSize=14;fontStyle=1;fontColor=#0f2347;align=left;spacing=12;" vertex="1" parent="1">
           <mxGeometry x="720" y="445" width="330" height="246" as="geometry"/>
         </mxCell>
         <mxCell id="langchain" value="LangChain Runnable Node&#xa;ChatPromptTemplate → Bedrock Runnable&#xa;JsonOutputParser → Pydantic schema" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#22c55e;fontSize=14;fontStyle=1;fontColor=#0f2347;align=left;spacing=12;" vertex="1" parent="1">

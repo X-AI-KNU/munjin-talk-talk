@@ -48,7 +48,7 @@ ap-northeast-2
 7. Amplify frontend 앱 연결
 8. Amplify 환경 변수 VITE_API_BASE_URL 설정
 9. SPA rewrite 설정
-10. Smoke Test
+10. 최종 동작 확인
 ```
 
 백엔드 보안 파라미터:
@@ -300,7 +300,7 @@ AMPLIFY_MONOREPO_APP_ROOT=frontend
 AMPLIFY_DIFF_DEPLOY=false
 ```
 
-제출용 Amplify 앱은 `main` 브랜치 하나만 운영합니다. 기능 실험은 Git 브랜치에서 진행하되, Amplify 배포와 AWS 리소스는 `main` 기준으로 단일화해 DynamoDB/S3/API endpoint 혼선을 줄입니다.
+제출용 Amplify 앱은 `main` 브랜치 하나만 운영합니다. 기능 개발은 Git 브랜치에서 진행하되, Amplify 배포와 AWS 리소스는 `main` 기준으로 단일화해 DynamoDB/S3/API endpoint 혼선을 줄입니다.
 
 직원/의료진 접근 코드와 `AuthSigningSecret`은 Amplify 환경 변수로 넣지 않습니다. 프론트 빌드 산출물에 secret이 포함되지 않도록, 화면에서 처음 내부 API 호출 시 로그인 모달로 접근 코드를 입력받고 `/auth/login`에서 짧은 시간 유효한 세션 토큰을 발급받습니다. 이후 API 요청은 `Authorization: Bearer <token>`만 사용합니다.
 
@@ -410,7 +410,7 @@ AWS 확인:
 
 ## 12. 비용 주의
 
-MVP 테스트에서 큰 비용을 만들 수 있는 항목:
+MVP 시연과 검증에서 큰 비용을 만들 수 있는 항목:
 
 - Bedrock LLM 호출
 - Titan embedding 호출
@@ -423,8 +423,8 @@ MVP 테스트에서 큰 비용을 만들 수 있는 항목:
 
 - S3 Lifecycle 3일 삭제
 - CloudWatch Logs 보존 기간 단축
-- test 데이터 삭제
-- 불필요한 반복 문진 테스트 제한
+- 시연 후 생성된 세션 데이터 삭제 또는 보존 기간 확인
+- 불필요한 반복 문진 실행 제한
 - Bedrock 호출 실패 retry 횟수 제한 유지
 
 ---

@@ -2,7 +2,7 @@
 """대사 기반 end-to-end 문진 파이프라인 평가 도구.
 
 이 스크립트는 평가자가 미리 query term이나 span을 작성하지 않아도 되도록 만든
-테스트용 실행기입니다. 입력 데이터에는 환자 발화와 골든 증상명만 넣고, 실제
+평가 실행기입니다. 입력 데이터에는 환자 발화와 골든 증상명만 넣고, 실제
 백엔드의 LangGraph 노드를 저장 직전 단계까지만 실행합니다.
 
 실행되는 단계:
@@ -79,7 +79,7 @@ def main() -> int:
     prediction_rows: list[dict[str, Any]] = []
     candidate_rows: list[dict[str, Any]] = []
     ir_eval_rows: list[dict[str, Any]] = []
-    ir_eval_fallback_rows: list[dict[str, Any]] = []
+    ir_eval_backup_rows: list[dict[str, Any]] = []
 
     for idx, case in enumerate(cases, start=1):
         result = evaluate_case(case, idx)
@@ -89,10 +89,10 @@ def main() -> int:
         candidate_rows.extend(result["candidate_rows"])
         ir_row = build_ir_eval_case(case, case_row)
         ir_eval_rows.append(ir_row)
-        if (ir_row.get("pipeline_meta") or {}).get("fallback_span_added"):
-            ir_eval_fallback_rows.append({
+        if (ir_row.get("pipeline_meta") or {}).get("backup_span_added"):
+            ir_eval_backup_rows.append({
                 "case_id": case_row.get("case_id"),
-                "reason": (ir_row.get("pipeline_meta") or {}).get("fallback_reason"),
+                "reason": (ir_row.get("pipeline_meta") or {}).get("backup_reason"),
                 "error": case_row.get("error"),
                 "validator_passed": case_row.get("validator_passed"),
             })
@@ -120,12 +120,12 @@ def main() -> int:
             "source_input": str(args.input),
             "total_cases": len(case_rows),
             "exported_cases": len(ir_eval_rows),
-            "fallback_cases": len(ir_eval_fallback_rows),
-            "fallback": ir_eval_fallback_rows,
+            "backup_query_cases": len(ir_eval_backup_rows),
+            "backup_query_rows": ir_eval_backup_rows,
             "purpose": (
                 "run_ir_eval.py 입력으로 쓰기 위한 파일입니다. "
                 "Bedrock extraction이 생성한 active symptom span을 우선 사용하되, "
-                "span 추출 실패 case도 제외하지 않도록 표준화 문장 기반 fallback span을 추가합니다."
+                "span 추출 실패 case도 제외하지 않도록 표준화 문장 기반 보조 query span을 추가합니다."
             ),
         },
     )
@@ -142,9 +142,9 @@ def main() -> int:
         f"ErrorRate={summary['error_rate']:.4f}"
     )
     print(
-        "- IR query 실험용 데이터: "
+        "- IR query 평가 데이터: "
         f"{args.output_dir / 'pipeline_ir_eval_cases.jsonl'} "
-        f"(exported={len(ir_eval_rows)}, fallback={len(ir_eval_fallback_rows)})"
+        f"(exported={len(ir_eval_rows)}, backup={len(ir_eval_backup_rows)})"
     )
     print(f"결과 저장: {args.output_dir}")
     return 0
@@ -230,11 +230,11 @@ def transcript_text(case: dict[str, Any]) -> str:
 
 
 def pipeline_standard_text(case: dict[str, Any], extracted: dict[str, Any], state: dict[str, Any]) -> str:
-    """IR fallback query에 쓸 표준화 문장을 안전하게 꺼냅니다.
+    """IR 보조 query에 쓸 표준화 문장을 안전하게 꺼냅니다.
 
     역할 분리 파이프라인이 정상 통과하면 `structured.standardized_text`에
     방언/구어체가 정리된 문장이 들어옵니다. validator 실패나 LLM 오류로 이 값이
-    비어도 평가 case를 버리지 않기 위해 원 입력 문장을 마지막 fallback으로 씁니다.
+    비어도 평가 case를 버리지 않기 위해 원 입력 문장을 마지막 보조 입력으로 씁니다.
     """
     structured = extracted.get("structured") if isinstance(extracted, dict) else {}
     raw = state.get("extraction_raw") if isinstance(state, dict) else {}
@@ -340,15 +340,15 @@ def build_ir_eval_case(source_case: dict[str, Any], case_row: dict[str, Any]) ->
 
     원본 평가셋에는 환자 발화와 골든 정답만 있습니다. A/B/C query 전략을 제대로 비교하려면
     Bedrock extraction이 만든 source_quote, normalized_text, LLM 증상명이 필요하므로,
-    pipeline 평가 직후 별도 JSONL로 저장합니다. 이 파일은 IR 실험 입력일 뿐 운영 저장소에는 쓰지 않습니다.
+    pipeline 평가 직후 별도 JSONL로 저장합니다. 이 파일은 IR 평가 입력일 뿐 운영 저장소에는 쓰지 않습니다.
     """
     text = str(case_row.get("text") or transcript_text(source_case)).strip()
     standard_text = str(case_row.get("standard_text") or source_case.get("standard_text") or text).strip()
     spans = compact_spans_for_ir(case_row.get("spans") or [])
-    fallback_reason = ""
+    backup_reason = ""
     if not has_active_ir_span(spans):
-        fallback_reason = "no_active_pipeline_span_standard_text_query"
-        spans = [fallback_span_for_ir(text, standard_text, fallback_reason)]
+        backup_reason = "no_active_pipeline_span_standard_text_query"
+        spans = [backup_span_for_ir(text, standard_text, backup_reason)]
 
     return {
         "case_id": case_row.get("case_id") or source_case.get("case_id"),
@@ -366,8 +366,8 @@ def build_ir_eval_case(source_case: dict[str, Any], case_row: dict[str, Any]) ->
             "extraction_attempts": int(case_row.get("extraction_attempts") or 0),
             "error": case_row.get("error") or "",
             "predicted_symptoms": case_row.get("predicted_symptoms") or [],
-            "fallback_span_added": bool(fallback_reason),
-            "fallback_reason": fallback_reason,
+            "backup_span_added": bool(backup_reason),
+            "backup_reason": backup_reason,
         },
     }
 
@@ -399,7 +399,7 @@ def has_active_ir_span(spans: list[dict[str, Any]]) -> bool:
     return any(is_active_symptom_state(span) for span in spans)
 
 
-def fallback_span_for_ir(source_text: str, standard_text: str, reason: str) -> dict[str, Any]:
+def backup_span_for_ir(source_text: str, standard_text: str, reason: str) -> dict[str, Any]:
     """추출 실패 case도 IR/linker 평가에서 제외하지 않기 위한 최소 span입니다.
 
     `name`을 비워 두면 C/G variant에서 query가 `normalized_text` 중심으로만
@@ -414,8 +414,8 @@ def fallback_span_for_ir(source_text: str, standard_text: str, reason: str) -> d
         "status": "있음",
         "type": "symptom",
         "slot_ref": "",
-        "fallback": True,
-        "fallback_reason": reason,
+        "backup_query": True,
+        "backup_reason": reason,
     }
 
 

@@ -46,7 +46,7 @@ React/Vite Frontend
 - Python 3.12
 - AWS SAM CLI
 
-AWS 테스트:
+AWS 동작 확인:
 
 - AWS CLI 로그인 또는 콘솔 권한
 - DynamoDB table
@@ -144,11 +144,11 @@ Environment variable:
 
 주의:
 
-- 기능 실험은 Git 브랜치에서 진행하되, Amplify와 AWS 리소스는 `main` 제출 환경으로 단일화하면 DynamoDB/S3/API 혼선을 줄일 수 있습니다.
+- 기능 개발은 Git 브랜치에서 진행하되, Amplify와 AWS 리소스는 `main` 제출 환경으로 단일화하면 DynamoDB/S3/API 혼선을 줄일 수 있습니다.
 
 ---
 
-## 8. Smoke Test 절차
+## 8. 최종 동작 확인 절차
 
 ### 8-1. 접수처
 
@@ -234,7 +234,7 @@ $base = "https://<api-id>.execute-api.ap-northeast-2.amazonaws.com"
 $body = @{
   visit_type = "initial"
   patient = @{
-    full_name = "테스트환자"
+    full_name = "홍길동"
     birth_date = "1950-09-17"
     gender = "여성"
     receipt_id = "R-0001"
@@ -311,12 +311,12 @@ sam build
 
 ---
 
-## 12. 테스트 후 정리
+## 12. 시연 후 정리
 
-테스트 후 삭제 또는 보존 정책을 확인할 항목:
+시연 후 삭제 또는 보존 정책을 확인할 항목:
 
 - S3 artifact bucket의 `sessions/` 객체
-- DynamoDB test table item
+- DynamoDB 세션 테이블 item
 - CloudWatch Logs 보존 기간
 - Transcribe job이 생성되지 않았는지 확인
 

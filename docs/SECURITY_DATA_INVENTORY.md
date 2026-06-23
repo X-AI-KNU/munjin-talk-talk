@@ -35,7 +35,7 @@
 | S3 artifact 객체 단위 암호화 명시 | 완료 | `artifact_store.py`, `template.yaml` |
 | 환자 화면 질문 문구를 백엔드 extraction에 전달 | 완료 | `frontend/src/services/api/transcripts.js`, `pipeline_nodes.py`, `extraction_prompts.py` |
 | 증상 slot, alias, safety flag를 도메인팩으로 분리 | 완료 | `domain_config.py`, `data/domain_packs/respiratory.json`, `clinical_terms.py` |
-| LLM 임의 confidence/score 필드 차단 회귀 테스트 | 완료 | `backend/serverless/tests/test_schema_and_artifact_policy.py` |
+| LLM 임의 confidence/score 필드 차단 회귀 검증 | 완료 | `backend/serverless/tests/test_schema_and_artifact_policy.py` |
 
 제출용 AWS 환경에서 확인한 운영 설정은 다음과 같습니다. 이 항목은 코드에 포함되는 설정이 아니라 AWS 콘솔/계정 정책으로 적용되는 보안 장치입니다.
 
@@ -65,7 +65,7 @@
 
 ## 3. 단계별 전수조사 표
 
-아래 표의 "기존" 항목은 보안 구조를 정리하기 전 MVP 코드에서 확인된 저장 방식을 의미합니다. `test` 브랜치의 현재 코드는 1-1절에 적은 것처럼 목표 저장 위치 기준으로 수정되었습니다.
+아래 표의 "기존" 항목은 보안 구조를 정리하기 전 MVP 코드에서 확인된 저장 방식을 의미합니다. 현재 제출 기준 코드는 1-1절에 적은 목표 저장 위치 기준으로 정리되어 있습니다.
 
 | 단계 | 관련 코드 | 기존 생성 또는 저장 데이터 | 기존 저장 위치 | 민감도 | 기존 문제 | 목표 저장 위치 | 조치 방향 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -199,7 +199,7 @@ sessions/YYYY-MM-DD/{session_id}/
 | P1 | 가명처리/마스킹 레이어 추가 | S3 저장 전 실명, 생년월일, 연락처 제거 |
 | P1 | Macie 탐지 및 S3 Lifecycle 3일 삭제 적용 | 저장된 산출물에 대한 사후 점검과 자동 삭제 |
 | P1 | Bedrock 입력 payload 최소화 | LLM 호출 시 직접식별정보 제거 |
-| P2 | 보안 회귀 테스트 추가 | 이후 수정에서 민감 필드가 다시 DDB에 들어가지 않도록 방지 |
+| P2 | 보안 회귀 검증 추가 | 이후 수정에서 민감 필드가 다시 DDB에 들어가지 않도록 방지 |
 | P2 | README와 아키텍처 문서 갱신 | 평가자와 팀원이 보안 구조를 바로 이해할 수 있게 함 |
 
 ## 8. Macie 적용 위치

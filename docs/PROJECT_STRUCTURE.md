@@ -2,7 +2,7 @@
 
 이 문서는 저장소를 처음 보는 개발자가 “어디를 봐야 하는지” 빠르게 파악하도록 만든 구조 설명서입니다.
 
-현재 저장소는 실제 MVP 배포에 필요한 코드와 문서만 남기는 것을 목표로 정리되어 있습니다. 로컬 IR 실험 산출물, persona 평가 결과, 임시 output 파일은 배포 저장소에 포함하지 않는 것이 원칙입니다.
+현재 저장소는 실제 MVP 배포에 필요한 코드와 문서만 남기는 것을 목표로 정리되어 있습니다. 로컬 IR 평가 산출물, persona 평가 결과, 임시 output 파일은 배포 저장소에 포함하지 않는 것이 원칙입니다.
 
 ---
 
@@ -320,7 +320,7 @@ backend/serverless/src/
 | `retrieval_scoring.py` | BM25, vector, label score |
 | `clinical_terms.py` | 도메인팩 기반 표준 증상, safety flag, quote pattern 구성 |
 | `clinical_state.py` | 증상 span의 active/non-active 분류 정책 (IR·원페이퍼 진입 필터) |
-| `domain_config.py` | 도메인팩 JSON 로딩, 기본 질문 문구 fallback, 허용 symptom slot 제공 |
+| `domain_config.py` | 도메인팩 JSON 로딩, 기본 질문 문구 보조 경로, 허용 symptom slot 제공 |
 | `question_sets.py` | 질문셋 JSON 로딩, API 공개 형태·LLM prompt 질문 문구 제공 |
 
 ### 원페이퍼와 안내문
@@ -367,7 +367,7 @@ backend/serverless/src/data/
 | --- | --- |
 | API endpoint 추가 | `handler.py` |
 | Lambda 환경 변수 추가 | `template.yaml`, `settings.py` |
-| 질문 문구 수정 | 백엔드 `backend/serverless/src/data/question_sets/default.json` (환자 태블릿이 API로 사용), 오프라인 fallback `frontend/src/config/questions.js` |
+| 질문 문구 수정 | 백엔드 `backend/serverless/src/data/question_sets/default.json` (환자 태블릿이 API로 사용), 오프라인 보조 질문 `frontend/src/config/questions.js` |
 | Bedrock prompt 수정 | `extraction_prompts.py`, `onepager_review.py`, `guide.py` |
 | 강원 방언 RAG 수정 | `dialect_config.py`, `dialect_rag.py`, `dialect_normalization.py`, `data/dialect_packs/` |
 | 의료 지식 RAG 참고 문맥 수정 | `rag_context.py`, `retrieval_documents.py`, `domain_config.py`, `clinical_terms.py` |
@@ -380,7 +380,7 @@ backend/serverless/src/data/
 | 원페이퍼 화면 표시 수정 | `frontend/src/components/doctor/DoctorOnePager.jsx` |
 | onepaper JSON 조립 수정 | `onepager.py`, `onepager_sections.py` |
 | 환자 안내문 표시 수정 | `PatientGuideScreen.jsx`, `guide.py` |
-| schema/artifact 회귀 테스트 | `backend/serverless/tests/test_schema_and_artifact_policy.py` |
+| schema/artifact 회귀 검증 | `backend/serverless/tests/test_schema_and_artifact_policy.py` |
 
 ---
 

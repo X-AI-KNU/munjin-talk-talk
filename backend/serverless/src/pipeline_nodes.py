@@ -458,7 +458,7 @@ def schema_quote_validation_node(state: AnswerPipelineState) -> dict[str, Any]:
     return update
 
 
-NON_SYMPTOM_FALLBACK_CONFIG = {
+NON_SYMPTOM_CONTEXT_CONFIG = {
     "onset": {
         "category": "증상맥락",
         "label": "시작시점",
@@ -496,7 +496,7 @@ def preserve_non_symptom_context(
     question_id = state.get("question_id") or ""
     chain_meta = state.get("extraction_chain_meta") or {}
     attempt = int(state.get("extraction_attempt") or 1)
-    structured = fallback_structured(question_type, question_id, transcript)
+    structured = preserved_context_structured(question_type, question_id, transcript)
     if structured is None:
         return None
 
@@ -514,7 +514,7 @@ def preserve_non_symptom_context(
             "validation_errors": validation_errors or [],
             "attempts": attempt,
             "retry_loop": "langgraph_schema_quote_repair",
-            "fallback": {
+            "context_preserve": {
                 "type": "non_symptom_context_preserve",
                 "reason": reason,
                 "error": extracted_error,
@@ -537,7 +537,7 @@ def preserve_non_symptom_context(
             {
                 "reason": reason,
                 "question_type": question_type,
-                "fallback": "non_symptom_context_preserve",
+                "context_preserve": "non_symptom_context_preserve",
                 "validation_error_count": len(validation_errors or []),
                 "attempt": attempt,
             },
@@ -546,7 +546,7 @@ def preserve_non_symptom_context(
     return update
 
 
-def fallback_structured(question_type: str, question_id: str, transcript: str) -> dict[str, Any] | None:
+def preserved_context_structured(question_type: str, question_id: str, transcript: str) -> dict[str, Any] | None:
     """검증 실패한 비증상 문항을 onepaper가 읽을 수 있는 최소 구조로 바꿉니다."""
     if question_type in {"patient_questions", "unresolved_questions"}:
         return {
@@ -562,7 +562,7 @@ def fallback_structured(question_type: str, question_id: str, transcript: str) -
             "unresolved_items": [],
         }
 
-    config = NON_SYMPTOM_FALLBACK_CONFIG.get(question_type)
+    config = NON_SYMPTOM_CONTEXT_CONFIG.get(question_type)
     if not config:
         return None
     return {

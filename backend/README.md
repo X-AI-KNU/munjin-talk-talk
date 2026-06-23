@@ -63,7 +63,7 @@ backend/
     │       ├── domain_packs/respiratory.json   (+ respiratory_fewshot.txt)
     │       ├── question_sets/default.json
     │       └── (비공개 배치) diseases_cleaned / symptom_index / embedding cache
-    └── tests/                   # pytest (6 파일, 25 케이스)
+    └── tests/                   # pytest 기반 회귀 검증
 ```
 
 > ℹ️ 도메인팩과 질문셋은 각각 `data/domain_packs/`, `data/question_sets/` 폴더로 분리되어 있습니다. 원천 의료 백과 본문과 그 파생 증상 인덱스·embedding cache는 저작권/이용 범위 검토 대상이라 공개 저장소에 포함하지 않고, 배포 시 팀 내부 비공개 데이터로 주입합니다. `backend/serverless/.aws-sam/`과 `samconfig.toml`은 로컬 산출물이라 저장소에 포함하지 않습니다.
@@ -172,13 +172,13 @@ S3는 `artifact_store.py`로만 읽고 씁니다. 저장 직전 `artifact_policy
 # Python 문법
 python -m compileall backend/serverless/src
 
-# 테스트
+# 검증
 cd backend/serverless
 pip install -r src/requirements.txt pytest
 python -m pytest tests/ -q
 ```
 
-실제 테스트 파일: `test_schema_and_artifact_policy.py`, `test_schema_slots.py`, `test_ir_noise_and_safety.py`, `test_prompts_golden.py`, `test_question_sets.py`, `test_sessions_queue.py`
+주요 검증 파일: `test_schema_and_artifact_policy.py`, `test_schema_slots.py`, `test_ir_noise_and_safety.py`, `test_prompts_golden.py`, `test_question_sets.py`, `test_sessions_queue.py`
 
 <details>
 <summary>Windows PowerShell (unittest 방식)</summary>

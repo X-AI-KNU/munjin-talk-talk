@@ -116,7 +116,7 @@ export async function openTranscribeStream({
       bytesSent += pcm.byteLength
     },
     onFallbackError(error) {
-      console.warn('audio worklet fallback:', error)
+      console.warn('audio worklet backup path:', error)
     },
   })
 
