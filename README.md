@@ -1,6 +1,9 @@
 <div align="center">
 
-# 🗣️ 문진톡톡 · MunjinTalkTalk
+<h1>
+  <img src="frontend/src/assets/munjin-logo.svg" width="46" alt="문진톡톡 로고" />
+  문진톡톡 · MunjinTalkTalk
+</h1>
 
 **고령 환자의 음성 한마디를, 의료진이 30초 안에 읽는 진료 전 원페이퍼로.**
 
@@ -11,7 +14,6 @@
 ![Backend](https://img.shields.io/badge/backend-AWS%20Lambda%20Python%203.12-ff9900)
 ![LLM](https://img.shields.io/badge/LLM-Bedrock%20Nova%20%2B%20Titan-232f3e)
 ![Pipeline](https://img.shields.io/badge/pipeline-LangGraph%20%2B%20LangChain-1c3c3c)
-![Verification](https://img.shields.io/badge/verification-26%20passed%2C%203%20skipped-success)
 
 </div>
 
@@ -48,14 +50,39 @@
         → 의료진 원페이퍼 → 의사 답변 입력 → 환자 안내문 출력
 ```
 
-### 4개의 화면
+### 화면 구성
 
-| 화면 | 경로 | 역할 |
-| --- | --- | --- |
-| 🧾 직원 접수 | `/staff` | 환자 정보 입력, 초진/재진 선택, 문진 세션 생성 |
-| 📱 환자 태블릿 | `/patient/:sessionId` | 음성 문진, STT 결과 확인, 동의 모달, 직원 도움 요청 |
-| 👨‍⚕️ 의료진 원페이퍼 | `/doctor/:sessionId` | 증상·원문 quote·문진 맥락·확인 항목·EMR 초안 |
-| 📄 환자 안내문 | `/guide/:sessionId` | 의사 답변을 어르신 표현으로 정리 + 종이 출력 |
+<table>
+  <thead>
+    <tr>
+      <th width="22%">화면</th>
+      <th width="22%">경로</th>
+      <th>역할</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>직원 접수</strong></td>
+      <td><code>/staff</code></td>
+      <td>환자 정보 입력, 초진/재진 선택, 문진 세션 생성</td>
+    </tr>
+    <tr>
+      <td><strong>환자 태블릿</strong></td>
+      <td><code>/patient/:sessionId</code></td>
+      <td>음성 문진, STT 결과 확인, 동의 모달, 직원 도움 요청</td>
+    </tr>
+    <tr>
+      <td><strong>의료진 원페이퍼</strong></td>
+      <td><code>/doctor/:sessionId</code></td>
+      <td>증상, 환자 원문, 문진 맥락, 확인 항목, EMR 초안 확인</td>
+    </tr>
+    <tr>
+      <td><strong>환자 안내문</strong></td>
+      <td><code>/guide/:sessionId</code></td>
+      <td>의사 답변을 어르신 표현으로 정리하고 종이로 출력</td>
+    </tr>
+  </tbody>
+</table>
 
 ## 🛡️ 왜 LLM에 전부 맡기지 않았나 — 이 프로젝트의 차별점
 
@@ -158,16 +185,6 @@ IR은 내부 배포 환경의 비공개 런타임 데이터(`diseases_cleaned.js
 
 ---
 
-## 📊 검증 현황
-
-| 지표 | 값 | 측정 조건 |
-| --- | --- | --- |
-| 자동 검증 | **26 passed, 3 skipped** | `pytest` |
-| 프론트 빌드 | 통과 | `npm run build` |
-| SAM 템플릿 검증 | 통과 | `sam validate` |
-
----
-
 ## 🚀 빠른 시작
 
 ### 프론트엔드
@@ -206,21 +223,6 @@ sam build
 sam deploy --guided   # ArtifactsBucketName 에 가명처리 산출물용 S3 버킷명 입력
 ```
 
-### 검증
-
-```bash
-# 백엔드 검증
-cd backend/serverless && python -m pytest tests/ -q     # 26 passed, 3 skipped
-# Python 문법
-python -m compileall backend/serverless/src
-# SAM 템플릿
-cd backend/serverless && sam validate
-# 프론트 빌드
-cd frontend && npm run build
-```
-
----
-
 ## 🗂️ 저장소 구조
 
 ```text
@@ -245,23 +247,23 @@ munjin-talk-talk/
 | --- | --- |
 | [frontend/README.md](frontend/README.md) | 화면·라우팅·STT·API 연동 |
 | [backend/README.md](backend/README.md) | 백엔드 책임·LangGraph·LLM·IR·저장 |
-| [backend/serverless/README.md](backend/serverless/README.md) | SAM 배포·endpoint·환경변수·검증 |
+| [backend/serverless/README.md](backend/serverless/README.md) | SAM 배포·endpoint·환경변수 |
 | [docs/LANGGRAPH_PIPELINE.md](docs/LANGGRAPH_PIPELINE.md) | 답변 1개가 거치는 노드 흐름 |
 | [docs/DATA_SCHEMA.md](docs/DATA_SCHEMA.md) | DynamoDB·S3·extraction·onepaper·guide JSON |
 | [docs/SECURITY_DATA_INVENTORY.md](docs/SECURITY_DATA_INVENTORY.md) | 필드별 보안 처리 기준 |
 
 ---
 
-## 🧭 제출 환경 보안 상태
+## 보안 수준
 
-현재 저장소는 해커톤 시연과 구조 검증을 위한 MVP입니다. 코드에는 1차 접근 제어와 저장 최소화 장치가 들어가 있으며, 제출용 AWS 환경에는 WAF, CloudTrail, GuardDuty, Security Hub, Macie, S3 lifecycle, DynamoDB TTL 같은 운영 보안 설정을 함께 적용했습니다.
+문진톡톡은 의료 문진 텍스트가 오가는 서비스를 전제로, 음성 원본 미저장·가명처리·저장 최소화·접근 제어를 기본 원칙으로 설계했습니다. 배포 환경에는 WAF, CloudTrail, GuardDuty, Security Hub, Macie, S3 lifecycle, DynamoDB TTL을 함께 적용해 공개 시연 중에도 데이터 노출 위험을 낮췄습니다.
 
 | 구분 | 적용 내용 |
 | --- | --- |
 | 접근 제어 | 직원/의사 접근 코드 로그인, 만료 세션 토큰, 환자 세션 토큰 |
 | 음성 처리 | 음성 원본 미저장 Transcribe Streaming |
 | 저장 최소화 | DynamoDB에는 상태와 S3 pointer만 저장, S3에는 가명처리 artifact 저장 |
-| 보관 기간 | DynamoDB TTL, S3 Lifecycle 3일 삭제 |
+| 보관 기간 | DynamoDB TTL, S3 Lifecycle 3일 삭제, CloudWatch Logs 단기 보존 |
 | 경계 보안 | CORS origin 제한, API Gateway throttling, Amplify WAF |
 | 감사·탐지 | CloudTrail, GuardDuty, Security Hub, Macie |
 | AI 서비스 정책 | AWS AI Services opt-out 정책 적용 |
