@@ -21,8 +21,6 @@
   -> 최종 표준 증상 평가
 ```
 
-![Hybrid IR 표준 증상 매칭 흐름](../../docs/architecture-diagrams/hybrid-ir-flow.png)
-
 평가는 두 층으로 나눠 봅니다.
 
 | 층 | 질문 |

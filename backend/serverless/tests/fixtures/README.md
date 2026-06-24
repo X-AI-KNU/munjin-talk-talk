@@ -4,8 +4,6 @@
 
 현재 핵심 파일은 `prompts_golden.json`입니다. 이 파일은 Bedrock에 전달되는 주요 프롬프트 구조가 의도와 다르게 바뀌지 않았는지 확인하기 위한 기준값입니다.
 
-![LangGraph AI 파이프라인](../../../../docs/architecture-diagrams/langgraph-pipeline.png)
-
 ---
 
 ## 검증 대상

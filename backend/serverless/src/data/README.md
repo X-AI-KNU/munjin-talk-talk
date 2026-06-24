@@ -4,8 +4,6 @@
 
 공개 GitHub에는 코드와 공개 가능한 설정 파일만 포함합니다. 저작권 또는 이용 범위 검토가 필요한 원천 의료 백과 데이터, 그 파생 증상 인덱스, embedding cache는 공개 저장소에 포함하지 않습니다.
 
-![Hybrid IR 데이터 참조 흐름](../../../../docs/architecture-diagrams/hybrid-ir-flow.png)
-
 ---
 
 ## 1. 공개 저장소에 포함되는 파일

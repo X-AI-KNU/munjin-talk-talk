@@ -16,8 +16,6 @@ AWS SAM으로 배포하는 문진톡톡 백엔드입니다. API Gateway HTTP API
 | Amazon Bedrock | Nova Pro/Lite LLM 호출 |
 | Amazon Titan Embeddings | 증상 문서 vector embedding |
 
-![백엔드 비동기 처리 흐름](../../docs/architecture-diagrams/backend-async-flow.png)
-
 ---
 
 ## 2. 주요 처리 원칙
@@ -29,8 +27,6 @@ AWS SAM으로 배포하는 문진톡톡 백엔드입니다. API Gateway HTTP API
 5. 증상 매칭은 BM25 + Titan Vector + label signal + linker validator를 거칩니다.
 6. DynamoDB에는 전체 문진 원문을 저장하지 않고 S3 artifact key만 저장합니다.
 7. 음성 원본 파일은 저장하지 않습니다.
-
-![데이터 저장과 보안 처리 흐름](../../docs/architecture-diagrams/data-security-flow.png)
 
 ---
 
@@ -129,7 +125,7 @@ sam build
 
 ### 2단계: 배포
 
-`CustomVocabularyName`을 빈 값으로 전달해야 할 때 PowerShell에서 `CustomVocabularyName=""` 형식은 오류가 날 수 있습니다. 빈 값이 필요하면 `CustomVocabularyName=` 항목을 생략하거나 `sam deploy --guided`에서 Enter로 비워 둡니다.
+`CustomVocabularyName`을 비워 배포하는 경우 PowerShell에서 `CustomVocabularyName=""` 형식은 오류가 날 수 있습니다. 빈 값으로 배포할 때는 `CustomVocabularyName=` 항목을 생략하거나 `sam deploy --guided`에서 Enter로 비워 둡니다.
 
 ```powershell
 sam deploy `

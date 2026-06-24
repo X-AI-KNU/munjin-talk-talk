@@ -670,7 +670,7 @@ Do not add symptoms, diagnoses, tests, or medications just because they appear b
   ]
 }</code></pre>
 
-      <h3>5-4. 이 예제에서 검토해야 할 RAG 설계 지점</h3>
+      <h3>5-4. 이 예제의 RAG 설계 검토 지점</h3>
       <p>
         “사레”는 일반 호흡기 증상만으로 처리하기 어렵다. 삼킴 곤란, 흡인 위험, 반복되는 폐렴 같은 문맥과 연결된다.
         따라서 RAG 문서가 호흡기계에만 좁게 묶이면 매칭 품질이 흔들릴 수 있다.
@@ -843,7 +843,7 @@ Do not add symptoms, diagnoses, tests, or medications just because they appear b
     </section>
 
     <section>
-      <h2>8. 저장해야 할 RAG 관련 최소 정보</h2>
+      <h2>8. 저장 대상 RAG 최소 정보</h2>
       <p>
         운영 저장은 서비스 실행과 사후 검토에 필요한 최소 정보만 남긴다.
         디버깅용 전체 프롬프트, 불필요한 boolean 플래그, 화면에서 쓰지 않는 중간값은 운영 저장 대상이 아니다.
@@ -876,7 +876,7 @@ Do not add symptoms, diagnoses, tests, or medications just because they appear b
           <tr>
             <td>선택된 표준 증상 ID와 표준명</td>
             <td>저장</td>
-            <td>원페이퍼 표시와 추후 통계에 필요하다.</td>
+            <td>원페이퍼 표시와 통계 집계에 필요하다.</td>
           </tr>
           <tr>
             <td>채택된 evidence 요약</td>

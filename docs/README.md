@@ -41,20 +41,6 @@
 
 ---
 
-## 아키텍처 구조도
-
-아래 구조도는 README와 발표자료에 바로 넣을 수 있도록 PNG와 SVG를 함께 보관합니다. PNG는 문서 삽입용, SVG는 수정 가능한 원본입니다.
-
-| 구조도 | 설명 |
-| --- | --- |
-| [환자 문진 UX 흐름](architecture-diagrams/patient-questionnaire-flow.png) | 접수부터 태블릿 문진 완료, 대기열 복귀까지의 사용자 흐름 |
-| [백엔드 비동기 처리 흐름](architecture-diagrams/backend-async-flow.png) | `/process-answers` 저장 후 Lambda async 분석으로 분리되는 구조 |
-| [LangGraph AI 파이프라인](architecture-diagrams/langgraph-pipeline.png) | RAG, 표준화, 의미 추출, schema 검증, IR, 원페이퍼 생성 흐름 |
-| [Hybrid IR 표준 증상 매칭](architecture-diagrams/hybrid-ir-flow.png) | BM25, Titan Vector, label signal, RRF, linker validator의 표준 증상 연결 |
-| [데이터 저장과 보안 처리](architecture-diagrams/data-security-flow.png) | 음성 미저장, 가명처리, S3 redacted artifact, DynamoDB pointer, AWS 보안 설정 |
-
----
-
 ## 문서 작성 기준
 
 - 해커톤 제출 문서는 “무엇을 만들었는가”보다 “왜 그렇게 설계했는가”가 보이도록 작성합니다.

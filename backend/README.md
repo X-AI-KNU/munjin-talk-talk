@@ -59,8 +59,6 @@ Internal background event
 
 환자 UX는 LLM 지연과 분리됩니다. 분석 실패가 발생해도 환자 완료 화면은 유지되고, 의료진 화면에서 재분석 또는 수동 확인을 진행합니다.
 
-![백엔드 비동기 처리 흐름](../docs/architecture-diagrams/backend-async-flow.png)
-
 ---
 
 ## 3. 주요 폴더 구조

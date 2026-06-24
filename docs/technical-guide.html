@@ -554,7 +554,7 @@
       </div>
       <div class="hero-card">
         <strong>Output</strong>
-        <span>의사용 원페이퍼, 의료진 체크리스트, 환자용 안내문</span>
+        <span>의사용 원페이퍼, 의료진 확인 항목, 환자용 안내문</span>
       </div>
     </div>
     <p class="caption">
@@ -601,7 +601,7 @@
         </div>
         <div class="mini-card tint-green">
           <h3>의사 원페이퍼</h3>
-          <p>증상, 원문 quote, 문진 맥락, 환자 질문, 의료진 체크리스트를 한 화면에서 확인합니다.</p>
+          <p>증상, 원문 quote, 문진 맥락, 환자 질문, 의료진 확인 항목을 한 화면에서 확인합니다.</p>
         </div>
         <div class="mini-card tint-orange">
           <h3>환자 안내문</h3>
@@ -776,8 +776,6 @@
 │        └─ 비공개 배치: diseases_cleaned / symptom_index / embedding cache
 ├─ docs/
 │  ├─ technical-guide.html
-│  ├─ architecture.drawio
-│  └─ architecture.svg
 ├─ amplify.yml
 └─ README.md</code></pre>
 
@@ -845,7 +843,7 @@
             <td><code>/doctor/{sessionId}</code></td>
             <td>의사</td>
             <td><code>DoctorView</code>, <code>DoctorOnePager</code>, <code>DoctorAgendaPanel</code></td>
-            <td>증상, 문진 맥락, 질문, 체크리스트, EMR 문장 확인 및 답변 입력</td>
+            <td>증상, 문진 맥락, 질문, 의료진 확인 항목, EMR 문장 확인 및 답변 입력</td>
           </tr>
           <tr>
             <td><code>/guide/{sessionId}</code></td>
@@ -1004,7 +1002,7 @@
             <td><code>GET /onepager/{id}</code></td>
             <td>의사 원페이퍼 진입</td>
             <td><code>build_onepager</code></td>
-            <td>원페이퍼 생성, Nova Pro 체크리스트 생성</td>
+            <td>원페이퍼 생성, Nova Pro 의료진 확인 항목 생성</td>
           </tr>
           <tr>
             <td><code>POST /doctor-response</code></td>
@@ -1121,7 +1119,7 @@
           <h3>LLM 실패 정책</h3>
           <ul class="callout-list">
             <li>LLM extraction 실패 시 rule-base 결과로 조용히 대체하지 않습니다.</li>
-            <li>원페이퍼 체크리스트는 Nova Pro review가 schema와 근거 검증을 통과한 경우에만 저장합니다.</li>
+            <li>원페이퍼 의료진 확인 항목은 Nova Pro review가 schema와 근거 검증을 통과한 경우에만 저장합니다.</li>
             <li>환자 안내문은 Nova Lite 결과가 너무 일반적이거나 원문 복사면 validator 실패로 표시합니다.</li>
           </ul>
         </div>
@@ -1430,9 +1428,9 @@ symptom_embeddings_...json
 }</code></pre>
 
       <div class="note green">
-        체크리스트인 <code>review_items</code>는 rule-base로 전부 만드는 것이 아니라,
+        의료진 확인 항목인 <code>review_items</code>는 rule-base로 전부 만드는 것이 아니라,
         Nova Pro가 <code>symptom_slots</code>, <code>clinical_clues</code>, <code>agenda</code>, <code>safety_flags</code>, 원문 Q1~Q4를 보고
-        “의사가 다음에 확인하거나 답해야 할 task”로 생성합니다.
+        “의사가 다음에 확인하거나 응답할 task”로 생성합니다.
       </div>
 
       <h3 class="schema-title">9-6. S3 doctor_review와 patient_guide</h3>
@@ -1443,7 +1441,7 @@ symptom_embeddings_...json
     {
       "question_summary": "처방약과 영양제 병용 가능 여부 문의",
       "original_quote": "약이랑 영양제 같이 먹어도 되나요",
-      "answer_text": "문제 없이 복용 가능합니다. 다만 추후 다른 약을 추가하면 다시 확인하세요."
+      "answer_text": "문제 없이 복용 가능합니다. 다만 다른 약을 추가하면 다시 확인하세요."
     }
   ],
   "patient_instruction": "약이랑 영양제 같이 꼭 아침 저녁으로 드세요.",
@@ -1458,7 +1456,7 @@ symptom_embeddings_...json
       "question": "처방약과 영양제 병용 가능 여부 문의",
       "answer_simple": [
         "처방받은 약과 영양제는 함께 복용할 수 있습니다.",
-        "추후 다른 약을 추가하는 경우 다시 확인해야 합니다."
+        "다른 약을 추가하는 경우 다시 확인해야 합니다."
       ],
       "tts_emphasis_words": ["처방받은 약", "영양제", "함께 복용"]
     }
@@ -1556,7 +1554,7 @@ EMBEDDING_DIMENSIONS=512</code></pre>
             <td>Q4에서 질문이 배열로 분리됐는지 확인</td>
           </tr>
           <tr>
-            <td>의료진 체크리스트가 부자연스러움</td>
+            <td>의료진 확인 항목이 부자연스러움</td>
             <td><code>onepager.review_items</code></td>
             <td><code>review_item_generation.method</code>가 <code>bedrock_nova_pro</code>인지 확인</td>
           </tr>

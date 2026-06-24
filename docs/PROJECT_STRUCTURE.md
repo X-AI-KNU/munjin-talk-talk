@@ -329,7 +329,7 @@ backend/serverless/src/
 | --- | --- |
 | `onepager.py` | S3 문항 artifact 기반 원페이퍼 생성/저장 진입점 |
 | `onepager_sections.py` | 환자 요약, 증상, agenda, transfer text 조립 |
-| `onepager_review.py` | Nova Pro 기반 체크리스트와 EMR 문장 리뷰 |
+| `onepager_review.py` | Nova Pro 기반 의료진 확인 항목과 EMR 문장 리뷰 |
 | `guide.py` | 의사 답변 S3 저장과 환자 안내문 생성 |
 | `schemas/review.py` | 원페이퍼 review schema |
 | `schemas/guide.py` | 환자 안내문 schema |

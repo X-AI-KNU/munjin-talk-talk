@@ -12,7 +12,7 @@
 - DynamoDB에 남겨도 되는 최소 인덱스 데이터와 S3에 보관할 문진 산출물을 분리한다.
 - 음성 원본, 실명, 생년월일, 연락처처럼 저장하면 위험한 데이터를 식별한다.
 - Macie, S3 Lifecycle, KMS, IAM, CloudWatch 로그 정책을 어디에 적용해야 하는지 결정한다.
-- 향후 코드 수정 시 삭제, 이동, 가명처리 대상이 되는 필드를 명확히 한다.
+- 코드 변경 시 삭제, 이동, 가명처리 대상이 되는 필드를 명확히 한다.
 
 ## 1-1. 2026-06-11 코드 반영 상태
 
@@ -77,7 +77,7 @@
 | Q별 의미 추출 | `backend/serverless/src/onepager.py`, `pipeline_graph.py`, `pipeline_nodes.py` | spans, source_quote, normalized_text, structured, clinical_clues, patient_questions | DynamoDB `question_results` | 건강정보 | LLM 추출 산출물이 DynamoDB에 직접 저장됨 | S3 `answers.redacted.json`, `llm_trace.redacted.json` | 운영 답변은 S3로 이동. trace는 최소 node event만 유지 |
 | 증상 IR 매칭 | `backend/serverless/src/retrieval.py` | matched_slots, symptom label, alias, rank_score, 근거 문구 | S3 `answers.redacted.json`, `onepaper.redacted.json`, `llm_trace.redacted.json` | 건강정보 | 운영 artifact와 UI에 숫자 점수나 후보 목록이 노출되면 과신을 유발할 수 있음 | S3 운영 artifact + 최소 trace | 운영 onepaper에는 점수 제거. 확정 IR 근거 요약은 최소 trace에만 저장 |
 | Safety Flag | `backend/serverless/src/clinical_terms.py`, `onepager.py`, `pipeline_nodes.py` | 객혈, 피 표현 등 위험 플래그, risk | DynamoDB | 건강정보 요약 | 상세 원문이 함께 묶일 수 있음 | DynamoDB 요약 + S3 상세 | DynamoDB에는 risk level, flag code만 유지. 상세 근거는 S3 |
-| 원페이퍼 생성 | `backend/serverless/src/onepager.py` `build_onepager` | 환자 요약, 증상 목록, 문진 맥락, 체크리스트, EMR 문장 | DynamoDB `onepager` | 건강정보 | 원페이퍼 전체가 DynamoDB에 저장됨 | S3 `onepaper.redacted.json` | DynamoDB에는 s3 key, ready status, risk 요약만 저장 |
+| 원페이퍼 생성 | `backend/serverless/src/onepager.py` `build_onepager` | 환자 요약, 증상 목록, 문진 맥락, 의료진 확인 항목, EMR 문장 | DynamoDB `onepager` | 건강정보 | 원페이퍼 전체가 DynamoDB에 저장됨 | S3 `onepaper.redacted.json` | DynamoDB에는 s3 key, ready status, risk 요약만 저장 |
 | 의사 답변 저장 | `backend/serverless/src/guide.py` `save_doctor_response` | 의사 답변, 환자 안내 강조사항, 추가 메모 | DynamoDB `doctor_review` | 건강정보 | 의사 입력 전문이 DynamoDB에 저장됨 | S3 `doctor_review.redacted.json` | DynamoDB에는 reviewed_at, guide_ready만 유지 |
 | 환자 안내문 생성 | `backend/serverless/src/guide.py` | patient_guide, 안내문 문장, 말로 재생할 문장 | DynamoDB `patient_guide` | 건강정보 | 환자 안내문 전체가 DynamoDB에 저장됨 | S3 `patient_guide.redacted.json` | DynamoDB에는 guide_ready, guide_s3_key만 유지 |
 | API 응답 | `backend/serverless/src/sessions.py` `public_session` | fullName, birthDate, phone, responses, onepager, privacyConsent | Frontend 응답 | 개인정보 + 건강정보 | 목록 조회 API가 많은 민감 데이터를 반환할 가능성 | 최소 응답 + 필요 시 권한별 artifact 조회 | public_session에서 직접식별자와 원문 응답 제거 |
@@ -187,22 +187,7 @@ sessions/YYYY-MM-DD/{session_id}/
 }
 ```
 
-## 7. 우선순위별 수정 계획
-
-| 우선순위 | 작업 | 이유 |
-| --- | --- | --- |
-| P0 | `patient.full_name`, `patient.birth_date`, `patient.phone` DynamoDB 저장 제거 | 직접식별정보 저장 위험이 가장 큼 |
-| P0 | `responses`, `question_results`, `onepager`, `patient_guide`, `doctor_review`를 S3 artifact로 이동 | 건강정보 원문과 LLM 산출물이 DDB에 누적되는 문제 해결 |
-| P0 | `public_session` 응답 최소화 | 목록 API에서 민감 데이터가 반환되는 문제 차단 |
-| P0 | CloudWatch 로그에 원문 발화, LLM payload 출력 금지 | 운영 로그를 통한 정보 노출 방지 |
-| P1 | S3 artifact 저장 모듈 추가 | 모든 산출물 저장 경로를 한 곳에서 통제 |
-| P1 | 가명처리/마스킹 레이어 추가 | S3 저장 전 실명, 생년월일, 연락처 제거 |
-| P1 | Macie 탐지 및 S3 Lifecycle 3일 삭제 적용 | 저장된 산출물에 대한 사후 점검과 자동 삭제 |
-| P1 | Bedrock 입력 payload 최소화 | LLM 호출 시 직접식별정보 제거 |
-| P2 | 보안 회귀 검증 추가 | 이후 수정에서 민감 필드가 다시 DDB에 들어가지 않도록 방지 |
-| P2 | README와 아키텍처 문서 갱신 | 평가자와 팀원이 보안 구조를 바로 이해할 수 있게 함 |
-
-## 8. Macie 적용 위치
+## 7. Macie 적용 위치
 
 Macie는 DynamoDB 내부 필드를 직접 가명처리하는 도구가 아닙니다. Macie는 S3 객체에 저장된 데이터에서 민감정보를 탐지하고 경고하는 보안 점검 도구입니다.
 
@@ -216,7 +201,7 @@ Macie는 DynamoDB 내부 필드를 직접 가명처리하는 도구가 아닙니
 
 즉, Macie는 "저장 전 필터"가 아니라 "저장 후 감사 장치"입니다. 저장 전 차단은 Lambda 내부 가명처리 코드와 schema validator가 담당해야 합니다.
 
-## 9. 현재 구현 기준 점검
+## 8. 현재 구현 기준 점검
 
 2026-06-08 기준 현재 코드는 이 전수조사 표의 핵심 저장 경계를 반영한 상태입니다. 즉, 이전 MVP처럼 DynamoDB 한 item에 환자 식별정보, 문항별 원문, LLM 추출 결과, 원페이퍼, 환자 안내문을 모두 직접 저장하는 구조가 아닙니다.
 
@@ -241,4 +226,4 @@ Macie는 DynamoDB 내부 필드를 직접 가명처리하는 도구가 아닙니
 | Bedrock/Transcribe 데이터 정책 | 코드상 음성 원본 저장 없음 | AWS Organizations AI services opt-out 정책 확인 |
 | API 접근 제어 | 직원/의료진 접근 코드 로그인, HMAC 서명 만료 세션 토큰, 환자 세션 토큰 검증 | 상용화 시 Cognito/SSO와 사용자별 감사 로그로 확장 |
 
-따라서 이 문서는 "앞으로 해야 할 목표"만 적은 문서가 아니라, 현재 코드가 어떤 저장 경계를 지키도록 정리되었는지와 AWS 콘솔에서 어떤 운영 설정을 추가해야 하는지를 함께 확인하는 기준 문서입니다.
+따라서 이 문서는 현재 코드가 지키는 저장 경계와 AWS 콘솔에서 확인할 운영 설정을 함께 정리한 기준 문서입니다.
