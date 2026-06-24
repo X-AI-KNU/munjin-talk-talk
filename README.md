@@ -123,6 +123,8 @@
 
 ## 🏗️ 기술 아키텍처
 
+아래 그래프는 화면, API, 서버리스 백엔드, AWS AI 서비스, 저장소의 연결 관계를 보여주는 상위 구조입니다. LangChain과 LangGraph는 별도 외부 서비스가 아니라, Lambda 내부에서 문진 분석 순서를 구현하기 위해 사용한 코드 레벨의 파이프라인 구성입니다.
+
 ```mermaid
 flowchart LR
   Staff["직원 접수<br/>/staff"]
@@ -132,7 +134,8 @@ flowchart LR
 
   Amplify["AWS Amplify Hosting<br/>React + Vite"]
   Api["API Gateway HTTP API"]
-  Lambda["AWS Lambda Python 3.12<br/>LangGraph Pipeline"]
+  Lambda["AWS Lambda Python 3.12"]
+  Pipeline["Lambda 내부 문진 처리<br/>RAG 참고 → LLM 구조화 → 검증 → Hybrid IR"]
   Dynamo["DynamoDB<br/>최소 세션 상태"]
   S3["S3 Artifact Bucket<br/>가명처리 JSON"]
   Transcribe["Amazon Transcribe Streaming"]
@@ -147,11 +150,12 @@ flowchart LR
   Amplify --> Api
   Api --> Lambda
   Tablet --> Transcribe
-  Lambda --> Dynamo
-  Lambda --> S3
-  Lambda --> Bedrock
-  Lambda --> Titan
-  Lambda --> SourceData
+  Lambda --> Pipeline
+  Pipeline --> Dynamo
+  Pipeline --> S3
+  Pipeline --> Bedrock
+  Pipeline --> Titan
+  Pipeline --> SourceData
 ```
 
 ### 기술 스택
@@ -164,19 +168,21 @@ flowchart LR
 | 음성 인식 | Amazon Transcribe Streaming | 음성 원본을 저장하지 않고 확정 텍스트만 처리 |
 | LLM | Amazon Bedrock — Nova Pro(강), Nova Lite(경) | 복잡한 구조화·검토와 가벼운 표준화 작업을 분리 |
 | 임베딩 | Amazon Titan Text Embeddings v2 | 환자 표현과 표준 증상 문서의 의미 유사도 계산 |
-| 파이프라인 | LangGraph `StateGraph` + LangChain Core Runnable/Parser | 노드 단위 실행, retry, 검증 실패 분기, trace 가능한 흐름 구성 |
+| 파이프라인 | LangGraph `StateGraph` + LangChain Core Runnable/Parser | Lambda 내부 처리 순서, retry, 검증 실패 분기, trace 가능한 흐름 구성 |
 | 검증 | Pydantic v2 스키마 검증 | LLM JSON의 필수 필드, enum, 원문 quote, extra field를 엄격히 확인 |
 | 검색 | BM25 + Titan Vector Hybrid IR | 키워드 일치와 의미 유사도를 함께 사용해 표준 증상 후보 검색 |
 | 저장 | DynamoDB(상태·포인터) + S3(가명처리 산출물) | 운영 상태와 상세 산출물을 분리해 저장 최소화 |
 | 인프라 정의 | AWS SAM (`template.yaml`) | API Gateway, Lambda, 환경변수, 권한을 코드로 관리 |
 
-### LangChain / LangGraph는 "용어"가 아니라 실제 코드 경로입니다
+### Lambda 내부 파이프라인 구현
 
-| 코드 | 역할 |
+위 그래프의 `Lambda 내부 문진 처리`는 아래 코드로 구현됩니다. LangGraph는 처리 노드의 순서와 재시도 분기를 정의하고, LangChain은 Bedrock 프롬프트 호출과 JSON 파싱을 일관된 체인으로 묶는 역할을 합니다.
+
+| 코드 | 하는 일 |
 | --- | --- |
-| `src/langchain_prompting.py` | `ChatPromptTemplate → RunnableLambda(Bedrock converse) → JsonOutputParser` 체인 |
-| `src/pipeline_graph.py` | LangGraph `StateGraph`로 노드·retry/safety/stop 조건부 엣지 정의 |
-| `src/pipeline_nodes.py` | RAG 검색, LLM extraction, Pydantic/원문 검증, Hybrid IR, S3 저장을 각 노드 함수로 분리 |
+| `src/pipeline_graph.py` | 문진 분석 노드 순서와 retry/safety/stop 조건부 분기 정의 |
+| `src/pipeline_nodes.py` | RAG 참고 컨텍스트, LLM 구조화, Pydantic/원문 검증, Hybrid IR, S3 저장을 노드 함수로 분리 |
+| `src/langchain_prompting.py` | `ChatPromptTemplate → Bedrock converse → JsonOutputParser` 체인 구성 |
 | [docs/LANGGRAPH_PIPELINE.md](docs/LANGGRAPH_PIPELINE.md) | 답변이 실제로 거치는 파이프라인 흐름 상세 |
 
 ---
