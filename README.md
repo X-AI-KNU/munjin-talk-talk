@@ -141,7 +141,7 @@ flowchart LR
   Transcribe["Amazon Transcribe Streaming"]
   Bedrock["Amazon Bedrock<br/>Nova Pro / Nova Lite"]
   Titan["Amazon Titan Text Embeddings"]
-  SourceData["Source JSON<br/>diseases_cleaned + symptom_index"]
+  SourceData["서울아산병원 질병백과 기반 데이터<br/>diseases_cleaned + symptom_index"]
 
   Staff --> Amplify
   Tablet --> Amplify
@@ -189,17 +189,18 @@ flowchart LR
 
 ## 🔍 Hybrid IR — 표준 증상 매칭
 
-LLM이 뽑은 증상 후보를 원천 데이터의 표준 증상명에 deterministic하게 맞춥니다.
+LLM이 정리한 증상 표현을 그대로 진단처럼 쓰지 않고, 서울아산병원 질병백과 기반 증상 데이터의 표준 증상명에 다시 맞춥니다. 이 단계의 목적은 “환자가 한 말”을 “원천 데이터에 존재하는 증상 슬롯”으로 연결하는 것입니다.
 
-IR은 내부 배포 환경의 비공개 런타임 데이터(`diseases_cleaned.json`, `symptom_index.json`, Titan embedding cache)를 사용합니다. 이 데이터는 원천 의료 백과 본문과 그 파생물이라 공개 Git 저장소에는 포함하지 않습니다. 공개 저장소에는 데이터 구조와 배치 기준만 남기고, 실제 배포 시에는 팀 내부 비공개 저장소에서 Lambda 패키지에 주입합니다.
+IR은 내부 배포 환경의 비공개 런타임 데이터(`diseases_cleaned.json`, `symptom_index.json`, Titan embedding cache)를 사용합니다. 이 데이터는 서울아산병원 질병백과 기반 원천 데이터와 그 파생 인덱스라 공개 Git 저장소에는 포함하지 않습니다. 공개 저장소에는 데이터 구조와 배치 기준만 남기고, 실제 배포 시에는 팀 내부 비공개 경로에서 Lambda 패키지에 주입합니다.
 
-1. LLM extraction이 증상 후보 span 생성
-2. `source_quote`·`normalized_text`·`name`·`slot_ref`로 검색 query 구성
-3. BM25 lexical 유사도 계산
-4. Titan embedding semantic 유사도 계산
-5. 표준 증상명/제한 alias bridge 직접 매칭 시 label score 보조 반영
-6. threshold 통과 후보만 운영용 `matched_slots`에 남김
-7. 운영 산출물엔 점수·후보 목록·prompt 전문 미저장 / 최소 감사 trace엔 확정 근거 요약만
+1. LLM extraction이 `source_quote`, `normalized_text`, `name`을 가진 증상 span을 생성
+2. IR query는 `normalized_text + name`을 중심으로 구성하고, 원문 quote는 화면 근거와 검증용으로 보존
+3. BM25가 표준 증상 문서와의 키워드 일치를 계산
+4. Titan embedding이 환자 표현과 표준 증상 문서의 의미 유사도를 계산
+5. 표준 증상명과 직접 가까운 표현은 label bridge로 보조 반영
+6. BM25 상위 후보, Titan vector 상위 후보, label 후보를 합친 뒤 내부 rank score로 재정렬
+7. Titan 의미 신호와 BM25/label 근거를 함께 만족한 후보만 `matched_slots`로 확정
+8. 운영 산출물에는 임의 점수·전체 후보 목록·prompt 전문을 저장하지 않고, 원페이퍼에는 “매칭됨/우선 확인”처럼 의료진이 해석 가능한 상태만 표시
 
 ### 예시
 
@@ -209,7 +210,7 @@ IR은 내부 배포 환경의 비공개 런타임 데이터(`diseases_cleaned.js
 | 표준화 | `"어제부터 목도 아프고 콧물도 조금 나와요"` |
 | LLM span | `source_quote="목도 아프고"`, `normalized_text="목이 아픔"`, `status="new"`, `symptom_hint="목 통증"` |
 | IR query | `목이 아픔 목 통증` |
-| 표준 증상 매칭 | `symptom_index`와 `diseases_cleaned`에서 생성한 후보 중 `목의 통증` slot 확정 |
+| 표준 증상 매칭 | 서울아산병원 질병백과 기반 `symptom_index`와 `diseases_cleaned`에서 생성한 후보 중 `목의 통증` slot 확정 |
 | 원페이퍼 표시 | 증상명, 환자 원문 quote, 문진 맥락을 함께 표시하고 의료진이 확인 |
 
 이 흐름에서 LLM의 역할은 “환자 말을 의미 단위로 정리하는 것”이고, 실제 표준 증상명은 원천 데이터 기반 IR과 validator를 통과해야만 남습니다.
@@ -269,7 +270,7 @@ sam build
 sam deploy --guided   # ArtifactsBucketName 에 가명처리 산출물용 S3 버킷명 입력
 ```
 
-실제 배포 환경에서는 공개 저장소에 포함하지 않는 IR 런타임 데이터(`diseases_cleaned.json`, `symptom_index.json`, embedding cache)를 팀 내부 비공개 경로에서 Lambda 패키지에 배치해야 합니다.
+실제 배포 환경에서는 공개 저장소에 포함하지 않는 서울아산병원 질병백과 기반 IR 런타임 데이터(`diseases_cleaned.json`, `symptom_index.json`, embedding cache)를 팀 내부 비공개 경로에서 Lambda 패키지에 배치해야 합니다.
 
 ## 🗂️ 저장소 구조
 
