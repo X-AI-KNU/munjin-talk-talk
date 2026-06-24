@@ -1,54 +1,76 @@
-# 📚 문진톡톡 · 문서 모음
+# 문진톡톡 문서 모음
 
-이 디렉터리는 문진톡톡 MVP의 구조 · 파이프라인 · 데이터 스키마 · 배포 절차 · 발표용 기술 설명을 담습니다. 루트 README가 프로젝트의 입구라면, `docs/`는 개발 · 검증 · 배포 · 평가를 위한 세부 문서 영역입니다.
-
-> 📍 [루트 README](../README.md) · [프론트엔드](../frontend/README.md) · [백엔드](../backend/README.md)
+이 폴더는 문진톡톡의 구조, 데이터, 배포, 보안, 평가 방법을 설명하는 기술 문서 모음입니다. 해커톤 평가자는 서비스가 실제로 어떻게 동작하는지 확인할 수 있고, 개발자는 배포와 유지보수에 필요한 세부 정보를 확인할 수 있습니다.
 
 ---
 
-## 📄 문서 목록
+## 평가자 추천 읽기 순서
 
-| 문서 | 대상 | 설명 |
+| 순서 | 문서 | 확인할 내용 |
 | --- | --- | --- |
-| [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) | 개발자 | 저장소 구조, 파일별 역할, 수정 위치 |
-| [LANGGRAPH_PIPELINE.md](LANGGRAPH_PIPELINE.md) | 개발자·평가자 | 답변 1개가 LangGraph 노드에서 처리되는 과정 |
-| [DATA_SCHEMA.md](DATA_SCHEMA.md) | 백엔드·데이터 검토자 | DynamoDB item, extraction, matched_slots, onepaper, guide JSON |
-| [SECURITY_DATA_INVENTORY.md](SECURITY_DATA_INVENTORY.md) | 개발자·보안 검토자 | DynamoDB/S3 하이브리드 저장 구조와 필드별 보안 처리 |
-| [MVP_SETUP.md](MVP_SETUP.md) | 개발자·시연 준비자 | 로컬 실행, AWS 백엔드 연결, 환경 점검 |
-| [DEPLOYMENT.md](DEPLOYMENT.md) | 배포 담당자 | Amplify·SAM·DynamoDB·IAM·Bedrock·Transcribe 절차 |
-| [technical-guide.html](technical-guide.html) | 발표자·평가자 | 브라우저용 시각적 기술 설명 페이지 |
-| [rag-mentoring-brief.html](rag-mentoring-brief.html) | 멘토링·발표 | RAG/IR 멘토링 브리프 |
-| [architecture.drawio](architecture.drawio) / [architecture.svg](architecture.svg) | 발표자·설계 검토자 | draw.io 다이어그램 / SVG 이미지 |
-| munjin-talk-talk-mvp-code-guide.docx | 개발자 | 코드 가이드 (Word) |
+| 1 | [../README.md](../README.md) | 문제 정의, 서비스 흐름, 핵심 기술, 보안 요약 |
+| 2 | [LANGGRAPH_PIPELINE.md](LANGGRAPH_PIPELINE.md) | 환자 답변이 원페이퍼로 바뀌는 AI 파이프라인 |
+| 3 | [DATA_SCHEMA.md](DATA_SCHEMA.md) | DynamoDB, S3, 원페이퍼, 안내문 JSON 구조 |
+| 4 | [SECURITY_DATA_INVENTORY.md](SECURITY_DATA_INVENTORY.md) | 어떤 데이터가 어디에 저장되고 어떻게 보호되는지 |
+| 5 | [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) | 코드 폴더와 주요 파일의 책임 |
 
 ---
 
-## 🧭 권장 읽기 순서
+## 개발자 추천 읽기 순서
 
-1. [루트 README](../README.md)
-2. [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
-3. [LANGGRAPH_PIPELINE.md](LANGGRAPH_PIPELINE.md)
-4. [DATA_SCHEMA.md](DATA_SCHEMA.md)
-5. [SECURITY_DATA_INVENTORY.md](SECURITY_DATA_INVENTORY.md)
-6. [MVP_SETUP.md](MVP_SETUP.md)
-7. [DEPLOYMENT.md](DEPLOYMENT.md)
-8. [technical-guide.html](technical-guide.html)
-
----
-
-## 📝 문서 작성 기준
-
-- 기본 서술 언어는 한국어. API path · 환경 변수 · model id · 파일명은 영어 원문 유지.
-- 의료 판단처럼 해석될 수 있는 표현을 피함.
-- LLM extraction · Hybrid IR · final review · guide generation의 책임을 분리해 설명.
-- 환자 음성은 S3에 저장하지 않는다는 원칙을 명시.
-- 문진 원문·원페이퍼·안내문은 DynamoDB가 아니라 가명처리 S3 artifact로 저장한다는 원칙을 명시.
-- LLM 검증 실패가 정상 결과처럼 저장되지 않음을 명시.
-- 실제 계정 ID·API endpoint·bucket 이름·access key는 문서에 고정하지 않음.
-- LangChain은 "LLM 호출 chain", LangGraph는 "문진 처리 흐름 graph"로 구분.
+| 순서 | 문서 | 확인할 내용 |
+| --- | --- | --- |
+| 1 | [../frontend/README.md](../frontend/README.md) | 프론트 화면 구조, STT 흐름, API 호출 방식 |
+| 2 | [../backend/README.md](../backend/README.md) | 백엔드 책임 범위, LangGraph, Hybrid IR |
+| 3 | [../backend/serverless/README.md](../backend/serverless/README.md) | SAM 배포, 환경 변수, AWS 콘솔 설정 |
+| 4 | [../backend/serverless/src/data/README.md](../backend/serverless/src/data/README.md) | 공개 저장소에 없는 런타임 데이터 배치 |
+| 5 | [../evaluation/ir/README.md](../evaluation/ir/README.md) | IR/Linker 평가 실행과 결과 해석 |
 
 ---
 
-## 🔧 기준 구현
+## 문서 목록
 
-이 문서들은 현재 저장소의 서버리스 MVP 구조를 기준으로 작성되었습니다. 다른 AWS 계정이나 Amplify 앱으로 배포할 때는 API Gateway endpoint, DynamoDB table name, SAM stack name, artifact bucket 이름을 환경에 맞게 다시 확인해야 합니다.
+| 파일 | 역할 |
+| --- | --- |
+| [LANGGRAPH_PIPELINE.md](LANGGRAPH_PIPELINE.md) | LangGraph 노드, LLM 호출, 검증, IR, retry 경로 |
+| [DATA_SCHEMA.md](DATA_SCHEMA.md) | 세션, 답변, 원페이퍼, 안내문, trace schema |
+| [SECURITY_DATA_INVENTORY.md](SECURITY_DATA_INVENTORY.md) | 개인정보/민감정보 저장 위치와 보관 정책 |
+| [DEPLOYMENT.md](DEPLOYMENT.md) | AWS 배포 절차와 운영 설정 |
+| [MVP_SETUP.md](MVP_SETUP.md) | 로컬 실행과 시연 준비 |
+| [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) | 전체 코드 구조와 파일별 책임 |
+| [readme-assets/PLACE_IMAGES_HERE.md](readme-assets/PLACE_IMAGES_HERE.md) | README용 화면 이미지 배치 안내 |
+
+---
+
+## 아키텍처 구조도
+
+아래 구조도는 README와 발표자료에 바로 넣을 수 있도록 PNG와 SVG를 함께 보관합니다. PNG는 문서 삽입용, SVG는 수정 가능한 원본입니다.
+
+| 구조도 | 설명 |
+| --- | --- |
+| [전체 서비스 아키텍처](architecture-diagrams/overall-service-architecture.png) | 프론트엔드, API Gateway, Lambda, LangGraph, Bedrock, Transcribe, DynamoDB, S3의 전체 연결 |
+| [환자 문진 UX 흐름](architecture-diagrams/patient-questionnaire-flow.png) | 접수부터 태블릿 문진 완료, 대기열 복귀까지의 사용자 흐름 |
+| [백엔드 비동기 처리 흐름](architecture-diagrams/backend-async-flow.png) | `/process-answers` 저장 후 Lambda async 분석으로 분리되는 구조 |
+| [LangGraph AI 파이프라인](architecture-diagrams/langgraph-pipeline.png) | RAG, 표준화, 의미 추출, schema 검증, IR, 원페이퍼 생성 흐름 |
+| [Hybrid IR 표준 증상 매칭](architecture-diagrams/hybrid-ir-flow.png) | BM25, Titan Vector, label signal, RRF, linker validator의 표준 증상 연결 |
+| [데이터 저장과 보안 처리](architecture-diagrams/data-security-flow.png) | 음성 미저장, 가명처리, S3 redacted artifact, DynamoDB pointer, AWS 보안 설정 |
+
+![문진톡톡 전체 서비스 아키텍처](architecture-diagrams/overall-service-architecture.png)
+
+---
+
+## 문서 작성 기준
+
+- 해커톤 제출 문서는 “무엇을 만들었는가”보다 “왜 그렇게 설계했는가”가 보이도록 작성합니다.
+- 의료 데이터 설명은 저장 위치, 보관 기간, 접근 경로, 비공개 처리 기준을 함께 적습니다.
+- AI 설명은 모델 이름보다 입력, 출력, validator, 실패 처리 경로를 먼저 적습니다.
+- 구현 예정이거나 아이디어 단계인 내용은 실제 구현 내용과 섞지 않습니다.
+- 로컬 평가 데이터, 환자 발화 원문, 비공개 원천 데이터 경로는 공개 문서에 넣지 않습니다.
+
+---
+
+## 최신 구현 기준
+
+현재 문진 기본 흐름은 Q1~Q4 답변을 모두 받은 뒤 `/process-answers`로 일괄 저장하고, 백그라운드 Lambda가 LangGraph 분석을 수행하는 구조입니다. 문항마다 LLM 분석을 기다리는 구조가 아닙니다.
+
+문서에서 `/process-answer`가 언급되는 경우는 단일 문항 처리 호환 endpoint 또는 회귀 검증 설명으로만 해석해야 합니다.

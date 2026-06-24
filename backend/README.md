@@ -1,217 +1,269 @@
-# ⚙️ 문진톡톡 · 백엔드
+# 문진톡톡 백엔드
 
-환자 음성 문진 텍스트를 구조화하고, 의료진 원페이퍼와 환자 안내문으로 이어지는 서버 측 처리를 담당합니다. 배포 대상은 [`backend/serverless`](serverless/README.md)이며 API Gateway · Lambda · DynamoDB · S3 · Transcribe Streaming · Bedrock · Titan Embeddings를 사용합니다.
+문진톡톡 백엔드는 환자가 확인한 Q1~Q4 문진 텍스트를 저장하고, 백그라운드에서 AI 파이프라인을 실행해 의료진 원페이퍼와 환자 안내문을 만드는 서버 측 구성입니다.
 
-> 📍 [루트 README](../README.md) · [serverless 배포 가이드](serverless/README.md) · [LangGraph 파이프라인](../docs/LANGGRAPH_PIPELINE.md)
+배포 대상은 [backend/serverless](serverless/README.md)이며 AWS API Gateway, Lambda, DynamoDB, S3, Amazon Bedrock, Amazon Titan Embeddings를 사용합니다.
 
-이 백엔드는 LLM 결과를 그대로 저장하지 않습니다. 모든 LLM 출력은 fixed schema · enum · 원문 quote 검증을 통과해야 하고, 증상 매칭은 원천 JSON 기반 Hybrid IR을 통과해야 합니다. 진단명 추천 · 처방 결정 · 질병 예측은 수행하지 않습니다.
+관련 문서:
+
+- [루트 README](../README.md)
+- [Serverless 배포 가이드](serverless/README.md)
+- [LangGraph 파이프라인](../docs/LANGGRAPH_PIPELINE.md)
+- [데이터 schema](../docs/DATA_SCHEMA.md)
 
 ---
 
-## 📋 책임 범위
+## 1. 책임 범위
 
 | 영역 | 책임 |
 | --- | --- |
-| 세션 관리 | 접수 세션의 최소 상태와 S3 pointer를 DynamoDB에 저장·조회 |
-| 음성 인식 연결 | 음성 저장 없이 Transcribe Streaming presigned URL 발급 |
-| RAG 참고 컨텍스트 | 원천 JSON·제한 alias bridge에서 LLM 표준화 참고 문맥 검색 |
-| LLM extraction | Bedrock Nova로 발화의 의미 단위·표준화·질문·단서 추출 |
-| Schema validation | Pydantic으로 JSON 구조·enum·quote grounding 검증 |
-| Hybrid IR | LLM 증상 후보를 BM25 + Titan Vector로 표준 증상명에 매칭 |
-| 원페이퍼 생성 | 증상·문맥·환자 질문·확인 항목·EMR 초안 조립 |
-| 환자 안내문 | 의사 답변을 환자용 안내문 JSON으로 구성 |
-| Artifact 저장 | 답변·원페이퍼·의사 답변·안내문·trace를 S3에 가명처리 JSON으로 저장 |
+| 세션 관리 | 접수 세션 상태, 대기 순번, S3 artifact pointer를 DynamoDB에 저장 |
+| 음성 처리 | Transcribe Streaming presigned URL 발급. 음성 원본 저장 없음 |
+| 답변 저장 | Q1~Q4 확인 텍스트를 일괄 저장하고 `analysis_pending`으로 전환 |
+| 백그라운드 분석 | Lambda async invoke로 LangGraph 파이프라인 실행 |
+| RAG 문맥 | 강원 방언팩과 도메인팩에서 표준화 참고 문맥 검색 |
+| LLM extraction | Bedrock Nova로 표준화, 의미 span, 문진 단서, 환자 질문 추출 |
+| Schema validation | Pydantic schema, enum, source_quote grounding 검증 |
+| Hybrid IR | BM25, Titan Vector, label signal로 표준 증상 후보 검색 |
+| 원페이퍼 | 증상, 원문, 문진 요약, 확인 항목, EMR 초안 생성 |
+| 안내문 | 의사 답변과 강조사항을 환자 친화 안내문으로 구성 |
+| 저장 정책 | DynamoDB에는 최소 상태, S3에는 redacted artifact 저장 |
+
+백엔드는 진단명 추천, 처방 결정, 질병 예측을 수행하지 않습니다.
 
 ---
 
-## 🗂️ 폴더 구조
+## 2. 최신 문진 처리 흐름
+
+현재 기본 흐름은 “문항마다 즉시 분석”이 아니라 “Q1~Q4 일괄 저장 후 백그라운드 분석”입니다.
+
+```text
+POST /process-answers
+  -> Q1~Q4 답변 정규화
+  -> S3 answers.redacted.json 저장
+  -> DynamoDB status = analysis_pending
+  -> 같은 Lambda를 Event invocation으로 비동기 호출
+  -> 프론트에는 즉시 patient_complete 응답
+
+Internal background event
+  -> Q1~Q4를 순서대로 LangGraph 파이프라인에 입력
+  -> quick safety flag
+  -> RAG context retrieval
+  -> semantic extraction
+  -> schema quote validation
+  -> Hybrid IR + linker
+  -> onepaper refresh
+  -> S3 onepaper/trace 저장
+  -> DynamoDB status = waiting_doctor 또는 needs_priority
+```
+
+환자 UX는 LLM 지연과 분리됩니다. 분석 실패가 발생해도 환자 완료 화면은 유지되고, 의료진 화면에서 재분석 또는 수동 확인을 진행합니다.
+
+![백엔드 비동기 처리 흐름](../docs/architecture-diagrams/backend-async-flow.png)
+
+---
+
+## 3. 주요 폴더 구조
 
 ```text
 backend/
 ├── README.md
 └── serverless/
+    ├── template.yaml
     ├── README.md
-    ├── template.yaml            # SAM: API Gateway + Lambda
     ├── src/
-    │   ├── handler.py           # API Gateway route 분기
-    │   ├── orchestration.py     # /process-answer 진입점
-    │   ├── settings.py          # AWS client, 환경 변수, 모델 ID
-    │   ├── sessions.py          # DynamoDB 세션 상태
-    │   ├── artifact_store.py    # S3 artifact 저장/조회
-    │   ├── artifact_policy.py   # 운영 artifact·최소 trace 필드 정리
-    │   ├── privacy.py           # 가명처리 helper
-    │   ├── audio.py             # Transcribe presigned URL
-    │   ├── pipeline_graph.py    # LangGraph 노드·edge 정의
-    │   ├── pipeline_nodes.py    # 노드별 실제 처리
-    │   ├── pipeline_state.py    # LangGraph state 구조
-    │   ├── pipeline_trace.py    # active path·trace
-    │   ├── rag_context.py       # RAG 참고 문맥 검색
-    │   ├── langchain_prompting.py # Bedrock JSON chain
-    │   ├── llm.py               # LLM 호출 wrapper + chain meta
-    │   ├── extraction_prompts.py / extraction_schema.py
-    │   ├── clinical_terms.py / clinical_state.py
-    │   ├── domain_config.py     # 도메인팩 로딩·기본 질문값
-    │   ├── question_sets.py     # 질문셋 로딩
-    │   ├── retrieval.py         # Hybrid IR 진입점
-    │   ├── retrieval_documents.py / retrieval_embeddings.py / retrieval_scoring.py
-    │   ├── onepager.py / onepager_sections.py / onepager_review.py
+    │   ├── handler.py
+    │   ├── auth.py
+    │   ├── orchestration.py
+    │   ├── sessions.py
+    │   ├── artifact_store.py
+    │   ├── artifact_policy.py
+    │   ├── privacy.py
+    │   ├── audio.py
+    │   ├── pipeline_graph.py
+    │   ├── pipeline_nodes.py
+    │   ├── pipeline_state.py
+    │   ├── pipeline_trace.py
+    │   ├── langchain_prompting.py
+    │   ├── llm.py
+    │   ├── rag_context.py
+    │   ├── dialect_rag.py
+    │   ├── domain_config.py
+    │   ├── question_sets.py
+    │   ├── retrieval.py
+    │   ├── retrieval_documents.py
+    │   ├── retrieval_embeddings.py
+    │   ├── retrieval_scoring.py
+    │   ├── onepager.py
+    │   ├── onepager_sections.py
+    │   ├── onepager_review.py
     │   ├── guide.py
-    │   ├── utils.py
-    │   ├── schemas/             # extraction.py, review.py, guide.py
+    │   ├── schemas/
     │   └── data/
-    │       ├── README.md
-    │       ├── domain_packs/respiratory.json   (+ respiratory_fewshot.txt)
-    │       ├── question_sets/default.json
-    │       └── (비공개 배치) diseases_cleaned / symptom_index / embedding cache
-    └── tests/                   # pytest 기반 회귀 검증
+    └── tests/
 ```
-
-> ℹ️ 도메인팩과 질문셋은 각각 `data/domain_packs/`, `data/question_sets/` 폴더로 분리되어 있습니다. 원천 의료 백과 본문과 그 파생 증상 인덱스·embedding cache는 저작권/이용 범위 검토 대상이라 공개 저장소에 포함하지 않고, 배포 시 팀 내부 비공개 데이터로 주입합니다. `backend/serverless/.aws-sam/`과 `samconfig.toml`은 로컬 산출물이라 저장소에 포함하지 않습니다.
 
 ---
 
-## 🔄 답변 1개 처리 흐름
+## 4. 핵심 파일
+
+| 파일 | 설명 |
+| --- | --- |
+| `handler.py` | API Gateway route 분기 |
+| `auth.py` | 직원/의사 접근 코드 로그인, 세션 토큰 검증 |
+| `orchestration.py` | `/process-answers`, background analysis, 재분석 진입점 |
+| `sessions.py` | DynamoDB 세션 상태 저장/조회 |
+| `artifact_store.py` | S3 redacted artifact 저장/조회 |
+| `artifact_policy.py` | 운영 artifact와 trace에서 보존할 최소 필드 정리 |
+| `privacy.py` | 환자명 마스킹, 연락처 제거, 개인정보 최소화 |
+| `audio.py` | Transcribe Streaming presigned URL 발급 |
+| `pipeline_graph.py` | LangGraph 노드와 edge 정의 |
+| `pipeline_nodes.py` | 각 노드의 실제 처리 코드 |
+| `langchain_prompting.py` | LangChain Runnable prompt/parse chain |
+| `llm.py` | Bedrock 호출 wrapper와 model routing |
+| `rag_context.py` | 도메인/방언/RAG 참고 문맥 검색 |
+| `dialect_rag.py` | 강원 방언팩 기반 표준어 후보 검색 |
+| `retrieval*.py` | Hybrid IR 문서 구성, embedding, scoring |
+| `onepager*.py` | 원페이퍼 섹션 조립과 review LLM |
+| `guide.py` | 환자 안내문 생성 |
+| `schemas/` | Pydantic fixed schema |
+
+---
+
+## 5. LangGraph와 LangChain 사용 방식
+
+### LangGraph
+
+LangGraph는 처리 순서와 실패 분기를 명시합니다.
 
 ```text
-POST /process-answer
-  → handler.py → orchestration.py → pipeline_graph.py → pipeline_nodes.py
-  → rag_context.py → langchain_prompting.py / llm.py → schemas/extraction.py
-  → retrieval.py → onepager.py → sessions.py → API response
+input_transcript
+  -> quick_safety_flag
+  -> rag_context_retrieval
+  -> semantic_extraction
+  -> schema_quote_validation
+  -> hybrid_ir_match
+  -> session_validation_save
+  -> onepaper_refresh
+  -> response_payload
 ```
 
-1. `handler.py`가 API Gateway 요청 수신, `/process-answer`는 `orchestration.process_answer()`로 전달
-2. `orchestration.py`가 LangGraph 파이프라인 실행
-3. `pipeline_graph.py`가 노드 순서·조건 분기 정의, `pipeline_nodes.py`가 각 노드 처리
-4. `rag_context_retrieval_node`가 원천 JSON 기반 참고 문맥 검색
-5. `semantic_extraction_node`가 LangChain Runnable chain으로 Bedrock Nova 호출
-6. `schema_quote_validation_node`가 Pydantic schema와 source_quote 검증
-7. 검증 실패 시 LangGraph가 `semantic_extraction_node`로 되돌려 repair prompt 실행
-8. 증상 문항이면 `retrieval.py`가 Hybrid IR 매칭
-9. `onepager.py`가 원페이퍼 JSON 갱신
-10. `artifact_store.py`가 답변·원페이퍼·trace를 S3에 저장
-11. `sessions.py`가 DynamoDB 상태·S3 pointer만 갱신
+검증 실패 시 bounded retry를 수행하고, 안전 플래그가 있으면 safety-only 저장 경로로 분기합니다.
 
----
+### LangChain
 
-## 🧠 LangGraph & LangChain
-
-**LangGraph** — 처리 경로와 분기 기록을 명시합니다. 노드:
+LangChain은 agent가 아니라 Runnable 조립 도구로 사용합니다.
 
 ```text
-input_transcript → quick_safety_flag → rag_context_retrieval
-→ semantic_extraction → schema_quote_validation → hybrid_ir_match
-→ session_validation_save → onepaper_refresh → response_payload
-(safety 분기: schema_quote_validation → safety_guardrail_save → response_payload)
+ChatPromptTemplate
+  -> Bedrock boto3 호출을 감싼 RunnableLambda
+  -> JsonOutputParser
+  -> Pydantic validator
 ```
 
-관련: `pipeline_graph.py`, `pipeline_nodes.py`, `pipeline_trace.py`
-
-**LangChain** — agent framework가 아니라 Runnable chain으로 씁니다. `ChatPromptTemplate`로 prompt를 만들고 boto3 Bedrock 호출을 `RunnableLambda`로 감싼 뒤 `JsonOutputParser`로 파싱하는 체인을 `semantic_extraction` 노드 안에서 실행합니다.
-
-관련: `langchain_prompting.py`, `llm.py`
+즉 LangChain은 prompt와 Bedrock 호출, JSON 파싱을 일관된 chain으로 묶는 역할입니다.
 
 ---
 
-## 🛡️ LLM 사용 원칙
+## 6. LLM 사용 원칙
 
-- LLM extraction은 필수 검증 경로이며, 실패 결과를 정상 결과처럼 저장하지 않습니다.
-- LLM JSON은 fixed schema를 통과해야 하고, `source_quote`·`original_quote`는 환자 원문에 존재해야 합니다.
-- enum은 미리 정의된 값만, schema에 없는 필드는 거부합니다.
-- LLM이 생성한 `score`·`confidence`·`probability`·`risk percentage`는 허용하지 않습니다.
-- 검증 실패 시 bounded retry, 이후에도 실패하면 저장하지 않고 422 반환.
-- 단, 안전 플래그가 있으면 extraction 실패 중에도 safety-only 저장 경로로 위험 신호만 보존할 수 있습니다.
-
-### Deterministic 코드의 위치
-
-| 구분 | 사용 | 설명 |
-| --- | --- | --- |
-| LLM extraction | 기본 | 실제 문진 의미 추출 |
-| Pydantic validation | 항상 | 저장 전 검증 |
-| RAG context | 사용 | 표준화 참고 문맥 (환자 사실로 직접 채택 안 함) |
-| safety flag rule | 사용 | 객혈·호흡곤란 등 즉시 확인 표현 감지 (진단 아님, guardrail) |
-| IR document build | 사용 | 원천 JSON을 검색 문서로 접는 변환 (발화 추출 로직 아님) |
+- LLM 출력은 fixed schema를 통과해야 저장됩니다.
+- `source_quote`와 `original_quote`는 환자 원문에 실제로 존재해야 합니다.
+- schema에 없는 필드, 정의되지 않은 enum은 거부합니다.
+- LLM이 임의로 만든 `score`, `confidence`, `probability`는 사용하지 않습니다.
+- 증상 매칭은 LLM 생성명만 신뢰하지 않고 Hybrid IR 후보와 linker validator를 거칩니다.
+- `symptom_absent`, `progress_improved` 같은 비활성 상태는 active symptom으로 올리지 않습니다.
 
 ---
 
-## 🔍 Hybrid IR
+## 7. Hybrid IR
 
-원천 데이터는 내부 배포 환경의 `data/diseases_cleaned.json`, `data/symptom_index.json`과 사전계산 embedding cache를 사용합니다. 이 3개 파일은 공개 저장소에는 포함하지 않습니다.
+운영 IR은 공개 저장소에 포함되지 않는 원천 데이터 3개와 공개 도메인팩을 함께 사용합니다.
 
-1. LLM span의 `source_quote`·`normalized_text`·`name`·`slot_ref`를 query로 구성
-2. `symptom_index.json`·`diseases_cleaned.json`에서 검색 문서 생성
-3. BM25 lexical score → Titan embedding cosine similarity → 표준명·alias bridge label score
-4. vector 중심 threshold 통과 후보만 `matched_slots`로 저장
-5. 운영 artifact에는 숫자 점수·후보 목록 제거, 최소 trace에는 확정 매칭의 BM25/vector/label/rank 근거 요약만 남김
+필수 비공개 파일:
 
-의료진 UI에는 숫자 점수를 표시하지 않습니다.
+- `backend/serverless/src/data/diseases_cleaned.json`
+- `backend/serverless/src/data/symptom_index.json`
+- `backend/serverless/src/data/symptom_embeddings_amazon.titan-embed-text-v2_0_512.json`
 
----
+검색 흐름:
 
-## 📄 원페이퍼 & 안내문
+```text
+LLM span
+  -> normalized_text + symptom_hint query
+  -> BM25 sparse score
+  -> Titan vector score
+  -> label signal
+  -> RRF hybrid fusion
+  -> top-k 표준 증상 후보
+  -> linker / deterministic validator
+```
 
-`onepager.py`는 S3 `answers.redacted.json`을 읽어 원페이퍼 JSON을 구성합니다 (`patient_summary`, `symptom_slots`, `clinical_clues`, `agenda`, `review_items`, `transfer_text`, `safety_flags`). `onepager_review.py`는 Q4 저장 후 또는 safety flag 시 Nova Pro로 확인 항목·EMR 초안을 다듬고 `schemas/review.py` 검증을 통과해야 반영됩니다.
-
-`guide.py`는 의사 답변·강조사항을 S3 `doctor_review.redacted.json`에, 생성된 안내문을 `patient_guide.redacted.json`에 저장합니다. 의사 답변은 Nova Lite로 환자용 쉬운 문장으로 변환하되 **강조사항은 LLM이 변형하지 않고 그대로** 별도 카드에 표시합니다. `schemas/guide.py` 검증 실패 시 빈 안내문과 실패 사유를 저장하고 validator 실패로 반환합니다.
-
----
-
-## 💾 데이터 저장
-
-| 저장소 | 저장하는 값 | 저장하지 않는 값 |
-| --- | --- | --- |
-| DynamoDB | `session_id`, queue_number, status, visit_type, **마스킹 환자 표시정보**, age_band, gender, department, doctor, receipt_id, risk, privacy_consent 요약, question_status, artifact key, onepager_ready, guide_ready | 실명·생년월일·연락처 원문, 문항 원문, 원페이퍼/안내문 전체 |
-| S3 | `sessions/YYYY-MM-DD/{session_id}/` 아래 consent·answers·onepaper·doctor_review·patient_guide·llm_trace 의 `.redacted.json` | 음성 원본, prompt 전문, LLM raw response, 전체 후보 목록 |
-
-S3는 `artifact_store.py`로만 읽고 씁니다. 저장 직전 `artifact_policy.py`가 운영 필드만 남기고 `privacy.py`가 연락처·주민번호·이메일·생년월일 형태 직접식별정보를 1차 마스킹합니다. 제출 환경에는 S3 Block Public Access · Lifecycle · KMS · Macie를 함께 적용했습니다.
+IR은 확장성을 위해 원천 JSON에서 문서를 구성합니다. 특정 테스트 문장에 맞춘 rule-base alias를 추가하는 구조가 아닙니다.
 
 ---
 
-## 🧪 검증
+## 8. 저장 구조
+
+| 저장소 | 내용 |
+| --- | --- |
+| DynamoDB | `session_id`, 상태, 대기 순번, 마스킹 환자명, 연령대, 성별, 진료과, S3 key |
+| S3 | `answers.redacted.json`, `onepaper.redacted.json`, `patient_guide.redacted.json`, `doctor_review.redacted.json`, 최소 `llm_trace.redacted.json` |
+
+음성 원본 파일, prompt 전문, LLM raw response, 전체 IR 후보 목록은 저장하지 않습니다.
+
+---
+
+## 9. 보안 처리
+
+- 직원/의사 접근 코드 로그인
+- 만료 세션 토큰
+- 환자별 세션 토큰
+- 실명 마스킹
+- 생년월일 원문 미저장, 연령대 저장
+- 연락처 원문 미저장
+- S3 artifact redaction
+- DynamoDB TTL
+- S3 lifecycle
+- AWS AI Services opt-out 정책 전제
+
+AWS 콘솔 설정은 [backend/serverless/README.md](serverless/README.md)에 정리되어 있습니다.
+
+---
+
+## 10. 검증
 
 ```bash
-# Python 문법
-python -m compileall backend/serverless/src
-
-# 검증
 cd backend/serverless
-pip install -r src/requirements.txt pytest
 python -m pytest tests/ -q
-```
-
-주요 검증 파일: `test_schema_and_artifact_policy.py`, `test_schema_slots.py`, `test_ir_noise_and_safety.py`, `test_prompts_golden.py`, `test_question_sets.py`, `test_sessions_queue.py`
-
-<details>
-<summary>Windows PowerShell (unittest 방식)</summary>
-
-```powershell
-py -3.12 -m compileall backend/serverless/src
-cd backend/serverless
+python -m compileall src
 sam validate
 ```
-</details>
 
----
+주요 테스트:
 
-## 🧭 개발자가 먼저 볼 파일
-
-| 목적 | 파일 |
+| 파일 | 목적 |
 | --- | --- |
-| API endpoint | `handler.py` |
-| 환경 변수·모델 ID | `settings.py` |
-| 전체 파이프라인 / 노드 | `pipeline_graph.py` / `pipeline_nodes.py` |
-| RAG 참고 문맥 | `rag_context.py` |
-| extraction prompt / schema | `extraction_prompts.py` / `schemas/extraction.py` |
-| 도메인팩 / 질문셋 로딩 | `domain_config.py` / `question_sets.py` |
-| 도메인팩 데이터 | `data/domain_packs/respiratory.json` |
-| Hybrid IR | `retrieval.py` (+ `_documents`/`_embeddings`/`_scoring`) |
-| 원페이퍼 / 리뷰 | `onepager.py` / `onepager_review.py` |
-| 환자 안내문 | `guide.py` |
-| 개인정보 최소화 / artifact 정책 | `privacy.py` / `artifact_policy.py` |
+| `test_schema_and_artifact_policy.py` | schema와 저장 artifact 정책 검증 |
+| `test_schema_slots.py` | 증상 slot schema 검증 |
+| `test_ir_noise_and_safety.py` | IR noise와 안전 플래그 검증 |
+| `test_prompts_golden.py` | 핵심 프롬프트 회귀 검증 |
+| `test_question_sets.py` | 질문셋 구조 검증 |
+| `test_sessions_queue.py` | 대기열 상태 전환 검증 |
 
 ---
 
-## 🔒 보안 주의
+## 11. 개발자가 먼저 볼 곳
 
-현재 MVP 백엔드는 `security.py`에서 직원/의료진 접근 코드 로그인, HMAC 서명 세션 토큰, 환자 세션별 토큰을 검증합니다. 직원/의료진 접근 코드는 `/auth/login`에서만 검증하고, 이후 보호 API는 `Authorization: Bearer <token>`으로 만료 세션 토큰을 확인합니다. 다만 이는 해커톤 MVP 수준의 1차 접근 제어이므로, 실제 의료기관 운영 전에는 Cognito 또는 병원 SSO, 사용자별 계정, 감사 로그, DynamoDB TTL 콘솔 활성화, S3 Lifecycle/KMS/Macie, CloudWatch Logs 보존, API Gateway throttling, WAF/IP 제한, 환자 동의 절차, 의료정보 처리 기준 검토가 필요합니다.
+1. `orchestration.py`: 답변 일괄 저장과 백그라운드 분석 시작점
+2. `pipeline_graph.py`: 전체 AI 처리 순서
+3. `pipeline_nodes.py`: 각 단계의 실제 구현
+4. `retrieval.py`: 표준 증상 매칭
+5. `onepager.py`: 의료진 원페이퍼 구성
+6. `guide.py`: 환자 안내문 구성
 
-자세한 내용: [serverless README](serverless/README.md) · [데이터 전수조사](../docs/SECURITY_DATA_INVENTORY.md)
+---
+
+## 12. 주의
+
+공개 GitHub에는 원천 의료 백과 데이터, 파생 증상 인덱스, embedding cache, 실제 평가 데이터, AWS 배포 산출물을 올리지 않습니다. 실행 또는 배포 전에는 팀 내부 비공개 저장소에서 필요한 런타임 데이터를 `src/data/`에 배치해야 합니다.

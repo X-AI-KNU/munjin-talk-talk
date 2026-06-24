@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="650" viewBox="0 0 1500 650" role="img" aria-labelledby="title desc">
+<title id="title">환자 문진 UX 흐름</title>
+<desc id="desc">직원 접수부터 태블릿 문진 완료와 큐 복귀까지의 환자 흐름</desc>
+<defs><marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/></marker>
+<marker id="arrow-green" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#16a34a"/></marker>
+<marker id="arrow-orange" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#f97316"/></marker>
+<marker id="arrow-red" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#ef4444"/></marker>
+<marker id="arrow-purple" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#8b5cf6"/></marker></defs>
+<rect width="1500" height="650" fill="#f8fbff"/>
+<text x="52" y="62" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="34" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="52" dy="0">환자 문진 UX 흐름</tspan>
+</text>
+<text x="52" y="94" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="17" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="52" dy="0">환자는 LLM 분석을 기다리지 않고 Q1~Q4 입력 완료 후 바로 완료 안내를 받고 태블릿은 대기열로 복귀합니다.</tspan>
+</text>
+<rect x="55" y="210" width="175" height="150" rx="16" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="79" y="248" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="18" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="79" dy="0">직원 접수</tspan>
+</text>
+<text x="79" y="278" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="79" dy="0">환자 확인</tspan>
+</text>
+<text x="79" y="303" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="79" dy="0">세션 생성</tspan>
+</text>
+<text x="80" y="248" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="22" font-weight="900" fill="#2563eb" text-anchor="start">
+<tspan x="80" dy="0">1</tspan>
+</text>
+<line x1="230" y1="285" x2="275" y2="285" stroke="#2563eb" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/>
+<rect x="275" y="210" width="175" height="150" rx="16" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+<text x="299" y="248" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="18" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="299" dy="0">문진 대기열</tspan>
+</text>
+<text x="299" y="278" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="299" dy="0">태블릿에서</tspan>
+</text>
+<text x="299" y="303" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="299" dy="0">환자 선택</tspan>
+</text>
+<text x="300" y="248" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="22" font-weight="900" fill="#2563eb" text-anchor="start">
+<tspan x="300" dy="0">2</tspan>
+</text>
+<line x1="450" y1="285" x2="495" y2="285" stroke="#2563eb" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/>
+<rect x="495" y="210" width="175" height="150" rx="16" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+<text x="519" y="248" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="18" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="519" dy="0">서비스 동의</tspan>
+</text>
+<text x="519" y="278" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="519" dy="0">개인정보/건강정보</tspan>
+</text>
+<text x="519" y="303" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="519" dy="0">처리 확인</tspan>
+</text>
+<text x="520" y="248" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="22" font-weight="900" fill="#2563eb" text-anchor="start">
+<tspan x="520" dy="0">3</tspan>
+</text>
+<line x1="670" y1="285" x2="715" y2="285" stroke="#2563eb" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/>
+<rect x="715" y="210" width="175" height="150" rx="16" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+<text x="739" y="248" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="18" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="739" dy="0">Q1~Q4 문진</tspan>
+</text>
+<text x="739" y="278" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="739" dy="0">음성 입력</tspan>
+</text>
+<text x="739" y="303" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="739" dy="0">직접 수정 가능</tspan>
+</text>
+<text x="740" y="248" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="22" font-weight="900" fill="#2563eb" text-anchor="start">
+<tspan x="740" dy="0">4</tspan>
+</text>
+<line x1="890" y1="285" x2="935" y2="285" stroke="#2563eb" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/>
+<rect x="935" y="210" width="175" height="150" rx="16" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+<text x="959" y="248" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="18" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="959" dy="0">일괄 저장</tspan>
+</text>
+<text x="959" y="278" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="959" dy="0">/process-answer</tspan>
+<tspan x="959" dy="18">s</tspan>
+</text>
+<text x="959" y="303" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="959" dy="0">분석 대기 등록</tspan>
+</text>
+<text x="960" y="248" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="22" font-weight="900" fill="#2563eb" text-anchor="start">
+<tspan x="960" dy="0">5</tspan>
+</text>
+<line x1="1110" y1="285" x2="1155" y2="285" stroke="#2563eb" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/>
+<rect x="1155" y="210" width="175" height="150" rx="16" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1179" y="248" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="18" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="1179" dy="0">완료 안내</tspan>
+</text>
+<text x="1179" y="278" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="1179" dy="0">대기번호 표시</tspan>
+</text>
+<text x="1179" y="303" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="1179" dy="0">태블릿 복귀</tspan>
+</text>
+<text x="1180" y="248" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="22" font-weight="900" fill="#2563eb" text-anchor="start">
+<tspan x="1180" dy="0">6</tspan>
+</text>
+<rect x="230" y="450" width="870" height="90" rx="16" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+<text x="254" y="488" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="18" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="254" dy="0">환자 화면 원칙</tspan>
+</text>
+<text x="254" y="518" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="254" dy="0">문항별 답변 저장 중 LLM 분석을 기다리지 않습니다. 분석 실패는 환자 진행을 막지 않고 의료진 화면에서 재분석 또는 수동 확인으로 처리합니다.</tspan>
+</text>
+</svg>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="760" viewBox="0 0 1500 760" role="img" aria-labelledby="title desc">
+<title id="title">백엔드 비동기 처리 흐름</title>
+<desc id="desc">환자 입력은 즉시 저장하고 Lambda가 백그라운드에서 LangGraph 분석을 수행하는 시퀀스</desc>
+<defs><marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/></marker>
+<marker id="arrow-green" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#16a34a"/></marker>
+<marker id="arrow-orange" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#f97316"/></marker>
+<marker id="arrow-red" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#ef4444"/></marker>
+<marker id="arrow-purple" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#8b5cf6"/></marker></defs>
+<rect width="1500" height="760" fill="#f8fbff"/>
+<text x="52" y="62" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="34" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="52" dy="0">백엔드 비동기 처리 흐름</tspan>
+</text>
+<text x="52" y="94" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="17" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="52" dy="0">환자 UX는 빠르게 끝내고, AI 분석은 별도 작업으로 수행해 의료진 화면에 준비 상태를 표시합니다.</tspan>
+</text>
+<rect x="70" y="150" width="170" height="64" rx="16" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="94" y="188" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="15" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="94" dy="0">환자 태블릿</tspan>
+</text>
+<line x1="155" y1="214" x2="155" y2="690" stroke="#cbd5e1" stroke-width="2.4" fill="none" stroke-dasharray="8 7"/>
+<rect x="295" y="150" width="170" height="64" rx="16" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+<text x="319" y="188" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="15" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="319" dy="0">API</tspan>
+<tspan x="319" dy="21">Gateway</tspan>
+</text>
+<line x1="380" y1="214" x2="380" y2="690" stroke="#cbd5e1" stroke-width="2.4" fill="none" stroke-dasharray="8 7"/>
+<rect x="520" y="150" width="170" height="64" rx="16" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+<text x="544" y="188" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="15" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="544" dy="0">Lambda API</tspan>
+</text>
+<line x1="605" y1="214" x2="605" y2="690" stroke="#cbd5e1" stroke-width="2.4" fill="none" stroke-dasharray="8 7"/>
+<rect x="745" y="150" width="170" height="64" rx="16" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="769" y="188" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="15" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="769" dy="0">DynamoDB</tspan>
+</text>
+<line x1="830" y1="214" x2="830" y2="690" stroke="#cbd5e1" stroke-width="2.4" fill="none" stroke-dasharray="8 7"/>
+<rect x="970" y="150" width="170" height="64" rx="16" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+<text x="994" y="188" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="15" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="994" dy="0">Background</tspan>
+<tspan x="994" dy="21">Lambda</tspan>
+</text>
+<line x1="1055" y1="214" x2="1055" y2="690" stroke="#cbd5e1" stroke-width="2.4" fill="none" stroke-dasharray="8 7"/>
+<rect x="1195" y="150" width="170" height="64" rx="16" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="1219" y="188" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="15" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="1219" dy="0">S3</tspan>
+<tspan x="1219" dy="21">Artifacts</tspan>
+</text>
+<line x1="1280" y1="214" x2="1280" y2="690" stroke="#cbd5e1" stroke-width="2.4" fill="none" stroke-dasharray="8 7"/>
+<line x1="155" y1="270" x2="380" y2="270" stroke="#2563eb" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/>
+<text x="179" y="258" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#64748b" text-anchor="start">
+<tspan x="179" dy="0">POST /process-answers</tspan>
+</text>
+<line x1="380" y1="315" x2="605" y2="315" stroke="#2563eb" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/>
+<text x="404" y="303" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#64748b" text-anchor="start">
+<tspan x="404" dy="0">Q1~Q4 전달</tspan>
+</text>
+<line x1="605" y1="360" x2="830" y2="360" stroke="#2563eb" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/>
+<text x="629" y="348" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#64748b" text-anchor="start">
+<tspan x="629" dy="0">answers 저장, analysis_pending</tspan>
+</text>
+<line x1="605" y1="405" x2="1055" y2="405" stroke="#2563eb" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/>
+<text x="629" y="393" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#64748b" text-anchor="start">
+<tspan x="629" dy="0">비동기 분석 이벤트 호출</tspan>
+</text>
+<line x1="605" y1="455" x2="155" y2="455" stroke="#2563eb" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/>
+<text x="179" y="443" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#64748b" text-anchor="start">
+<tspan x="179" dy="0">즉시 완료 응답</tspan>
+</text>
+<line x1="1055" y1="505" x2="1280" y2="505" stroke="#2563eb" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/>
+<text x="1079" y="493" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#64748b" text-anchor="start">
+<tspan x="1079" dy="0">onepaper / guide / trace 저장</tspan>
+</text>
+<line x1="1055" y1="550" x2="830" y2="550" stroke="#2563eb" stroke-width="2.4" fill="none" marker-end="url(#arrow-blue)"/>
+<text x="854" y="538" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#64748b" text-anchor="start">
+<tspan x="854" dy="0">waiting_doctor / needs_priority</tspan>
+</text>
+<rect x="90" y="630" width="1320" height="78" rx="16" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+<text x="114" y="668" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="18" font-weight="800" fill="#0f2347" text-anchor="start">
+<tspan x="114" dy="0">핵심</tspan>
+</text>
+<text x="114" y="698" font-family="Noto Sans KR, Malgun Gothic, Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="start">
+<tspan x="114" dy="0">환자 완료 화면은 저장 성공만 기다립니다. LangGraph, Bedrock, IR, 안내문 생성은 background Lambda가 수행합니다.</tspan>
+</text>
+</svg>
