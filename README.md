@@ -206,16 +206,16 @@ IR은 내부 배포 환경의 비공개 런타임 데이터(`diseases_cleaned.js
 
 ```mermaid
 flowchart TB
-  Span["LLM symptom span<br/>source_quote · normalized_text · name"]
-  Query["IR query<br/>normalized_text + name"]
-  BM25["BM25 후보<br/>표준 증상 문서와 키워드 일치"]
-  Titan["Titan vector 후보<br/>환자 표현과 표준 증상 문서 의미 유사도"]
-  Label["Label bridge 후보<br/>표준 증상명에 직접 가까운 표현"]
-  Merge["후보 통합<br/>BM25 ∪ Titan ∪ label"]
-  Rank["내부 rank score 재정렬<br/>운영 UI에는 점수 미노출"]
-  Gate{"Hybrid gate 통과?"}
-  Matched["matched_slots<br/>원페이퍼에 매칭됨으로 표시"]
-  Unmatched["unmatched_spans<br/>문진 맥락으로 보존"]
+  Span["LLM span<br/>quote · text · hint"]
+  Query["IR query<br/>text + hint"]
+  BM25["BM25<br/>키워드 일치"]
+  Titan["Titan Vector<br/>의미 유사도"]
+  Label["Label Bridge<br/>표준명 보조"]
+  Merge["후보 통합<br/>BM25 + Vector + Label"]
+  Rank["재정렬<br/>점수는 내부용"]
+  Gate{"근거 충분?"}
+  Matched["matched_slots<br/>원페이퍼 표시"]
+  Unmatched["unmatched_spans<br/>맥락 보존"]
 
   Span --> Query
   Query --> BM25
@@ -226,9 +226,18 @@ flowchart TB
   Label --> Merge
   Merge --> Rank
   Rank --> Gate
-  Gate -- "Titan 의미 신호 + BM25/label 근거 있음" --> Matched
+  Gate -- "의미 + 키워드 근거" --> Matched
   Gate -- "근거 부족" --> Unmatched
 ```
+
+| 그래프 항목 | 실제 의미 |
+| --- | --- |
+| `quote · text · hint` | LLM이 환자 원문에서 추출한 `source_quote`, 표준화 표현 `normalized_text`, 검색 힌트 `name` |
+| `BM25` | 서울아산병원 질병백과 기반 증상 문서와의 키워드 일치 |
+| `Titan Vector` | 환자 표현과 표준 증상 문서 사이의 의미 유사도 |
+| `Label Bridge` | 표준 증상명과 직접 가까운 표현을 보조 후보로 보존 |
+| `재정렬` | 후보를 내부 rank score로 정렬하되 운영 UI에는 숫자 점수를 노출하지 않음 |
+| `근거 충분?` | Titan 의미 신호와 BM25/label 근거가 함께 있을 때만 표준 증상으로 확정 |
 
 ### 예시
 
