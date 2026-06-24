@@ -5,9 +5,9 @@
   문진톡톡 · MunjinTalkTalk
 </h1>
 
-고령 환자의 음성 한마디를, 의료진이 진료 전 한눈에 읽는 원페이퍼로.
+어르신의 말은 쉽게, 의료진의 확인은 빠르게.
 
-말로 답한 문진을 → 구조화 → 표준 증상 매칭 → 검증을 거쳐, 진료 전엔 *의료진용 원페이퍼*로, 진료 후엔 *환자용 안내문*으로 바꿔주는 AI 문진 보조 MVP
+고령 환자가 말로 답한 문진을 구조화, 표준 증상 매칭, 검증을 거쳐 진료 전엔 *의료진용 원페이퍼*로, 진료 후엔 *환자용 안내문*으로 바꿔주는 AI 문진 보조 MVP
 
 ![Status](https://img.shields.io/badge/status-MVP-blue)
 ![Frontend](https://img.shields.io/badge/frontend-React%2018%20%2B%20Vite-61dafb)
@@ -52,14 +52,23 @@
 접수처 직원이 세션을 만들면, 환자는 태블릿에서 음성으로 문진에 답합니다. 백엔드는 발화를 구조화하고 표준 증상과 매칭·검증한 뒤, 의료진이 빠르게 확인할 수 있는 원페이퍼를 만듭니다. 진료 후 의사가 답변과 강조사항을 남기면, 환자가 읽을 안내문이 생성됩니다.
 
 ```text
-직원 접수 → 환자 동의 → Q1~Q4 음성 문진 → 실시간 전사(Transcribe)
-        → 환자 확인 텍스트 일괄 저장(/process-answers)
-        → 환자 완료 화면 · 태블릿 대기열 복귀
-
-백그라운드 Lambda
-        → RAG 참고 컨텍스트 → LLM 구조화(Bedrock) → 스키마/원문 검증
-        → Hybrid IR 표준 증상 매칭 → S3 산출물 저장 · DynamoDB 상태 갱신
-        → 의료진 원페이퍼 → 의사 답변 입력 → 환자 안내문 출력
+[직원 접수] → [환자 동의] → [Q1~Q4 음성 문진] → [실시간 전사]
+                                      │
+                                      ▼
+                       [확정 텍스트 일괄 저장 /process-answers]
+                                      │
+               ┌──────────────────────┴──────────────────────┐
+               ▼                                             ▼
+ [환자 완료 화면 · 태블릿 대기열 복귀]              [백그라운드 Lambda 분석]
+                                                             │
+                                                             ▼
+              [RAG 참고 컨텍스트] → [LLM 구조화] → [스키마/원문 검증]
+                                                             │
+                                                             ▼
+                         [Hybrid IR 표준 증상 매칭] → [의료진 원페이퍼]
+                                                             │
+                                                             ▼
+                                             [의사 답변 입력] → [환자 안내문 출력]
 ```
 
 ### 화면 구성
@@ -145,26 +154,28 @@ flowchart LR
 
 ### 기술 스택
 
-| 영역 | 기술 |
-| --- | --- |
-| Frontend | React 18, Vite, React Router (상태관리 라이브러리 없이 경량 유지) |
-| Hosting | AWS Amplify |
-| API / Compute | API Gateway HTTP API, AWS Lambda (Python 3.12) |
-| 음성 인식 | Amazon Transcribe Streaming (음성 원본 미저장) |
-| LLM | Amazon Bedrock — Nova Pro(강), Nova Lite(경) |
-| 임베딩 | Amazon Titan Text Embeddings v2 |
-| 파이프라인 | LangGraph `StateGraph` + LangChain Core Runnable/Parser |
-| 검증 | Pydantic v2 스키마 검증 |
-| 검색 | BM25 + Titan Vector Hybrid IR |
-| 저장 | DynamoDB(상태·포인터) + S3(가명처리 산출물) |
-| 인프라 정의 | AWS SAM (`template.yaml`) |
+| 영역 | 기술 | 도입 목적 |
+| --- | --- | --- |
+| Frontend | React 18, Vite, React Router | 접수·태블릿·원페이퍼·안내문을 하나의 경량 SPA로 구성 |
+| Hosting | AWS Amplify | 배포 URL 제공, HTTPS, 프론트 빌드 자동화, WAF 연계 |
+| API / Compute | API Gateway HTTP API, AWS Lambda (Python 3.12) | 문진 세션과 LLM 파이프라인을 서버리스로 실행 |
+| 음성 인식 | Amazon Transcribe Streaming | 음성 원본을 저장하지 않고 확정 텍스트만 처리 |
+| LLM | Amazon Bedrock — Nova Pro(강), Nova Lite(경) | 복잡한 구조화·검토와 가벼운 표준화 작업을 분리 |
+| 임베딩 | Amazon Titan Text Embeddings v2 | 환자 표현과 표준 증상 문서의 의미 유사도 계산 |
+| 파이프라인 | LangGraph `StateGraph` + LangChain Core Runnable/Parser | 노드 단위 실행, retry, 검증 실패 분기, trace 가능한 흐름 구성 |
+| 검증 | Pydantic v2 스키마 검증 | LLM JSON의 필수 필드, enum, 원문 quote, extra field를 엄격히 확인 |
+| 검색 | BM25 + Titan Vector Hybrid IR | 키워드 일치와 의미 유사도를 함께 사용해 표준 증상 후보 검색 |
+| 저장 | DynamoDB(상태·포인터) + S3(가명처리 산출물) | 운영 상태와 상세 산출물을 분리해 저장 최소화 |
+| 인프라 정의 | AWS SAM (`template.yaml`) | API Gateway, Lambda, 환경변수, 권한을 코드로 관리 |
 
 ### LangChain / LangGraph는 "용어"가 아니라 실제 코드 경로입니다
 
-- `src/langchain_prompting.py` — `ChatPromptTemplate → RunnableLambda(Bedrock converse) → JsonOutputParser` 체인
-- `src/pipeline_graph.py` — LangGraph `StateGraph`로 노드·retry/safety/stop 조건부 엣지 정의
-- `src/pipeline_nodes.py` — RAG 검색, LLM extraction, Pydantic/원문 검증, Hybrid IR, S3 저장을 각 노드 함수로 분리
-- 흐름 상세: [docs/LANGGRAPH_PIPELINE.md](docs/LANGGRAPH_PIPELINE.md)
+| 코드 | 역할 |
+| --- | --- |
+| `src/langchain_prompting.py` | `ChatPromptTemplate → RunnableLambda(Bedrock converse) → JsonOutputParser` 체인 |
+| `src/pipeline_graph.py` | LangGraph `StateGraph`로 노드·retry/safety/stop 조건부 엣지 정의 |
+| `src/pipeline_nodes.py` | RAG 검색, LLM extraction, Pydantic/원문 검증, Hybrid IR, S3 저장을 각 노드 함수로 분리 |
+| [docs/LANGGRAPH_PIPELINE.md](docs/LANGGRAPH_PIPELINE.md) | 답변이 실제로 거치는 파이프라인 흐름 상세 |
 
 ---
 
