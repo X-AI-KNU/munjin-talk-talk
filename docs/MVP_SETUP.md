@@ -249,19 +249,22 @@ Invoke-RestMethod -Method Post -Uri "$base/sessions" -ContentType "application/j
 
 이 예시는 입력 payload입니다. 백엔드는 이 값을 그대로 DynamoDB에 저장하지 않습니다.
 
-문항 처리:
+문진 답변 일괄 저장:
 
 ```powershell
-$answer = @{
+$answers = @{
   session_id = "<session_id>"
-  question_id = "Q1"
-  question_type = "chief_complaint"
-  question_set_id = "default"
-  transcript = "어제부터 목이 칼칼하고 코가 막혀요"
   visit_type = "initial"
+  question_set_id = "default"
+  answers = @(
+    @{ question_id = "Q1"; question_type = "chief_complaint"; transcript = "어제부터 목이 칼칼하고 코가 막혀요" },
+    @{ question_id = "Q2"; question_type = "onset"; transcript = "어제부터 그랬어요" },
+    @{ question_id = "Q3"; question_type = "medication"; transcript = "먹는 약은 없습니다" },
+    @{ question_id = "Q4"; question_type = "patient_question"; transcript = "감기약을 먹어도 되는지 궁금해요" }
+  )
 } | ConvertTo-Json -Depth 10
 
-Invoke-RestMethod -Method Post -Uri "$base/process-answer" -ContentType "application/json" -Body $answer
+Invoke-RestMethod -Method Post -Uri "$base/process-answers" -ContentType "application/json" -Body $answers
 ```
 
 원페이퍼 조회:
@@ -279,8 +282,8 @@ Invoke-RestMethod -Method Get -Uri "$base/onepager/<session_id>"
 | 문진 세션 생성이 안 됨 | `VITE_API_BASE_URL`이 비었거나 잘못됨 | `.env.local` 또는 Amplify 환경 변수 확인 |
 | 환자 태블릿에서 마이크가 안 됨 | HTTPS가 아니거나 브라우저 권한 거부 | Amplify URL 또는 localhost 사용, 마이크 권한 허용 |
 | STT 결과가 비어 있음 | 마이크 입력 없음, Transcribe 연결 실패 | 브라우저 console, `/transcribe-stream-url` 응답 확인 |
-| Q 처리 후 validator 오류 | LLM 출력이 schema/source_quote 검증 실패 | CloudWatch, S3 trace 확인 |
-| 원페이퍼가 비어 있음 | `/process-answer` 실패 또는 S3 artifact 없음 | S3 `answers.redacted.json` 확인 |
+| 답변 저장 후 원페이퍼가 늦게 보임 | `/process-answers`는 답변 저장 후 백그라운드 분석을 시작함 | 잠시 후 새로고침, CloudWatch 확인 |
+| 원페이퍼가 비어 있음 | 백그라운드 분석 실패 또는 S3 artifact 없음 | S3 `answers.redacted.json`, `onepaper.redacted.json` 확인 |
 | 안내문이 안 나옴 | 의사 답변 저장 실패 또는 guide generation 실패 | S3 `doctor_review.redacted.json`, `patient_guide.redacted.json` 확인 |
 | S3 AccessDenied | Lambda role 권한 부족 | Lambda role에 artifact bucket `GetObject`, `PutObject` 권한 추가 |
 

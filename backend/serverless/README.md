@@ -39,7 +39,7 @@ AWS SAM으로 배포하는 문진톡톡 백엔드입니다. API Gateway HTTP API
 | `GET` | `/sessions/{session_id}` | 세션 조회 | 세션/직원/의사 |
 | `GET` | `/sessions` | 오늘 접수 목록 조회 | 직원 |
 | `POST` | `/process-answers` | Q1~Q4 답변 일괄 저장, 분석 큐 등록 | 환자 세션 |
-| `POST` | `/process-answer` | 단일 문항 처리 호환 endpoint | 환자 세션 |
+| `POST` | `/process-answer` | 과거 단일 문항 처리용 보조 API. 일반 환자 문진 화면은 사용하지 않음 | 환자 세션 |
 | `POST` | `/transcribe/stream-url` | Transcribe Streaming presigned URL 발급 | 환자 세션 |
 | `GET` | `/doctor/queue` | 의사 대기열 | 의사 |
 | `GET` | `/onepaper/{session_id}` | 원페이퍼 조회 | 의사 |

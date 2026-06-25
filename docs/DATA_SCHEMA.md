@@ -28,17 +28,15 @@ S3 = 가명처리된 운영 artifact + 최소 설명 trace
 POST /sessions
   -> DynamoDB minimal session item 생성
 
-POST /process-answer
-  -> STT 확정 텍스트 수신
-  -> 원천 JSON 기반 RAG 참고 컨텍스트 검색
-  -> LLM extraction JSON 생성
-  -> Pydantic schema 검증
-  -> source_quote 원문 포함 여부 검증
-  -> 검증 실패 시 LangGraph retry loop
-  -> 증상 문항이면 Hybrid IR matched_slots 생성
+POST /process-answers
+  -> 환자가 확인한 Q1~Q4 텍스트를 한 번에 수신
   -> S3 answers.redacted.json 저장
+  -> DynamoDB status를 analysis_pending으로 변경
+  -> 백그라운드 Lambda에서 LangGraph 분석 시작
+  -> 표준화, 의미 span 추출, Pydantic schema 검증, source_quote 검증
+  -> 증상 span은 Hybrid IR과 linker validator로 matched_slots 생성
   -> S3 onepaper.redacted.json 저장
-  -> DynamoDB question_status, risk, status, artifact key 갱신
+  -> DynamoDB risk, status, artifact key 갱신
 
 POST /doctor-response
   -> S3 doctor_review.redacted.json 저장

@@ -179,7 +179,7 @@ services/
 | `api.js` | 서비스 API re-export |
 | `api/client.js` | API base URL, 공통 session normalize |
 | `api/sessions.js` | 세션 생성, 조회, 대기열 |
-| `api/transcripts.js` | `/process-answer` 호출 |
+| `api/transcripts.js` | Q1~Q4 답변 일괄 저장 API 호출 |
 | `api/doctor.js` | 원페이퍼, doctor response, guide API |
 | `transcribeStreaming.js` | WebSocket STT streaming 구현 |
 | `onepagerAdapter.js` | 백엔드 onepaper JSON을 UI용 shape으로 변환 |
@@ -287,7 +287,7 @@ backend/serverless/src/
 
 | 파일 | 역할 |
 | --- | --- |
-| `orchestration.py` | `/process-answer` 진입점 |
+| `orchestration.py` | Q1~Q4 답변 저장, 백그라운드 분석 시작, 재분석 진입점 |
 | `pipeline_graph.py` | LangGraph 조립, 노드 연결, 조건 분기 |
 | `pipeline_nodes.py` | 실제 노드 구현 |
 | `pipeline_state.py` | 상태 타입과 그래프 메타데이터 |

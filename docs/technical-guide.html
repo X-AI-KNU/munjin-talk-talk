@@ -654,15 +654,15 @@
           <span>브라우저 WebSocket<br />음성 저장 없이 text만 수신</span>
         </div>
         <div class="flow-step tint-orange">
-          <b>5. 서버 파이프라인</b>
-          <span><code>/process-answer</code><br />LangGraph 문항 처리 시작</span>
+          <b>5. 답변 일괄 저장</b>
+          <span><code>/process-answers</code><br />Q1~Q4 확정 텍스트 저장</span>
         </div>
         <div class="flow-step tint-orange">
-          <b>6. RAG 참고 문맥</b>
-          <span>원천 JSON + 제한 alias<br />LLM 표준화 참고용</span>
+          <b>6. 백그라운드 분석</b>
+          <span>Lambda async invocation<br />환자는 완료 화면으로 이동</span>
         </div>
         <div class="flow-step tint-orange">
-          <b>7. LLM + 검증</b>
+          <b>7. RAG + LLM 검증</b>
           <span>LangChain Runnable<br />Pydantic/source_quote retry</span>
         </div>
         <div class="flow-step tint-orange">
@@ -987,10 +987,10 @@
             <td>Amazon Transcribe Streaming WebSocket 서명 URL</td>
           </tr>
           <tr>
-            <td><code>POST /process-answer</code></td>
-            <td>질문별 발화 종료</td>
-            <td><code>process_answer</code></td>
-            <td>LLM 추출, schema 검증, hybrid IR, 저장을 한 번에 실행</td>
+            <td><code>POST /process-answers</code></td>
+            <td>Q1~Q4 문진 완료</td>
+            <td><code>process_answers</code></td>
+            <td>확정 텍스트를 저장하고 백그라운드 분석을 시작</td>
           </tr>
           <tr>
             <td><code>GET /doctor/queue</code></td>

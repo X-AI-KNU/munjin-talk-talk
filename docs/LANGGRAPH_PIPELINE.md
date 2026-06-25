@@ -91,11 +91,12 @@ flowchart LR
 
 ### `orchestration.py`
 
-`/process-answer`의 진입점입니다.
+환자 답변 저장과 분석 시작을 담당하는 진입점입니다. 환자 화면에서는 Q1~Q4 답변을 한 번에 저장하고, 실제 LangGraph 분석은 백그라운드 Lambda에서 수행합니다.
 
 ```python
-def process_answer(body):
-    return run_answer_pipeline(body)
+def process_answers(body):
+    # Q1~Q4 텍스트를 저장하고 분석 작업을 비동기로 시작합니다.
+    ...
 ```
 
 이 파일은 일부러 얇게 유지합니다. 실제 파이프라인은 `pipeline_graph.py`와 `pipeline_nodes.py`에 있습니다.
