@@ -50,10 +50,29 @@
     {"name": "가래", "slot_id": "sputum", "keywords": ["가래", "痰"], "alert": false},
     {"name": "호흡곤란", "slot_id": "dyspnea", "keywords": ["숨", "호흡", "답답"], "alert": true},
     {"name": "가슴 답답", "slot_id": "chest_discomfort", "keywords": ["가슴 답답", "가슴이 답답", "가심", "답답허", "답답하"], "alert": true},
-    {"name": "흉통", "slot_id": "chest_pain", "keywords": ["가슴", "흉통"], "alert": true},
+    {"name": "흉통", "slot_id": "chest_pain", "keywords": ["가슴", "흉통", "결리", "찌르", "쑤시", "숨 쉴 때"], "alert": true},
+    {"name": "흉부압박감", "slot_id": "chest_pressure", "keywords": ["꽉 누르", "짓누르", "압박", "눌리는"], "alert": true},
     {"name": "기운없음", "slot_id": "low_energy", "keywords": ["기운없", "기운 없", "힘이 없", "힘 없음", "힘이 안", "힘이 잘 안", "몸에 힘", "무기력"], "alert": false},
     {"name": "어지러움", "slot_id": "dizziness", "keywords": ["어지러", "어질", "현기"], "alert": false},
-    {"name": "두통", "slot_id": "headache", "keywords": ["머리", "두통"], "alert": false}
+    {"name": "두통", "slot_id": "headache", "keywords": ["머리", "두통", "뒷골", "지끈"], "alert": false},
+    {"name": "방사통", "slot_id": "radiating_pain", "keywords": ["방사통", "뻗치", "찌르르", "어깨에서 팔", "팔로", "등으로"], "alert": false},
+    {"name": "복부팽만감", "slot_id": "abdominal_bloating", "keywords": ["배가 빵빵", "배 빵빵", "더부룩", "복부팽만", "배가 부풀"], "alert": false},
+    {"name": "복부 통증", "slot_id": "abdominal_pain", "keywords": ["배가 아프", "복통", "배 살살", "배가 살살"], "alert": false},
+    {"name": "하지부종", "slot_id": "leg_edema", "keywords": ["다리 붓", "다리 부기", "다리가 부", "종아리 붓"], "alert": false},
+    {"name": "사지 부종", "slot_id": "limb_edema", "keywords": ["손발 붓", "손발이 부", "팔다리 붓"], "alert": false},
+    {"name": "근육통", "slot_id": "myalgia", "keywords": ["몸살", "삭신", "쑤시", "결리", "근육통"], "alert": false},
+    {"name": "오한", "slot_id": "chills", "keywords": ["오한", "한기", "춥", "이불"], "alert": false},
+    {"name": "권태감", "slot_id": "malaise", "keywords": ["나른", "처짐", "권태", "축 처"], "alert": false},
+    {"name": "근력 약화", "slot_id": "muscle_weakness", "keywords": ["팔다리 힘", "힘이 들어가지", "힘이 안 들어"], "alert": false},
+    {"name": "발한", "slot_id": "sweating", "keywords": ["식은땀", "땀", "발한"], "alert": false},
+    {"name": "눈꼽", "slot_id": "eye_discharge", "keywords": ["눈곱", "눈꼽"], "alert": false},
+    {"name": "눈의 충혈", "slot_id": "eye_redness", "keywords": ["눈이 빨갛", "충혈"], "alert": false},
+    {"name": "삼키기 곤란", "slot_id": "dysphagia", "keywords": ["삼키기", "넘어가지", "목에 걸리"], "alert": false},
+    {"name": "창백", "slot_id": "pallor", "keywords": ["핏기", "창백", "핼쑥"], "alert": false},
+    {"name": "구토", "slot_id": "vomiting", "keywords": ["구토", "토함", "토해"], "alert": false},
+    {"name": "체중감소", "slot_id": "weight_loss", "keywords": ["살이 빠", "체중감소", "몸무게"], "alert": false},
+    {"name": "화농성 객담", "slot_id": "purulent_sputum", "keywords": ["누런 가래", "노란 가래", "진한 가래", "화농성"], "alert": false},
+    {"name": "검은색 가래", "slot_id": "black_sputum", "keywords": ["검은 가래", "검은색 가래", "거뭇한 가래"], "alert": false}
   ],
   "symptom_quote_patterns": {
     "throat_irritation": [
@@ -79,12 +98,24 @@
     "chest_discomfort": [
       "가(?:슴|심)(?:이|은|도)?\\s*(?:답답(?:하고|해요|합니다|하다|허고|허다)?)"
     ],
+    "chest_pain": [
+      "가슴(?:의|이|은)?\\s*(?:한쪽이?\\s*)?(?:결려요|결립니다|아파요|아픕니다|찌르듯\\s*아파요|찌르는\\s*통증)",
+      "숨(?:을)?\\s*쉴\\s*때마다\\s*가슴\\S{0,6}\\s*(?:결려요|결립니다|아파요|아픕니다)"
+    ],
     "low_energy": [
       "(?:몸에\\s*)?힘(?:이|은|도)?\\s*(?:잘\\s*)?(?:안\\s*)?(?:들어가요|들어가|들어갑니다|없어요|없어|없습니다)",
       "기운(?:이|은|도)?\\s*(?:없어요|없어|없습니다)"
     ],
     "dizziness": [
       "(?:머리(?:가|는|도)?\\s*)?(?:어지러워요|어지러움|어지러워|어지럽습니다|어질어질해요|어질어질)"
+    ],
+    "leg_edema": [
+      "다리(?:가|는|도)?\\s*(?:붓(?:기|기가)?|부어오릅니다|부었어요|부어)",
+      "다리\\s*부기"
+    ],
+    "myalgia": [
+      "(?:온몸|삭신)(?:이|은|도)?\\s*(?:쑤십니다|쑤셔요|쑤시고|결립니다|결려요)",
+      "몸살(?:이)?\\s*(?:난\\s*)?것\\s*같"
     ]
   },
   "ir_stable_slot_ids": {
@@ -124,20 +155,57 @@
     "malaise": "권태감",
     "wheezing": "천명음",
     "headache": "두통",
-    "voice_change": "목소리 변화"
+    "voice_change": "목소리 변화",
+    "radiating_pain": "방사통",
+    "abdominal_bloating": "복부팽만감",
+    "abdominal_pain": "복부 통증",
+    "leg_edema": "하지부종",
+    "limb_edema": "사지 부종",
+    "myalgia": "근육통",
+    "chills": "오한",
+    "muscle_weakness": "근력 약화",
+    "sweating": "발한",
+    "eye_discharge": "눈꼽",
+    "eye_redness": "눈의 충혈",
+    "dysphagia": "삼키기 곤란",
+    "pallor": "창백",
+    "vomiting": "구토",
+    "weight_loss": "체중감소",
+    "purulent_sputum": "화농성 객담",
+    "black_sputum": "검은색 가래",
+    "chest_pressure": "흉부압박감"
   },
   "ir_text_aliases": [
+    {"pattern": "피.{0,4}(가래|섞|묻)|객혈", "canonical_name": "객혈"},
+    {"pattern": "(누런|노란|진한|화농성).{0,4}(가래|객담)", "canonical_name": "화농성 객담"},
+    {"pattern": "(검은|검은색|거뭇한|거뭇하게).{0,4}(가래|객담)", "canonical_name": "검은색 가래"},
     {"pattern": "목|인후|칼칼|따끔", "canonical_name": "목의 통증"},
     {"pattern": "코.{0,3}(막|맥)|비폐색", "canonical_name": "코막힘"},
     {"pattern": "콧물|코물", "canonical_name": "콧물"},
     {"pattern": "가래|객담", "canonical_name": "가래"},
     {"pattern": "기침|콜록", "canonical_name": "기침"},
-    {"pattern": "피.{0,4}(가래|섞|묻)|객혈", "canonical_name": "객혈"},
     {"pattern": "숨|호흡곤란|숨참", "canonical_name": "호흡곤란"},
     {"pattern": "가(?:슴|심).{0,4}답답", "canonical_name": "가슴 답답"},
-    {"pattern": "가슴.{0,4}(아프|통증)|흉통", "canonical_name": "흉통"},
+    {"pattern": "가슴.{0,8}(결리|찌르|쑤시|아프|통증|한쪽)|숨.{0,8}가슴.{0,8}(결리|아프)|흉통", "canonical_name": "흉통"},
+    {"pattern": "(꽉|짓)?\\s*누르|압박|눌리는", "canonical_name": "흉부압박감"},
     {"pattern": "몸에\\s*힘|힘.{0,4}(없|안\\s*들)|기운\\s*없|무기력", "canonical_name": "기운없음"},
     {"pattern": "어지러|어질|현기", "canonical_name": "어지러움"},
+    {"pattern": "어깨에서\\s*팔|팔로\\s*(뻗|찌르르)|뻗치|방사통", "canonical_name": "방사통"},
+    {"pattern": "배.{0,4}(빵빵|더부룩|부풀)|복부팽만", "canonical_name": "복부팽만감"},
+    {"pattern": "배.{0,4}(아프|살살)|복통", "canonical_name": "복부 통증"},
+    {"pattern": "다리.{0,4}(붓|부기|부어)", "canonical_name": "하지부종"},
+    {"pattern": "손발.{0,4}(붓|부어)|팔다리.{0,4}붓", "canonical_name": "사지 부종"},
+    {"pattern": "온몸.{0,4}쑤시|삭신|몸살|근육통|결리", "canonical_name": "근육통"},
+    {"pattern": "오한|한기|춥|이불", "canonical_name": "오한"},
+    {"pattern": "나른|처짐|축\\s*처|권태", "canonical_name": "권태감"},
+    {"pattern": "팔다리.{0,6}힘|힘이\\s*(들어가지|안\\s*들어)", "canonical_name": "근력 약화"},
+    {"pattern": "식은땀|땀|발한", "canonical_name": "발한"},
+    {"pattern": "눈곱|눈꼽", "canonical_name": "눈꼽"},
+    {"pattern": "눈.{0,4}(빨갛|충혈)", "canonical_name": "눈의 충혈"},
+    {"pattern": "삼키|넘어가지|목에\\s*걸리", "canonical_name": "삼키기 곤란"},
+    {"pattern": "핏기|창백|핼쑥", "canonical_name": "창백"},
+    {"pattern": "구토|토함|토해|토하", "canonical_name": "구토"},
+    {"pattern": "살이\\s*빠|체중\\s*감소|몸무게", "canonical_name": "체중감소"},
     {"pattern": "쌕쌕|천명", "canonical_name": "천명음"},
     {"pattern": "열|발열|고열", "canonical_name": "열"}
   ],

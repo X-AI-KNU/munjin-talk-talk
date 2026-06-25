@@ -140,6 +140,9 @@
     },
     {
       "title": "weakness and dizziness map to Asan symptom labels",
+      "visit_type": "followup",
+      "question_id": "Q3",
+      "question_type": "new_symptoms",
       "tagged_spans": [
         {
           "source_quote": "몸에 힘이 잘 안들어가고",
@@ -183,6 +186,102 @@
             "status": "있음",
             "alert": false,
             "explain": "아산 표준 증상 후보인 어지러움으로 검색되도록 힌트를 보강합니다."
+          }
+        ]
+      }
+    },
+    {
+      "title": "leg swelling maps to lower limb edema",
+      "visit_type": "followup",
+      "question_id": "Q3",
+      "question_type": "new_symptoms",
+      "tagged_spans": [
+        {
+          "source_quote": "다리가 부어오릅니다",
+          "type": "new",
+          "slot_ref": "other",
+          "name": "다리 부어오름",
+          "normalized_text": "다리가 부어오릅니다.",
+          "status": "있음",
+          "alert": false,
+          "explain": "새로 생긴 현재 증상입니다."
+        }
+      ],
+      "expected_json": {
+        "spans": [
+          {
+            "source_quote": "다리가 부어오릅니다",
+            "type": "new",
+            "slot_ref": "leg_edema",
+            "name": "다리 부기",
+            "normalized_text": "다리가 부어오릅니다.",
+            "status": "있음",
+            "alert": false,
+            "explain": "다리 부기 표현은 하지부종 후보로 검색되도록 힌트를 보강합니다."
+          }
+        ]
+      }
+    },
+    {
+      "title": "one-sided chest catching pain maps to chest pain",
+      "visit_type": "initial",
+      "question_id": "Q1",
+      "question_type": "chief_complaint",
+      "tagged_spans": [
+        {
+          "source_quote": "가슴 한쪽이 결립니다",
+          "type": "symptom",
+          "slot_ref": "other",
+          "name": "가슴 결림",
+          "normalized_text": "가슴 한쪽이 결립니다.",
+          "status": "있음",
+          "alert": false,
+          "explain": "현재 증상입니다."
+        }
+      ],
+      "expected_json": {
+        "spans": [
+          {
+            "source_quote": "가슴 한쪽이 결립니다",
+            "type": "symptom",
+            "slot_ref": "chest_pain",
+            "name": "가슴 한쪽 결림",
+            "normalized_text": "가슴 한쪽이 결립니다.",
+            "status": "있음",
+            "alert": true,
+            "explain": "가슴 한쪽이 결리거나 찌르는 표현은 흉통 후보로 검색되도록 힌트를 보강합니다."
+          }
+        ]
+      }
+    },
+    {
+      "title": "colored sputum keeps specific sputum character",
+      "visit_type": "initial",
+      "question_id": "Q1",
+      "question_type": "chief_complaint",
+      "tagged_spans": [
+        {
+          "source_quote": "가래가 거뭇하게 나옵니다",
+          "type": "symptom",
+          "slot_ref": "other",
+          "name": "가래",
+          "normalized_text": "가래가 거뭇하게 나옵니다.",
+          "status": "있음",
+          "alert": false,
+          "explain": "현재 증상입니다."
+        }
+      ],
+      "expected_json": {
+        "spans": [
+          {
+            "source_quote": "가래가 거뭇하게 나옵니다",
+            "type": "symptom",
+            "slot_ref": "black_sputum",
+            "name": "거뭇한 가래",
+            "normalized_text": "가래가 거뭇하게 나옵니다.",
+            "status": "있음",
+            "alert": false,
+            "explain": "가래의 색을 검색 힌트에 보존해 검은색 가래 후보로 검색되도록 합니다."
           }
         ]
       }

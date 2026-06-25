@@ -1,0 +1,11 @@
+﻿variant,case_id,failure_type,missing_gold,negative_hits,gold_symptoms,evaluated_k,predicted_top_k,queries_used,span_names,span_statuses,span_types,active_span_count,skipped_span_count
+G,eval_024,partial_miss|extraction_gold_mismatch,재채기,,재채기; 콧물,20,콧물,재채기가 멎질 않고 콧물도 마이 나와요.,,있음,symptom,1,0
+G,eval_025,no_prediction|extraction_gold_mismatch,흉통,,흉통,20,,숨을 쉴 때마다 가슴 한쪽이 결립니다 가슴 한쪽 결림,가슴 한쪽 결림,있음,symptom,1,0
+G,eval_041,miss_all_gold|extraction_gold_mismatch,불안; 빈맥,,불안; 빈맥,20,부정맥,심장이 너무 빨리 뛰고 괜히 불안해요.,,있음,symptom,1,0
+G,eval_043,no_prediction|extraction_gold_mismatch,두통,,두통,20,,등이 당겨집니다 등 당김 || 머리가 무겁습니다 머리 무거움,등 당김; 머리 무거움,있음; 있음,symptom; symptom,2,0
+G,eval_049,no_prediction|extraction_gold_mismatch,설사,,설사,20,,하루에 몇 번씩 무른 변을 보고 계십니다 하루에 몇 번씩 무른 변,하루에 몇 번씩 무른 변,있음,symptom,1,0
+G,eval_065,miss_all_gold|extraction_gold_mismatch,흉통,,흉통,20,가슴 답답,전에는 없던 가슴 결림이 새로 생겼습니다 가슴 결림,가슴 결림,있음,new,1,0
+G,eval_069,miss_all_gold|extraction_gold_mismatch,피로감,,피로감,20,권태감,쉬어도 피곤합니다 쉬어도 피곤함 || 자꾸 처집니다 자꾸 처짐,쉬어도 피곤함; 자꾸 처짐,있음; 있음,symptom; symptom,2,0
+G,eval_092,partial_miss|extraction_gold_mismatch,눈꼽,,눈꼽; 눈의 충혈,20,눈의 충혈,눈이 빨갛습니다 눈 빨갛 || 눈꼽이 자꾸 막힙니다 눈곱 끼임,눈 빨갛; 눈곱 끼임,있음; 있음,symptom; symptom,2,0
+G,eval_093,miss_all_gold|extraction_gold_mismatch,삼키기 곤란,,삼키기 곤란,20,사래걸림,음식이 목에 걸려 잘 넘어가지 않습니다 음식 목 걸림,음식 목 걸림,있음,symptom,1,0
+G,eval_097,no_prediction|extraction_gold_mismatch,두통,,두통,20,,머리가 지끈거립니다 머리 지끈거림,머리 지끈거림,있음,progress_unchanged,1,1

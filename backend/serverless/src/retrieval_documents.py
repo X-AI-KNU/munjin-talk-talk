@@ -195,10 +195,13 @@ def build_symptom_docs_from_sources():
         direct_text = " ".join(item["text"] for item in direct_snippets[:5])
         disease_text = ", ".join(top_diseases)
         dept_text = ", ".join(top_departments)
+        alias_text = " ".join(_aliases_for_domain_name(symptom_name))
         retrieval_parts = [
             f"표준 증상명: {symptom_name}.",
             f"아산백과 증상 목록에서 '{symptom_name}'으로 기록된 표준 증상 후보.",
         ]
+        if alias_text:
+            retrieval_parts.append(f"도메인 alias 표현: {alias_text}.")
         if direct_text:
             retrieval_parts.append(f"증상 직접 근거 문장: {direct_text}")
         if disease_text:
@@ -214,7 +217,7 @@ def build_symptom_docs_from_sources():
         docs.append({
             "symptom_id": symptom_id,
             "display_name": symptom_name,
-            "bm25_text": normalize_text(" ".join([symptom_name, f"표준 증상명 {symptom_name}", direct_text])),
+            "bm25_text": normalize_text(" ".join([symptom_name, f"표준 증상명 {symptom_name}", alias_text, direct_text])),
             "retrieval_text": normalize_text("\n".join(retrieval_parts)),
             "embedding_text": normalize_text(" ".join(embedding_parts)),
             "evidence": direct_snippets[:8],

@@ -654,7 +654,7 @@ def retrieve_by_query(
         return []
 
     preferred_texts = preferred_texts or []
-    preferred_name = preferred_canonical_name(preferred_slot_id, *preferred_texts) if preferred_slot_id else ""
+    preferred_name = preferred_canonical_name(preferred_slot_id, *preferred_texts, query)
     bm25_raw = bm25.scores(query)
     bm25_norm = minmax_norm(bm25_raw)
 
