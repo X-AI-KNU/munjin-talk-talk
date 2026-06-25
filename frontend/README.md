@@ -99,7 +99,7 @@
 
 음성 원본 파일은 저장하지 않습니다. 브라우저가 Transcribe Streaming으로 음성을 직접 전송하고, 환자가 확인한 텍스트만 백엔드로 전달합니다.
 
-`public/audio-worklets/pcm16-processor.js`는 삭제하면 안 됩니다. 이 파일은 브라우저 마이크 입력을 Amazon Transcribe Streaming이 받을 수 있는 오디오 형식으로 변환하는 역할을 합니다. Vite는 `public` 폴더의 파일을 빌드 결과에 그대로 포함하므로, 배포 후에도 브라우저에서 안정적으로 불러올 수 있습니다.
+`public/audio-worklets/pcm16-processor.js` 파일은 브라우저 마이크 입력을 Amazon Transcribe Streaming이 받을 수 있는 오디오 형식으로 변환하는 역할을 합니다. Vite는 `public` 폴더의 파일을 빌드 결과에 그대로 포함하므로, 배포 후에도 브라우저에서 안정적으로 불러올 수 있습니다.
 
 ---
 
