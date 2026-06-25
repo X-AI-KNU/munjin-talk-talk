@@ -57,10 +57,10 @@
       }
     },
     {
-      "title": "negative fever and active choking cough",
+      "title": "negative fever and active choking symptom",
       "meaning_units": [
         {"source_quote": "열은 안 나는데", "normalized_text": "열은 나지 않습니다.", "role": "clinical_meaning"},
-        {"source_quote": "물 마시면 자꾸 사레가 걸려서 캑캑거려요", "normalized_text": "물을 마시면 자꾸 사레가 걸리고 캑캑거립니다.", "role": "clinical_meaning"}
+        {"source_quote": "물 마시면 자꾸 사래가 걸려서 캑캑거려요", "normalized_text": "물을 마시면 자꾸 사래가 걸리고 캑캑거립니다.", "role": "clinical_meaning"}
       ],
       "expected_json": {
         "spans": [
@@ -75,11 +75,11 @@
             "explain": "발열을 부정했습니다."
           },
           {
-            "source_quote": "물 마시면 자꾸 사레가 걸려서 캑캑거려요",
+            "source_quote": "물 마시면 자꾸 사래가 걸려서 캑캑거려요",
             "type": "new",
             "slot_ref": "other",
-            "name": "사레 후 기침",
-            "normalized_text": "물을 마시면 자꾸 사레가 걸리고 캑캑거립니다.",
+            "name": "사래걸림",
+            "normalized_text": "물을 마시면 자꾸 사래가 걸리고 캑캑거립니다.",
             "status": "있음",
             "alert": false,
             "explain": "새로 생긴 현재 증상입니다."

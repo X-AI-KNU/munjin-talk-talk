@@ -159,13 +159,17 @@ def parse_args() -> argparse.Namespace:
 
 
 def load_cases(path: Path) -> list[dict[str, Any]]:
-    """JSONL과 JSON 배열을 모두 읽습니다."""
+    """JSONL, JSON 배열, {"data": [...]} 래퍼 파일을 모두 읽습니다."""
     text = path.read_text(encoding="utf-8").strip()
     if not text:
         return []
-    if text.startswith("["):
+    if text.startswith("[") or text.startswith("{"):
         data = json.loads(text)
-        return data if isinstance(data, list) else []
+        if isinstance(data, list):
+            return data
+        if isinstance(data, dict) and isinstance(data.get("data"), list):
+            return data["data"]
+        return []
 
     rows: list[dict[str, Any]] = []
     for line_no, line in enumerate(text.splitlines(), start=1):

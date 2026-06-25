@@ -113,11 +113,11 @@
       }
     },
     {
-      "title": "negative fever does not become active when cough is present",
+      "title": "negative fever does not become active when choking is present",
       "visit_type": "followup",
       "question_id": "Q3",
       "question_type": "new_symptoms",
-      "patient_answer": "열은 안 나는데 물 마시면 자꾸 사레가 걸려서 캑캑거려요.",
+      "patient_answer": "열은 안 나는데 물 마시면 자꾸 사래가 걸려서 캑캑거려요.",
       "expected_json": {
         "spans": [
           {
@@ -131,27 +131,27 @@
             "explain": "발열을 명확히 부정했습니다."
           },
           {
-            "source_quote": "물 마시면 자꾸 사레가 걸려서 캑캑거려요",
+            "source_quote": "물 마시면 자꾸 사래가 걸려서 캑캑거려요",
             "type": "new",
-            "slot_ref": "cough",
-            "name": "사레 후 기침",
-            "normalized_text": "물을 마시면 자꾸 사레가 걸리고 기침하듯 캑캑거립니다.",
+            "slot_ref": "other",
+            "name": "사래걸림",
+            "normalized_text": "물을 마시면 자꾸 사래가 걸리고 캑캑거립니다.",
             "status": "있음",
             "alert": false,
-            "explain": "사레 후 캑캑거리는 증상을 새로 생긴 현재 증상으로 말했습니다."
+            "explain": "물을 마실 때 사래가 걸리는 증상을 새로 생긴 현재 증상으로 말했습니다."
           }
         ],
         "structured": {
-          "standardized_text": "열은 나지 않지만 물을 마시면 자꾸 사레가 걸리고 캑캑거립니다.",
+          "standardized_text": "열은 나지 않지만 물을 마시면 자꾸 사래가 걸리고 캑캑거립니다.",
           "clinical_clues": [
             {
               "category": "증상맥락",
               "label": "현재양상",
-              "summary": "물을 마실 때 사레 후 기침 양상이 있습니다.",
-              "source_quote": "물 마시면 자꾸 사레가 걸려서 캑캑거려요",
+              "summary": "물을 마실 때 사래가 자꾸 걸립니다.",
+              "source_quote": "물 마시면 자꾸 사래가 걸려서 캑캑거려요",
               "source_question": "Q3",
               "priority": "일반",
-              "related_symptoms": ["기침"]
+              "related_symptoms": ["사래걸림"]
             }
           ],
           "questions": [],
