@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 const INTERACTIVE_SELECTOR = [
   'a',
@@ -12,10 +12,12 @@ const INTERACTIVE_SELECTOR = [
 ].join(',')
 
 export function useDragScroll() {
-  const ref = useRef(null)
+  const [element, setElement] = useState(null)
+  const ref = useCallback((node) => {
+    setElement(node)
+  }, [])
 
   useEffect(() => {
-    const element = ref.current
     if (!element) return undefined
 
     let pointerId = null
@@ -86,7 +88,7 @@ export function useDragScroll() {
       element.removeEventListener('pointercancel', endDrag)
       element.removeEventListener('lostpointercapture', endDrag)
     }
-  }, [])
+  }, [element])
 
   return ref
 }
