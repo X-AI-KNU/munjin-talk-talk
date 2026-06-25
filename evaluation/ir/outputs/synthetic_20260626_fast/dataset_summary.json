@@ -1,0 +1,77 @@
+{
+  "summary": {
+    "case_count": 1000,
+    "visit_counts": {
+      "재진": 400,
+      "초진": 600
+    },
+    "question_counts": {
+      "Q1": 810,
+      "Q3": 190
+    },
+    "question_type_counts": {
+      "chief_complaint": 540,
+      "current_medications": 60,
+      "new_symptoms": 130,
+      "progress": 270
+    },
+    "dialect_counts": {
+      "dialect": 500,
+      "standard": 500
+    },
+    "multi_gold_case_count": 400,
+    "unique_gold_symptom_count": 47,
+    "unique_negative_symptom_count": 46,
+    "top_gold_symptoms": {
+      "코막힘": 33,
+      "가래": 33,
+      "가슴 두근거림": 33,
+      "눈의 충혈": 33,
+      "호흡곤란": 33,
+      "방사통": 33,
+      "설사": 33,
+      "감기 증상": 32,
+      "오한": 32,
+      "복부 통증": 32,
+      "콧물": 32,
+      "목의 통증": 32,
+      "온몸이 떨림": 32,
+      "거품이 섞인 가래": 32,
+      "어지러움": 32,
+      "사래걸림": 32,
+      "흉부압박감": 32,
+      "기운없음": 32,
+      "복부팽만감": 32,
+      "사지 부종": 32
+    },
+    "top_negative_symptoms": {
+      "부정맥": 10,
+      "체중감소": 7,
+      "오한": 6,
+      "눈꼽": 6,
+      "흉부압박감": 6,
+      "가슴 답답": 6,
+      "콧물": 6,
+      "감기 증상": 6,
+      "흉통": 6,
+      "어지러움": 6,
+      "창백": 6,
+      "근력 약화": 6,
+      "발한": 6,
+      "운동 시 호흡곤란": 6,
+      "호흡곤란": 6,
+      "화농성 객담": 6,
+      "하지부종": 6,
+      "재채기": 5,
+      "목소리 변화": 5,
+      "목의 통증": 5
+    },
+    "error_count": 0,
+    "warning_count": 0,
+    "input": "C:\\Users\\CGB\\munjin-talk-talk-mvp\\evaluation\\ir\\data\\synthetic\\synthetic_1000.json",
+    "symptom_index": "C:\\Users\\CGB\\munjin-talk-talk-mvp\\backend\\serverless\\src\\data\\symptom_index.json",
+    "question_set": "C:\\Users\\CGB\\munjin-talk-talk-mvp\\backend\\serverless\\src\\data\\question_sets\\default.json"
+  },
+  "errors": [],
+  "warnings": []
+}

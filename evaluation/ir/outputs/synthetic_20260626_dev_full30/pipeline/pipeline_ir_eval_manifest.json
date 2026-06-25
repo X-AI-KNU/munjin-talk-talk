@@ -1,0 +1,33 @@
+{
+  "source_input": "C:\\Users\\CGB\\munjin-talk-talk-mvp\\evaluation\\ir\\data\\synthetic\\synthetic_dev_300.json",
+  "total_cases": 30,
+  "exported_cases": 30,
+  "backup_query_cases": 4,
+  "backup_query_rows": [
+    {
+      "case_id": "syn_0011",
+      "reason": "no_active_pipeline_span_standard_text_query",
+      "error": "",
+      "validator_passed": true
+    },
+    {
+      "case_id": "syn_0013",
+      "reason": "no_active_pipeline_span_standard_text_query",
+      "error": "",
+      "validator_passed": false
+    },
+    {
+      "case_id": "syn_0020",
+      "reason": "no_active_pipeline_span_standard_text_query",
+      "error": "semantic_extraction_failed",
+      "validator_passed": false
+    },
+    {
+      "case_id": "syn_0028",
+      "reason": "no_active_pipeline_span_standard_text_query",
+      "error": "",
+      "validator_passed": true
+    }
+  ],
+  "purpose": "run_ir_eval.py 입력으로 쓰기 위한 파일입니다. Bedrock extraction이 생성한 active symptom span을 우선 사용하되, span 추출 실패 case도 제외하지 않도록 표준화 문장 기반 보조 query span을 추가합니다."
+}

@@ -1,0 +1,77 @@
+{
+  "summary": {
+    "case_count": 500,
+    "visit_counts": {
+      "재진": 205,
+      "초진": 295
+    },
+    "question_counts": {
+      "Q1": 392,
+      "Q3": 108
+    },
+    "question_type_counts": {
+      "chief_complaint": 263,
+      "current_medications": 32,
+      "new_symptoms": 76,
+      "progress": 129
+    },
+    "dialect_counts": {
+      "dialect": 254,
+      "standard": 246
+    },
+    "multi_gold_case_count": 200,
+    "unique_gold_symptom_count": 47,
+    "unique_negative_symptom_count": 46,
+    "top_gold_symptoms": {
+      "코막힘": 17,
+      "가래": 17,
+      "가슴 답답": 17,
+      "가슴 두근거림": 17,
+      "눈의 충혈": 17,
+      "설사": 17,
+      "두통": 16,
+      "피로감": 16,
+      "검은색 가래": 16,
+      "피부홍조": 16,
+      "근육통": 16,
+      "사래걸림": 16,
+      "화농성 객담": 16,
+      "창백": 16,
+      "불안": 16,
+      "근력 약화": 16,
+      "부정맥": 16,
+      "빈맥": 16,
+      "권태감": 16,
+      "눈이 무거운 느낌": 16
+    },
+    "top_negative_symptoms": {
+      "부정맥": 6,
+      "기침": 3,
+      "가슴 두근거림": 3,
+      "검은색 가래": 3,
+      "복부팽만감": 3,
+      "빈맥": 3,
+      "방사통": 3,
+      "가래": 3,
+      "피로감": 3,
+      "설사": 3,
+      "거품이 섞인 가래": 3,
+      "코막힘": 3,
+      "두통": 3,
+      "기운없음": 3,
+      "온몸이 떨림": 3,
+      "오한": 3,
+      "눈꼽": 3,
+      "흉부압박감": 3,
+      "가슴 답답": 3,
+      "콧물": 3
+    },
+    "error_count": 0,
+    "warning_count": 0,
+    "input": "C:\\Users\\CGB\\munjin-talk-talk-mvp\\evaluation\\ir\\data\\synthetic\\synthetic_locked_holdout_500.json",
+    "symptom_index": "C:\\Users\\CGB\\munjin-talk-talk-mvp\\backend\\serverless\\src\\data\\symptom_index.json",
+    "question_set": "C:\\Users\\CGB\\munjin-talk-talk-mvp\\backend\\serverless\\src\\data\\question_sets\\default.json"
+  },
+  "errors": [],
+  "warnings": []
+}
