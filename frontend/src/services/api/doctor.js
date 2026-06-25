@@ -12,7 +12,7 @@ export async function getOnePager(sessionId, { role = 'doctor' } = {}) {
   return res.json()
 }
 
-// 저장된 onepaper를 기준으로 최종 AI 검토만 다시 실행합니다.
+// 저장된 Q1~Q4 원문/표준화 결과로 onepaper를 재조립한 뒤 최종 AI 검토를 다시 실행합니다.
 export async function rerunOnePagerReview(sessionId) {
   if (!sessionId) return null
   ensureApiConfigured()

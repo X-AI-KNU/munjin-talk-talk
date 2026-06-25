@@ -223,22 +223,20 @@ def build_pending_onepager(session: dict[str, Any], responses: dict[str, Any], a
 
 
 def rerun_onepager_review(session_id: str):
-    """저장된 onepaper를 기준으로 최종 AI 검토만 다시 실행합니다.
+    """저장된 답변 원문/표준화 결과를 기준으로 onepaper를 재조립한 뒤 최종 AI 검토를 다시 실행합니다.
 
-    환자 답변 자체를 다시 추출하거나 IR을 다시 돌리지는 않습니다.
-    의사가 화면에서 "AI 재검토"를 누를 때 checklist, EMR 초안, doctor brief만
+    의사가 화면에서 "AI 재검토"를 누르면 이전 검토 결과가 섞인 onepaper를 그대로
+    이어 쓰지 않고, 저장된 Q1~Q4 답변 artifact에서 원문/표준화문/IR 결과를 다시 읽어
+    deterministic 초안을 복원합니다. 그 초안을 기준으로 checklist, EMR 초안, doctor brief를
     다시 생성해 보고, 검증을 통과한 결과만 S3 onepaper artifact에 반영합니다.
     """
     session = get_session(session_id)
     if not session:
         return None, response(404, {"error": "session_not_found"})
 
-    onepager = get_json(session, ONEPAPER_FILE, default=None)
-    if not isinstance(onepager, dict) or not onepager:
-        onepager = build_onepager(session)
-
     responses = load_answers(session)
     session_for_review = {**session, "responses": responses, "question_results": responses}
+    onepager = build_onepager(session_for_review, run_final_review=False)
     reviewed = apply_bedrock_onepager_review(session_for_review, onepager)
     put_json(session, ONEPAPER_FILE, reviewed)
     updated_session = update_session(session_id, {
@@ -248,7 +246,7 @@ def rerun_onepager_review(session_id: str):
     return get_onepager_payload(updated_session), None
 
 
-def build_onepager(session: dict[str, Any]) -> dict[str, Any]:
+def build_onepager(session: dict[str, Any], run_final_review: bool = True) -> dict[str, Any]:
     """저장된 문항 artifact를 의사용 onepaper JSON으로 조립합니다."""
     patient = session.get("patient", {})
     responses = session.get("responses") or load_answers(session)
@@ -281,7 +279,7 @@ def build_onepager(session: dict[str, Any]) -> dict[str, Any]:
     }
 
     should_run_final_review = bool(q4) or bool(safety)
-    if responses and should_run_final_review:
+    if run_final_review and responses and should_run_final_review:
         session_for_review = {**session, "responses": responses, "question_results": responses}
         onepager = apply_bedrock_onepager_review(session_for_review, onepager)
     return onepager
