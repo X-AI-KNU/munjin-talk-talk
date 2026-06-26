@@ -1,7 +1,10 @@
 {
-  "version": "respiratory_train_100_v2_2026-06-26",
-  "description": "Train-derived respiratory/ENT/general symptom support pack built only from train_100_v2.",
-  "source_dataset": "evaluation/train_100_v2/train_100_v2.jsonl",
+  "version": "respiratory_ontology87_train_100_v2_2026-06-26",
+  "description": "Product ontology from symptom_index with train_100_v2-derived alias and few-shot support.",
+  "source_dataset": {
+    "ontology": "backend/serverless/src/data/symptom_index.json",
+    "train_support": "evaluation/train_100_v2/train_100_v2.jsonl"
+  },
   "fewshot_id": "respiratory",
   "fewshot_sets": {
     "extraction": "fewshots/respiratory/extraction.json",
@@ -13,14 +16,16 @@
   },
   "symptom_rules": [
     {
-      "name": "복부 팽만",
+      "name": "복부팽만감",
       "slot_id": "abdominal_bloating",
       "keywords": [
-        "복부 팽만",
+        "복부팽만감",
         "빵빵",
         "더부룩"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
       "name": "복부 통증",
@@ -30,7 +35,59 @@
         "복통",
         "창지"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "복벽이 움푹 들어감",
+      "slot_id": "abdominal_wall_retraction",
+      "keywords": [
+        "복벽이 움푹 들어감"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "근긴장의 이상",
+      "slot_id": "abnormal_muscle_tone",
+      "keywords": [
+        "근긴장의 이상"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "급성 신부전",
+      "slot_id": "acute_renal_failure",
+      "keywords": [
+        "급성 신부전"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "의식 변화",
+      "slot_id": "altered_mental_status",
+      "keywords": [
+        "의식 변화"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "빈혈",
+      "slot_id": "anemia",
+      "keywords": [
+        "빈혈"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "식욕부진",
@@ -40,15 +97,80 @@
         "입맛",
         "잘 못 먹"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "불안",
+      "slot_id": "anxiety",
+      "keywords": [
+        "불안"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "부정맥",
+      "slot_id": "arrhythmia",
+      "keywords": [
+        "부정맥"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "천식",
+      "slot_id": "asthma",
+      "keywords": [
+        "천식"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "무증상",
+      "slot_id": "asymptomatic",
+      "keywords": [
+        "무증상"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "검은색 가래",
       "slot_id": "black_sputum",
       "keywords": [
-        "검은색 가래"
+        "검은색 가래",
+        "검게"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "온몸이 떨림",
+      "slot_id": "body_tremor",
+      "keywords": [
+        "온몸이 떨림"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "서맥",
+      "slot_id": "bradycardia",
+      "keywords": [
+        "서맥"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "가슴 답답",
@@ -59,7 +181,19 @@
         "답답",
         "막혀"
       ],
-      "alert": true
+      "alert": true,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "흉곽 팽윤",
+      "slot_id": "chest_hyperinflation",
+      "keywords": [
+        "흉곽 팽윤"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "흉통",
@@ -70,7 +204,19 @@
         "아프",
         "통증"
       ],
-      "alert": true
+      "alert": true,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "흉부압박감",
+      "slot_id": "chest_pressure",
+      "keywords": [
+        "흉부압박감"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "오한",
@@ -80,7 +226,9 @@
         "춥고",
         "떨"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
       "name": "사래걸림",
@@ -89,16 +237,51 @@
         "사래걸림",
         "사래"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "곤봉지",
+      "slot_id": "clubbing",
+      "keywords": [
+        "곤봉지"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "인지장애",
+      "slot_id": "cognitive_impairment",
+      "keywords": [
+        "인지장애"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "감기 증상",
       "slot_id": "cold_symptoms",
       "keywords": [
         "감기 증상",
-        "감기"
+        "감기",
+        "감기 기운"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "결막염",
+      "slot_id": "conjunctivitis",
+      "keywords": [
+        "결막염"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "기침",
@@ -106,7 +289,9 @@
       "keywords": [
         "기침"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
       "name": "청색증",
@@ -116,7 +301,29 @@
         "입술",
         "파래"
       ],
-      "alert": true
+      "alert": true,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "사망",
+      "slot_id": "death",
+      "keywords": [
+        "사망"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "의식 저하",
+      "slot_id": "decreased_consciousness",
+      "keywords": [
+        "의식 저하"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "설사",
@@ -125,7 +332,19 @@
         "설사",
         "묽은 변"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "지남력 장애",
+      "slot_id": "disorientation",
+      "keywords": [
+        "지남력 장애"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "어지러움",
@@ -134,7 +353,9 @@
         "어지러움",
         "핑 돌"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
       "name": "삼키기 곤란",
@@ -143,7 +364,9 @@
         "삼키기 곤란",
         "삼키"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
       "name": "호흡곤란",
@@ -153,15 +376,30 @@
         "숨",
         "숨 쉬기"
       ],
-      "alert": true
+      "alert": true,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
-      "name": "눈곱",
+      "name": "운동 시 호흡곤란",
+      "slot_id": "exertional_dyspnea",
+      "keywords": [
+        "운동 시 호흡곤란"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "눈꼽",
       "slot_id": "eye_discharge",
       "keywords": [
+        "눈꼽",
         "눈곱"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
       "name": "눈의 충혈",
@@ -172,7 +410,9 @@
         "빨갛",
         "충혈"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
       "name": "피로감",
@@ -183,7 +423,19 @@
         "축 처지",
         "자우름"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "수유 곤란",
+      "slot_id": "feeding_difficulty",
+      "keywords": [
+        "수유 곤란"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "열",
@@ -191,7 +443,19 @@
       "keywords": [
         "열"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "마찰음",
+      "slot_id": "friction_rub",
+      "keywords": [
+        "마찰음"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "거품이 섞인 가래",
@@ -201,7 +465,9 @@
         "거품",
         "거품 섞"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
       "name": "두통",
@@ -212,7 +478,29 @@
         "머리깽이",
         "아프"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "심부전",
+      "slot_id": "heart_failure",
+      "keywords": [
+        "심부전"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "눈이 무거운 느낌",
+      "slot_id": "heavy_eyes",
+      "keywords": [
+        "눈이 무거운 느낌"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "객혈",
@@ -222,7 +510,69 @@
         "피",
         "피가 섞"
       ],
-      "alert": true
+      "alert": true,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "탈장",
+      "slot_id": "hernia",
+      "keywords": [
+        "탈장"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "고탄산증",
+      "slot_id": "hypercapnia",
+      "keywords": [
+        "고탄산증"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "저산소증",
+      "slot_id": "hypoxemia",
+      "keywords": [
+        "저산소증"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "폐기능저하",
+      "slot_id": "impaired_pulmonary_function",
+      "keywords": [
+        "폐기능저하"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "뇌압상승증상",
+      "slot_id": "increased_intracranial_pressure_symptoms",
+      "keywords": [
+        "뇌압상승증상"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "경정맥 확장",
+      "slot_id": "jugular_venous_distension",
+      "keywords": [
+        "경정맥 확장"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "하지부종",
@@ -233,7 +583,19 @@
         "발",
         "붓"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "사지 부종",
+      "slot_id": "limb_edema",
+      "keywords": [
+        "사지 부종"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "기운없음",
@@ -242,7 +604,29 @@
         "기운없음",
         "기운"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "권태감",
+      "slot_id": "malaise",
+      "keywords": [
+        "권태감"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "다발성 장기부전 증상",
+      "slot_id": "multiple_organ_failure_symptoms",
+      "keywords": [
+        "다발성 장기부전 증상"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "근력 약화",
@@ -252,7 +636,9 @@
         "팔다리",
         "힘이 잘 안"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
       "name": "근육통",
@@ -263,7 +649,9 @@
         "몸살",
         "근육"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
       "name": "코막힘",
@@ -274,7 +662,19 @@
         "막혀",
         "답답"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "창백",
+      "slot_id": "pallor",
+      "keywords": [
+        "창백"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "가슴 두근거림",
@@ -284,7 +684,69 @@
         "두근",
         "맥이 불규칙"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "말초부종",
+      "slot_id": "peripheral_edema",
+      "keywords": [
+        "말초부종"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "흉수",
+      "slot_id": "pleural_effusion",
+      "keywords": [
+        "흉수"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "호기의 증가",
+      "slot_id": "prolonged_expiration",
+      "keywords": [
+        "호기의 증가"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "폐부종",
+      "slot_id": "pulmonary_edema",
+      "keywords": [
+        "폐부종"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "폐동맥 고혈압",
+      "slot_id": "pulmonary_hypertension",
+      "keywords": [
+        "폐동맥 고혈압"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "박동성 통증",
+      "slot_id": "pulsating_pain",
+      "keywords": [
+        "박동성 통증"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "화농성 객담",
@@ -295,7 +757,39 @@
         "노랗",
         "짙은 가래"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "방사통",
+      "slot_id": "radiating_pain",
+      "keywords": [
+        "방사통"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "반복되는 폐렴",
+      "slot_id": "recurrent_pneumonia",
+      "keywords": [
+        "반복되는 폐렴"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "호흡기감염",
+      "slot_id": "respiratory_infection",
+      "keywords": [
+        "호흡기감염"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "콧물",
@@ -303,7 +797,19 @@
       "keywords": [
         "콧물"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "피부홍조",
+      "slot_id": "skin_flushing",
+      "keywords": [
+        "피부홍조"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "재채기",
@@ -311,7 +817,9 @@
       "keywords": [
         "재채기"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
       "name": "가래",
@@ -319,7 +827,69 @@
       "keywords": [
         "가래"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "질식",
+      "slot_id": "suffocation",
+      "keywords": [
+        "질식"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "함몰가슴",
+      "slot_id": "sunken_chest",
+      "keywords": [
+        "함몰가슴"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "발한",
+      "slot_id": "sweating",
+      "keywords": [
+        "발한"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "빈맥",
+      "slot_id": "tachycardia",
+      "keywords": [
+        "빈맥"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "빈호흡",
+      "slot_id": "tachypnea",
+      "keywords": [
+        "빈호흡"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
+    },
+    {
+      "name": "압통",
+      "slot_id": "tenderness",
+      "keywords": [
+        "압통"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "목의 통증",
@@ -329,9 +899,12 @@
         "목",
         "아프",
         "아푸",
+        "아퍼",
         "칼칼"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
       "name": "목소리 변화",
@@ -341,7 +914,9 @@
         "목소리",
         "쉬"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     },
     {
       "name": "구토",
@@ -351,7 +926,19 @@
         "토했",
         "울렁"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
+    },
+    {
+      "name": "체중감소",
+      "slot_id": "weight_loss",
+      "keywords": [
+        "체중감소"
+      ],
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": false
     },
     {
       "name": "천명음",
@@ -360,12 +947,14 @@
         "천명음",
         "쌕쌕"
       ],
-      "alert": false
+      "alert": false,
+      "source": "symptom_index_ontology",
+      "train_observed": true
     }
   ],
   "symptom_quote_patterns": {
     "abdominal_bloating": [
-      "복부\\ 팽만",
+      "복부팽만감",
       "배.{0,8}빵빵",
       "더부룩"
     ],
@@ -374,21 +963,62 @@
       "복통",
       "창지.{0,8}꼬"
     ],
+    "abdominal_wall_retraction": [
+      "복벽이\\ 움푹\\ 들어감"
+    ],
+    "abnormal_muscle_tone": [
+      "근긴장의\\ 이상"
+    ],
+    "acute_renal_failure": [
+      "급성\\ 신부전"
+    ],
+    "altered_mental_status": [
+      "의식\\ 변화"
+    ],
+    "anemia": [
+      "빈혈"
+    ],
     "anorexia": [
       "식욕부진",
       "입맛.{0,8}없",
       "잘 못 먹"
     ],
+    "anxiety": [
+      "불안"
+    ],
+    "arrhythmia": [
+      "부정맥"
+    ],
+    "asthma": [
+      "천식"
+    ],
+    "asymptomatic": [
+      "무증상"
+    ],
     "black_sputum": [
-      "검은색\\ 가래"
+      "검은색\\ 가래",
+      "가래.{0,12}(검은|까만|검게)",
+      "검게.{0,8}나오"
+    ],
+    "body_tremor": [
+      "온몸이\\ 떨림"
+    ],
+    "bradycardia": [
+      "서맥"
     ],
     "chest_discomfort": [
       "가슴\\ 답답",
       "가슴.{0,10}(답답|막혀|막히|조이)"
     ],
+    "chest_hyperinflation": [
+      "흉곽\\ 팽윤"
+    ],
     "chest_pain": [
       "흉통",
       "가슴.{0,10}(아프|통증|찌르|쑤시)"
+    ],
+    "chest_pressure": [
+      "흉부압박감"
     ],
     "chills": [
       "오한",
@@ -398,9 +1028,18 @@
       "사래걸림",
       "사래.{0,8}(걸|들)"
     ],
+    "clubbing": [
+      "곤봉지"
+    ],
+    "cognitive_impairment": [
+      "인지장애"
+    ],
     "cold_symptoms": [
       "감기\\ 증상",
-      "감기.{0,8}(같|걸린)"
+      "감기.{0,8}(같|걸린|기운)"
+    ],
+    "conjunctivitis": [
+      "결막염"
     ],
     "cough": [
       "기침"
@@ -409,9 +1048,18 @@
       "청색증",
       "입술.{0,8}(파래|파랗|푸르)"
     ],
+    "death": [
+      "사망"
+    ],
+    "decreased_consciousness": [
+      "의식\\ 저하"
+    ],
     "diarrhea": [
       "설사",
       "묽은 변"
+    ],
+    "disorientation": [
+      "지남력\\ 장애"
     ],
     "dizziness": [
       "어지러움",
@@ -423,10 +1071,14 @@
     ],
     "dyspnea": [
       "호흡곤란",
-      "숨.{0,10}(힘들|차|가쁘)",
-      "숨\\s*쉬기.{0,10}힘"
+      "숨.{0,20}(힘들|차|가쁘)",
+      "숨\\s*쉬기.{0,30}힘"
+    ],
+    "exertional_dyspnea": [
+      "운동\\ 시\\ 호흡곤란"
     ],
     "eye_discharge": [
+      "눈꼽",
       "눈곱"
     ],
     "eye_redness": [
@@ -439,8 +1091,14 @@
       "축.{0,4}처지",
       "자우름"
     ],
+    "feeding_difficulty": [
+      "수유\\ 곤란"
+    ],
     "fever": [
       "열"
+    ],
+    "friction_rub": [
+      "마찰음"
     ],
     "frothy_sputum": [
       "거품이\\ 섞인\\ 가래",
@@ -451,24 +1109,59 @@
       "머리.{0,8}아프",
       "머리깽이"
     ],
+    "heart_failure": [
+      "심부전"
+    ],
+    "heavy_eyes": [
+      "눈이\\ 무거운\\ 느낌"
+    ],
     "hemoptysis": [
       "객혈",
       "기침.{0,12}피",
       "피.{0,8}(섞|가래|나오)"
+    ],
+    "hernia": [
+      "탈장"
+    ],
+    "hypercapnia": [
+      "고탄산증"
+    ],
+    "hypoxemia": [
+      "저산소증"
+    ],
+    "impaired_pulmonary_function": [
+      "폐기능저하"
+    ],
+    "increased_intracranial_pressure_symptoms": [
+      "뇌압상승증상"
+    ],
+    "jugular_venous_distension": [
+      "경정맥\\ 확장"
     ],
     "leg_edema": [
       "하지부종",
       "(다리|발).{0,8}붓",
       "신발.{0,8}끼"
     ],
+    "limb_edema": [
+      "사지\\ 부종"
+    ],
     "low_energy": [
       "기운없음",
       "기운.{0,6}없"
     ],
+    "malaise": [
+      "권태감"
+    ],
+    "multiple_organ_failure_symptoms": [
+      "다발성\\ 장기부전\\ 증상"
+    ],
     "muscle_weakness": [
       "근력\\ 약화",
       "팔다리.{0,12}힘.{0,8}안",
-      "힘이.{0,8}안 들어"
+      "힘이.{0,8}안 들어",
+      "힘.{0,12}안 좋",
+      "힘\\s*들어가는.{0,12}안 좋"
     ],
     "myalgia": [
       "근육통",
@@ -480,17 +1173,50 @@
       "코.{0,8}(막혀|막히|답답)",
       "코도.{0,8}막"
     ],
+    "pallor": [
+      "창백"
+    ],
     "palpitation": [
       "가슴\\ 두근거림",
       "두근",
       "맥이.{0,8}불규칙"
     ],
+    "peripheral_edema": [
+      "말초부종"
+    ],
+    "pleural_effusion": [
+      "흉수"
+    ],
+    "prolonged_expiration": [
+      "호기의\\ 증가"
+    ],
+    "pulmonary_edema": [
+      "폐부종"
+    ],
+    "pulmonary_hypertension": [
+      "폐동맥\\ 고혈압"
+    ],
+    "pulsating_pain": [
+      "박동성\\ 통증"
+    ],
     "purulent_sputum": [
       "화농성\\ 객담",
       "(누렇|노랗|짙은).{0,8}가래"
     ],
+    "radiating_pain": [
+      "방사통"
+    ],
+    "recurrent_pneumonia": [
+      "반복되는\\ 폐렴"
+    ],
+    "respiratory_infection": [
+      "호흡기감염"
+    ],
     "rhinorrhea": [
       "콧물"
+    ],
+    "skin_flushing": [
+      "피부홍조"
     ],
     "sneezing": [
       "재채기"
@@ -498,9 +1224,27 @@
     "sputum": [
       "가래"
     ],
+    "suffocation": [
+      "질식"
+    ],
+    "sunken_chest": [
+      "함몰가슴"
+    ],
+    "sweating": [
+      "발한"
+    ],
+    "tachycardia": [
+      "빈맥"
+    ],
+    "tachypnea": [
+      "빈호흡"
+    ],
+    "tenderness": [
+      "압통"
+    ],
     "throat_irritation": [
       "목의\\ 통증",
-      "목.{0,8}(아프|아푸|칼칼|따갑|쓰리)"
+      "목.{0,8}(아프|아푸|아퍼|칼칼|따갑|쓰리)"
     ],
     "voice_change": [
       "목소리\\ 변화",
@@ -512,100 +1256,201 @@
       "토했",
       "울렁.{0,8}토"
     ],
+    "weight_loss": [
+      "체중감소"
+    ],
     "wheezing": [
       "천명음",
       "(쌕쌕|휘파람).{0,12}(소리|숨|나)"
     ]
   },
   "ir_stable_slot_ids": {
-    "복부 팽만": "abdominal_bloating",
+    "복부팽만감": "abdominal_bloating",
     "복부 통증": "abdominal_pain",
+    "복벽이 움푹 들어감": "abdominal_wall_retraction",
+    "근긴장의 이상": "abnormal_muscle_tone",
+    "급성 신부전": "acute_renal_failure",
+    "의식 변화": "altered_mental_status",
+    "빈혈": "anemia",
     "식욕부진": "anorexia",
+    "불안": "anxiety",
+    "부정맥": "arrhythmia",
+    "천식": "asthma",
+    "무증상": "asymptomatic",
     "검은색 가래": "black_sputum",
+    "온몸이 떨림": "body_tremor",
+    "서맥": "bradycardia",
     "가슴 답답": "chest_discomfort",
+    "흉곽 팽윤": "chest_hyperinflation",
     "흉통": "chest_pain",
+    "흉부압박감": "chest_pressure",
     "오한": "chills",
     "사래걸림": "choking",
+    "곤봉지": "clubbing",
+    "인지장애": "cognitive_impairment",
     "감기 증상": "cold_symptoms",
+    "결막염": "conjunctivitis",
     "기침": "cough",
     "청색증": "cyanosis",
+    "사망": "death",
+    "의식 저하": "decreased_consciousness",
     "설사": "diarrhea",
+    "지남력 장애": "disorientation",
     "어지러움": "dizziness",
     "삼키기 곤란": "dysphagia",
     "호흡곤란": "dyspnea",
-    "눈곱": "eye_discharge",
+    "운동 시 호흡곤란": "exertional_dyspnea",
+    "눈꼽": "eye_discharge",
     "눈의 충혈": "eye_redness",
     "피로감": "fatigue",
+    "수유 곤란": "feeding_difficulty",
     "열": "fever",
+    "마찰음": "friction_rub",
     "거품이 섞인 가래": "frothy_sputum",
     "두통": "headache",
+    "심부전": "heart_failure",
+    "눈이 무거운 느낌": "heavy_eyes",
     "객혈": "hemoptysis",
+    "탈장": "hernia",
+    "고탄산증": "hypercapnia",
+    "저산소증": "hypoxemia",
+    "폐기능저하": "impaired_pulmonary_function",
+    "뇌압상승증상": "increased_intracranial_pressure_symptoms",
+    "경정맥 확장": "jugular_venous_distension",
     "하지부종": "leg_edema",
+    "사지 부종": "limb_edema",
     "기운없음": "low_energy",
+    "권태감": "malaise",
+    "다발성 장기부전 증상": "multiple_organ_failure_symptoms",
     "근력 약화": "muscle_weakness",
     "근육통": "myalgia",
     "코막힘": "nasal_obstruction",
+    "창백": "pallor",
     "가슴 두근거림": "palpitation",
+    "말초부종": "peripheral_edema",
+    "흉수": "pleural_effusion",
+    "호기의 증가": "prolonged_expiration",
+    "폐부종": "pulmonary_edema",
+    "폐동맥 고혈압": "pulmonary_hypertension",
+    "박동성 통증": "pulsating_pain",
     "화농성 객담": "purulent_sputum",
+    "방사통": "radiating_pain",
+    "반복되는 폐렴": "recurrent_pneumonia",
+    "호흡기감염": "respiratory_infection",
     "콧물": "rhinorrhea",
+    "피부홍조": "skin_flushing",
     "재채기": "sneezing",
     "가래": "sputum",
+    "질식": "suffocation",
+    "함몰가슴": "sunken_chest",
+    "발한": "sweating",
+    "빈맥": "tachycardia",
+    "빈호흡": "tachypnea",
+    "압통": "tenderness",
     "목의 통증": "throat_irritation",
     "목소리 변화": "voice_change",
     "구토": "vomiting",
+    "체중감소": "weight_loss",
     "천명음": "wheezing"
   },
   "ir_slot_to_canonical_name": {
-    "abdominal_bloating": "복부 팽만",
+    "abdominal_bloating": "복부팽만감",
     "abdominal_pain": "복부 통증",
+    "abdominal_wall_retraction": "복벽이 움푹 들어감",
+    "abnormal_muscle_tone": "근긴장의 이상",
+    "acute_renal_failure": "급성 신부전",
+    "altered_mental_status": "의식 변화",
+    "anemia": "빈혈",
     "anorexia": "식욕부진",
+    "anxiety": "불안",
+    "arrhythmia": "부정맥",
+    "asthma": "천식",
+    "asymptomatic": "무증상",
     "black_sputum": "검은색 가래",
+    "body_tremor": "온몸이 떨림",
+    "bradycardia": "서맥",
     "chest_discomfort": "가슴 답답",
+    "chest_hyperinflation": "흉곽 팽윤",
     "chest_pain": "흉통",
+    "chest_pressure": "흉부압박감",
     "chills": "오한",
     "choking": "사래걸림",
+    "clubbing": "곤봉지",
+    "cognitive_impairment": "인지장애",
     "cold_symptoms": "감기 증상",
+    "conjunctivitis": "결막염",
     "cough": "기침",
     "cyanosis": "청색증",
+    "death": "사망",
+    "decreased_consciousness": "의식 저하",
     "diarrhea": "설사",
+    "disorientation": "지남력 장애",
     "dizziness": "어지러움",
     "dysphagia": "삼키기 곤란",
     "dyspnea": "호흡곤란",
-    "eye_discharge": "눈곱",
+    "exertional_dyspnea": "운동 시 호흡곤란",
+    "eye_discharge": "눈꼽",
     "eye_redness": "눈의 충혈",
     "fatigue": "피로감",
+    "feeding_difficulty": "수유 곤란",
     "fever": "열",
+    "friction_rub": "마찰음",
     "frothy_sputum": "거품이 섞인 가래",
     "headache": "두통",
+    "heart_failure": "심부전",
+    "heavy_eyes": "눈이 무거운 느낌",
     "hemoptysis": "객혈",
+    "hernia": "탈장",
+    "hypercapnia": "고탄산증",
+    "hypoxemia": "저산소증",
+    "impaired_pulmonary_function": "폐기능저하",
+    "increased_intracranial_pressure_symptoms": "뇌압상승증상",
+    "jugular_venous_distension": "경정맥 확장",
     "leg_edema": "하지부종",
+    "limb_edema": "사지 부종",
     "low_energy": "기운없음",
+    "malaise": "권태감",
+    "multiple_organ_failure_symptoms": "다발성 장기부전 증상",
     "muscle_weakness": "근력 약화",
     "myalgia": "근육통",
     "nasal_obstruction": "코막힘",
+    "pallor": "창백",
     "palpitation": "가슴 두근거림",
+    "peripheral_edema": "말초부종",
+    "pleural_effusion": "흉수",
+    "prolonged_expiration": "호기의 증가",
+    "pulmonary_edema": "폐부종",
+    "pulmonary_hypertension": "폐동맥 고혈압",
+    "pulsating_pain": "박동성 통증",
     "purulent_sputum": "화농성 객담",
+    "radiating_pain": "방사통",
+    "recurrent_pneumonia": "반복되는 폐렴",
+    "respiratory_infection": "호흡기감염",
     "rhinorrhea": "콧물",
+    "skin_flushing": "피부홍조",
     "sneezing": "재채기",
     "sputum": "가래",
+    "suffocation": "질식",
+    "sunken_chest": "함몰가슴",
+    "sweating": "발한",
+    "tachycardia": "빈맥",
+    "tachypnea": "빈호흡",
+    "tenderness": "압통",
     "throat_irritation": "목의 통증",
     "voice_change": "목소리 변화",
     "vomiting": "구토",
+    "weight_loss": "체중감소",
     "wheezing": "천명음"
   },
   "ir_text_aliases": [
     {
-      "pattern": "복부\\ 팽만",
-      "canonical_name": "복부 팽만",
-      "source_case_ids": [
-        "train_v2_094",
-        "train_v2_099"
-      ],
-      "source": "train_100_v2_gold_label"
+      "pattern": "복부팽만감",
+      "canonical_name": "복부팽만감",
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "배.{0,8}빵빵",
-      "canonical_name": "복부 팽만",
+      "canonical_name": "복부팽만감",
       "source_case_ids": [
         "train_v2_094",
         "train_v2_099"
@@ -614,7 +1459,7 @@
     },
     {
       "pattern": "더부룩",
-      "canonical_name": "복부 팽만",
+      "canonical_name": "복부팽만감",
       "source_case_ids": [
         "train_v2_094",
         "train_v2_099"
@@ -624,11 +1469,7 @@
     {
       "pattern": "복부\\ 통증",
       "canonical_name": "복부 통증",
-      "source_case_ids": [
-        "train_v2_093",
-        "train_v2_098"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "복통",
@@ -648,13 +1489,34 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "복벽이\\ 움푹\\ 들어감",
+      "canonical_name": "복벽이 움푹 들어감",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "근긴장의\\ 이상",
+      "canonical_name": "근긴장의 이상",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "급성\\ 신부전",
+      "canonical_name": "급성 신부전",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "의식\\ 변화",
+      "canonical_name": "의식 변화",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "빈혈",
+      "canonical_name": "빈혈",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "식욕부진",
       "canonical_name": "식욕부진",
-      "source_case_ids": [
-        "train_v2_095",
-        "train_v2_100"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "입맛.{0,8}없",
@@ -675,27 +1537,61 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "불안",
+      "canonical_name": "불안",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "부정맥",
+      "canonical_name": "부정맥",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "천식",
+      "canonical_name": "천식",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "무증상",
+      "canonical_name": "무증상",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "검은색\\ 가래",
+      "canonical_name": "검은색 가래",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "가래.{0,12}(검은|까만|검게)",
       "canonical_name": "검은색 가래",
       "source_case_ids": [
         "train_v2_023",
         "train_v2_031"
       ],
-      "source": "train_100_v2_gold_label"
+      "source": "train_100_v2_positive_utterance"
+    },
+    {
+      "pattern": "검게.{0,8}나오",
+      "canonical_name": "검은색 가래",
+      "source_case_ids": [
+        "train_v2_023"
+      ],
+      "source": "train_100_v2_positive_utterance"
+    },
+    {
+      "pattern": "온몸이\\ 떨림",
+      "canonical_name": "온몸이 떨림",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "서맥",
+      "canonical_name": "서맥",
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "가슴\\ 답답",
       "canonical_name": "가슴 답답",
-      "source_case_ids": [
-        "train_v2_040",
-        "train_v2_043",
-        "train_v2_044",
-        "train_v2_048",
-        "train_v2_051",
-        "train_v2_052",
-        "train_v2_056"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "가슴.{0,10}(답답|막혀|막히|조이)",
@@ -712,13 +1608,14 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "흉곽\\ 팽윤",
+      "canonical_name": "흉곽 팽윤",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "흉통",
       "canonical_name": "흉통",
-      "source_case_ids": [
-        "train_v2_041",
-        "train_v2_049"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "가슴.{0,10}(아프|통증|찌르|쑤시)",
@@ -730,13 +1627,14 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "흉부압박감",
+      "canonical_name": "흉부압박감",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "오한",
       "canonical_name": "오한",
-      "source_case_ids": [
-        "train_v2_058",
-        "train_v2_065"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "(춥고|추워).{0,8}(떨|떨리)",
@@ -750,11 +1648,7 @@
     {
       "pattern": "사래걸림",
       "canonical_name": "사래걸림",
-      "source_case_ids": [
-        "train_v2_073",
-        "train_v2_078"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "사래.{0,8}(걸|들)",
@@ -766,36 +1660,38 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "곤봉지",
+      "canonical_name": "곤봉지",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "인지장애",
+      "canonical_name": "인지장애",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "감기\\ 증상",
+      "canonical_name": "감기 증상",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "감기.{0,8}(같|걸린|기운)",
       "canonical_name": "감기 증상",
       "source_case_ids": [
         "train_v2_005",
         "train_v2_013"
       ],
-      "source": "train_100_v2_gold_label"
+      "source": "train_100_v2_positive_utterance"
     },
     {
-      "pattern": "감기.{0,8}(같|걸린)",
-      "canonical_name": "감기 증상",
-      "source_case_ids": [
-        "train_v2_005"
-      ],
-      "source": "train_100_v2_positive_utterance"
+      "pattern": "결막염",
+      "canonical_name": "결막염",
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "기침",
       "canonical_name": "기침",
-      "source_case_ids": [
-        "train_v2_019",
-        "train_v2_021",
-        "train_v2_026",
-        "train_v2_027",
-        "train_v2_029",
-        "train_v2_034",
-        "train_v2_035",
-        "train_v2_037"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "기침",
@@ -815,11 +1711,7 @@
     {
       "pattern": "청색증",
       "canonical_name": "청색증",
-      "source_case_ids": [
-        "train_v2_045",
-        "train_v2_053"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "입술.{0,8}(파래|파랗|푸르)",
@@ -831,13 +1723,19 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "사망",
+      "canonical_name": "사망",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "의식\\ 저하",
+      "canonical_name": "의식 저하",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "설사",
       "canonical_name": "설사",
-      "source_case_ids": [
-        "train_v2_092",
-        "train_v2_097"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "묽은 변",
@@ -849,13 +1747,14 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "지남력\\ 장애",
+      "canonical_name": "지남력 장애",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "어지러움",
       "canonical_name": "어지러움",
-      "source_case_ids": [
-        "train_v2_081",
-        "train_v2_086"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "핑.{0,4}돌",
@@ -869,11 +1768,7 @@
     {
       "pattern": "삼키기\\ 곤란",
       "canonical_name": "삼키기 곤란",
-      "source_case_ids": [
-        "train_v2_072",
-        "train_v2_077"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "삼키.{0,8}힘",
@@ -887,19 +1782,10 @@
     {
       "pattern": "호흡곤란",
       "canonical_name": "호흡곤란",
-      "source_case_ids": [
-        "train_v2_039",
-        "train_v2_043",
-        "train_v2_046",
-        "train_v2_047",
-        "train_v2_051",
-        "train_v2_054",
-        "train_v2_055"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
-      "pattern": "숨.{0,10}(힘들|차|가쁘)",
+      "pattern": "숨.{0,20}(힘들|차|가쁘)",
       "canonical_name": "호흡곤란",
       "source_case_ids": [
         "train_v2_039",
@@ -912,29 +1798,31 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
-      "pattern": "숨\\s*쉬기.{0,10}힘",
+      "pattern": "숨\\s*쉬기.{0,30}힘",
       "canonical_name": "호흡곤란",
       "source_case_ids": [
         "train_v2_039",
         "train_v2_043",
         "train_v2_046",
         "train_v2_047",
-        "train_v2_051"
+        "train_v2_051",
+        "train_v2_055"
       ],
       "source": "train_100_v2_positive_utterance"
     },
     {
-      "pattern": "눈곱",
-      "canonical_name": "눈곱",
-      "source_case_ids": [
-        "train_v2_075",
-        "train_v2_080"
-      ],
-      "source": "train_100_v2_gold_label"
+      "pattern": "운동\\ 시\\ 호흡곤란",
+      "canonical_name": "운동 시 호흡곤란",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "눈꼽",
+      "canonical_name": "눈꼽",
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "눈곱",
-      "canonical_name": "눈곱",
+      "canonical_name": "눈꼽",
       "source_case_ids": [
         "train_v2_075",
         "train_v2_080"
@@ -944,11 +1832,7 @@
     {
       "pattern": "눈의\\ 충혈",
       "canonical_name": "눈의 충혈",
-      "source_case_ids": [
-        "train_v2_074",
-        "train_v2_079"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "눈.{0,8}(빨갛|충혈)",
@@ -962,13 +1846,7 @@
     {
       "pattern": "피로감",
       "canonical_name": "피로감",
-      "source_case_ids": [
-        "train_v2_060",
-        "train_v2_063",
-        "train_v2_067",
-        "train_v2_070"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "피곤",
@@ -998,17 +1876,14 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "수유\\ 곤란",
+      "canonical_name": "수유 곤란",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "열",
       "canonical_name": "열",
-      "source_case_ids": [
-        "train_v2_006",
-        "train_v2_014",
-        "train_v2_057",
-        "train_v2_062",
-        "train_v2_064",
-        "train_v2_069"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "열",
@@ -1024,13 +1899,14 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "마찰음",
+      "canonical_name": "마찰음",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "거품이\\ 섞인\\ 가래",
       "canonical_name": "거품이 섞인 가래",
-      "source_case_ids": [
-        "train_v2_024",
-        "train_v2_032"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "(거품|거품 섞).{0,8}가래",
@@ -1044,11 +1920,7 @@
     {
       "pattern": "두통",
       "canonical_name": "두통",
-      "source_case_ids": [
-        "train_v2_085",
-        "train_v2_090"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "머리.{0,8}아프",
@@ -1069,13 +1941,19 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "심부전",
+      "canonical_name": "심부전",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "눈이\\ 무거운\\ 느낌",
+      "canonical_name": "눈이 무거운 느낌",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "객혈",
       "canonical_name": "객혈",
-      "source_case_ids": [
-        "train_v2_042",
-        "train_v2_050"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "기침.{0,12}피",
@@ -1096,13 +1974,39 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "탈장",
+      "canonical_name": "탈장",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "고탄산증",
+      "canonical_name": "고탄산증",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "저산소증",
+      "canonical_name": "저산소증",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "폐기능저하",
+      "canonical_name": "폐기능저하",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "뇌압상승증상",
+      "canonical_name": "뇌압상승증상",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "경정맥\\ 확장",
+      "canonical_name": "경정맥 확장",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "하지부종",
       "canonical_name": "하지부종",
-      "source_case_ids": [
-        "train_v2_083",
-        "train_v2_088"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "(다리|발).{0,8}붓",
@@ -1123,13 +2027,14 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "사지\\ 부종",
+      "canonical_name": "사지 부종",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "기운없음",
       "canonical_name": "기운없음",
-      "source_case_ids": [
-        "train_v2_061",
-        "train_v2_068"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "기운.{0,6}없",
@@ -1141,13 +2046,19 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "권태감",
+      "canonical_name": "권태감",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "다발성\\ 장기부전\\ 증상",
+      "canonical_name": "다발성 장기부전 증상",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "근력\\ 약화",
       "canonical_name": "근력 약화",
-      "source_case_ids": [
-        "train_v2_084",
-        "train_v2_089"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "팔다리.{0,12}힘.{0,8}안",
@@ -1166,15 +2077,25 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "힘.{0,12}안 좋",
+      "canonical_name": "근력 약화",
+      "source_case_ids": [
+        "train_v2_089"
+      ],
+      "source": "train_100_v2_positive_utterance"
+    },
+    {
+      "pattern": "힘\\s*들어가는.{0,12}안 좋",
+      "canonical_name": "근력 약화",
+      "source_case_ids": [
+        "train_v2_089"
+      ],
+      "source": "train_100_v2_positive_utterance"
+    },
+    {
       "pattern": "근육통",
       "canonical_name": "근육통",
-      "source_case_ids": [
-        "train_v2_059",
-        "train_v2_063",
-        "train_v2_066",
-        "train_v2_070"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "몸.{0,8}쑤시",
@@ -1198,14 +2119,7 @@
     {
       "pattern": "코막힘",
       "canonical_name": "코막힘",
-      "source_case_ids": [
-        "train_v2_002",
-        "train_v2_007",
-        "train_v2_010",
-        "train_v2_015",
-        "train_v2_018"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "코.{0,8}(막혀|막히|답답)",
@@ -1228,13 +2142,14 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "창백",
+      "canonical_name": "창백",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "가슴\\ 두근거림",
       "canonical_name": "가슴 두근거림",
-      "source_case_ids": [
-        "train_v2_082",
-        "train_v2_087"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "두근",
@@ -1254,14 +2169,39 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "말초부종",
+      "canonical_name": "말초부종",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "흉수",
+      "canonical_name": "흉수",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "호기의\\ 증가",
+      "canonical_name": "호기의 증가",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "폐부종",
+      "canonical_name": "폐부종",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "폐동맥\\ 고혈압",
+      "canonical_name": "폐동맥 고혈압",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "박동성\\ 통증",
+      "canonical_name": "박동성 통증",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "화농성\\ 객담",
       "canonical_name": "화농성 객담",
-      "source_case_ids": [
-        "train_v2_022",
-        "train_v2_030",
-        "train_v2_038"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "(누렇|노랗|짙은).{0,8}가래",
@@ -1274,15 +2214,24 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "방사통",
+      "canonical_name": "방사통",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "반복되는\\ 폐렴",
+      "canonical_name": "반복되는 폐렴",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "호흡기감염",
+      "canonical_name": "호흡기감염",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "콧물",
       "canonical_name": "콧물",
-      "source_case_ids": [
-        "train_v2_003",
-        "train_v2_008",
-        "train_v2_011",
-        "train_v2_016"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "콧물",
@@ -1296,15 +2245,14 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "피부홍조",
+      "canonical_name": "피부홍조",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "재채기",
       "canonical_name": "재채기",
-      "source_case_ids": [
-        "train_v2_004",
-        "train_v2_008",
-        "train_v2_012",
-        "train_v2_016"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "재채기",
@@ -1320,15 +2268,7 @@
     {
       "pattern": "가래",
       "canonical_name": "가래",
-      "source_case_ids": [
-        "train_v2_020",
-        "train_v2_021",
-        "train_v2_028",
-        "train_v2_029",
-        "train_v2_036",
-        "train_v2_037"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "가래",
@@ -1342,9 +2282,44 @@
         "train_v2_037"
       ],
       "source": "train_100_v2_positive_utterance"
+    },
+    {
+      "pattern": "질식",
+      "canonical_name": "질식",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "함몰가슴",
+      "canonical_name": "함몰가슴",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "발한",
+      "canonical_name": "발한",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "빈맥",
+      "canonical_name": "빈맥",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "빈호흡",
+      "canonical_name": "빈호흡",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "압통",
+      "canonical_name": "압통",
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "목의\\ 통증",
+      "canonical_name": "목의 통증",
+      "source": "symptom_index_ontology"
+    },
+    {
+      "pattern": "목.{0,8}(아프|아푸|아퍼|칼칼|따갑|쓰리)",
       "canonical_name": "목의 통증",
       "source_case_ids": [
         "train_v2_001",
@@ -1353,27 +2328,12 @@
         "train_v2_015",
         "train_v2_017"
       ],
-      "source": "train_100_v2_gold_label"
-    },
-    {
-      "pattern": "목.{0,8}(아프|아푸|칼칼|따갑|쓰리)",
-      "canonical_name": "목의 통증",
-      "source_case_ids": [
-        "train_v2_001",
-        "train_v2_007",
-        "train_v2_015",
-        "train_v2_017"
-      ],
       "source": "train_100_v2_positive_utterance"
     },
     {
       "pattern": "목소리\\ 변화",
       "canonical_name": "목소리 변화",
-      "source_case_ids": [
-        "train_v2_071",
-        "train_v2_076"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "목소리.{0,8}(쉬|안 나오|변)",
@@ -1395,11 +2355,7 @@
     {
       "pattern": "구토",
       "canonical_name": "구토",
-      "source_case_ids": [
-        "train_v2_091",
-        "train_v2_096"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "토했",
@@ -1427,13 +2383,14 @@
       "source": "train_100_v2_positive_utterance"
     },
     {
+      "pattern": "체중감소",
+      "canonical_name": "체중감소",
+      "source": "symptom_index_ontology"
+    },
+    {
       "pattern": "천명음",
       "canonical_name": "천명음",
-      "source_case_ids": [
-        "train_v2_025",
-        "train_v2_033"
-      ],
-      "source": "train_100_v2_gold_label"
+      "source": "symptom_index_ontology"
     },
     {
       "pattern": "(쌕쌕|휘파람).{0,12}(소리|숨|나)",

@@ -1,9 +1,16 @@
 {
   "train_rows": 100,
-  "train_gold_symptoms": 36,
-  "symptom_rules": 36,
-  "alias_patterns": 87,
-  "quote_pattern_slots": 36,
+  "ontology_symptoms": 87,
+  "train_gold_symptoms_raw": 36,
+  "train_gold_symptoms_mapped": 36,
+  "symptom_rules": 87,
+  "alias_patterns": 142,
+  "ontology_alias_patterns": 87,
+  "train_derived_alias_patterns": 55,
+  "train_alias_full_gold_rows": 100,
+  "train_alias_miss_rows": 0,
+  "train_alias_misses": [],
+  "quote_pattern_slots": 87,
   "alert_slot_ids": [
     "chest_discomfort",
     "hemoptysis",
@@ -11,9 +18,11 @@
     "dyspnea",
     "chest_pain"
   ],
-  "fewshot_source_cases": [],
-  "version": "respiratory_train_100_v2_2026-06-26",
-  "source_dataset": "evaluation/train_100_v2/train_100_v2.jsonl",
+  "version": "respiratory_ontology87_train_100_v2_2026-06-26",
+  "source_dataset": {
+    "ontology": "backend/serverless/src/data/symptom_index.json",
+    "train_support": "evaluation/train_100_v2/train_100_v2.jsonl"
+  },
   "language_style_counts": {
     "standard": 50,
     "gangwon": 50
@@ -36,6 +45,6 @@
     "symptom_hint": 5,
     "onepager_review": 2
   },
-  "provenance_entries": 144,
+  "provenance_entries": 250,
   "test_data_used": false
 }
