@@ -1,0 +1,16 @@
+{
+  "version": "train-100-rendered-v1",
+  "source_blueprint": "evaluation/train_100_blueprint/case_blueprint.jsonl",
+  "render_prompt": "evaluation/train_100_blueprint/llm_render_prompt.md",
+  "quality_gate": "evaluation/train_100_blueprint/quality_gate.md",
+  "generation_mode": "LLM-rendered patient utterances from fixed blueprint rows",
+  "case_count": 100,
+  "intended_use": "training-only source for rebuilding domain pack, aliases, and few-shot candidates",
+  "not_for_final_reporting": true,
+  "test_data_used": false,
+  "notes": [
+    "No code-based phrase combinator was used to render patient utterances.",
+    "Metadata and labels are copied from the fixed blueprint.",
+    "The text field is synthetic patient speech rendered from each blueprint row."
+  ]
+}
