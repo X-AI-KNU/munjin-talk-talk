@@ -1,11 +1,10 @@
 import ScreenHeader from '../tablet/ScreenHeader.jsx'
 
 // 문진 종료 화면입니다.
-// 일반 완료와 직원 인계 종료를 구분하고, 접수 순번을 크게 보여줍니다.
+// 일반 완료와 직원 인계 종료를 구분하고, 환자에게 다음 상태를 알려줍니다.
 
 // v4 변경:
 // - 모든 글자 크기 키움
-// - 대기 순번: 접수 시 백엔드가 발급한 실제 queueNumber 사용
 
 const CheckCircleIcon = () => (
   <svg viewBox="0 0 64 64" fill="none">
@@ -19,10 +18,9 @@ export default function DoneScreen({
   patient,
   visitType,
   stopped = false,
-  queueNumber = null,
   onExitToQueue,
 }) {
-  const displayQueueNumber = Number(queueNumber || patient?.queueNumber || 0)
+  const statusText = stopped ? '직원 확인 대기' : '의료진 확인 대기'
 
   return (
     <>
@@ -57,10 +55,9 @@ export default function DoneScreen({
         </p>
 
         <div className="queue-card queue-card-v4">
-          <span className="queue-label queue-label-large">대기 순번</span>
-          <span className="queue-number queue-number-large">
-            {displayQueueNumber > 0 ? displayQueueNumber : '—'}
-            {displayQueueNumber > 0 && <small>번</small>}
+          <span className="queue-label queue-label-large">현재 상태</span>
+          <span className="queue-number queue-number-large done-status-text">
+            {statusText}
           </span>
         </div>
 

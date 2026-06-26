@@ -5,6 +5,8 @@ S3에 저장된 문항 결과를 의사 화면에서 읽기 쉬운 카드 구조
 근거가 필요할 때는 별도 `llm_trace.redacted.json`의 최소 설명 trace를 봅니다.
 """
 
+import re
+
 from clinical_state import (
     is_absent_symptom_state,
     is_non_active_symptom_state,
@@ -185,25 +187,162 @@ def unique_clues(clues):
     return out
 
 
+AGENDA_SPLIT_STARTERS = (
+    "그리고",
+    "또",
+    "혹시",
+    "머리",
+    "두통",
+    "진통제",
+    "해열제",
+    "약",
+    "처방",
+    "검사",
+    "엑스레이",
+    "CT",
+    "씨티",
+    "홍삼",
+    "한약",
+    "영양제",
+    "술",
+    "커피",
+    "운동",
+    "샤워",
+    "일",
+    "생활",
+    "언제",
+    "얼마나",
+    "며칠",
+    "다시",
+)
+
+AGENDA_QUESTION_TOKENS = (
+    "?",
+    "궁금",
+    "알고 싶",
+    "괜찮",
+    "되나",
+    "되냐",
+    "되나요",
+    "될까",
+    "먹어도",
+    "복용해도",
+    "피해야",
+    "언제",
+    "얼마나",
+    "며칠",
+    "검사",
+    "수 있",
+    "줄 수",
+    "받을 수",
+    "가야",
+    "해야",
+    "가능",
+)
+
+
 def normalize_agenda(q4):
     """Q4 patient questions를 원페이퍼 우측 질문 카드 목록으로 변환합니다."""
     structured = q4.get("structured", {})
     questions = structured.get("questions") or q4.get("questions") or []
     out = []
+    seen = set()
     for item in questions:
+        for agenda_item in expand_agenda_item(item):
+            key = (
+                agenda_item.get("category"),
+                agenda_item.get("summary"),
+                agenda_item.get("original_quote"),
+            )
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append(agenda_item)
+    return out
+
+
+def expand_agenda_item(item):
+    """LLM이 한 카드로 묶은 복수 질문을 원문 근거 단위로 다시 나눕니다."""
+    summary = clean_quote(item.get("summary", ""))
+    original_quote = clean_quote(item.get("original_quote", ""))
+    base_text = original_quote or summary
+    pieces = split_agenda_question_text(base_text)
+
+    if len(pieces) <= 1:
         category = infer_agenda_category(
-            " ".join([item.get("summary", ""), item.get("original_quote", "")]),
+            " ".join([summary, original_quote]),
             item.get("category", "other"),
         )
-        out.append({
-            "type": category,
-            "category": category,
-            "type_label": agenda_label(category),
-            "summary": item.get("summary", ""),
-            "original_quote": item.get("original_quote", ""),
-            "source_question": "Q4",
-        })
-    return out
+        return [agenda_payload(category, summary, original_quote)]
+
+    expanded = []
+    for piece in pieces:
+        category = infer_agenda_category(piece, "other")
+        expanded.append(agenda_payload(category, summarize_agenda_piece(piece), piece))
+    return expanded
+
+
+def split_agenda_question_text(text):
+    """환자가 한 번에 이어 말한 여러 질문을 보수적으로 분리합니다."""
+    normalized = clean_quote(text)
+    if not normalized:
+        return []
+
+    sentences = [
+        clean_quote(part)
+        for part in re.split(r"\s*[.?!。！？]\s*", normalized)
+        if clean_quote(part)
+    ]
+
+    parts = []
+    for sentence in sentences:
+        parts.extend(split_agenda_connector_piece(sentence))
+
+    question_parts = [part for part in parts if is_agenda_question_like(part)]
+    return question_parts if len(question_parts) > 1 else [normalized]
+
+
+def split_agenda_connector_piece(text):
+    starters = "|".join(re.escape(starter) for starter in AGENDA_SPLIT_STARTERS)
+    marker = re.compile(
+        rf"((?:알고\s*싶고|궁금하고|싶고|괜찮은\s*건지|괜찮을지))\s+(?=(?:{starters}))"
+    )
+    marked = marker.sub(r"\1 ||| ", clean_quote(text))
+    return [clean_quote(part) for part in marked.split("|||") if clean_quote(part)]
+
+
+def is_agenda_question_like(text):
+    normalized = clean_quote(text)
+    return any(token in normalized for token in AGENDA_QUESTION_TOKENS)
+
+
+def summarize_agenda_piece(text):
+    normalized = clean_quote(text)
+    if "홍삼" in normalized and any(token in normalized for token in ("약", "처방", "복용", "먹")):
+        return "홍삼과 약을 함께 복용해도 되는지 문의"
+    if any(token in normalized for token in ("영양제", "한약")) and any(
+        token in normalized for token in ("약", "처방", "복용", "먹")
+    ):
+        return "영양제/한약을 약과 함께 복용해도 되는지 문의"
+    if "진통제" in normalized:
+        if any(token in normalized for token in ("머리", "두통", "아파")):
+            return "머리 통증 때문에 진통제를 사용할 수 있는지 문의"
+        return "진통제를 사용할 수 있는지 문의"
+    if "해열제" in normalized:
+        return "해열제를 사용할 수 있는지 문의"
+    return normalized
+
+
+def agenda_payload(category, summary, original_quote):
+    category = clean_quote(category or "other") or "other"
+    return {
+        "type": category,
+        "category": category,
+        "type_label": agenda_label(category),
+        "summary": clean_quote(summary),
+        "original_quote": clean_quote(original_quote),
+        "source_question": "Q4",
+    }
 
 
 def agenda_label(category):

@@ -1196,6 +1196,14 @@ body {
   color: var(--navy, #0f2347);
   line-height: 1;
 }
+.done-status-text {
+  max-width: 190px;
+  font-size: 30px !important;
+  letter-spacing: 0 !important;
+  line-height: 1.18 !important;
+  text-align: right;
+  word-break: keep-all;
+}
 .queue-number-large small {
   font-size: 22px !important;
   font-weight: 900 !important;

@@ -46,7 +46,6 @@ export default function PatientFlow({
   initialVisitType = null,
   patient = null,
   sessionId = null,
-  queueNumber = null,
   questionSetId = 'default',
   frameVariant = 'preview',
   skipVisitTypeWhenPreset = true,
@@ -459,7 +458,6 @@ export default function PatientFlow({
             patient={displayPatient}
             visitType={visitType}
             stopped={intakeStopped}
-            queueNumber={queueNumber}
             onExitToQueue={onExitToQueue}
           />
         )
