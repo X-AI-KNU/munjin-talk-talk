@@ -36,16 +36,16 @@ def test_dialect_rag_returns_context_shape():
 def test_dialect_schema_rejects_ungrounded_quote():
     from schemas.dialect import validate_dialect_payload
 
-    transcript = "코가 맥혀요"
+    transcript = "여매방아라고 했어요"
     obj = {
         "original_text": transcript,
-        "standardized_text": "코가 막혀요",
+        "standardized_text": "연자방아라고 했어요",
         "replacements": [
             {
                 "source_quote": "없는 말",
-                "standard_text": "막혀요",
-                "evidence_dialect": "맥혀요",
-                "evidence_standard": "막혀요",
+                "standard_text": "연자방아",
+                "evidence_dialect": "여매방아",
+                "evidence_standard": "연자방아",
                 "match_type": "exact",
             }
         ],
