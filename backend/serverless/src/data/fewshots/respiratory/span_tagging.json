@@ -1,0 +1,108 @@
+{
+  "stage": "span_tagging",
+  "source_dataset": "evaluation/train_100_v2/train_100_v2.jsonl",
+  "examples": [
+    {
+      "title": "Two active spans from one answer",
+      "source_case_ids": [
+        "train_v2_007"
+      ],
+      "visit_type": "initial",
+      "question_id": "Q1",
+      "question_type": "chief_complaint",
+      "question": "어디가 불편하셔서 오셨어요?",
+      "patient_answer": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+      "input": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+      "tagged_spans": [
+        {
+          "source_quote": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+          "type": "symptom",
+          "slot_ref": "throat_irritation",
+          "name": "목의 통증",
+          "normalized_text": "목이 아픈 것 같고 코도 계속 막혀서 숨 쉬기가 불편해",
+          "status": "있음",
+          "alert": false,
+          "explain": "환자 원문에서 해당 증상이 근거로 확인됨."
+        },
+        {
+          "source_quote": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+          "type": "symptom",
+          "slot_ref": "nasal_obstruction",
+          "name": "코막힘",
+          "normalized_text": "목이 아픈 것 같고 코도 계속 막혀서 숨 쉬기가 불편해",
+          "status": "있음",
+          "alert": false,
+          "explain": "환자 원문에서 해당 증상이 근거로 확인됨."
+        }
+      ]
+    },
+    {
+      "title": "Do not turn absent dyspnea into an active card",
+      "source_case_ids": [
+        "train_v2_041"
+      ],
+      "visit_type": "initial",
+      "question_id": "Q1",
+      "question_type": "chief_complaint",
+      "question": "어디가 불편하셔서 오셨어요?",
+      "patient_answer": "가슴이 좀 아프긴 한데 숨참은 없어",
+      "input": "가슴이 좀 아프긴 한데 숨참은 없어",
+      "tagged_spans": [
+        {
+          "source_quote": "가슴이 좀 아프긴 한데 숨참은 없어",
+          "type": "symptom",
+          "slot_ref": "chest_pain",
+          "name": "흉통",
+          "normalized_text": "가슴이 좀 아프긴 한데 숨참은 없어",
+          "status": "있음",
+          "alert": true,
+          "explain": "환자 원문에서 해당 증상이 근거로 확인됨."
+        },
+        {
+          "source_quote": "가슴이 좀 아프긴 한데 숨참은 없어",
+          "type": "symptom_absent",
+          "slot_ref": "dyspnea",
+          "name": "호흡곤란",
+          "normalized_text": "가슴이 좀 아프긴 한데 숨참은 없어",
+          "status": "없음",
+          "alert": false,
+          "explain": "환자 원문에서 부정 표현으로 확인됨."
+        }
+      ]
+    },
+    {
+      "title": "Dialect headache with absent dizziness",
+      "source_case_ids": [
+        "train_v2_085"
+      ],
+      "visit_type": "initial",
+      "question_id": "Q1",
+      "question_type": "chief_complaint",
+      "question": "어디가 불편하셔서 오셨어요?",
+      "patient_answer": "머리깽이 좀 아프긴 한데 어지럽지는 않아",
+      "input": "머리깽이 좀 아프긴 한데 어지럽지는 않아",
+      "tagged_spans": [
+        {
+          "source_quote": "머리깽이 좀 아프긴 한데 어지럽지는 않아",
+          "type": "symptom",
+          "slot_ref": "headache",
+          "name": "두통",
+          "normalized_text": "머리가 좀 아프긴 한데 어지럽지는 않아",
+          "status": "있음",
+          "alert": false,
+          "explain": "환자 원문에서 해당 증상이 근거로 확인됨."
+        },
+        {
+          "source_quote": "머리깽이 좀 아프긴 한데 어지럽지는 않아",
+          "type": "symptom_absent",
+          "slot_ref": "dizziness",
+          "name": "어지러움",
+          "normalized_text": "머리가 좀 아프긴 한데 어지럽지는 않아",
+          "status": "없음",
+          "alert": false,
+          "explain": "환자 원문에서 부정 표현으로 확인됨."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "train_rows": 100,
+  "train_gold_symptoms": 36,
+  "symptom_rules": 36,
+  "alias_patterns": 87,
+  "quote_pattern_slots": 36,
+  "alert_slot_ids": [
+    "chest_discomfort",
+    "hemoptysis",
+    "cyanosis",
+    "dyspnea",
+    "chest_pain"
+  ],
+  "fewshot_source_cases": [],
+  "version": "respiratory_train_100_v2_2026-06-26",
+  "source_dataset": "evaluation/train_100_v2/train_100_v2.jsonl",
+  "language_style_counts": {
+    "standard": 50,
+    "gangwon": 50
+  },
+  "question_counts": {
+    "Q1": 50,
+    "Q3": 50
+  },
+  "dialect_source_layer_counts": {
+    "none": 50,
+    "clinical_colloquial": 25,
+    "rag_pack_anchored": 10,
+    "light_dialect_style": 15
+  },
+  "fewshot_counts": {
+    "extraction": 4,
+    "standardization": 4,
+    "semantic_unit": 3,
+    "span_tagging": 3,
+    "symptom_hint": 5,
+    "onepager_review": 2
+  },
+  "provenance_entries": 144,
+  "test_data_used": false
+}

@@ -2,18 +2,19 @@
 
 이 폴더는 문진톡톡 백엔드가 질문셋, 방언 RAG, 표준 증상 IR을 수행할 때 참조하는 데이터 위치입니다.
 
-## 현재 reset 상태
+## 현재 런타임 산출물 상태
 
-오염 가능성이 있는 런타임 학습/보강 데이터는 제거했습니다.
+오염 가능성이 있는 1차 런타임 학습/보강 데이터는 제거했고,
+현재 포함된 도메인팩과 few-shot은 `evaluation/train_100_v2`의 승인된 100개 train 문장만 근거로 다시 생성했습니다.
 
-제거한 항목:
+현재 재생성된 항목:
 
 - `domain_packs/respiratory.json`
-- `domain_packs/respiratory_fewshot.txt`
 - `fewshots/respiratory/*.json`
-- 도메인팩 내부 alias, symptom rule 보강, few-shot 연결
+- 도메인팩 내부 alias, symptom rule, safety flag, few-shot 연결
+- `evaluation/train_100_v2/artifact_provenance.json`에 산출 근거 case id와 acceptance reason 기록
 
-이 상태에서는 기본 `DOMAIN_PACK=respiratory` 런타임이 바로 동작하지 않을 수 있습니다. 의도된 상태입니다. 새 도메인팩과 few-shot은 `evaluation` 아래에서 생성한 `train_100` 데이터만 근거로 다시 구축합니다.
+`domain_packs/respiratory_fewshot.txt` 형식은 더 이상 사용하지 않고, stage별 JSON few-shot만 사용합니다.
 
 ## 유지하는 항목
 
@@ -34,7 +35,7 @@
 ## 재구축 원칙
 
 1. `evaluation` 아래에서 생성 설계 문서를 먼저 확정합니다.
-2. GPT/LLM으로 `train_100`을 생성합니다.
-3. `train_100`만 보고 alias, domain pack, few-shot 후보를 만듭니다.
+2. GPT/LLM으로 `train_100_v2`를 생성합니다.
+3. `train_100_v2`만 보고 alias, domain pack, few-shot 후보를 만듭니다.
 4. 후보에는 근거 case id와 이유를 남깁니다.
 5. 그 뒤 별도 `test_1000`을 생성해 locked test로 평가합니다.

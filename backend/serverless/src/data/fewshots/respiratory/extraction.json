@@ -1,0 +1,151 @@
+{
+  "stage": "extraction",
+  "source_dataset": "evaluation/train_100_v2/train_100_v2.jsonl",
+  "selection_policy": "Sparse representative examples only; do not memorize the train set.",
+  "examples": [
+    {
+      "title": "Gangwon Q1 with two active upper-airway symptoms",
+      "source_case_ids": [
+        "train_v2_007"
+      ],
+      "visit_type": "initial",
+      "question_id": "Q1",
+      "question_type": "chief_complaint",
+      "question": "어디가 불편하셔서 오셨어요?",
+      "patient_answer": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+      "expected_json": {
+        "spans": [
+          {
+            "source_quote": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+            "type": "symptom",
+            "slot_ref": "throat_irritation",
+            "name": "목의 통증",
+            "normalized_text": "목이 아픈 것 같고 코도 계속 막혀서 숨 쉬기가 불편해",
+            "status": "있음",
+            "alert": false,
+            "explain": "환자 원문에서 해당 증상이 근거로 확인됨."
+          },
+          {
+            "source_quote": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+            "type": "symptom",
+            "slot_ref": "nasal_obstruction",
+            "name": "코막힘",
+            "normalized_text": "목이 아픈 것 같고 코도 계속 막혀서 숨 쉬기가 불편해",
+            "status": "있음",
+            "alert": false,
+            "explain": "환자 원문에서 해당 증상이 근거로 확인됨."
+          }
+        ],
+        "structured": {
+          "standardized_text": "목이 아픈 것 같고 코도 계속 막혀서 숨 쉬기가 불편해",
+          "clinical_clues": [],
+          "questions": [],
+          "unresolved_items": []
+        }
+      }
+    },
+    {
+      "title": "Active chest pain with explicitly absent dyspnea",
+      "source_case_ids": [
+        "train_v2_041"
+      ],
+      "visit_type": "initial",
+      "question_id": "Q1",
+      "question_type": "chief_complaint",
+      "question": "어디가 불편하셔서 오셨어요?",
+      "patient_answer": "가슴이 좀 아프긴 한데 숨참은 없어",
+      "expected_json": {
+        "spans": [
+          {
+            "source_quote": "가슴이 좀 아프긴 한데 숨참은 없어",
+            "type": "symptom",
+            "slot_ref": "chest_pain",
+            "name": "흉통",
+            "normalized_text": "가슴이 좀 아프긴 한데 숨참은 없어",
+            "status": "있음",
+            "alert": true,
+            "explain": "환자 원문에서 해당 증상이 근거로 확인됨."
+          },
+          {
+            "source_quote": "가슴이 좀 아프긴 한데 숨참은 없어",
+            "type": "symptom_absent",
+            "slot_ref": "dyspnea",
+            "name": "호흡곤란",
+            "normalized_text": "가슴이 좀 아프긴 한데 숨참은 없어",
+            "status": "없음",
+            "alert": false,
+            "explain": "환자 원문에서 부정 표현으로 확인됨."
+          }
+        ],
+        "structured": {
+          "standardized_text": "가슴이 좀 아프긴 한데 숨참은 없어",
+          "clinical_clues": [],
+          "questions": [],
+          "unresolved_items": []
+        }
+      }
+    },
+    {
+      "title": "Follow-up sputum character hidden behind lay wording",
+      "source_case_ids": [
+        "train_v2_038"
+      ],
+      "visit_type": "followup",
+      "question_id": "Q3",
+      "question_type": "progress",
+      "question": "이전과 비교해서 증상이 어떻게 변했나요?",
+      "patient_answer": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+      "expected_json": {
+        "spans": [
+          {
+            "source_quote": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+            "type": "symptom",
+            "slot_ref": "purulent_sputum",
+            "name": "화농성 객담",
+            "normalized_text": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+            "status": "있음",
+            "alert": false,
+            "explain": "환자 원문에서 해당 증상이 근거로 확인됨."
+          }
+        ],
+        "structured": {
+          "standardized_text": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+          "clinical_clues": [],
+          "questions": [],
+          "unresolved_items": []
+        }
+      }
+    },
+    {
+      "title": "Follow-up improvement still needs current-state care",
+      "source_case_ids": [
+        "train_v2_055"
+      ],
+      "visit_type": "followup",
+      "question_id": "Q3",
+      "question_type": "progress",
+      "question": "이전과 비교해서 증상이 어떻게 변했나요?",
+      "patient_answer": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+      "expected_json": {
+        "spans": [
+          {
+            "source_quote": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+            "type": "progress_improved",
+            "slot_ref": "dyspnea",
+            "name": "호흡곤란",
+            "normalized_text": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+            "status": "있음",
+            "alert": true,
+            "explain": "환자 원문에서 해당 증상이 근거로 확인됨."
+          }
+        ],
+        "structured": {
+          "standardized_text": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+          "clinical_clues": [],
+          "questions": [],
+          "unresolved_items": []
+        }
+      }
+    }
+  ]
+}

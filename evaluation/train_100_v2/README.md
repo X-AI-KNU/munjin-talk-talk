@@ -12,6 +12,25 @@ reported as held-out model performance.
 - `render_train.py`: Bedrock renderer and quality gate.
 - `train_100_v2.jsonl`: rendered patient utterances.
 - `quality_gate_report.json`: validation summary.
+- `build_artifacts.py`: deterministic train-only runtime artifact builder.
+- `artifact_build_report.json`: generated artifact counts and distribution checks.
+- `artifact_provenance.json`: source case ids, source quotes, and acceptance reasons for generated artifacts.
+
+## Runtime Artifact Build
+
+Run from the repository root:
+
+```powershell
+python -X utf8 evaluation\train_100_v2\build_artifacts.py
+```
+
+The builder writes:
+
+- `backend/serverless/src/data/domain_packs/respiratory.json`
+- `backend/serverless/src/data/fewshots/respiratory/*.json`
+
+It must read only `train_100_v2.jsonl`. Held-out test data must not be used
+for artifact generation.
 
 ## Rendering Contract
 

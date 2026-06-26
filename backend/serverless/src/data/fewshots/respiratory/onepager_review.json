@@ -1,0 +1,50 @@
+{
+  "stage": "onepager_review",
+  "source_dataset": "evaluation/train_100_v2/train_100_v2.jsonl",
+  "examples": [
+    {
+      "title": "Safety-sensitive chest pain without unsupported dyspnea",
+      "source_case_ids": [
+        "train_v2_041"
+      ],
+      "visit_type": "initial",
+      "question_id": "Q1",
+      "question_type": "chief_complaint",
+      "question": "어디가 불편하셔서 오셨어요?",
+      "patient_answer": "가슴이 좀 아프긴 한데 숨참은 없어",
+      "expected_json": {
+        "review_items": [
+          "흉통의 현재 지속 여부와 심한 정도 확인"
+        ],
+        "transfer_text": "S) 문진 답변 / CC: 흉통 / PI: 가슴이 좀 아프긴 한데 숨참은 없어 / 확인: 지속 여부와 악화 신호",
+        "doctor_brief": {
+          "근거": [
+            "가슴이 좀 아프긴 한데 숨참은 없어"
+          ]
+        }
+      }
+    },
+    {
+      "title": "Follow-up improvement still requires current severity clarification",
+      "source_case_ids": [
+        "train_v2_055"
+      ],
+      "visit_type": "followup",
+      "question_id": "Q3",
+      "question_type": "progress",
+      "question": "이전과 비교해서 증상이 어떻게 변했나요?",
+      "patient_answer": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+      "expected_json": {
+        "review_items": [
+          "호흡곤란의 현재 지속 여부와 심한 정도 확인"
+        ],
+        "transfer_text": "S) 문진 답변 / CC: 호흡곤란 / PI: 숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어 / 확인: 지속 여부와 악화 신호",
+        "doctor_brief": {
+          "근거": [
+            "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어"
+          ]
+        }
+      }
+    }
+  ]
+}

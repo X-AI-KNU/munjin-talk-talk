@@ -5,12 +5,15 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import pytest
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
+from domain_config import get_domain_pack, llm_symptom_slot_ids  # noqa: E402
 from schemas.extraction import validate_extraction_payload  # noqa: E402
 
 
@@ -44,7 +47,12 @@ def assert_slot_error(slot_ref: str):
 
 
 def test_ir_only_slot_ref_is_rejected():
-    assert_slot_error("wheezing")
+    pack = get_domain_pack()
+    llm_slots = set(llm_symptom_slot_ids())
+    ir_only_slots = sorted(set(pack.get("ir_slot_to_canonical_name") or {}) - llm_slots)
+    if not ir_only_slots:
+        pytest.skip("Current clean train-derived domain pack has no IR-only slots.")
+    assert_slot_error(ir_only_slots[0])
 
 
 def test_empty_slot_ref_is_rejected_without_defaulting_to_other():

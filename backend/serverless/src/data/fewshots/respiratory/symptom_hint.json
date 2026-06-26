@@ -1,0 +1,101 @@
+{
+  "stage": "symptom_hint",
+  "source_dataset": "evaluation/train_100_v2/train_100_v2.jsonl",
+  "examples": [
+    {
+      "title": "Map 아푸나 and 코 막힘 to canonical hints",
+      "source_case_ids": [
+        "train_v2_007"
+      ],
+      "visit_type": "initial",
+      "question_id": "Q1",
+      "question_type": "chief_complaint",
+      "question": "어디가 불편하셔서 오셨어요?",
+      "patient_answer": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+      "input": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+      "expected_output": {
+        "positive_symptoms": [
+          "목의 통증",
+          "코막힘"
+        ],
+        "negative_symptoms": []
+      }
+    },
+    {
+      "title": "Map 누렇고 짙은 가래 to purulent sputum",
+      "source_case_ids": [
+        "train_v2_038"
+      ],
+      "visit_type": "followup",
+      "question_id": "Q3",
+      "question_type": "progress",
+      "question": "이전과 비교해서 증상이 어떻게 변했나요?",
+      "patient_answer": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+      "input": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+      "expected_output": {
+        "positive_symptoms": [
+          "화농성 객담"
+        ],
+        "negative_symptoms": []
+      }
+    },
+    {
+      "title": "Map 가슴 아픔 while preserving absent 숨참",
+      "source_case_ids": [
+        "train_v2_041"
+      ],
+      "visit_type": "initial",
+      "question_id": "Q1",
+      "question_type": "chief_complaint",
+      "question": "어디가 불편하셔서 오셨어요?",
+      "patient_answer": "가슴이 좀 아프긴 한데 숨참은 없어",
+      "input": "가슴이 좀 아프긴 한데 숨참은 없어",
+      "expected_output": {
+        "positive_symptoms": [
+          "흉통"
+        ],
+        "negative_symptoms": [
+          "호흡곤란"
+        ]
+      }
+    },
+    {
+      "title": "Map 머리깽이 to headache and 어지럽지는 않아 to absent dizziness",
+      "source_case_ids": [
+        "train_v2_085"
+      ],
+      "visit_type": "initial",
+      "question_id": "Q1",
+      "question_type": "chief_complaint",
+      "question": "어디가 불편하셔서 오셨어요?",
+      "patient_answer": "머리깽이 좀 아프긴 한데 어지럽지는 않아",
+      "input": "머리깽이 좀 아프긴 한데 어지럽지는 않아",
+      "expected_output": {
+        "positive_symptoms": [
+          "두통"
+        ],
+        "negative_symptoms": [
+          "어지러움"
+        ]
+      }
+    },
+    {
+      "title": "Map 창지 꼬임 to abdominal pain",
+      "source_case_ids": [
+        "train_v2_093"
+      ],
+      "visit_type": "initial",
+      "question_id": "Q1",
+      "question_type": "chief_complaint",
+      "question": "어디가 불편하셔서 오셨어요?",
+      "patient_answer": "창지가 꼬이는 느낌이랑 복통이 좀 있어",
+      "input": "창지가 꼬이는 느낌이랑 복통이 좀 있어",
+      "expected_output": {
+        "positive_symptoms": [
+          "복부 통증"
+        ],
+        "negative_symptoms": []
+      }
+    }
+  ]
+}

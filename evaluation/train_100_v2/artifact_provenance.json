@@ -1,0 +1,1917 @@
+{
+  "symptom_rule:복부 팽만": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "복부 팽만",
+    "slot_id": "abdominal_bloating",
+    "source_case_ids": [
+      "train_v2_094",
+      "train_v2_099"
+    ],
+    "source_quotes": [
+      "배가 빵빵하고 더부룩한 느낌이야",
+      "배가 여전히 빵빵하고 더부룩한 느낌이야, 다른 건 없어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:복부 통증": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "복부 통증",
+    "slot_id": "abdominal_pain",
+    "source_case_ids": [
+      "train_v2_093",
+      "train_v2_098"
+    ],
+    "source_quotes": [
+      "창지가 꼬이는 느낌이랑 복통이 좀 있어",
+      "창지가 계속 꼬이는 느낌이야, 별 나아진 거 없어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:식욕부진": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "식욕부진",
+    "slot_id": "anorexia",
+    "source_case_ids": [
+      "train_v2_095",
+      "train_v2_100"
+    ],
+    "source_quotes": [
+      "여전히 입맛이 없고 음식을 잘 못 먹는다",
+      "아직 입맛이 없고 잘 못 먹는 느낌이야"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:검은색 가래": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "검은색 가래",
+    "slot_id": "black_sputum",
+    "source_case_ids": [
+      "train_v2_023",
+      "train_v2_031"
+    ],
+    "source_quotes": [
+      "요새 가래 색이 왜 검게 나오는지 걱정 돼",
+      "가래 색이 또 검게 변한 것 같은데, 전번에도 비슷했던 것 같아"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:가슴 답답": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "가슴 답답",
+    "slot_id": "chest_discomfort",
+    "source_case_ids": [
+      "train_v2_040",
+      "train_v2_043",
+      "train_v2_044",
+      "train_v2_048",
+      "train_v2_051",
+      "train_v2_052",
+      "train_v2_056"
+    ],
+    "source_quotes": [
+      "가슴이 막혀서 답답한 거 같아",
+      "숨 쉬기가 힘들고 가슴이 답답해",
+      "가슴이 제리제리하고 답답한 느낌인데, 아프진 않아",
+      "가슴이 여전히 답답한 느낌이야, 전보다 좀 나아졌지만 아직 남아있어",
+      "그 뒤로 숨 쉬기 힘들고 가슴이 답답해서 여전히 별로야",
+      "가슴이 아직 답답한 느낌이야, 하지만 아픈 건 아니야"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:흉통": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "흉통",
+    "slot_id": "chest_pain",
+    "source_case_ids": [
+      "train_v2_041",
+      "train_v2_049"
+    ],
+    "source_quotes": [
+      "가슴이 좀 아프긴 한데 숨참은 없어",
+      "가슴 통증은 여전히 있는데 숨참은 없어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:오한": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "오한",
+    "slot_id": "chills",
+    "source_case_ids": [
+      "train_v2_058",
+      "train_v2_065"
+    ],
+    "source_quotes": [
+      "얼음 먹은 것 같이 몸 전체가 춥고 떨려",
+      "그래, 춥고 떨리는 느낌 좀 줄어든 것 같아"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:사래걸림": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "사래걸림",
+    "slot_id": "choking",
+    "source_case_ids": [
+      "train_v2_073",
+      "train_v2_078"
+    ],
+    "source_quotes": [
+      "사래는 좀 걸리는 거 같은데 음식 먹을 때는 별로 안 걸려",
+      "사래는 여전히 들리는데, 음식 넘어가는 건 문제 없어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:감기 증상": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "감기 증상",
+    "slot_id": "cold_symptoms",
+    "source_case_ids": [
+      "train_v2_005",
+      "train_v2_013"
+    ],
+    "source_quotes": [
+      "감기 걸린 것 같은데 열은 안 나",
+      "감기 기운은 아직 남아있는데 열은 나지 않아"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:기침": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "기침",
+    "slot_id": "cough",
+    "source_case_ids": [
+      "train_v2_019",
+      "train_v2_021",
+      "train_v2_026",
+      "train_v2_027",
+      "train_v2_029",
+      "train_v2_034",
+      "train_v2_035",
+      "train_v2_037"
+    ],
+    "source_quotes": [
+      "뭐야, 요즘 기침이 왜 계속 나는 거지.",
+      "기침이 자꾸 나고 가래도 많이 나와",
+      "기침은 자꾸 나는데 가래는 전혀 없어서 좀 이상해",
+      "요새 기침이 계속 나는 거 걱정스러워",
+      "기침이랑 가래는 계속 나는 거 같아",
+      "기침은 여전히 있는데 가래는 나지 않아"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:청색증": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "청색증",
+    "slot_id": "cyanosis",
+    "source_case_ids": [
+      "train_v2_045",
+      "train_v2_053"
+    ],
+    "source_quotes": [
+      "입술이 좀 파래 보여서 걱정 되는데, 뭐라 할 수 없는 불편함 있어.",
+      "입술이 또 파래 보이는 거 계속 돼"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:설사": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "설사",
+    "slot_id": "diarrhea",
+    "source_case_ids": [
+      "train_v2_092",
+      "train_v2_097"
+    ],
+    "source_quotes": [
+      "묽은 변이 계속 나오는데, 진작에 그랬던 것도 아닌 거 같아",
+      "묽은 변 계속 나는 거 같아"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:어지러움": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "어지러움",
+    "slot_id": "dizziness",
+    "source_case_ids": [
+      "train_v2_081",
+      "train_v2_086"
+    ],
+    "source_quotes": [
+      "머리가 핑 돌고 어지러워",
+      "아직도 머리가 핑 돌거든, 어지러운 느낌이 계속 되고 있어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:삼키기 곤란": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "삼키기 곤란",
+    "slot_id": "dysphagia",
+    "source_case_ids": [
+      "train_v2_072",
+      "train_v2_077"
+    ],
+    "source_quotes": [
+      "음식 삼키는 게 좀 힘들어",
+      "음식 삼키는 건 여전히 힘들어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:호흡곤란": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "호흡곤란",
+    "slot_id": "dyspnea",
+    "source_case_ids": [
+      "train_v2_039",
+      "train_v2_043",
+      "train_v2_046",
+      "train_v2_047",
+      "train_v2_051",
+      "train_v2_054",
+      "train_v2_055"
+    ],
+    "source_quotes": [
+      "숨 쉬기가 정말 힘들어서 일상생활도 제대로 안 돼",
+      "숨 쉬기가 힘들고 가슴이 답답해",
+      "숨 쉬기 힘들어, 피 섞인 가래는 없지만 참 많이 힘들어",
+      "숨 쉬기가 힘들어서 말하는 게 너무 힘들어",
+      "그 뒤로 숨 쉬기 힘들고 가슴이 답답해서 여전히 별로야",
+      "그 뒤로도 숨 쉬는 거 힘들고, 피 섞인 가래는 여전히 없어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:눈곱": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "눈곱",
+    "slot_id": "eye_discharge",
+    "source_case_ids": [
+      "train_v2_075",
+      "train_v2_080"
+    ],
+    "source_quotes": [
+      "눈곱이 좀 끼는 거 같은데, 그거 외에는 다른 건 별로 없어",
+      "눈곱 때문에 불편함이 계속되고 있어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:눈의 충혈": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "눈의 충혈",
+    "slot_id": "eye_redness",
+    "source_case_ids": [
+      "train_v2_074",
+      "train_v2_079"
+    ],
+    "source_quotes": [
+      "눈이 빨갛게 충혈되어서 좀 불편해",
+      "눈이 여전히 빨갛게 충혈돼서 불편해"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:피로감": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "피로감",
+    "slot_id": "fatigue",
+    "source_case_ids": [
+      "train_v2_060",
+      "train_v2_063",
+      "train_v2_067",
+      "train_v2_070"
+    ],
+    "source_quotes": [
+      "계속 피곤하고 축 처지는 느낌이야",
+      "몸땡이 쑤시고 온몸이 피곤해",
+      "자우름은 조금 나아졌지만, 아직도 가끔 축 처지는 느낌이 있어",
+      "몸살 때문에 좀 덜 피곤한 것 같긴 한데, 여전히 근육이 좀 아파서 힘들어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:열": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "열",
+    "slot_id": "fever",
+    "source_case_ids": [
+      "train_v2_006",
+      "train_v2_014",
+      "train_v2_057",
+      "train_v2_062",
+      "train_v2_064",
+      "train_v2_069"
+    ],
+    "source_quotes": [
+      "열은 좀 있는데 기침은 안 나는 거 같아",
+      "전에도 있었는데 열은 아직 있고 기침은 완전 없어졌어",
+      "몸에 열감이 계속 느껴져",
+      "열은 나는데 오한은 없어",
+      "전에 열이 좀 많이 나서 걱정했는데 요즘 좀 나아진 것 같아",
+      "열은 아직 있는데, 전에 같은 춥고 떠는 건 없어졌어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:거품이 섞인 가래": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "거품이 섞인 가래",
+    "slot_id": "frothy_sputum",
+    "source_case_ids": [
+      "train_v2_024",
+      "train_v2_032"
+    ],
+    "source_quotes": [
+      "거품 섞인 가래는 나오는데 피는 안 나와",
+      "거품 섞인 가래는 계속 나오는데 피는 안 나와"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:두통": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "두통",
+    "slot_id": "headache",
+    "source_case_ids": [
+      "train_v2_085",
+      "train_v2_090"
+    ],
+    "source_quotes": [
+      "머리깽이 좀 아프긴 한데 어지럽지는 않아",
+      "머리깽이 아프기는 하는데, 그래도 어지럽지는 않아"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:객혈": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "객혈",
+    "slot_id": "hemoptysis",
+    "source_case_ids": [
+      "train_v2_042",
+      "train_v2_050"
+    ],
+    "source_quotes": [
+      "기침할 때 피가 섞여서 나오는 게 좀 걱정돼",
+      "아직도 기침할 때마다 피가 섞여서 나오는데, 좀 걱정돼"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:하지부종": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "하지부종",
+    "slot_id": "leg_edema",
+    "source_case_ids": [
+      "train_v2_083",
+      "train_v2_088"
+    ],
+    "source_quotes": [
+      "다리랑 발이 너무 붓는다, 신발 끼기도 힘들어",
+      "다리가 여전히 붓는 거 같은데, 신발 끼는 거 너무 불편해"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:기운없음": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "기운없음",
+    "slot_id": "low_energy",
+    "source_case_ids": [
+      "train_v2_061",
+      "train_v2_068"
+    ],
+    "source_quotes": [
+      "요새 기운이 없는 것 같아",
+      "기운없는 느낌이 좀 나아진 것 같아"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:근력 약화": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "근력 약화",
+    "slot_id": "muscle_weakness",
+    "source_case_ids": [
+      "train_v2_084",
+      "train_v2_089"
+    ],
+    "source_quotes": [
+      "팔다리에 힘이 잘 안 들어가는 느낌이야",
+      "팔다리에 힘 들어가는 거 좀 안 좋아졌어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:근육통": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "근육통",
+    "slot_id": "myalgia",
+    "source_case_ids": [
+      "train_v2_059",
+      "train_v2_063",
+      "train_v2_066",
+      "train_v2_070"
+    ],
+    "source_quotes": [
+      "몸살 같은데 온몸이 쑤시는 느낌이야",
+      "몸땡이 쑤시고 온몸이 피곤해",
+      "전에 몸 전체가 쑤시는 느낌 심했는데 이번엔 조금 나아진 것 같아",
+      "몸살 때문에 좀 덜 피곤한 것 같긴 한데, 여전히 근육이 좀 아파서 힘들어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:코막힘": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "코막힘",
+    "slot_id": "nasal_obstruction",
+    "source_case_ids": [
+      "train_v2_002",
+      "train_v2_007",
+      "train_v2_010",
+      "train_v2_015",
+      "train_v2_018"
+    ],
+    "source_quotes": [
+      "코가 완전 막혀서 숨쉬기 힘들어",
+      "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+      "코빼기가 막혀서 숨쉬는 게 너무 답답해",
+      "목이 아푸나 싶고 코는 여전히 막혀",
+      "그때 이후로 코가 여전히 막혀서 숨쉬기가 답답해"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:가슴 두근거림": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "가슴 두근거림",
+    "slot_id": "palpitation",
+    "source_case_ids": [
+      "train_v2_082",
+      "train_v2_087"
+    ],
+    "source_quotes": [
+      "가슴이 맥이 불규칙하게 두근거려서 걱정돼",
+      "가슴 두근거림이 여전히 많이 느껴지는 것 같아"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:화농성 객담": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "화농성 객담",
+    "slot_id": "purulent_sputum",
+    "source_case_ids": [
+      "train_v2_022",
+      "train_v2_030",
+      "train_v2_038"
+    ],
+    "source_quotes": [
+      "요새 기침할 때 노랗고 걸쭉한 가래가 많이 나와",
+      "아직도 누렇고 진한 가래가 자꾸 나오는데 완전 질린다",
+      "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:콧물": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "콧물",
+    "slot_id": "rhinorrhea",
+    "source_case_ids": [
+      "train_v2_003",
+      "train_v2_008",
+      "train_v2_011",
+      "train_v2_016"
+    ],
+    "source_quotes": [
+      "콧물이 계속 나는 거 말고는 큰 문제는 없어",
+      "콧물이 자꾸 나고 재채기도 잘해",
+      "콧물 계속 나고 있어",
+      "콧물이랑 재채기 계속 나는 거 같네, 아직도 괜찮지 않아"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:재채기": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "재채기",
+    "slot_id": "sneezing",
+    "source_case_ids": [
+      "train_v2_004",
+      "train_v2_008",
+      "train_v2_012",
+      "train_v2_016"
+    ],
+    "source_quotes": [
+      "재채기가 계속 나서 불편해",
+      "콧물이 자꾸 나고 재채기도 잘해",
+      "재채기는 여전히 자주 나",
+      "콧물이랑 재채기 계속 나는 거 같네, 아직도 괜찮지 않아"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:가래": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "가래",
+    "slot_id": "sputum",
+    "source_case_ids": [
+      "train_v2_020",
+      "train_v2_021",
+      "train_v2_028",
+      "train_v2_029",
+      "train_v2_036",
+      "train_v2_037"
+    ],
+    "source_quotes": [
+      "목에 가래가 좀 끼는 느낌이 있어",
+      "기침이 자꾸 나고 가래도 많이 나와",
+      "목에 가래가 끼는 느낌이 심해서 불편해",
+      "기침이랑 가래는 계속 나는 거 같아",
+      "가래 좀 끼는 거 아직 나아지지 않았어",
+      "여전히 기침이랑 가래 많이 나와"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:목의 통증": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "목의 통증",
+    "slot_id": "throat_irritation",
+    "source_case_ids": [
+      "train_v2_001",
+      "train_v2_007",
+      "train_v2_009",
+      "train_v2_015",
+      "train_v2_017"
+    ],
+    "source_quotes": [
+      "목이 좀 아프고 칼칼한 느낌이야",
+      "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+      "목이 좀 아퍼서 불편해",
+      "목이 아푸나 싶고 코는 여전히 막혀",
+      "목이 아직 칼칼하고 때로는 많이 아플 때도 있어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:목소리 변화": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "목소리 변화",
+    "slot_id": "voice_change",
+    "source_case_ids": [
+      "train_v2_071",
+      "train_v2_076"
+    ],
+    "source_quotes": [
+      "목소리가 쉬어서 잘 나오지 않는 거 같아",
+      "목소리 쉬인 거 좀 나아진 거 같아"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:구토": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "구토",
+    "slot_id": "vomiting",
+    "source_case_ids": [
+      "train_v2_091",
+      "train_v2_096"
+    ],
+    "source_quotes": [
+      "속이 울렁거리고 구토는 했는데 설사는 안 해",
+      "속이 울렁거리고 토했는데 설사는 전혀 없어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "symptom_rule:천명음": {
+    "artifact_type": "domain_pack.symptom_rule",
+    "canonical_symptom": "천명음",
+    "slot_id": "wheezing",
+    "source_case_ids": [
+      "train_v2_025",
+      "train_v2_033"
+    ],
+    "source_quotes": [
+      "숨 쉴 때마다 쌕쌕거리는 소리가 난다",
+      "숨쉴 때 쌕쌕거리는 소리는 여전히 나고 있어"
+    ],
+    "acceptance_reason": "Gold symptom appears in accepted train_100_v2 rows."
+  },
+  "alias:복부 팽만:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "복부 팽만",
+    "pattern": "복부\\ 팽만",
+    "source_case_ids": [
+      "train_v2_094",
+      "train_v2_099"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:복부 팽만:배.{0,8}빵빵": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "복부 팽만",
+    "pattern": "배.{0,8}빵빵",
+    "source_case_ids": [
+      "train_v2_094",
+      "train_v2_099"
+    ],
+    "source_quotes": [
+      "배가 빵빵",
+      "배가 여전히 빵빵"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:복부 팽만:더부룩": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "복부 팽만",
+    "pattern": "더부룩",
+    "source_case_ids": [
+      "train_v2_094",
+      "train_v2_099"
+    ],
+    "source_quotes": [
+      "더부룩",
+      "더부룩"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:복부 통증:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "복부 통증",
+    "pattern": "복부\\ 통증",
+    "source_case_ids": [
+      "train_v2_093",
+      "train_v2_098"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:복부 통증:복통": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "복부 통증",
+    "pattern": "복통",
+    "source_case_ids": [
+      "train_v2_093"
+    ],
+    "source_quotes": [
+      "복통"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:복부 통증:창지.{0,8}꼬": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "복부 통증",
+    "pattern": "창지.{0,8}꼬",
+    "source_case_ids": [
+      "train_v2_093",
+      "train_v2_098"
+    ],
+    "source_quotes": [
+      "창지가 꼬",
+      "창지가 계속 꼬"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:식욕부진:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "식욕부진",
+    "pattern": "식욕부진",
+    "source_case_ids": [
+      "train_v2_095",
+      "train_v2_100"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:식욕부진:입맛.{0,8}없": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "식욕부진",
+    "pattern": "입맛.{0,8}없",
+    "source_case_ids": [
+      "train_v2_095",
+      "train_v2_100"
+    ],
+    "source_quotes": [
+      "입맛이 없",
+      "입맛이 없"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:식욕부진:잘 못 먹": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "식욕부진",
+    "pattern": "잘 못 먹",
+    "source_case_ids": [
+      "train_v2_095",
+      "train_v2_100"
+    ],
+    "source_quotes": [
+      "잘 못 먹",
+      "잘 못 먹"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:검은색 가래:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "검은색 가래",
+    "pattern": "검은색\\ 가래",
+    "source_case_ids": [
+      "train_v2_023",
+      "train_v2_031"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:가슴 답답:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "가슴 답답",
+    "pattern": "가슴\\ 답답",
+    "source_case_ids": [
+      "train_v2_040",
+      "train_v2_043",
+      "train_v2_044",
+      "train_v2_048",
+      "train_v2_051",
+      "train_v2_052",
+      "train_v2_056"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:가슴 답답:가슴.{0,10}(답답|막혀|막히|조이)": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "가슴 답답",
+    "pattern": "가슴.{0,10}(답답|막혀|막히|조이)",
+    "source_case_ids": [
+      "train_v2_040",
+      "train_v2_043",
+      "train_v2_044",
+      "train_v2_048",
+      "train_v2_051",
+      "train_v2_052",
+      "train_v2_056"
+    ],
+    "source_quotes": [
+      "가슴이 막혀서 답답",
+      "가슴이 답답",
+      "가슴이 제리제리하고 답답",
+      "가슴이 여전히 답답",
+      "가슴이 답답",
+      "가슴이 아직 답답",
+      "가슴이 덜 답답"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:흉통:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "흉통",
+    "pattern": "흉통",
+    "source_case_ids": [
+      "train_v2_041",
+      "train_v2_049"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:흉통:가슴.{0,10}(아프|통증|찌르|쑤시)": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "흉통",
+    "pattern": "가슴.{0,10}(아프|통증|찌르|쑤시)",
+    "source_case_ids": [
+      "train_v2_041",
+      "train_v2_049"
+    ],
+    "source_quotes": [
+      "가슴이 좀 아프",
+      "가슴 통증"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:오한:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "오한",
+    "pattern": "오한",
+    "source_case_ids": [
+      "train_v2_058",
+      "train_v2_065"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:오한:(춥고|추워).{0,8}(떨|떨리)": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "오한",
+    "pattern": "(춥고|추워).{0,8}(떨|떨리)",
+    "source_case_ids": [
+      "train_v2_058",
+      "train_v2_065"
+    ],
+    "source_quotes": [
+      "춥고 떨",
+      "춥고 떨"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:사래걸림:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "사래걸림",
+    "pattern": "사래걸림",
+    "source_case_ids": [
+      "train_v2_073",
+      "train_v2_078"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:사래걸림:사래.{0,8}(걸|들)": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "사래걸림",
+    "pattern": "사래.{0,8}(걸|들)",
+    "source_case_ids": [
+      "train_v2_073",
+      "train_v2_078"
+    ],
+    "source_quotes": [
+      "사래는 좀 걸",
+      "사래는 여전히 들"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:감기 증상:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "감기 증상",
+    "pattern": "감기\\ 증상",
+    "source_case_ids": [
+      "train_v2_005",
+      "train_v2_013"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:감기 증상:감기.{0,8}(같|걸린)": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "감기 증상",
+    "pattern": "감기.{0,8}(같|걸린)",
+    "source_case_ids": [
+      "train_v2_005"
+    ],
+    "source_quotes": [
+      "감기 걸린 것 같"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:기침:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "기침",
+    "pattern": "기침",
+    "source_case_ids": [
+      "train_v2_019",
+      "train_v2_021",
+      "train_v2_026",
+      "train_v2_027",
+      "train_v2_029",
+      "train_v2_034",
+      "train_v2_035",
+      "train_v2_037"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:기침:기침": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "기침",
+    "pattern": "기침",
+    "source_case_ids": [
+      "train_v2_019",
+      "train_v2_021",
+      "train_v2_026",
+      "train_v2_027",
+      "train_v2_029",
+      "train_v2_034",
+      "train_v2_035",
+      "train_v2_037"
+    ],
+    "source_quotes": [
+      "기침",
+      "기침",
+      "기침",
+      "기침",
+      "기침",
+      "기침",
+      "기침",
+      "기침"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:청색증:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "청색증",
+    "pattern": "청색증",
+    "source_case_ids": [
+      "train_v2_045",
+      "train_v2_053"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:청색증:입술.{0,8}(파래|파랗|푸르)": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "청색증",
+    "pattern": "입술.{0,8}(파래|파랗|푸르)",
+    "source_case_ids": [
+      "train_v2_045",
+      "train_v2_053"
+    ],
+    "source_quotes": [
+      "입술이 좀 파래",
+      "입술이 또 파래"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:설사:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "설사",
+    "pattern": "설사",
+    "source_case_ids": [
+      "train_v2_092",
+      "train_v2_097"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:설사:묽은 변": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "설사",
+    "pattern": "묽은 변",
+    "source_case_ids": [
+      "train_v2_092",
+      "train_v2_097"
+    ],
+    "source_quotes": [
+      "묽은 변",
+      "묽은 변"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:어지러움:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "어지러움",
+    "pattern": "어지러움",
+    "source_case_ids": [
+      "train_v2_081",
+      "train_v2_086"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:어지러움:핑.{0,4}돌": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "어지러움",
+    "pattern": "핑.{0,4}돌",
+    "source_case_ids": [
+      "train_v2_081",
+      "train_v2_086"
+    ],
+    "source_quotes": [
+      "핑 돌",
+      "핑 돌"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:삼키기 곤란:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "삼키기 곤란",
+    "pattern": "삼키기\\ 곤란",
+    "source_case_ids": [
+      "train_v2_072",
+      "train_v2_077"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:삼키기 곤란:삼키.{0,8}힘": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "삼키기 곤란",
+    "pattern": "삼키.{0,8}힘",
+    "source_case_ids": [
+      "train_v2_072",
+      "train_v2_077"
+    ],
+    "source_quotes": [
+      "삼키는 게 좀 힘",
+      "삼키는 건 여전히 힘"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:호흡곤란:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "호흡곤란",
+    "pattern": "호흡곤란",
+    "source_case_ids": [
+      "train_v2_039",
+      "train_v2_043",
+      "train_v2_046",
+      "train_v2_047",
+      "train_v2_051",
+      "train_v2_054",
+      "train_v2_055"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:호흡곤란:숨.{0,10}(힘들|차|가쁘)": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "호흡곤란",
+    "pattern": "숨.{0,10}(힘들|차|가쁘)",
+    "source_case_ids": [
+      "train_v2_039",
+      "train_v2_043",
+      "train_v2_046",
+      "train_v2_047",
+      "train_v2_051",
+      "train_v2_054"
+    ],
+    "source_quotes": [
+      "숨 쉬기가 정말 힘들",
+      "숨 쉬기가 힘들",
+      "숨 쉬기 힘들",
+      "숨 쉬기가 힘들",
+      "숨 쉬기 힘들",
+      "숨 쉬는 거 힘들"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:호흡곤란:숨\\s*쉬기.{0,10}힘": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "호흡곤란",
+    "pattern": "숨\\s*쉬기.{0,10}힘",
+    "source_case_ids": [
+      "train_v2_039",
+      "train_v2_043",
+      "train_v2_046",
+      "train_v2_047",
+      "train_v2_051"
+    ],
+    "source_quotes": [
+      "숨 쉬기가 정말 힘",
+      "숨 쉬기가 힘",
+      "숨 쉬기 힘",
+      "숨 쉬기가 힘",
+      "숨 쉬기 힘"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:눈곱:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "눈곱",
+    "pattern": "눈곱",
+    "source_case_ids": [
+      "train_v2_075",
+      "train_v2_080"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:눈곱:눈곱": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "눈곱",
+    "pattern": "눈곱",
+    "source_case_ids": [
+      "train_v2_075",
+      "train_v2_080"
+    ],
+    "source_quotes": [
+      "눈곱",
+      "눈곱"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:눈의 충혈:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "눈의 충혈",
+    "pattern": "눈의\\ 충혈",
+    "source_case_ids": [
+      "train_v2_074",
+      "train_v2_079"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:눈의 충혈:눈.{0,8}(빨갛|충혈)": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "눈의 충혈",
+    "pattern": "눈.{0,8}(빨갛|충혈)",
+    "source_case_ids": [
+      "train_v2_074",
+      "train_v2_079"
+    ],
+    "source_quotes": [
+      "눈이 빨갛게 충혈",
+      "눈이 여전히 빨갛"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:피로감:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "피로감",
+    "pattern": "피로감",
+    "source_case_ids": [
+      "train_v2_060",
+      "train_v2_063",
+      "train_v2_067",
+      "train_v2_070"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:피로감:피곤": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "피로감",
+    "pattern": "피곤",
+    "source_case_ids": [
+      "train_v2_060",
+      "train_v2_063",
+      "train_v2_070"
+    ],
+    "source_quotes": [
+      "피곤",
+      "피곤",
+      "피곤"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:피로감:축.{0,4}처지": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "피로감",
+    "pattern": "축.{0,4}처지",
+    "source_case_ids": [
+      "train_v2_060",
+      "train_v2_067"
+    ],
+    "source_quotes": [
+      "축 처지",
+      "축 처지"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:피로감:자우름": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "피로감",
+    "pattern": "자우름",
+    "source_case_ids": [
+      "train_v2_067"
+    ],
+    "source_quotes": [
+      "자우름"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:열:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "열",
+    "pattern": "열",
+    "source_case_ids": [
+      "train_v2_006",
+      "train_v2_014",
+      "train_v2_057",
+      "train_v2_062",
+      "train_v2_064",
+      "train_v2_069"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:열:열": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "열",
+    "pattern": "열",
+    "source_case_ids": [
+      "train_v2_006",
+      "train_v2_014",
+      "train_v2_057",
+      "train_v2_062",
+      "train_v2_064",
+      "train_v2_069"
+    ],
+    "source_quotes": [
+      "열",
+      "열",
+      "열",
+      "열",
+      "열",
+      "열"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:거품이 섞인 가래:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "거품이 섞인 가래",
+    "pattern": "거품이\\ 섞인\\ 가래",
+    "source_case_ids": [
+      "train_v2_024",
+      "train_v2_032"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:거품이 섞인 가래:(거품|거품 섞).{0,8}가래": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "거품이 섞인 가래",
+    "pattern": "(거품|거품 섞).{0,8}가래",
+    "source_case_ids": [
+      "train_v2_024",
+      "train_v2_032"
+    ],
+    "source_quotes": [
+      "거품 섞인 가래",
+      "거품 섞인 가래"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:두통:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "두통",
+    "pattern": "두통",
+    "source_case_ids": [
+      "train_v2_085",
+      "train_v2_090"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:두통:머리.{0,8}아프": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "두통",
+    "pattern": "머리.{0,8}아프",
+    "source_case_ids": [
+      "train_v2_085",
+      "train_v2_090"
+    ],
+    "source_quotes": [
+      "머리깽이 좀 아프",
+      "머리깽이 아프"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:두통:머리깽이": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "두통",
+    "pattern": "머리깽이",
+    "source_case_ids": [
+      "train_v2_085",
+      "train_v2_090"
+    ],
+    "source_quotes": [
+      "머리깽이",
+      "머리깽이"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:객혈:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "객혈",
+    "pattern": "객혈",
+    "source_case_ids": [
+      "train_v2_042",
+      "train_v2_050"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:객혈:기침.{0,12}피": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "객혈",
+    "pattern": "기침.{0,12}피",
+    "source_case_ids": [
+      "train_v2_042",
+      "train_v2_050"
+    ],
+    "source_quotes": [
+      "기침할 때 피",
+      "기침할 때마다 피"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:객혈:피.{0,8}(섞|가래|나오)": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "객혈",
+    "pattern": "피.{0,8}(섞|가래|나오)",
+    "source_case_ids": [
+      "train_v2_042",
+      "train_v2_050"
+    ],
+    "source_quotes": [
+      "피가 섞여서 나오",
+      "피가 섞여서 나오"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:하지부종:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "하지부종",
+    "pattern": "하지부종",
+    "source_case_ids": [
+      "train_v2_083",
+      "train_v2_088"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:하지부종:(다리|발).{0,8}붓": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "하지부종",
+    "pattern": "(다리|발).{0,8}붓",
+    "source_case_ids": [
+      "train_v2_083",
+      "train_v2_088"
+    ],
+    "source_quotes": [
+      "다리랑 발이 너무 붓",
+      "다리가 여전히 붓"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:하지부종:신발.{0,8}끼": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "하지부종",
+    "pattern": "신발.{0,8}끼",
+    "source_case_ids": [
+      "train_v2_083",
+      "train_v2_088"
+    ],
+    "source_quotes": [
+      "신발 끼",
+      "신발 끼"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:기운없음:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "기운없음",
+    "pattern": "기운없음",
+    "source_case_ids": [
+      "train_v2_061",
+      "train_v2_068"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:기운없음:기운.{0,6}없": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "기운없음",
+    "pattern": "기운.{0,6}없",
+    "source_case_ids": [
+      "train_v2_061",
+      "train_v2_068"
+    ],
+    "source_quotes": [
+      "기운이 없",
+      "기운없"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:근력 약화:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "근력 약화",
+    "pattern": "근력\\ 약화",
+    "source_case_ids": [
+      "train_v2_084",
+      "train_v2_089"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:근력 약화:팔다리.{0,12}힘.{0,8}안": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "근력 약화",
+    "pattern": "팔다리.{0,12}힘.{0,8}안",
+    "source_case_ids": [
+      "train_v2_084"
+    ],
+    "source_quotes": [
+      "팔다리에 힘이 잘 안"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:근력 약화:힘이.{0,8}안 들어": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "근력 약화",
+    "pattern": "힘이.{0,8}안 들어",
+    "source_case_ids": [
+      "train_v2_084"
+    ],
+    "source_quotes": [
+      "힘이 잘 안 들어"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:근육통:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "근육통",
+    "pattern": "근육통",
+    "source_case_ids": [
+      "train_v2_059",
+      "train_v2_063",
+      "train_v2_066",
+      "train_v2_070"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:근육통:몸.{0,8}쑤시": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "근육통",
+    "pattern": "몸.{0,8}쑤시",
+    "source_case_ids": [
+      "train_v2_059",
+      "train_v2_063",
+      "train_v2_066"
+    ],
+    "source_quotes": [
+      "몸이 쑤시",
+      "몸땡이 쑤시",
+      "몸 전체가 쑤시"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:근육통:몸살": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "근육통",
+    "pattern": "몸살",
+    "source_case_ids": [
+      "train_v2_059",
+      "train_v2_070"
+    ],
+    "source_quotes": [
+      "몸살",
+      "몸살"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:코막힘:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "코막힘",
+    "pattern": "코막힘",
+    "source_case_ids": [
+      "train_v2_002",
+      "train_v2_007",
+      "train_v2_010",
+      "train_v2_015",
+      "train_v2_018"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:코막힘:코.{0,8}(막혀|막히|답답)": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "코막힘",
+    "pattern": "코.{0,8}(막혀|막히|답답)",
+    "source_case_ids": [
+      "train_v2_002",
+      "train_v2_007",
+      "train_v2_010",
+      "train_v2_015",
+      "train_v2_018"
+    ],
+    "source_quotes": [
+      "코가 완전 막혀",
+      "코도 계속 막혀",
+      "코빼기가 막혀",
+      "코는 여전히 막혀",
+      "코가 여전히 막혀"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:코막힘:코도.{0,8}막": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "코막힘",
+    "pattern": "코도.{0,8}막",
+    "source_case_ids": [
+      "train_v2_007"
+    ],
+    "source_quotes": [
+      "코도 계속 막"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:가슴 두근거림:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "가슴 두근거림",
+    "pattern": "가슴\\ 두근거림",
+    "source_case_ids": [
+      "train_v2_082",
+      "train_v2_087"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:가슴 두근거림:두근": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "가슴 두근거림",
+    "pattern": "두근",
+    "source_case_ids": [
+      "train_v2_082",
+      "train_v2_087"
+    ],
+    "source_quotes": [
+      "두근",
+      "두근"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:가슴 두근거림:맥이.{0,8}불규칙": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "가슴 두근거림",
+    "pattern": "맥이.{0,8}불규칙",
+    "source_case_ids": [
+      "train_v2_082"
+    ],
+    "source_quotes": [
+      "맥이 불규칙"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:화농성 객담:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "화농성 객담",
+    "pattern": "화농성\\ 객담",
+    "source_case_ids": [
+      "train_v2_022",
+      "train_v2_030",
+      "train_v2_038"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:화농성 객담:(누렇|노랗|짙은).{0,8}가래": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "화농성 객담",
+    "pattern": "(누렇|노랗|짙은).{0,8}가래",
+    "source_case_ids": [
+      "train_v2_022",
+      "train_v2_030",
+      "train_v2_038"
+    ],
+    "source_quotes": [
+      "노랗고 걸쭉한 가래",
+      "누렇고 진한 가래",
+      "누렇고 짙은 가래"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:콧물:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "콧물",
+    "pattern": "콧물",
+    "source_case_ids": [
+      "train_v2_003",
+      "train_v2_008",
+      "train_v2_011",
+      "train_v2_016"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:콧물:콧물": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "콧물",
+    "pattern": "콧물",
+    "source_case_ids": [
+      "train_v2_003",
+      "train_v2_008",
+      "train_v2_011",
+      "train_v2_016"
+    ],
+    "source_quotes": [
+      "콧물",
+      "콧물",
+      "콧물",
+      "콧물"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:재채기:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "재채기",
+    "pattern": "재채기",
+    "source_case_ids": [
+      "train_v2_004",
+      "train_v2_008",
+      "train_v2_012",
+      "train_v2_016"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:재채기:재채기": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "재채기",
+    "pattern": "재채기",
+    "source_case_ids": [
+      "train_v2_004",
+      "train_v2_008",
+      "train_v2_012",
+      "train_v2_016"
+    ],
+    "source_quotes": [
+      "재채기",
+      "재채기",
+      "재채기",
+      "재채기"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:가래:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "가래",
+    "pattern": "가래",
+    "source_case_ids": [
+      "train_v2_020",
+      "train_v2_021",
+      "train_v2_028",
+      "train_v2_029",
+      "train_v2_036",
+      "train_v2_037"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:가래:가래": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "가래",
+    "pattern": "가래",
+    "source_case_ids": [
+      "train_v2_020",
+      "train_v2_021",
+      "train_v2_028",
+      "train_v2_029",
+      "train_v2_036",
+      "train_v2_037"
+    ],
+    "source_quotes": [
+      "가래",
+      "가래",
+      "가래",
+      "가래",
+      "가래",
+      "가래"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:목의 통증:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "목의 통증",
+    "pattern": "목의\\ 통증",
+    "source_case_ids": [
+      "train_v2_001",
+      "train_v2_007",
+      "train_v2_009",
+      "train_v2_015",
+      "train_v2_017"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:목의 통증:목.{0,8}(아프|아푸|칼칼|따갑|쓰리)": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "목의 통증",
+    "pattern": "목.{0,8}(아프|아푸|칼칼|따갑|쓰리)",
+    "source_case_ids": [
+      "train_v2_001",
+      "train_v2_007",
+      "train_v2_015",
+      "train_v2_017"
+    ],
+    "source_quotes": [
+      "목이 좀 아프고 칼칼",
+      "목이 아푸",
+      "목이 아푸",
+      "목이 아직 칼칼"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:목소리 변화:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "목소리 변화",
+    "pattern": "목소리\\ 변화",
+    "source_case_ids": [
+      "train_v2_071",
+      "train_v2_076"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:목소리 변화:목소리.{0,8}(쉬|안 나오|변)": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "목소리 변화",
+    "pattern": "목소리.{0,8}(쉬|안 나오|변)",
+    "source_case_ids": [
+      "train_v2_071",
+      "train_v2_076"
+    ],
+    "source_quotes": [
+      "목소리가 쉬",
+      "목소리 쉬"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:목소리 변화:쉬인": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "목소리 변화",
+    "pattern": "쉬인",
+    "source_case_ids": [
+      "train_v2_076"
+    ],
+    "source_quotes": [
+      "쉬인"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:구토:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "구토",
+    "pattern": "구토",
+    "source_case_ids": [
+      "train_v2_091",
+      "train_v2_096"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:구토:토했": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "구토",
+    "pattern": "토했",
+    "source_case_ids": [
+      "train_v2_096"
+    ],
+    "source_quotes": [
+      "토했"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:구토:구토": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "구토",
+    "pattern": "구토",
+    "source_case_ids": [
+      "train_v2_091"
+    ],
+    "source_quotes": [
+      "구토"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:구토:울렁.{0,8}토": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "구토",
+    "pattern": "울렁.{0,8}토",
+    "source_case_ids": [
+      "train_v2_091",
+      "train_v2_096"
+    ],
+    "source_quotes": [
+      "울렁거리고 구토",
+      "울렁거리고 토"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "alias:천명음:canonical": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "천명음",
+    "pattern": "천명음",
+    "source_case_ids": [
+      "train_v2_025",
+      "train_v2_033"
+    ],
+    "acceptance_reason": "Canonical label is present as a train_100_v2 gold symptom."
+  },
+  "alias:천명음:(쌕쌕|휘파람).{0,12}(소리|숨|나)": {
+    "artifact_type": "domain_pack.ir_text_alias",
+    "canonical_symptom": "천명음",
+    "pattern": "(쌕쌕|휘파람).{0,12}(소리|숨|나)",
+    "source_case_ids": [
+      "train_v2_025",
+      "train_v2_033"
+    ],
+    "source_quotes": [
+      "쌕쌕거리는 소리",
+      "쌕쌕거리는 소리는 여전히 나"
+    ],
+    "acceptance_reason": "Regex matched at least one accepted train_100_v2 row where this symptom is gold."
+  },
+  "fewshot:extraction:train_v2_007": {
+    "artifact_type": "fewshots.extraction",
+    "source_case_ids": [
+      "train_v2_007"
+    ],
+    "source_quote": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:extraction:train_v2_041": {
+    "artifact_type": "fewshots.extraction",
+    "source_case_ids": [
+      "train_v2_041"
+    ],
+    "source_quote": "가슴이 좀 아프긴 한데 숨참은 없어",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:extraction:train_v2_038": {
+    "artifact_type": "fewshots.extraction",
+    "source_case_ids": [
+      "train_v2_038"
+    ],
+    "source_quote": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:extraction:train_v2_055": {
+    "artifact_type": "fewshots.extraction",
+    "source_case_ids": [
+      "train_v2_055"
+    ],
+    "source_quote": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:standardization:train_v2_007": {
+    "artifact_type": "fewshots.standardization",
+    "source_case_ids": [
+      "train_v2_007"
+    ],
+    "source_quote": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:standardization:train_v2_085": {
+    "artifact_type": "fewshots.standardization",
+    "source_case_ids": [
+      "train_v2_085"
+    ],
+    "source_quote": "머리깽이 좀 아프긴 한데 어지럽지는 않아",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:standardization:train_v2_067": {
+    "artifact_type": "fewshots.standardization",
+    "source_case_ids": [
+      "train_v2_067"
+    ],
+    "source_quote": "자우름은 조금 나아졌지만, 아직도 가끔 축 처지는 느낌이 있어",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:standardization:train_v2_093": {
+    "artifact_type": "fewshots.standardization",
+    "source_case_ids": [
+      "train_v2_093"
+    ],
+    "source_quote": "창지가 꼬이는 느낌이랑 복통이 좀 있어",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:semantic_unit:train_v2_041": {
+    "artifact_type": "fewshots.semantic_unit",
+    "source_case_ids": [
+      "train_v2_041"
+    ],
+    "source_quote": "가슴이 좀 아프긴 한데 숨참은 없어",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:semantic_unit:train_v2_055": {
+    "artifact_type": "fewshots.semantic_unit",
+    "source_case_ids": [
+      "train_v2_055"
+    ],
+    "source_quote": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:semantic_unit:train_v2_038": {
+    "artifact_type": "fewshots.semantic_unit",
+    "source_case_ids": [
+      "train_v2_038"
+    ],
+    "source_quote": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:span_tagging:train_v2_007": {
+    "artifact_type": "fewshots.span_tagging",
+    "source_case_ids": [
+      "train_v2_007"
+    ],
+    "source_quote": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:span_tagging:train_v2_041": {
+    "artifact_type": "fewshots.span_tagging",
+    "source_case_ids": [
+      "train_v2_041"
+    ],
+    "source_quote": "가슴이 좀 아프긴 한데 숨참은 없어",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:span_tagging:train_v2_085": {
+    "artifact_type": "fewshots.span_tagging",
+    "source_case_ids": [
+      "train_v2_085"
+    ],
+    "source_quote": "머리깽이 좀 아프긴 한데 어지럽지는 않아",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:symptom_hint:train_v2_007": {
+    "artifact_type": "fewshots.symptom_hint",
+    "source_case_ids": [
+      "train_v2_007"
+    ],
+    "source_quote": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:symptom_hint:train_v2_038": {
+    "artifact_type": "fewshots.symptom_hint",
+    "source_case_ids": [
+      "train_v2_038"
+    ],
+    "source_quote": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:symptom_hint:train_v2_041": {
+    "artifact_type": "fewshots.symptom_hint",
+    "source_case_ids": [
+      "train_v2_041"
+    ],
+    "source_quote": "가슴이 좀 아프긴 한데 숨참은 없어",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:symptom_hint:train_v2_085": {
+    "artifact_type": "fewshots.symptom_hint",
+    "source_case_ids": [
+      "train_v2_085"
+    ],
+    "source_quote": "머리깽이 좀 아프긴 한데 어지럽지는 않아",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:symptom_hint:train_v2_093": {
+    "artifact_type": "fewshots.symptom_hint",
+    "source_case_ids": [
+      "train_v2_093"
+    ],
+    "source_quote": "창지가 꼬이는 느낌이랑 복통이 좀 있어",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:onepager_review:train_v2_041": {
+    "artifact_type": "fewshots.onepager_review",
+    "source_case_ids": [
+      "train_v2_041"
+    ],
+    "source_quote": "가슴이 좀 아프긴 한데 숨참은 없어",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  },
+  "fewshot:onepager_review:train_v2_055": {
+    "artifact_type": "fewshots.onepager_review",
+    "source_case_ids": [
+      "train_v2_055"
+    ],
+    "source_quote": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+    "acceptance_reason": "Selected as a sparse representative example from accepted train_100_v2."
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "stage": "semantic_unit",
+  "source_dataset": "evaluation/train_100_v2/train_100_v2.jsonl",
+  "examples": [
+    {
+      "title": "Split active symptom and explicit absence",
+      "source_case_ids": [
+        "train_v2_041"
+      ],
+      "visit_type": "initial",
+      "question_id": "Q1",
+      "question_type": "chief_complaint",
+      "question": "어디가 불편하셔서 오셨어요?",
+      "patient_answer": "가슴이 좀 아프긴 한데 숨참은 없어",
+      "input": "가슴이 좀 아프긴 한데 숨참은 없어",
+      "meaning_units": [
+        {
+          "source_quote": "가슴이 좀 아프긴 한데 숨참은 없어",
+          "summary": "가슴이 좀 아프긴 한데 숨참은 없어",
+          "question_id": "Q1"
+        }
+      ],
+      "expected_output": "Meaning units must preserve negation, improvement, and modifiers as stated."
+    },
+    {
+      "title": "Keep improved but still present course as one meaning unit",
+      "source_case_ids": [
+        "train_v2_055"
+      ],
+      "visit_type": "followup",
+      "question_id": "Q3",
+      "question_type": "progress",
+      "question": "이전과 비교해서 증상이 어떻게 변했나요?",
+      "patient_answer": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+      "input": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+      "meaning_units": [
+        {
+          "source_quote": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+          "summary": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+          "question_id": "Q3"
+        }
+      ],
+      "expected_output": "Meaning units must preserve negation, improvement, and modifiers as stated."
+    },
+    {
+      "title": "Keep sputum color and character together",
+      "source_case_ids": [
+        "train_v2_038"
+      ],
+      "visit_type": "followup",
+      "question_id": "Q3",
+      "question_type": "progress",
+      "question": "이전과 비교해서 증상이 어떻게 변했나요?",
+      "patient_answer": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+      "input": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+      "meaning_units": [
+        {
+          "source_quote": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+          "summary": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+          "question_id": "Q3"
+        }
+      ],
+      "expected_output": "Meaning units must preserve negation, improvement, and modifiers as stated."
+    }
+  ]
+}

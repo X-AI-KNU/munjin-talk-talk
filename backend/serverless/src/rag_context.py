@@ -112,10 +112,14 @@ def retrieve_symptom_references(query: str, top_k: int = 4) -> list[dict[str, An
 def retrieve_alias_hints(query: str) -> list[dict[str, str]]:
     """표준명/alias bridge에서 환자 표현과 직접 닿는 힌트를 찾습니다."""
     hints = []
+    seen_canonical = set()
     for pattern, canonical_name in IR_TEXT_ALIASES:
+        if canonical_name in seen_canonical:
+            continue
         match = re.search(pattern, query)
         if not match:
             continue
+        seen_canonical.add(canonical_name)
         hints.append(
             {
                 "matched_text": clean_quote(match.group(0)),
