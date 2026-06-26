@@ -13,6 +13,7 @@ This folder defines the held-out evaluation dataset design for MunjinTalkTalk sy
 | `llm_render_prompt.md` | Prompt template for LLM-based test utterance rendering |
 | `quality_gate.md` | Manual and automated checks before accepting rendered test data |
 | `row_design_protocol.md` | Rules for creating the 1000 row-level blueprint without leaking train data |
+| `dialect_source_policy.md` | Source-grounding rules for Kangwon dialect expressions |
 
 ## Workflow
 

@@ -19,6 +19,8 @@ Accept the rendered test set only when all checks pass.
 - Standard colloquial: 500.
 - Kangwon colloquial: 500.
 - Quadrants are 250 each.
+- Standard rows all have `dialect_source_layer: none`.
+- Kangwon source-layer counts match `distribution_plan.json`.
 - Symptom group counts match `distribution_plan.json`.
 - Status pattern counts match `distribution_plan.json`.
 - Gold symptom count and negative symptom count distributions match `distribution_plan.json`.
@@ -27,6 +29,9 @@ Accept the rendered test set only when all checks pass.
 
 - No rendered text exactly matches any `train_100` text.
 - No rendered text is near-duplicate of `train_100` text by high character n-gram overlap.
+- `rag_pack_anchored` Kangwon rows contain at least one natural expression grounded in `dialect_kangwon.csv/json`.
+- `train_validated_medical_colloquial` rows must not claim that their colloquial forms are dialect-pack terms.
+- Rare dialect-pack words must not be forced into medical utterances when unnatural.
 - `direct_label_forbidden` cases must not contain exact forbidden standard labels.
 - Patient text must not be EMR style.
 - Patient text must not contain JSON, bullets, diagnosis, explanation, or staff/doctor narration.

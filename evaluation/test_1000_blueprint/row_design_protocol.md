@@ -12,6 +12,8 @@ This document describes how to create `case_blueprint.jsonl`. It should be used 
 - Do not use Q2 onset timing or Q4 patient question content.
 - Use only Q1 chief complaint and Q3 follow-up/new symptom content.
 - Keep standard Korean and Gangwon colloquial at exactly 50% each.
+- Standard rows must set `dialect_source_layer` to `none`.
+- For Kangwon rows, set `dialect_source_layer` according to `dialect_source_policy.md`.
 
 ## Row ID Blocks
 
@@ -71,9 +73,38 @@ Avoid ambiguous negative forms unless the row is intentionally hard and still cl
 
 Gangwon rows should sound colloquial, not like a list of rare dialect words.
 
-Use light or medium dialect most of the time:
+The current runtime dialect RAG pack is a general vocabulary pack, not a medical symptom lexicon. Therefore Kangwon rows must declare one of three source layers:
+
+- `rag_pack_anchored`: includes at least one natural expression grounded in `dialect_kangwon.csv/json`.
+- `train_validated_medical_colloquial`: uses medical colloquial families already validated in `train_100`, without copying full train utterances.
+- `light_dialect_flavor`: mostly standard symptom wording with mild local cadence or endings.
+
+Target mix inside 500 Kangwon rows:
+
+| Layer | Count |
+| --- | ---: |
+| `rag_pack_anchored` | 120 |
+| `train_validated_medical_colloquial` | 280 |
+| `light_dialect_flavor` | 100 |
+
+RAG-pack anchored examples that can be used when natural:
+
+- `아푸나?` -> `아프니?`
+- `(가슴이) 제리제리하다` -> `저리다`
+- `코빼기` -> `코`
+- `다리깽이` -> `다리`
+- `몸땡이` -> `몸통`
+- `자우름` -> `졸음`
+- `장구카다`, `잠구키다` -> `잠기다`
+- `줄구다` -> `줄이다`
+- `지악`, `으찌냑` -> `저녁`, `어제 저녁`
+- `역부러` -> `일부러`
+
+Train-validated medical colloquial examples:
 
 - "아녀", "없어/없드래", "그랬어", "하니", "가심", "맥혀", "아퍼"
+
+These are style families, not proof that the current dialect RAG pack contains those exact terms.
 
 Strong dialect rows are limited to 50 cases and must remain understandable.
 

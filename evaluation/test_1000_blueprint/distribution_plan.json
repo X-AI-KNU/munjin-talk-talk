@@ -29,6 +29,11 @@
     "medium": 150,
     "strong": 50
   },
+  "kangwon_source_layer_distribution": {
+    "rag_pack_anchored": 120,
+    "train_validated_medical_colloquial": 280,
+    "light_dialect_flavor": 100
+  },
   "symptom_group_distribution": {
     "upper_airway_common": 220,
     "cough_sputum_lower_airway": 180,
@@ -89,6 +94,37 @@
       "식욕부진"
     ],
     "max_exact_standard_label_rate": 0.15
+  },
+  "dialect_source_policy": {
+    "primary_rag_pack_files": [
+      "backend/serverless/src/data/dialect_packs/dialect_kangwon.csv",
+      "backend/serverless/src/data/dialect_packs/dialect_kangwon.json"
+    ],
+    "rag_pack_note": "The current Kangwon dialect pack is a general vocabulary pack, not a medical symptom lexicon. Use pack-grounded terms only when clinically natural.",
+    "rag_pack_anchored_examples": [
+      { "dialect": "아푸나?", "standard": "아프니?", "usage": "pain wording anchor" },
+      { "dialect": "(가슴이) 제리제리하다", "standard": "저리다", "usage": "sensation anchor, not direct chest pain by itself" },
+      { "dialect": "코빼기", "standard": "코", "usage": "nose/body-part anchor" },
+      { "dialect": "다리깽이", "standard": "다리", "usage": "leg/body-part anchor" },
+      { "dialect": "몸땡이", "standard": "몸통", "usage": "body anchor" },
+      { "dialect": "자우름", "standard": "졸음", "usage": "sleepiness/fatigue-adjacent anchor" },
+      { "dialect": "장구카다", "standard": "잠기다", "usage": "voice or blockage context only if natural" },
+      { "dialect": "줄구다", "standard": "줄이다", "usage": "improvement/reduction context" },
+      { "dialect": "지악", "standard": "저녁", "usage": "timing context" },
+      { "dialect": "역부러", "standard": "일부러", "usage": "daily context" }
+    ],
+    "train_validated_medical_colloquial_examples": [
+      "가심",
+      "맥혀",
+      "코물",
+      "아푸다",
+      "아퍼",
+      "아녀",
+      "않어",
+      "하니",
+      "영"
+    ],
+    "must_not_claim_as_rag_pack_terms": ["가심", "맥혀", "아녀"]
   },
   "surface_variation_targets": {
     "short_single_clause": 260,
