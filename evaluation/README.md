@@ -1,22 +1,20 @@
 # Evaluation Reset
 
-The previous IR evaluation folder, generated datasets, run outputs, hand-built aliases, few-shots, and domain-pack-derived tuning artifacts have been removed.
+The previous IR evaluation folder, generated datasets, run outputs, train-derived aliases, few-shots, and domain-pack tuning artifacts have been removed.
 
-This directory now starts from a clean reset marker and rebuilds evaluation assets from documented design files only.
+This directory now keeps only reset status and clean design documents. Generated train/test data must not be committed here until the new blueprint is accepted.
 
-Planned rebuild order:
+Current rebuild order:
 
-1. Define the data generation blueprint and leakage rules.
-2. Generate `train_100`.
-3. Build domain pack, aliases, and few-shot candidates from `train_100` only.
-4. Freeze those runtime artifacts.
-5. Generate a separate locked `test_1000`.
-6. Run evaluation once before inspecting individual test failures.
+1. Freeze the reset scope and leakage rules.
+2. Design `train_100_v2`.
+3. Render `train_100_v2` with LLM-generated patient utterances from the approved blueprint.
+4. Build domain pack, aliases, and few-shot candidates from accepted `train_100_v2` only.
+5. Freeze train-derived runtime artifacts with provenance.
+6. Design and render a separate locked `test_1000_v2`.
+7. Run offline IR evaluation and real Bedrock pipeline evaluation as separate tracks.
+8. Save the first held-out report before inspecting individual test failures for improvements.
 
-Do not restore the old `evaluation/ir` data or outputs as training material.
+Do not restore the old `evaluation/ir`, `train_100`, or `test_1000` outputs as training material.
 
-Current rebuild entry point:
-
-- `train_100_blueprint/`: blueprint and LLM rendering instructions for the first 100 training cases.
-- `test_1000_blueprint/`: held-out test design, rendering rules, and first-evaluation lock for the 1000 case evaluation set.
-- `RESEARCH_DESIGN.md`: clean train/test order, dialect source-layer policy, and reporting rules.
+See `design/` for the new clean rebuild plan.

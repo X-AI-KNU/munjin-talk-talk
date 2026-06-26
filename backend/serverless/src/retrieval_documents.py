@@ -64,30 +64,8 @@ def _aliases_for_domain_name(symptom_name):
             aliases.extend(keywords)
     for pattern, canonical_name in IR_TEXT_ALIASES:
         if canonical_name == symptom_name:
-            aliases.extend(_literal_terms_from_alias_pattern(pattern))
+            aliases.append(pattern)
     return sorted({normalize_text(alias) for alias in aliases if normalize_text(alias)})
-
-
-def _literal_terms_from_alias_pattern(pattern):
-    """Regex alias에서 검색에 쓸 수 있는 문자 term만 추립니다.
-
-    domain pack의 alias는 `re.search`용 정규식입니다. 이를 BM25 문서에 그대로
-    넣으면 `s`, `0`, `12` 같은 regex 조각이 토큰으로 섞여 짧은 증상어 순위를
-    흐립니다. IR 검색 문서에는 의미 있는 한글/영문/숫자 조각만 보조 term으로
-    넣고, 실제 regex 매칭은 `rag_context`와 `preferred_canonical_name`에서
-    계속 수행합니다.
-    """
-    text = str(pattern or "")
-    text = text.replace("\\s", " ")
-    terms = re.findall(r"[가-힣a-zA-Z0-9]+", text)
-    cleaned = []
-    for term in terms:
-        if len(term) < 2:
-            continue
-        if term.isdigit():
-            continue
-        cleaned.append(term)
-    return cleaned
 
 
 def build_symptom_docs_from_domain_pack():
