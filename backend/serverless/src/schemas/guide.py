@@ -24,7 +24,7 @@ class StrictModel(BaseModel):
 
 
 class PatientGuideItem(StrictModel):
-    """환자 질문 하나에 대응하는 쉬운 안내문 항목입니다."""
+    """환자 질문 하나에 대응하는 의미 보존 안내문 항목입니다."""
 
     question: str = Field(min_length=1)
     answer_simple: list[str]

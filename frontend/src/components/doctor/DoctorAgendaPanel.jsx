@@ -153,7 +153,7 @@ export default function DoctorAgendaPanel({ sessionData, submitStatus, onSubmit 
 
               <textarea
                 className="dap-textarea"
-                placeholder="환자에게 전달할 답변 (의학 용어 사용 가능 — LLM이 어르신 표현으로 변환)"
+                placeholder="환자에게 전달할 답변 (의미 유지 — 존댓말만 정리)"
                 value={answer.answer_text}
                 onChange={(e) => handleAnswerChange(idx, e.target.value)}
                 rows={4}

@@ -17,7 +17,7 @@ from llm import call_bedrock_json_with_meta
 from schemas.guide import validate_guide_payload
 from sessions import get_session, update_session
 from settings import GUIDE_MAX_TOKENS, GUIDE_MODEL_ID
-from utils import clean_quote, compact_ir, json_default, mask_name, normalize_text, now_iso, response
+from utils import clean_quote, json_default, mask_name, now_iso, response
 
 
 def save_doctor_response(body: dict[str, Any]):
@@ -109,7 +109,7 @@ def generate_patient_guide_bedrock(
     answers: list[dict[str, Any]],
     patient_instruction: str,
 ) -> dict[str, Any]:
-    """의사 답변을 어르신이 이해하기 쉬운 한국어 안내문으로 변환합니다."""
+    """의사 답변의 의미를 보존한 채 어르신 대상 존댓말 안내문으로 변환합니다."""
     payload = {
         "patient": session.get("patient", {}),
         "onepager": onepager,
@@ -118,17 +118,23 @@ def generate_patient_guide_bedrock(
     }
     prompt = f"""
 You are a Korean patient instruction writer for older adults after a clinic visit.
-Convert the doctor's answers into easy Korean guide items.
+Convert the doctor's answers only into polite Korean honorific guide items for an older patient.
+Your job is style conversion, not medical simplification.
 
 Core rules:
+- Treat doctor_answers as the authoritative source for answer content.
+- Preserve the doctor's exact medical meaning, clinical strength, uncertainty, permissions, warnings, medication names, dosages, timing, follow-up conditions, and exceptions.
+- Do NOT simplify, summarize, paraphrase loosely, add explanations, replace medical terms, or change clinical intent.
+- If the doctor's answer is already patient-facing Korean, keep it nearly identical and adjust only spacing, punctuation, and polite endings when needed.
+- You may split a long doctor answer into short sentences only when every split preserves the same meaning.
+- Convert telegraphic clinician style into polite 존댓말 for an older patient.
+  Example: "복용 가능" -> "드셔도 됩니다."
+  Example: "추가 약 생기면 재확인" -> "다른 약이 추가되면 다시 확인해 주세요."
 - Use only information present in doctor_answers, onepager, or the separate doctor instruction.
 - Do not invent diagnosis, prescription, dosage, duration, test results, or follow-up dates.
-- Do not copy the doctor's answer verbatim. Rewrite it into polite, easy Korean.
-- Preserve permissions, warnings, timing, follow-up conditions, and uncertainty.
-- Keep each bullet short and concrete.
-- Avoid difficult medical terms unless the doctor used them.
 - The field doctor_patient_instruction_displayed_separately is displayed as a separate blue card.
   Do not duplicate it inside question answer items.
+- The JSON field name answer_simple is legacy. It must contain meaning-preserving polite Korean sentences, not simplified rewrites.
 - Return JSON only. The backend validates the output with a strict schema.
 
 Few-shot examples:
@@ -139,8 +145,8 @@ JSON item:
 {{
   "question": "혈압약과 감기약을 같이 먹어도 되는지 궁금함",
   "answer_simple": [
-    "혈압약은 평소처럼 계속 드셔도 됩니다.",
-    "감기약은 오늘 처방받은 약만 드시는 것이 안전합니다."
+    "혈압약은 계속 드셔도 됩니다.",
+    "감기약은 오늘 처방받은 약만 드셔야 합니다."
   ],
   "tts_emphasis_words": ["혈압약", "오늘 처방받은 약"]
 }}
@@ -151,8 +157,8 @@ JSON item:
 {{
   "question": "영양제를 처방약과 같이 먹어도 되는지 궁금함",
   "answer_simple": [
-    "현재 드시는 영양제는 이번 약과 같이 드셔도 됩니다.",
-    "나중에 다른 약이 추가되면 병원이나 약국에 다시 확인해 주세요."
+    "영양제는 이번 처방약과 큰 상호작용은 없어 보입니다.",
+    "다른 약이 추가되면 다시 확인해 주세요."
   ],
   "tts_emphasis_words": ["다른 약", "다시 확인"]
 }}
@@ -162,7 +168,7 @@ Required JSON schema:
   "items": [
     {{
       "question": "patient question summary",
-      "answer_simple": ["short instruction sentence"],
+      "answer_simple": ["meaning-preserving polite Korean sentence"],
       "tts_emphasis_words": ["important word"]
     }}
   ],
@@ -200,7 +206,7 @@ Data:
 
 
 def is_patient_guide_usable(guide: dict[str, Any], answers: list[dict[str, Any]]) -> bool:
-    """빈 안내문, 일반론, 의사 답변 원문 복사를 거부합니다."""
+    """빈 안내문과 근거 없는 일반론을 거부합니다."""
     items = guide.get("items") if isinstance(guide, dict) else []
     if not isinstance(items, list) or not items:
         return False
@@ -209,9 +215,8 @@ def is_patient_guide_usable(guide: dict[str, Any], answers: list[dict[str, Any]]
         "오늘 진료에서 안내받은 내용을 확인해 주세요",
         "의사 선생님의 안내를 따라 주세요",
     ]
-    source_answers = [normalize_text(ans.get("answer_text") or ans.get("answer") or "") for ans in (answers or [])]
     usable_count = 0
-    for idx, item in enumerate(items):
+    for item in items:
         answer_simple = item.get("answer_simple") if isinstance(item, dict) else []
         if not isinstance(answer_simple, list):
             continue
@@ -220,9 +225,6 @@ def is_patient_guide_usable(guide: dict[str, Any], answers: list[dict[str, Any]]
             continue
         joined = " ".join(cleaned)
         if any(pattern in joined for pattern in generic_patterns):
-            continue
-        source = source_answers[idx] if idx < len(source_answers) else " ".join(source_answers)
-        if source and compact_ir(joined) == compact_ir(source):
             continue
         usable_count += 1
     return usable_count > 0

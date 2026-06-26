@@ -5,10 +5,10 @@ import logoUrl from '../../assets/munjin-logo.svg'
 import './PatientGuideScreen.css'
 
 // 진료 후 환자에게 보여주거나 출력할 안내문 화면입니다.
-// LLM이 쉬운 표현으로 바꾼 답변과 의사가 직접 적은 강조사항을 함께 보여줍니다.
+// LLM이 의미를 보존해 존댓말로 정리한 답변과 의사가 직접 적은 강조사항을 함께 보여줍니다.
 
 // 환자 안내 화면 (Phase B - 진료 후 태블릿).
-// 의사 답변을 LLM이 어르신 친화적 문장으로 변환한 결과를 큰 글씨로 표시.
+// 의사 답변을 LLM이 어르신 대상 존댓말 문장으로 변환한 결과를 큰 글씨로 표시.
 // TTS 음성 안내, 보호자 공유(SMS), 종이 출력 옵션 제공.
 
 function normalizeGuideItems(guide) {

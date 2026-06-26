@@ -88,3 +88,36 @@ def test_instruction_only_response_is_reviewed_and_guide_ready():
     assert captured["updates"]["status"] == "reviewed"
     assert captured["updates"]["guide_ready"] is True
     assert captured["saved"][guide.DOCTOR_REVIEW_FILE]["patient_instruction"] == "약은 중단하지 말고 복용해 주세요"
+
+
+def test_patient_guide_allows_meaning_preserving_polite_answer():
+    guide, _captured = import_guide_with_stubs()
+    captured_prompt = {}
+
+    def fake_call(prompt, *_args, **_kwargs):
+        captured_prompt["text"] = prompt
+        return ({
+            "items": [{
+                "question": "혈압약을 계속 먹어도 되는지 문의",
+                "answer_simple": ["혈압약은 계속 복용해도 됩니다."],
+                "tts_emphasis_words": ["혈압약"],
+            }],
+            "delivery_options": ["screen", "tts", "print"],
+        }, "raw-guide", {})
+
+    guide.call_bedrock_json_with_meta = fake_call
+
+    result = guide.generate_patient_guide(
+        {"session_id": "s_guide", "patient": {"name": "홍길동"}},
+        {},
+        [{
+            "question_summary": "혈압약을 계속 먹어도 되는지 문의",
+            "answer_text": "혈압약은 계속 복용해도 됩니다.",
+        }],
+        "",
+    )
+
+    assert result["generation_method"] == "bedrock_nova_lite_grounded"
+    assert result["items"][0]["answer_simple"] == ["혈압약은 계속 복용해도 됩니다"]
+    assert "Do NOT simplify" in captured_prompt["text"]
+    assert "style conversion, not medical simplification" in captured_prompt["text"]
