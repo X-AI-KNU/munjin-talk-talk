@@ -57,9 +57,14 @@ export default function ReceptionView() {
     return () => clearTimeout(timer)
   }, [notice])
 
-  const waitingCount = useMemo(
-    () => sessions.filter((session) => ['waiting_tablet', 'in_progress', 'staff_help'].includes(session.status)).length,
+  const visibleReceptionSessions = useMemo(
+    () => sessions.filter(isReceptionQueueVisible),
     [sessions]
+  )
+
+  const waitingCount = useMemo(
+    () => visibleReceptionSessions.filter((session) => ['waiting_tablet', 'in_progress', 'staff_help'].includes(session.status)).length,
+    [visibleReceptionSessions]
   )
 
   const updateField = (key, value) => {
@@ -224,7 +229,7 @@ export default function ReceptionView() {
         </div>
         <div className="rp-stats">
           <div>
-            <span>{sessions.length}</span>
+            <span>{visibleReceptionSessions.length}</span>
             <small>오늘 접수</small>
           </div>
           <div>
@@ -244,7 +249,7 @@ export default function ReceptionView() {
           submitError={formError}
           isSubmitting={isCreatingSession}
         />
-        <ReceptionSessionList sessions={sessions} onOpenManualInput={openManualInput} onDeleteSession={handleDeleteSession} />
+        <ReceptionSessionList sessions={visibleReceptionSessions} onOpenManualInput={openManualInput} onDeleteSession={handleDeleteSession} />
       </div>
 
       <ReceptionManualInput
@@ -277,4 +282,8 @@ function getChangedManualAnswers(session, manualTexts, originalTexts, visitType 
   return questions
     .map((question) => ({ question, transcript: (manualTexts[question.id] || '').trim() }))
     .filter((item) => item.transcript && item.transcript !== (originalTexts[item.question.id] || '').trim())
+}
+
+function isReceptionQueueVisible(session) {
+  return session?.status !== 'reviewed' && !session?.guideReady
 }
