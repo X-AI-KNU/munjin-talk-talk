@@ -43,22 +43,12 @@
     },
     "dialect_source_layer": {
       "none": 50,
-      "rag_pack_anchored": 10,
       "clinical_colloquial": 25,
+      "rag_pack_anchored": 10,
       "light_dialect_style": 15
     }
   },
   "rag_pack_anchor_cases": [
-    {
-      "case_id": "train_v2_006",
-      "group": "upper_airway_common",
-      "anchor": {
-        "dialect": "코빼기",
-        "standard": "코",
-        "sample_query": "코빼기가 막혀",
-        "usage": "코 증상에만 사용"
-      }
-    },
     {
       "case_id": "train_v2_007",
       "group": "upper_airway_common",
@@ -66,77 +56,77 @@
         "dialect": "아푸나?",
         "standard": "아프니?",
         "sample_query": "목이 아푸나 싶어",
-        "usage": "아프다 계열 표현에만 사용"
+        "usage": "목 통증처럼 아프다는 표현에만 사용"
       }
     },
     {
-      "case_id": "train_v2_024",
-      "group": "cough_sputum_lower_airway",
+      "case_id": "train_v2_010",
+      "group": "upper_airway_common",
       "anchor": {
-        "dialect": "줄구다",
-        "standard": "줄이다",
-        "sample_query": "기침이 좀 줄구다",
-        "usage": "증상이 줄었다는 Q3 호전 표현에만 사용"
+        "dialect": "코빼기",
+        "standard": "코",
+        "sample_query": "코빼기가 막혀",
+        "usage": "코막힘이나 콧물처럼 코 증상에만 사용"
       }
     },
     {
-      "case_id": "train_v2_044",
+      "case_id": "train_v2_015",
+      "group": "upper_airway_common",
+      "anchor": {
+        "dialect": "아푸나?",
+        "standard": "아프니?",
+        "sample_query": "목이 아푸나 싶어",
+        "usage": "재진 Q3에서 목 통증 경과 표현에만 사용"
+      }
+    },
+    {
+      "case_id": "train_v2_056",
       "group": "dyspnea_chest_urgent",
       "anchor": {
         "dialect": "(가슴이) 제리제리하다",
         "standard": "저리다",
         "sample_query": "가슴이 제리제리해",
-        "usage": "가슴 저림 또는 이상감 표현에만 사용"
+        "usage": "가슴 이상감이 호전되었는지 말하는 Q3 경과 표현에만 사용"
       }
     },
     {
-      "case_id": "train_v2_045",
-      "group": "dyspnea_chest_urgent",
-      "anchor": {
-        "dialect": "(가슴이) 제리제리하다",
-        "standard": "저리다",
-        "sample_query": "가슴이 제리제리해",
-        "usage": "가슴 저림 또는 이상감 표현에만 사용"
-      }
-    },
-    {
-      "case_id": "train_v2_060",
+      "case_id": "train_v2_063",
       "group": "systemic_course",
       "anchor": {
         "dialect": "몸땡이",
         "standard": "몸통",
         "sample_query": "몸땡이가 쑤셔",
-        "usage": "몸살/몸통 불편 표현에만 사용"
+        "usage": "몸살이나 근육통처럼 몸이 쑤시는 표현에만 사용"
       }
     },
     {
-      "case_id": "train_v2_061",
+      "case_id": "train_v2_067",
       "group": "systemic_course",
       "anchor": {
         "dialect": "자우름",
         "standard": "졸음",
         "sample_query": "자우름이 와",
-        "usage": "피로/졸림 동반 표현에만 사용"
+        "usage": "피로감이나 처지는 느낌을 말하는 경과 표현에만 사용"
       }
     },
     {
-      "case_id": "train_v2_073",
-      "group": "ent_swallow_eye_voice",
-      "anchor": {
-        "dialect": "잠구키다[장구키다]",
-        "standard": "잠기다",
-        "sample_query": "목소리가 장구키다",
-        "usage": "목소리 잠김 표현에만 사용"
-      }
-    },
-    {
-      "case_id": "train_v2_084",
+      "case_id": "train_v2_085",
       "group": "cardio_neuro_edema",
       "anchor": {
         "dialect": "머리깽이",
         "standard": "머리",
         "sample_query": "머리깽이가 핑 돌아",
-        "usage": "두통/어지러움 표현에만 사용"
+        "usage": "두통이나 어지러움처럼 머리 불편 표현에만 사용"
+      }
+    },
+    {
+      "case_id": "train_v2_090",
+      "group": "cardio_neuro_edema",
+      "anchor": {
+        "dialect": "머리깽이",
+        "standard": "머리",
+        "sample_query": "머리깽이가 핑 돌아",
+        "usage": "재진 Q3에서 두통 경과 표현에만 사용"
       }
     },
     {
@@ -146,7 +136,17 @@
         "dialect": "창지",
         "standard": "창자",
         "sample_query": "창지가 꼬이는 느낌",
-        "usage": "복부/장 불편 표현에만 사용"
+        "usage": "복부 통증처럼 배나 장이 불편한 표현에만 사용"
+      }
+    },
+    {
+      "case_id": "train_v2_098",
+      "group": "gi_nonspecific_confounders",
+      "anchor": {
+        "dialect": "창지",
+        "standard": "창자",
+        "sample_query": "창지가 꼬이는 느낌",
+        "usage": "재진 Q3에서 복부 통증 경과 표현에만 사용"
       }
     }
   ]

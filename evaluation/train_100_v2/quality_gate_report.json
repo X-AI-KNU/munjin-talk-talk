@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "errors": [],
+  "counts": {
+    "visit_type": {
+      "initial": 50,
+      "followup": 50
+    },
+    "question_id": {
+      "Q1": 50,
+      "Q3": 50
+    },
+    "language_style": {
+      "standard": 50,
+      "gangwon": 50
+    },
+    "dialect_source_layer": {
+      "none": 50,
+      "clinical_colloquial": 25,
+      "rag_pack_anchored": 10,
+      "light_dialect_style": 15
+    },
+    "symptom_group": {
+      "upper_airway_common": 18,
+      "cough_sputum_lower_airway": 20,
+      "dyspnea_chest_urgent": 18,
+      "systemic_course": 14,
+      "ent_swallow_eye_voice": 10,
+      "cardio_neuro_edema": 10,
+      "gi_nonspecific_confounders": 10
+    },
+    "status_pattern": {
+      "active_current": 45,
+      "recurrent_or_persistent": 25,
+      "improved_or_resolved": 10,
+      "denied_negative_context": 15,
+      "mixed_context": 5
+    },
+    "quality_passed": {
+      "true": 100
+    }
+  },
+  "failed_cases": [],
+  "warning_cases": []
+}

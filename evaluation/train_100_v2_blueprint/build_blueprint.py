@@ -317,6 +317,123 @@ def build_cases() -> list[dict]:
     return cases
 
 
+ANCHOR_ASSIGNMENTS = {
+    "train_v2_007": {
+        "dialect": "아푸나?",
+        "standard": "아프니?",
+        "sample_query": "목이 아푸나 싶어",
+        "usage": "목 통증처럼 아프다는 표현에만 사용",
+    },
+    "train_v2_010": {
+        "dialect": "코빼기",
+        "standard": "코",
+        "sample_query": "코빼기가 막혀",
+        "usage": "코막힘이나 콧물처럼 코 증상에만 사용",
+    },
+    "train_v2_015": {
+        "dialect": "아푸나?",
+        "standard": "아프니?",
+        "sample_query": "목이 아푸나 싶어",
+        "usage": "재진 Q3에서 목 통증 경과 표현에만 사용",
+    },
+    "train_v2_056": {
+        "dialect": "(가슴이) 제리제리하다",
+        "standard": "저리다",
+        "sample_query": "가슴이 제리제리해",
+        "usage": "가슴 이상감이 호전되었는지 말하는 Q3 경과 표현에만 사용",
+    },
+    "train_v2_063": {
+        "dialect": "몸땡이",
+        "standard": "몸통",
+        "sample_query": "몸땡이가 쑤셔",
+        "usage": "몸살이나 근육통처럼 몸이 쑤시는 표현에만 사용",
+    },
+    "train_v2_067": {
+        "dialect": "자우름",
+        "standard": "졸음",
+        "sample_query": "자우름이 와",
+        "usage": "피로감이나 처지는 느낌을 말하는 경과 표현에만 사용",
+    },
+    "train_v2_085": {
+        "dialect": "머리깽이",
+        "standard": "머리",
+        "sample_query": "머리깽이가 핑 돌아",
+        "usage": "두통이나 어지러움처럼 머리 불편 표현에만 사용",
+    },
+    "train_v2_090": {
+        "dialect": "머리깽이",
+        "standard": "머리",
+        "sample_query": "머리깽이가 핑 돌아",
+        "usage": "재진 Q3에서 두통 경과 표현에만 사용",
+    },
+    "train_v2_093": {
+        "dialect": "창지",
+        "standard": "창자",
+        "sample_query": "창지가 꼬이는 느낌",
+        "usage": "복부 통증처럼 배나 장이 불편한 표현에만 사용",
+    },
+    "train_v2_098": {
+        "dialect": "창지",
+        "standard": "창자",
+        "sample_query": "창지가 꼬이는 느낌",
+        "usage": "재진 Q3에서 복부 통증 경과 표현에만 사용",
+    },
+}
+
+
+LIGHT_DIALECT_CASE_IDS = {
+    "train_v2_008",
+    "train_v2_009",
+    "train_v2_016",
+    "train_v2_017",
+    "train_v2_026",
+    "train_v2_027",
+    "train_v2_034",
+    "train_v2_035",
+    "train_v2_046",
+    "train_v2_047",
+    "train_v2_055",
+    "train_v2_068",
+    "train_v2_078",
+    "train_v2_089",
+    "train_v2_100",
+}
+
+
+def rebalance_dialect_layers(cases: list[dict]) -> None:
+    """Keep the fixed 10/25/15 dialect split while anchoring only compatible rows."""
+    by_id = {case["case_id"]: case for case in cases}
+    missing = sorted(set(ANCHOR_ASSIGNMENTS) - set(by_id))
+    if missing:
+        raise RuntimeError(f"anchor assignments reference missing cases: {missing}")
+
+    for case in cases:
+        case.pop("dialect_anchor", None)
+        case.pop("dialect_anchor_acceptance", None)
+        if case["language_style"] == "standard":
+            case["dialect_source_layer"] = "none"
+            continue
+        case["dialect_source_layer"] = "clinical_colloquial"
+
+    for case_id, anchor in ANCHOR_ASSIGNMENTS.items():
+        case = by_id[case_id]
+        if case["language_style"] != "gangwon":
+            raise RuntimeError(f"{case_id} is not a Gangwon row")
+        case["dialect_source_layer"] = "rag_pack_anchored"
+        case["dialect_anchor"] = anchor
+        case["dialect_anchor_acceptance"] = (
+            "Rendered text must include the dialect anchor naturally and retrieve it through retrieve_dialect_context()."
+        )
+
+    for case_id in LIGHT_DIALECT_CASE_IDS:
+        case = by_id[case_id]
+        if case["language_style"] != "gangwon":
+            raise RuntimeError(f"{case_id} is not a Gangwon row")
+        if case["dialect_source_layer"] == "rag_pack_anchored":
+            raise RuntimeError(f"{case_id} cannot be both light_dialect_style and rag_pack_anchored")
+        case["dialect_source_layer"] = "light_dialect_style"
+
+
 def validate(cases: list[dict]) -> dict:
     errors: list[str] = []
     if len(cases) != 100:
@@ -458,6 +575,7 @@ It must not mechanically assemble templates or copy prior `train_100` text.
 
 def main() -> None:
     cases = build_cases()
+    rebalance_dialect_layers(cases)
     report = validate(cases)
     write_files(cases, report)
     print(json.dumps(report, ensure_ascii=False, indent=2))
