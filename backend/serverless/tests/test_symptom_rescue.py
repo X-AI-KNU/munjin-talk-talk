@@ -106,3 +106,32 @@ def test_followup_q3_chest_tightness_rescue_reaches_ir():
     assert matched["unmatched_spans"] == []
     assert matched["matched_slots"][0]["slot_id"] == "chest_discomfort"
     assert matched["matched_slots"][0]["name"] == "가슴 답답"
+
+
+def test_safety_flag_routes_to_guardrail_when_semantic_extraction_fails():
+    install_settings_stub()
+    from pipeline_nodes import quick_safety_flag_node, schema_quote_validation_node  # noqa: E402
+
+    base_state = {
+        "question_id": "Q1",
+        "question_type": "chief_complaint",
+        "visit_type": "initial",
+        "transcript": "가심이 답답허고 코물이 줄줄 나와요",
+        "trace": [],
+        "active_path": [],
+    }
+
+    safety_update = quick_safety_flag_node(base_state)
+    assert safety_update["preliminary_safety_flag"]["category"] == "chest_discomfort"
+
+    validation_update = schema_quote_validation_node({
+        **base_state,
+        **safety_update,
+        "semantic_failed": True,
+        "extracted": {"error": "bedrock_or_schema_failed"},
+        "extraction_raw": None,
+        "extraction_attempt": 3,
+    })
+
+    assert validation_update["safety_only"] is True
+    assert "error_response" not in validation_update

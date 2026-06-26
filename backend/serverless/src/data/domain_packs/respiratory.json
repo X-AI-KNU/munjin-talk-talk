@@ -145,7 +145,7 @@
   "safety_flags": [
     {"category": "hemoptysis", "label": "객혈 의심", "severity": "high", "pattern": "객혈|피(?:가)?\\s*(섞인|섞여|나온|나와)|피가래|가래.*피|피.*가래|피를\\s*토|피\\s*토"},
     {"category": "dyspnea", "label": "호흡곤란", "severity": "high", "pattern": "숨이\\s*(안|너무|많이)\\s*(차|막|막혀)|숨\\s*못\\s*쉬|호흡\\s*곤란|말을\\s*못\\s*할"},
-    {"category": "chest_discomfort", "label": "가슴 답답", "severity": "high", "pattern": "가(?:슴|심)(?:이)?\\s*(?:답답|답답허|답답하)"},
+    {"category": "chest_discomfort", "label": "가슴 답답", "severity": "high", "pattern": "가(?:슴|심)(?:이|은|는|도)?\\s*(?:답답(?:해지는|해지|해져|하고|해요|합니다|하다|허고|허다|허|하)?|답답허|답답하)"},
     {"category": "chest_pain", "label": "흉통", "severity": "high", "pattern": "가슴(?:이)?\\s*(통증|아프|아파|아픈|쥐어|답답)|흉통|쥐어짜"},
     {"category": "cyanosis", "label": "청색증", "severity": "high", "pattern": "입술.*(파래|푸르)|손끝.*(파래|푸르)|청색증"},
     {"category": "consciousness", "label": "의식 변화", "severity": "high", "pattern": "의식|기절|쓰러졌|정신.*(없|잃)|깨워도"},
