@@ -9,8 +9,8 @@ Current rebuild order:
 1. Freeze the reset scope and leakage rules.
 2. Design `train_100_v2`.
 3. Render `train_100_v2` with LLM-generated patient utterances from the approved blueprint.
-4. Build domain pack, aliases, and few-shot candidates from accepted `train_100_v2` only.
-5. Freeze train-derived runtime artifacts with provenance.
+4. Build the runtime domain pack from the source symptom ontology, then add aliases and few-shot candidates from accepted `train_100_v2` only.
+5. Freeze runtime artifacts with provenance that separates ontology source and train-derived support.
 6. Design and render a separate locked `test_1000_v2`.
 7. Run offline IR evaluation and real Bedrock pipeline evaluation as separate tracks.
 8. Save the first held-out report before inspecting individual test failures for improvements.

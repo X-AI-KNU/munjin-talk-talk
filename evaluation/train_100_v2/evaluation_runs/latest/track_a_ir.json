@@ -1,0 +1,4494 @@
+{
+  "track": "A_offline_ir",
+  "runs_bedrock": false,
+  "dataset_rows": 100,
+  "total_gold_mentions": 111,
+  "negative_rows": 22,
+  "metrics": {
+    "alias": {
+      "recall@1": 0.8198,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "all_gold_hit@5": 1.0,
+      "negative_in_top5_rows": 11,
+      "negative_in_top5_rate_among_negative_rows": 0.5
+    },
+    "bm25": {
+      "recall@1": 0.5045,
+      "recall@3": 0.8108,
+      "recall@5": 0.8829,
+      "recall@10": 0.9459,
+      "all_gold_hit@5": 0.87,
+      "negative_in_top5_rows": 14,
+      "negative_in_top5_rate_among_negative_rows": 0.6364
+    },
+    "combined": {
+      "recall@1": 0.8198,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "all_gold_hit@5": 1.0,
+      "negative_in_top5_rows": 17,
+      "negative_in_top5_rate_among_negative_rows": 0.7727
+    }
+  },
+  "stratified": {
+    "alias:question_id": {
+      "Q1": {
+        "rows": 50,
+        "gold": 55,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "Q3": {
+        "rows": 50,
+        "gold": 56,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      }
+    },
+    "alias:language_style": {
+      "gangwon": {
+        "rows": 50,
+        "gold": 57,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "standard": {
+        "rows": 50,
+        "gold": 54,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      }
+    },
+    "alias:dialect_source_layer": {
+      "clinical_colloquial": {
+        "rows": 25,
+        "gold": 27,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "light_dialect_style": {
+        "rows": 15,
+        "gold": 17,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "none": {
+        "rows": 50,
+        "gold": 54,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "rag_pack_anchored": {
+        "rows": 10,
+        "gold": 13,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      }
+    },
+    "alias:expression_policy": {
+      "direct_common": {
+        "rows": 35,
+        "gold": 43,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "lay_paraphrase": {
+        "rows": 45,
+        "gold": 47,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "technical_hidden": {
+        "rows": 20,
+        "gold": 21,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      }
+    },
+    "alias:symptom_group": {
+      "cardio_neuro_edema": {
+        "rows": 10,
+        "gold": 10,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "cough_sputum_lower_airway": {
+        "rows": 20,
+        "gold": 23,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "dyspnea_chest_urgent": {
+        "rows": 18,
+        "gold": 20,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "ent_swallow_eye_voice": {
+        "rows": 10,
+        "gold": 10,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "gi_nonspecific_confounders": {
+        "rows": 10,
+        "gold": 10,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "systemic_course": {
+        "rows": 14,
+        "gold": 16,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "upper_airway_common": {
+        "rows": 18,
+        "gold": 22,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      }
+    },
+    "bm25:question_id": {
+      "Q1": {
+        "rows": 50,
+        "gold": 55,
+        "recall@5": 0.8727,
+        "all_gold_hit@5": 0.86
+      },
+      "Q3": {
+        "rows": 50,
+        "gold": 56,
+        "recall@5": 0.8929,
+        "all_gold_hit@5": 0.88
+      }
+    },
+    "bm25:language_style": {
+      "gangwon": {
+        "rows": 50,
+        "gold": 57,
+        "recall@5": 0.8596,
+        "all_gold_hit@5": 0.84
+      },
+      "standard": {
+        "rows": 50,
+        "gold": 54,
+        "recall@5": 0.9074,
+        "all_gold_hit@5": 0.9
+      }
+    },
+    "bm25:dialect_source_layer": {
+      "clinical_colloquial": {
+        "rows": 25,
+        "gold": 27,
+        "recall@5": 0.8889,
+        "all_gold_hit@5": 0.88
+      },
+      "light_dialect_style": {
+        "rows": 15,
+        "gold": 17,
+        "recall@5": 0.7059,
+        "all_gold_hit@5": 0.6667
+      },
+      "none": {
+        "rows": 50,
+        "gold": 54,
+        "recall@5": 0.9074,
+        "all_gold_hit@5": 0.9
+      },
+      "rag_pack_anchored": {
+        "rows": 10,
+        "gold": 13,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      }
+    },
+    "bm25:expression_policy": {
+      "direct_common": {
+        "rows": 35,
+        "gold": 43,
+        "recall@5": 0.7907,
+        "all_gold_hit@5": 0.7429
+      },
+      "lay_paraphrase": {
+        "rows": 45,
+        "gold": 47,
+        "recall@5": 0.9362,
+        "all_gold_hit@5": 0.9333
+      },
+      "technical_hidden": {
+        "rows": 20,
+        "gold": 21,
+        "recall@5": 0.9524,
+        "all_gold_hit@5": 0.95
+      }
+    },
+    "bm25:symptom_group": {
+      "cardio_neuro_edema": {
+        "rows": 10,
+        "gold": 10,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "cough_sputum_lower_airway": {
+        "rows": 20,
+        "gold": 23,
+        "recall@5": 0.7391,
+        "all_gold_hit@5": 0.7
+      },
+      "dyspnea_chest_urgent": {
+        "rows": 18,
+        "gold": 20,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "ent_swallow_eye_voice": {
+        "rows": 10,
+        "gold": 10,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "gi_nonspecific_confounders": {
+        "rows": 10,
+        "gold": 10,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "systemic_course": {
+        "rows": 14,
+        "gold": 16,
+        "recall@5": 0.8125,
+        "all_gold_hit@5": 0.7857
+      },
+      "upper_airway_common": {
+        "rows": 18,
+        "gold": 22,
+        "recall@5": 0.8182,
+        "all_gold_hit@5": 0.7778
+      }
+    },
+    "combined:question_id": {
+      "Q1": {
+        "rows": 50,
+        "gold": 55,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "Q3": {
+        "rows": 50,
+        "gold": 56,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      }
+    },
+    "combined:language_style": {
+      "gangwon": {
+        "rows": 50,
+        "gold": 57,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "standard": {
+        "rows": 50,
+        "gold": 54,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      }
+    },
+    "combined:dialect_source_layer": {
+      "clinical_colloquial": {
+        "rows": 25,
+        "gold": 27,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "light_dialect_style": {
+        "rows": 15,
+        "gold": 17,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "none": {
+        "rows": 50,
+        "gold": 54,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "rag_pack_anchored": {
+        "rows": 10,
+        "gold": 13,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      }
+    },
+    "combined:expression_policy": {
+      "direct_common": {
+        "rows": 35,
+        "gold": 43,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "lay_paraphrase": {
+        "rows": 45,
+        "gold": 47,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "technical_hidden": {
+        "rows": 20,
+        "gold": 21,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      }
+    },
+    "combined:symptom_group": {
+      "cardio_neuro_edema": {
+        "rows": 10,
+        "gold": 10,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "cough_sputum_lower_airway": {
+        "rows": 20,
+        "gold": 23,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "dyspnea_chest_urgent": {
+        "rows": 18,
+        "gold": 20,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "ent_swallow_eye_voice": {
+        "rows": 10,
+        "gold": 10,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "gi_nonspecific_confounders": {
+        "rows": 10,
+        "gold": 10,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "systemic_course": {
+        "rows": 14,
+        "gold": 16,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      },
+      "upper_airway_common": {
+        "rows": 18,
+        "gold": 22,
+        "recall@5": 1.0,
+        "all_gold_hit@5": 1.0
+      }
+    }
+  },
+  "details": [
+    {
+      "case_id": "train_v2_001",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "목이 좀 아프고 칼칼한 느낌이야",
+      "gold": [
+        "목의 통증"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "목의 통증"
+        ],
+        "bm25": [
+          "삼키기 곤란",
+          "목의 통증",
+          "코막힘",
+          "가슴 답답",
+          "콧물",
+          "열",
+          "눈이 무거운 느낌",
+          "흉통",
+          "발한",
+          "두통"
+        ],
+        "combined": [
+          "목의 통증",
+          "삼키기 곤란",
+          "코막힘",
+          "가슴 답답",
+          "콧물",
+          "열",
+          "눈이 무거운 느낌",
+          "흉통",
+          "발한",
+          "두통"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_002",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "코가 완전 막혀서 숨쉬기 힘들어",
+      "gold": [
+        "코막힘"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "호흡곤란",
+          "코막힘"
+        ],
+        "bm25": [
+          "호흡곤란",
+          "사망",
+          "가래",
+          "가슴 답답",
+          "코막힘",
+          "복벽이 움푹 들어감",
+          "근력 약화",
+          "탈장"
+        ],
+        "combined": [
+          "호흡곤란",
+          "코막힘",
+          "사망",
+          "가래",
+          "가슴 답답",
+          "복벽이 움푹 들어감",
+          "근력 약화",
+          "탈장"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_003",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "콧물이 계속 나는 거 말고는 큰 문제는 없어",
+      "gold": [
+        "콧물"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "콧물"
+        ],
+        "bm25": [
+          "재채기",
+          "코막힘",
+          "콧물",
+          "삼키기 곤란",
+          "가래",
+          "감기 증상",
+          "천명음",
+          "두통",
+          "결막염",
+          "오한"
+        ],
+        "combined": [
+          "콧물",
+          "재채기",
+          "코막힘",
+          "삼키기 곤란",
+          "가래",
+          "감기 증상",
+          "천명음",
+          "두통",
+          "결막염",
+          "오한"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_004",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "재채기가 계속 나서 불편해",
+      "gold": [
+        "재채기"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "재채기"
+        ],
+        "bm25": [
+          "재채기",
+          "코막힘",
+          "감기 증상",
+          "콧물",
+          "호흡곤란",
+          "탈장"
+        ],
+        "combined": [
+          "재채기",
+          "코막힘",
+          "감기 증상",
+          "콧물",
+          "호흡곤란",
+          "탈장"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_005",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "감기 걸린 것 같은데 열은 안 나",
+      "gold": [
+        "감기 증상"
+      ],
+      "negative": [
+        "열"
+      ],
+      "candidates": {
+        "alias": [
+          "감기 증상",
+          "열"
+        ],
+        "bm25": [
+          "감기 증상",
+          "목소리 변화",
+          "근력 약화",
+          "말초부종",
+          "무증상",
+          "재채기",
+          "식욕부진",
+          "피로감",
+          "두통",
+          "근육통"
+        ],
+        "combined": [
+          "감기 증상",
+          "열",
+          "목소리 변화",
+          "근력 약화",
+          "말초부종",
+          "무증상",
+          "재채기",
+          "식욕부진",
+          "피로감",
+          "두통",
+          "근육통"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_006",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "열은 좀 있는데 기침은 안 나는 거 같아",
+      "gold": [
+        "열"
+      ],
+      "negative": [
+        "기침"
+      ],
+      "candidates": {
+        "alias": [
+          "기침",
+          "열"
+        ],
+        "bm25": [
+          "삼키기 곤란",
+          "가래",
+          "목소리 변화",
+          "근력 약화",
+          "천명음",
+          "호흡곤란",
+          "흉통",
+          "탈장",
+          "기침",
+          "결막염"
+        ],
+        "combined": [
+          "기침",
+          "열",
+          "삼키기 곤란",
+          "가래",
+          "목소리 변화",
+          "근력 약화",
+          "천명음",
+          "호흡곤란",
+          "흉통",
+          "탈장",
+          "결막염"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_007",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "rag_pack_anchored",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+      "gold": [
+        "목의 통증",
+        "코막힘"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "코막힘",
+          "목의 통증"
+        ],
+        "bm25": [
+          "코막힘",
+          "호흡곤란",
+          "콧물",
+          "가슴 답답",
+          "목의 통증",
+          "열",
+          "감기 증상",
+          "탈장",
+          "흉통",
+          "천명음"
+        ],
+        "combined": [
+          "코막힘",
+          "목의 통증",
+          "호흡곤란",
+          "콧물",
+          "가슴 답답",
+          "열",
+          "감기 증상",
+          "탈장",
+          "흉통",
+          "천명음"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_008",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "콧물이 자꾸 나고 재채기도 잘해",
+      "gold": [
+        "재채기",
+        "콧물"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "콧물",
+          "재채기"
+        ],
+        "bm25": [
+          "재채기",
+          "천식",
+          "고탄산증",
+          "흉곽 팽윤",
+          "호기의 증가",
+          "콧물",
+          "저산소증",
+          "결막염",
+          "구토",
+          "두통"
+        ],
+        "combined": [
+          "콧물",
+          "재채기",
+          "천식",
+          "고탄산증",
+          "흉곽 팽윤",
+          "호기의 증가",
+          "저산소증",
+          "결막염",
+          "구토",
+          "두통"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_009",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "목이 좀 아퍼서 불편해",
+      "gold": [
+        "목의 통증"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "목의 통증"
+        ],
+        "bm25": [
+          "코막힘",
+          "목의 통증",
+          "콧물",
+          "열",
+          "호흡곤란"
+        ],
+        "combined": [
+          "목의 통증",
+          "코막힘",
+          "콧물",
+          "열",
+          "호흡곤란"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_010",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "rag_pack_anchored",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "코빼기가 막혀서 숨쉬는 게 너무 답답해",
+      "gold": [
+        "코막힘"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "코막힘"
+        ],
+        "bm25": [
+          "가슴 답답",
+          "코막힘",
+          "호흡곤란",
+          "탈장"
+        ],
+        "combined": [
+          "코막힘",
+          "가슴 답답",
+          "호흡곤란",
+          "탈장"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_011",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "콧물 계속 나고 있어",
+      "gold": [
+        "콧물"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "콧물"
+        ],
+        "bm25": [
+          "콧물",
+          "코막힘",
+          "두통",
+          "결막염",
+          "오한",
+          "천식",
+          "고탄산증",
+          "근육통",
+          "흉곽 팽윤",
+          "호기의 증가"
+        ],
+        "combined": [
+          "콧물",
+          "코막힘",
+          "두통",
+          "결막염",
+          "오한",
+          "천식",
+          "고탄산증",
+          "근육통",
+          "흉곽 팽윤",
+          "호기의 증가"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_012",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "재채기는 여전히 자주 나",
+      "gold": [
+        "재채기"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "재채기"
+        ],
+        "bm25": [
+          "재채기",
+          "사망",
+          "빈호흡",
+          "천명음"
+        ],
+        "combined": [
+          "재채기",
+          "사망",
+          "빈호흡",
+          "천명음"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_013",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "감기 기운은 아직 남아있는데 열은 나지 않아",
+      "gold": [
+        "감기 증상"
+      ],
+      "negative": [
+        "열"
+      ],
+      "candidates": {
+        "alias": [
+          "감기 증상",
+          "열"
+        ],
+        "bm25": [
+          "감기 증상",
+          "기운없음",
+          "말초부종",
+          "호흡곤란",
+          "탈장",
+          "흉통",
+          "두통",
+          "근육통",
+          "사망"
+        ],
+        "combined": [
+          "감기 증상",
+          "열",
+          "기운없음",
+          "말초부종",
+          "호흡곤란",
+          "탈장",
+          "흉통",
+          "두통",
+          "근육통",
+          "사망"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_014",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "전에도 있었는데 열은 아직 있고 기침은 완전 없어졌어",
+      "gold": [
+        "열"
+      ],
+      "negative": [
+        "기침"
+      ],
+      "candidates": {
+        "alias": [
+          "기침",
+          "열"
+        ],
+        "bm25": [
+          "체중감소",
+          "사망",
+          "검은색 가래",
+          "탈장",
+          "기침",
+          "운동 시 호흡곤란",
+          "가래",
+          "가슴 답답",
+          "감기 증상",
+          "빈호흡"
+        ],
+        "combined": [
+          "기침",
+          "열",
+          "체중감소",
+          "사망",
+          "검은색 가래",
+          "탈장",
+          "운동 시 호흡곤란",
+          "가래",
+          "가슴 답답",
+          "감기 증상",
+          "빈호흡"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_015",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "rag_pack_anchored",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "목이 아푸나 싶고 코는 여전히 막혀",
+      "gold": [
+        "목의 통증",
+        "코막힘"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "코막힘",
+          "목의 통증"
+        ],
+        "bm25": [
+          "코막힘",
+          "가슴 답답",
+          "목의 통증",
+          "콧물",
+          "열",
+          "사망",
+          "두통"
+        ],
+        "combined": [
+          "코막힘",
+          "목의 통증",
+          "가슴 답답",
+          "콧물",
+          "열",
+          "사망",
+          "두통"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_016",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "콧물이랑 재채기 계속 나는 거 같네, 아직도 괜찮지 않아",
+      "gold": [
+        "재채기",
+        "콧물"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "콧물",
+          "재채기"
+        ],
+        "bm25": [
+          "재채기",
+          "콧물",
+          "코막힘",
+          "삼키기 곤란",
+          "가래",
+          "감기 증상",
+          "천명음",
+          "두통",
+          "결막염",
+          "오한"
+        ],
+        "combined": [
+          "콧물",
+          "재채기",
+          "코막힘",
+          "삼키기 곤란",
+          "가래",
+          "감기 증상",
+          "천명음",
+          "두통",
+          "결막염",
+          "오한"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_017",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "목이 아직 칼칼하고 때로는 많이 아플 때도 있어",
+      "gold": [
+        "목의 통증"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "목의 통증"
+        ],
+        "bm25": [
+          "설사",
+          "열",
+          "재채기",
+          "구토",
+          "코막힘",
+          "목의 통증",
+          "기침",
+          "콧물",
+          "가래",
+          "검은색 가래"
+        ],
+        "combined": [
+          "목의 통증",
+          "설사",
+          "열",
+          "재채기",
+          "구토",
+          "코막힘",
+          "기침",
+          "콧물",
+          "가래",
+          "검은색 가래"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_018",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "direct_common",
+      "symptom_group": "upper_airway_common",
+      "utterance": "그때 이후로 코가 여전히 막혀서 숨쉬기가 답답해",
+      "gold": [
+        "코막힘"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "코막힘"
+        ],
+        "bm25": [
+          "가슴 답답",
+          "호흡곤란",
+          "코막힘",
+          "기침",
+          "사망",
+          "탈장"
+        ],
+        "combined": [
+          "코막힘",
+          "가슴 답답",
+          "호흡곤란",
+          "기침",
+          "사망",
+          "탈장"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_019",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "뭐야, 요즘 기침이 왜 계속 나는 거지.",
+      "gold": [
+        "기침"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "기침"
+        ],
+        "bm25": [
+          "삼키기 곤란",
+          "콧물",
+          "결막염",
+          "가슴 답답",
+          "구토",
+          "가래",
+          "코막힘",
+          "감기 증상",
+          "천명음",
+          "기침"
+        ],
+        "combined": [
+          "기침",
+          "삼키기 곤란",
+          "콧물",
+          "결막염",
+          "가슴 답답",
+          "구토",
+          "가래",
+          "코막힘",
+          "감기 증상",
+          "천명음"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_020",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "목에 가래가 좀 끼는 느낌이 있어",
+      "gold": [
+        "가래"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "가래"
+        ],
+        "bm25": [
+          "삼키기 곤란",
+          "가래",
+          "검은색 가래",
+          "기침",
+          "객혈",
+          "운동 시 호흡곤란",
+          "구토",
+          "눈이 무거운 느낌",
+          "폐부종",
+          "거품이 섞인 가래"
+        ],
+        "combined": [
+          "가래",
+          "삼키기 곤란",
+          "검은색 가래",
+          "기침",
+          "객혈",
+          "운동 시 호흡곤란",
+          "구토",
+          "눈이 무거운 느낌",
+          "폐부종",
+          "거품이 섞인 가래"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_021",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "기침이 자꾸 나고 가래도 많이 나와",
+      "gold": [
+        "가래",
+        "기침"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "기침",
+          "가래"
+        ],
+        "bm25": [
+          "가래",
+          "기침",
+          "결막염",
+          "가슴 답답",
+          "삼키기 곤란",
+          "구토",
+          "콧물",
+          "열",
+          "천식",
+          "고탄산증"
+        ],
+        "combined": [
+          "기침",
+          "가래",
+          "결막염",
+          "가슴 답답",
+          "삼키기 곤란",
+          "구토",
+          "콧물",
+          "열",
+          "천식",
+          "고탄산증"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_022",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "요새 기침할 때 노랗고 걸쭉한 가래가 많이 나와",
+      "gold": [
+        "화농성 객담"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "기침",
+          "화농성 객담",
+          "가래"
+        ],
+        "bm25": [
+          "가래",
+          "기침",
+          "검은색 가래",
+          "화농성 객담",
+          "구토",
+          "운동 시 호흡곤란",
+          "객혈",
+          "열",
+          "체중감소",
+          "천명음"
+        ],
+        "combined": [
+          "기침",
+          "화농성 객담",
+          "가래",
+          "검은색 가래",
+          "구토",
+          "운동 시 호흡곤란",
+          "객혈",
+          "열",
+          "체중감소",
+          "천명음"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_023",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "요새 가래 색이 왜 검게 나오는지 걱정 돼",
+      "gold": [
+        "검은색 가래"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "검은색 가래",
+          "가래"
+        ],
+        "bm25": [
+          "검은색 가래",
+          "가래",
+          "객혈",
+          "화농성 객담",
+          "거품이 섞인 가래",
+          "기침",
+          "체중감소",
+          "구토",
+          "감기 증상",
+          "오한"
+        ],
+        "combined": [
+          "검은색 가래",
+          "가래",
+          "객혈",
+          "화농성 객담",
+          "거품이 섞인 가래",
+          "기침",
+          "체중감소",
+          "구토",
+          "감기 증상",
+          "오한"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_024",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "거품 섞인 가래는 나오는데 피는 안 나와",
+      "gold": [
+        "거품이 섞인 가래"
+      ],
+      "negative": [
+        "객혈"
+      ],
+      "candidates": {
+        "alias": [
+          "거품이 섞인 가래",
+          "가래"
+        ],
+        "bm25": [
+          "거품이 섞인 가래",
+          "가래",
+          "객혈",
+          "목소리 변화",
+          "검은색 가래",
+          "근력 약화",
+          "기침",
+          "화농성 객담",
+          "체중감소",
+          "구토"
+        ],
+        "combined": [
+          "거품이 섞인 가래",
+          "가래",
+          "객혈",
+          "목소리 변화",
+          "검은색 가래",
+          "근력 약화",
+          "기침",
+          "화농성 객담",
+          "체중감소",
+          "구토"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_025",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "숨 쉴 때마다 쌕쌕거리는 소리가 난다",
+      "gold": [
+        "천명음"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "천명음"
+        ],
+        "bm25": [
+          "가슴 답답",
+          "결막염",
+          "흉통",
+          "콧물",
+          "천명음",
+          "말초부종",
+          "목소리 변화",
+          "감기 증상",
+          "호흡곤란",
+          "곤봉지"
+        ],
+        "combined": [
+          "천명음",
+          "가슴 답답",
+          "결막염",
+          "흉통",
+          "콧물",
+          "말초부종",
+          "목소리 변화",
+          "감기 증상",
+          "호흡곤란",
+          "곤봉지"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_026",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "direct_common",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "기침은 자꾸 나는데 가래는 전혀 없어서 좀 이상해",
+      "gold": [
+        "기침"
+      ],
+      "negative": [
+        "가래"
+      ],
+      "candidates": {
+        "alias": [
+          "기침",
+          "가래"
+        ],
+        "bm25": [
+          "가래",
+          "검은색 가래",
+          "객혈",
+          "삼키기 곤란",
+          "체중감소",
+          "화농성 객담",
+          "근긴장의 이상",
+          "기침",
+          "거품이 섞인 가래",
+          "불안"
+        ],
+        "combined": [
+          "기침",
+          "가래",
+          "검은색 가래",
+          "객혈",
+          "삼키기 곤란",
+          "체중감소",
+          "화농성 객담",
+          "근긴장의 이상",
+          "거품이 섞인 가래",
+          "불안"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_027",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "direct_common",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "요새 기침이 계속 나는 거 걱정스러워",
+      "gold": [
+        "기침"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "기침"
+        ],
+        "bm25": [
+          "삼키기 곤란",
+          "콧물",
+          "코막힘",
+          "결막염",
+          "가슴 답답",
+          "구토",
+          "감기 증상",
+          "가래",
+          "천명음",
+          "오한"
+        ],
+        "combined": [
+          "기침",
+          "삼키기 곤란",
+          "콧물",
+          "코막힘",
+          "결막염",
+          "가슴 답답",
+          "구토",
+          "감기 증상",
+          "가래",
+          "천명음",
+          "오한"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_028",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "direct_common",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "목에 가래가 끼는 느낌이 심해서 불편해",
+      "gold": [
+        "가래"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "가래"
+        ],
+        "bm25": [
+          "가래",
+          "삼키기 곤란",
+          "검은색 가래",
+          "기침",
+          "운동 시 호흡곤란",
+          "구토",
+          "객혈",
+          "사망",
+          "눈이 무거운 느낌",
+          "호흡곤란"
+        ],
+        "combined": [
+          "가래",
+          "삼키기 곤란",
+          "검은색 가래",
+          "기침",
+          "운동 시 호흡곤란",
+          "구토",
+          "객혈",
+          "사망",
+          "눈이 무거운 느낌",
+          "호흡곤란"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_029",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "기침이랑 가래는 계속 나는 거 같아",
+      "gold": [
+        "가래",
+        "기침"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "기침",
+          "가래"
+        ],
+        "bm25": [
+          "삼키기 곤란",
+          "가래",
+          "콧물",
+          "결막염",
+          "감기 증상",
+          "구토",
+          "코막힘",
+          "가슴 답답",
+          "검은색 가래",
+          "천명음"
+        ],
+        "combined": [
+          "기침",
+          "가래",
+          "삼키기 곤란",
+          "콧물",
+          "결막염",
+          "감기 증상",
+          "구토",
+          "코막힘",
+          "가슴 답답",
+          "검은색 가래",
+          "천명음"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_030",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "아직도 누렇고 진한 가래가 자꾸 나오는데 완전 질린다",
+      "gold": [
+        "화농성 객담"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "화농성 객담",
+          "가래"
+        ],
+        "bm25": [
+          "가래",
+          "객혈",
+          "기침",
+          "검은색 가래",
+          "구토",
+          "화농성 객담",
+          "운동 시 호흡곤란",
+          "사망",
+          "거품이 섞인 가래",
+          "목소리 변화"
+        ],
+        "combined": [
+          "화농성 객담",
+          "가래",
+          "객혈",
+          "기침",
+          "검은색 가래",
+          "구토",
+          "운동 시 호흡곤란",
+          "사망",
+          "거품이 섞인 가래",
+          "목소리 변화"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_031",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "가래 색이 또 검게 변한 것 같은데, 전번에도 비슷했던 것 같아",
+      "gold": [
+        "검은색 가래"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "검은색 가래",
+          "가래"
+        ],
+        "bm25": [
+          "검은색 가래",
+          "체중감소",
+          "거품이 섞인 가래",
+          "가래",
+          "화농성 객담",
+          "감기 증상",
+          "오한",
+          "객혈",
+          "청색증",
+          "기침"
+        ],
+        "combined": [
+          "검은색 가래",
+          "가래",
+          "체중감소",
+          "거품이 섞인 가래",
+          "화농성 객담",
+          "감기 증상",
+          "오한",
+          "객혈",
+          "청색증",
+          "기침"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_032",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "거품 섞인 가래는 계속 나오는데 피는 안 나와",
+      "gold": [
+        "거품이 섞인 가래"
+      ],
+      "negative": [
+        "객혈"
+      ],
+      "candidates": {
+        "alias": [
+          "거품이 섞인 가래",
+          "가래"
+        ],
+        "bm25": [
+          "거품이 섞인 가래",
+          "가래",
+          "객혈",
+          "목소리 변화",
+          "검은색 가래",
+          "감기 증상",
+          "코막힘",
+          "근력 약화",
+          "기침",
+          "콧물"
+        ],
+        "combined": [
+          "거품이 섞인 가래",
+          "가래",
+          "객혈",
+          "목소리 변화",
+          "검은색 가래",
+          "감기 증상",
+          "코막힘",
+          "근력 약화",
+          "기침",
+          "콧물"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_033",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "숨쉴 때 쌕쌕거리는 소리는 여전히 나고 있어",
+      "gold": [
+        "천명음"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "천명음"
+        ],
+        "bm25": [
+          "가슴 답답",
+          "천명음",
+          "흉통",
+          "결막염",
+          "곤봉지",
+          "콧물",
+          "천식",
+          "저산소증",
+          "고탄산증",
+          "흉곽 팽윤"
+        ],
+        "combined": [
+          "천명음",
+          "가슴 답답",
+          "흉통",
+          "결막염",
+          "곤봉지",
+          "콧물",
+          "천식",
+          "저산소증",
+          "고탄산증",
+          "흉곽 팽윤"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_034",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "direct_common",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "기침은 여전히 있는데 가래는 나지 않아",
+      "gold": [
+        "기침"
+      ],
+      "negative": [
+        "가래"
+      ],
+      "candidates": {
+        "alias": [
+          "기침",
+          "가래"
+        ],
+        "bm25": [
+          "호흡곤란",
+          "사망",
+          "검은색 가래",
+          "가래",
+          "체중감소",
+          "화농성 객담",
+          "탈장",
+          "기침",
+          "객혈",
+          "거품이 섞인 가래"
+        ],
+        "combined": [
+          "기침",
+          "가래",
+          "호흡곤란",
+          "사망",
+          "검은색 가래",
+          "체중감소",
+          "화농성 객담",
+          "탈장",
+          "객혈",
+          "거품이 섞인 가래"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_035",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "direct_common",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "기침이 아직도 나는군, 많이 안 나아진 것 같아",
+      "gold": [
+        "기침"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "기침"
+        ],
+        "bm25": [
+          "삼키기 곤란",
+          "결막염",
+          "가래",
+          "콧물",
+          "기침",
+          "가슴 답답",
+          "구토",
+          "열",
+          "목소리 변화",
+          "근력 약화"
+        ],
+        "combined": [
+          "기침",
+          "삼키기 곤란",
+          "결막염",
+          "가래",
+          "콧물",
+          "가슴 답답",
+          "구토",
+          "열",
+          "목소리 변화",
+          "근력 약화"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_036",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "direct_common",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "가래 좀 끼는 거 아직 나아지지 않았어",
+      "gold": [
+        "가래"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "가래"
+        ],
+        "bm25": [
+          "가래",
+          "거품이 섞인 가래",
+          "검은색 가래",
+          "화농성 객담",
+          "체중감소",
+          "객혈",
+          "감기 증상",
+          "기침",
+          "오한",
+          "운동 시 호흡곤란"
+        ],
+        "combined": [
+          "가래",
+          "거품이 섞인 가래",
+          "검은색 가래",
+          "화농성 객담",
+          "체중감소",
+          "객혈",
+          "감기 증상",
+          "기침",
+          "오한",
+          "운동 시 호흡곤란"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_037",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "direct_common",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "여전히 기침이랑 가래 많이 나와",
+      "gold": [
+        "가래",
+        "기침"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "기침",
+          "가래"
+        ],
+        "bm25": [
+          "가래",
+          "기침",
+          "검은색 가래",
+          "결막염",
+          "구토",
+          "체중감소",
+          "거품이 섞인 가래",
+          "화농성 객담",
+          "삼키기 곤란",
+          "객혈"
+        ],
+        "combined": [
+          "기침",
+          "가래",
+          "검은색 가래",
+          "결막염",
+          "구토",
+          "체중감소",
+          "거품이 섞인 가래",
+          "화농성 객담",
+          "삼키기 곤란",
+          "객혈"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_038",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "cough_sputum_lower_airway",
+      "utterance": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+      "gold": [
+        "화농성 객담"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "화농성 객담",
+          "가래"
+        ],
+        "bm25": [
+          "가래",
+          "화농성 객담",
+          "객혈",
+          "검은색 가래",
+          "기침",
+          "감기 증상",
+          "구토",
+          "운동 시 호흡곤란",
+          "오한",
+          "코막힘"
+        ],
+        "combined": [
+          "화농성 객담",
+          "가래",
+          "객혈",
+          "검은색 가래",
+          "기침",
+          "감기 증상",
+          "구토",
+          "운동 시 호흡곤란",
+          "오한",
+          "코막힘"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_039",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "숨 쉬기가 정말 힘들어서 일상생활도 제대로 안 돼",
+      "gold": [
+        "호흡곤란"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "호흡곤란"
+        ],
+        "bm25": [
+          "호흡곤란",
+          "탈장",
+          "근력 약화",
+          "가래",
+          "복벽이 움푹 들어감",
+          "서맥",
+          "목소리 변화",
+          "감기 증상",
+          "흉통",
+          "저산소증"
+        ],
+        "combined": [
+          "호흡곤란",
+          "탈장",
+          "근력 약화",
+          "가래",
+          "복벽이 움푹 들어감",
+          "서맥",
+          "목소리 변화",
+          "감기 증상",
+          "흉통",
+          "저산소증"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_040",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "가슴이 막혀서 답답한 거 같아",
+      "gold": [
+        "가슴 답답"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "가슴 답답"
+        ],
+        "bm25": [
+          "가슴 답답",
+          "코막힘",
+          "가슴 두근거림",
+          "함몰가슴",
+          "흉통",
+          "삼키기 곤란",
+          "청색증"
+        ],
+        "combined": [
+          "가슴 답답",
+          "코막힘",
+          "가슴 두근거림",
+          "함몰가슴",
+          "흉통",
+          "삼키기 곤란",
+          "청색증"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_041",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "가슴이 좀 아프긴 한데 숨참은 없어",
+      "gold": [
+        "흉통"
+      ],
+      "negative": [
+        "호흡곤란"
+      ],
+      "candidates": {
+        "alias": [
+          "흉통"
+        ],
+        "bm25": [
+          "가슴 답답",
+          "흉통",
+          "가슴 두근거림",
+          "함몰가슴",
+          "목의 통증",
+          "삼키기 곤란",
+          "두통",
+          "서맥",
+          "청색증",
+          "저산소증"
+        ],
+        "combined": [
+          "흉통",
+          "가슴 답답",
+          "가슴 두근거림",
+          "함몰가슴",
+          "목의 통증",
+          "삼키기 곤란",
+          "두통",
+          "서맥",
+          "청색증",
+          "저산소증"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_042",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "기침할 때 피가 섞여서 나오는 게 좀 걱정돼",
+      "gold": [
+        "객혈"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "기침",
+          "객혈"
+        ],
+        "bm25": [
+          "가래",
+          "기침",
+          "객혈",
+          "검은색 가래",
+          "화농성 객담",
+          "구토",
+          "천명음",
+          "운동 시 호흡곤란",
+          "호흡기감염",
+          "목소리 변화"
+        ],
+        "combined": [
+          "기침",
+          "객혈",
+          "가래",
+          "검은색 가래",
+          "화농성 객담",
+          "구토",
+          "천명음",
+          "운동 시 호흡곤란",
+          "호흡기감염",
+          "목소리 변화"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_043",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "숨 쉬기가 힘들고 가슴이 답답해",
+      "gold": [
+        "가슴 답답",
+        "호흡곤란"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "가슴 답답",
+          "호흡곤란"
+        ],
+        "bm25": [
+          "가슴 답답",
+          "호흡곤란",
+          "코막힘",
+          "흉통",
+          "가슴 두근거림",
+          "함몰가슴",
+          "가래",
+          "삼키기 곤란",
+          "청색증",
+          "탈장"
+        ],
+        "combined": [
+          "가슴 답답",
+          "호흡곤란",
+          "코막힘",
+          "흉통",
+          "가슴 두근거림",
+          "함몰가슴",
+          "가래",
+          "삼키기 곤란",
+          "청색증",
+          "탈장"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_044",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "rag_pack_anchored",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "가슴이 제리제리하고 답답한 느낌인데, 아프진 않아",
+      "gold": [
+        "가슴 답답"
+      ],
+      "negative": [
+        "흉통"
+      ],
+      "candidates": {
+        "alias": [
+          "가슴 답답"
+        ],
+        "bm25": [
+          "가슴 답답",
+          "삼키기 곤란",
+          "흉통",
+          "코막힘",
+          "눈이 무거운 느낌",
+          "가슴 두근거림",
+          "함몰가슴",
+          "목의 통증",
+          "검은색 가래",
+          "발한"
+        ],
+        "combined": [
+          "가슴 답답",
+          "삼키기 곤란",
+          "흉통",
+          "코막힘",
+          "눈이 무거운 느낌",
+          "가슴 두근거림",
+          "함몰가슴",
+          "목의 통증",
+          "검은색 가래",
+          "발한"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_045",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "입술이 좀 파래 보여서 걱정 되는데, 뭐라 할 수 없는 불편함 있어.",
+      "gold": [
+        "청색증"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "청색증"
+        ],
+        "bm25": [
+          "사망",
+          "청색증",
+          "호흡기감염",
+          "호흡곤란",
+          "반복되는 폐렴",
+          "곤봉지",
+          "심부전",
+          "마찰음",
+          "폐동맥 고혈압",
+          "탈장"
+        ],
+        "combined": [
+          "청색증",
+          "사망",
+          "호흡기감염",
+          "호흡곤란",
+          "반복되는 폐렴",
+          "곤봉지",
+          "심부전",
+          "마찰음",
+          "폐동맥 고혈압",
+          "탈장"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_046",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "숨 쉬기 힘들어, 피 섞인 가래는 없지만 참 많이 힘들어",
+      "gold": [
+        "호흡곤란"
+      ],
+      "negative": [
+        "객혈"
+      ],
+      "candidates": {
+        "alias": [
+          "호흡곤란",
+          "객혈",
+          "가래"
+        ],
+        "bm25": [
+          "가래",
+          "거품이 섞인 가래",
+          "호흡곤란",
+          "객혈",
+          "복벽이 움푹 들어감",
+          "근력 약화",
+          "기침",
+          "검은색 가래",
+          "열",
+          "탈장"
+        ],
+        "combined": [
+          "호흡곤란",
+          "객혈",
+          "가래",
+          "거품이 섞인 가래",
+          "복벽이 움푹 들어감",
+          "근력 약화",
+          "기침",
+          "검은색 가래",
+          "열",
+          "탈장"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_047",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "숨 쉬기가 힘들어서 말하는 게 너무 힘들어",
+      "gold": [
+        "호흡곤란"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "호흡곤란"
+        ],
+        "bm25": [
+          "호흡곤란",
+          "가래",
+          "복벽이 움푹 들어감",
+          "근력 약화",
+          "탈장",
+          "천명음",
+          "흉통",
+          "결막염",
+          "콧물",
+          "폐부종"
+        ],
+        "combined": [
+          "호흡곤란",
+          "가래",
+          "복벽이 움푹 들어감",
+          "근력 약화",
+          "탈장",
+          "천명음",
+          "흉통",
+          "결막염",
+          "콧물",
+          "폐부종"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_048",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "가슴이 여전히 답답한 느낌이야, 전보다 좀 나아졌지만 아직 남아있어",
+      "gold": [
+        "가슴 답답"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "가슴 답답"
+        ],
+        "bm25": [
+          "가슴 답답",
+          "삼키기 곤란",
+          "코막힘",
+          "눈이 무거운 느낌",
+          "가슴 두근거림",
+          "함몰가슴",
+          "흉통",
+          "무증상",
+          "사망",
+          "발한"
+        ],
+        "combined": [
+          "가슴 답답",
+          "삼키기 곤란",
+          "코막힘",
+          "눈이 무거운 느낌",
+          "가슴 두근거림",
+          "함몰가슴",
+          "흉통",
+          "무증상",
+          "사망",
+          "발한"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_049",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "technical_hidden",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "가슴 통증은 여전히 있는데 숨참은 없어",
+      "gold": [
+        "흉통"
+      ],
+      "negative": [
+        "호흡곤란"
+      ],
+      "candidates": {
+        "alias": [
+          "흉통"
+        ],
+        "bm25": [
+          "삼키기 곤란",
+          "흉통",
+          "가슴 두근거림",
+          "가슴 답답",
+          "함몰가슴",
+          "박동성 통증",
+          "복부 통증",
+          "목의 통증",
+          "청색증",
+          "사망"
+        ],
+        "combined": [
+          "흉통",
+          "삼키기 곤란",
+          "가슴 두근거림",
+          "가슴 답답",
+          "함몰가슴",
+          "박동성 통증",
+          "복부 통증",
+          "목의 통증",
+          "청색증",
+          "사망"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_050",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "아직도 기침할 때마다 피가 섞여서 나오는데, 좀 걱정돼",
+      "gold": [
+        "객혈"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "기침",
+          "객혈"
+        ],
+        "bm25": [
+          "가래",
+          "기침",
+          "객혈",
+          "검은색 가래",
+          "화농성 객담",
+          "구토",
+          "호흡기감염",
+          "체중감소",
+          "목소리 변화",
+          "두통"
+        ],
+        "combined": [
+          "기침",
+          "객혈",
+          "가래",
+          "검은색 가래",
+          "화농성 객담",
+          "구토",
+          "호흡기감염",
+          "체중감소",
+          "목소리 변화",
+          "두통"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_051",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "그 뒤로 숨 쉬기 힘들고 가슴이 답답해서 여전히 별로야",
+      "gold": [
+        "가슴 답답",
+        "호흡곤란"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "가슴 답답",
+          "호흡곤란"
+        ],
+        "bm25": [
+          "가슴 답답",
+          "호흡곤란",
+          "코막힘",
+          "흉통",
+          "가슴 두근거림",
+          "함몰가슴",
+          "가래",
+          "천명음",
+          "사망",
+          "삼키기 곤란"
+        ],
+        "combined": [
+          "가슴 답답",
+          "호흡곤란",
+          "코막힘",
+          "흉통",
+          "가슴 두근거림",
+          "함몰가슴",
+          "가래",
+          "천명음",
+          "사망",
+          "삼키기 곤란"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_052",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "direct_common",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "가슴이 아직 답답한 느낌이야, 하지만 아픈 건 아니야",
+      "gold": [
+        "가슴 답답"
+      ],
+      "negative": [
+        "흉통"
+      ],
+      "candidates": {
+        "alias": [
+          "가슴 답답"
+        ],
+        "bm25": [
+          "가슴 답답",
+          "삼키기 곤란",
+          "검은색 가래",
+          "무증상",
+          "코막힘",
+          "하지부종",
+          "눈이 무거운 느낌",
+          "가슴 두근거림",
+          "함몰가슴",
+          "흉통"
+        ],
+        "combined": [
+          "가슴 답답",
+          "삼키기 곤란",
+          "검은색 가래",
+          "무증상",
+          "코막힘",
+          "하지부종",
+          "눈이 무거운 느낌",
+          "가슴 두근거림",
+          "함몰가슴",
+          "흉통"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_053",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "direct_common",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "입술이 또 파래 보이는 거 계속 돼",
+      "gold": [
+        "청색증"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "청색증"
+        ],
+        "bm25": [
+          "사망",
+          "청색증",
+          "코막힘",
+          "감기 증상",
+          "콧물",
+          "가슴 답답",
+          "흉통",
+          "빈호흡",
+          "호흡기감염",
+          "기침"
+        ],
+        "combined": [
+          "청색증",
+          "사망",
+          "코막힘",
+          "감기 증상",
+          "콧물",
+          "가슴 답답",
+          "흉통",
+          "빈호흡",
+          "호흡기감염",
+          "기침"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_054",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "direct_common",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "그 뒤로도 숨 쉬는 거 힘들고, 피 섞인 가래는 여전히 없어",
+      "gold": [
+        "호흡곤란"
+      ],
+      "negative": [
+        "객혈"
+      ],
+      "candidates": {
+        "alias": [
+          "호흡곤란",
+          "객혈",
+          "가래"
+        ],
+        "bm25": [
+          "거품이 섞인 가래",
+          "객혈",
+          "가래",
+          "호흡곤란",
+          "가슴 답답",
+          "검은색 가래",
+          "천명음",
+          "운동 시 호흡곤란",
+          "화농성 객담",
+          "사망"
+        ],
+        "combined": [
+          "호흡곤란",
+          "객혈",
+          "가래",
+          "거품이 섞인 가래",
+          "가슴 답답",
+          "검은색 가래",
+          "천명음",
+          "운동 시 호흡곤란",
+          "화농성 객담",
+          "사망"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_055",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "direct_common",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+      "gold": [
+        "호흡곤란"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "호흡곤란"
+        ],
+        "bm25": [
+          "호흡곤란",
+          "객혈",
+          "가래",
+          "무증상",
+          "재채기",
+          "식욕부진",
+          "피로감",
+          "사망",
+          "빈호흡",
+          "체중감소"
+        ],
+        "combined": [
+          "호흡곤란",
+          "객혈",
+          "가래",
+          "무증상",
+          "재채기",
+          "식욕부진",
+          "피로감",
+          "사망",
+          "빈호흡",
+          "체중감소"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_056",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "dyspnea_chest_urgent",
+      "utterance": "가슴이 덜 답답해졌어, 좀 나아진 거 같아",
+      "gold": [
+        "가슴 답답"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "가슴 답답"
+        ],
+        "bm25": [
+          "가슴 답답",
+          "코막힘",
+          "가슴 두근거림",
+          "함몰가슴",
+          "흉통",
+          "삼키기 곤란",
+          "청색증"
+        ],
+        "combined": [
+          "가슴 답답",
+          "코막힘",
+          "가슴 두근거림",
+          "함몰가슴",
+          "흉통",
+          "삼키기 곤란",
+          "청색증"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_057",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "몸에 열감이 계속 느껴져",
+      "gold": [
+        "열"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "열"
+        ],
+        "bm25": [
+          "코막힘",
+          "콧물",
+          "감기 증상",
+          "두통",
+          "근육통"
+        ],
+        "combined": [
+          "열",
+          "코막힘",
+          "콧물",
+          "감기 증상",
+          "두통",
+          "근육통"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_058",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "얼음 먹은 것 같이 몸 전체가 춥고 떨려",
+      "gold": [
+        "오한"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "오한"
+        ],
+        "bm25": [
+          "오한",
+          "객혈",
+          "근육통"
+        ],
+        "combined": [
+          "오한",
+          "객혈",
+          "근육통"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_059",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "몸살 같은데 온몸이 쑤시는 느낌이야",
+      "gold": [
+        "근육통"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "근육통"
+        ],
+        "bm25": [
+          "온몸이 떨림",
+          "삼키기 곤란",
+          "근육통",
+          "눈이 무거운 느낌",
+          "무증상",
+          "재채기",
+          "흉통",
+          "식욕부진",
+          "피로감",
+          "발한"
+        ],
+        "combined": [
+          "근육통",
+          "온몸이 떨림",
+          "삼키기 곤란",
+          "눈이 무거운 느낌",
+          "무증상",
+          "재채기",
+          "흉통",
+          "식욕부진",
+          "피로감",
+          "발한"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_060",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "계속 피곤하고 축 처지는 느낌이야",
+      "gold": [
+        "피로감"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "피로감"
+        ],
+        "bm25": [
+          "피로감",
+          "삼키기 곤란",
+          "코막힘",
+          "눈이 무거운 느낌",
+          "감기 증상",
+          "가슴 답답",
+          "콧물",
+          "검은색 가래",
+          "발한",
+          "피부홍조"
+        ],
+        "combined": [
+          "피로감",
+          "삼키기 곤란",
+          "코막힘",
+          "눈이 무거운 느낌",
+          "감기 증상",
+          "가슴 답답",
+          "콧물",
+          "검은색 가래",
+          "발한",
+          "피부홍조"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_061",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "요새 기운이 없는 것 같아",
+      "gold": [
+        "기운없음"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "기운없음"
+        ],
+        "bm25": [
+          "호흡곤란",
+          "기운없음",
+          "감기 증상",
+          "객혈",
+          "가슴 답답",
+          "가래",
+          "천명음",
+          "두통",
+          "근육통"
+        ],
+        "combined": [
+          "기운없음",
+          "호흡곤란",
+          "감기 증상",
+          "객혈",
+          "가슴 답답",
+          "가래",
+          "천명음",
+          "두통",
+          "근육통"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_062",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "열은 나는데 오한은 없어",
+      "gold": [
+        "열"
+      ],
+      "negative": [
+        "오한"
+      ],
+      "candidates": {
+        "alias": [
+          "오한",
+          "열"
+        ],
+        "bm25": [
+          "오한",
+          "삼키기 곤란",
+          "권태감",
+          "두통",
+          "근육통",
+          "가래",
+          "열",
+          "구토",
+          "천명음"
+        ],
+        "combined": [
+          "오한",
+          "열",
+          "삼키기 곤란",
+          "권태감",
+          "두통",
+          "근육통",
+          "가래",
+          "구토",
+          "천명음"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_063",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "rag_pack_anchored",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "몸땡이 쑤시고 온몸이 피곤해",
+      "gold": [
+        "근육통",
+        "피로감"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "피로감",
+          "근육통"
+        ],
+        "bm25": [
+          "온몸이 떨림",
+          "피로감",
+          "근육통",
+          "흉통"
+        ],
+        "combined": [
+          "피로감",
+          "근육통",
+          "온몸이 떨림",
+          "흉통"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_064",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "전에 열이 좀 많이 나서 걱정했는데 요즘 좀 나아진 것 같아",
+      "gold": [
+        "열"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "열"
+        ],
+        "bm25": [
+          "기침",
+          "가래",
+          "열",
+          "빈맥",
+          "빈호흡",
+          "권태감",
+          "두통",
+          "근육통",
+          "설사",
+          "체중감소"
+        ],
+        "combined": [
+          "열",
+          "기침",
+          "가래",
+          "빈맥",
+          "빈호흡",
+          "권태감",
+          "두통",
+          "근육통",
+          "설사",
+          "체중감소"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_065",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "그래, 춥고 떨리는 느낌 좀 줄어든 것 같아",
+      "gold": [
+        "오한"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "오한"
+        ],
+        "bm25": [
+          "오한",
+          "눈이 무거운 느낌",
+          "가슴 답답",
+          "발한",
+          "피부홍조",
+          "불안",
+          "삼키기 곤란",
+          "곤봉지"
+        ],
+        "combined": [
+          "오한",
+          "눈이 무거운 느낌",
+          "가슴 답답",
+          "발한",
+          "피부홍조",
+          "불안",
+          "삼키기 곤란",
+          "곤봉지"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_066",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "전에 몸 전체가 쑤시는 느낌 심했는데 이번엔 조금 나아진 것 같아",
+      "gold": [
+        "근육통"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "근육통"
+        ],
+        "bm25": [
+          "눈이 무거운 느낌",
+          "발한",
+          "피부홍조",
+          "불안",
+          "근육통",
+          "가슴 답답",
+          "삼키기 곤란",
+          "재채기",
+          "흉통",
+          "객혈"
+        ],
+        "combined": [
+          "근육통",
+          "눈이 무거운 느낌",
+          "발한",
+          "피부홍조",
+          "불안",
+          "가슴 답답",
+          "삼키기 곤란",
+          "재채기",
+          "흉통",
+          "객혈"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_067",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "rag_pack_anchored",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "자우름은 조금 나아졌지만, 아직도 가끔 축 처지는 느낌이 있어",
+      "gold": [
+        "피로감"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "피로감"
+        ],
+        "bm25": [
+          "피로감",
+          "삼키기 곤란",
+          "눈이 무거운 느낌",
+          "가슴 답답",
+          "사망",
+          "흉통",
+          "천명음",
+          "무증상",
+          "발한",
+          "피부홍조"
+        ],
+        "combined": [
+          "피로감",
+          "삼키기 곤란",
+          "눈이 무거운 느낌",
+          "가슴 답답",
+          "사망",
+          "흉통",
+          "천명음",
+          "무증상",
+          "발한",
+          "피부홍조"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_068",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "기운없는 느낌이 좀 나아진 것 같아",
+      "gold": [
+        "기운없음"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "기운없음"
+        ],
+        "bm25": [
+          "기운없음",
+          "삼키기 곤란",
+          "눈이 무거운 느낌",
+          "감기 증상",
+          "호흡곤란",
+          "발한",
+          "피부홍조",
+          "불안",
+          "가슴 답답"
+        ],
+        "combined": [
+          "기운없음",
+          "삼키기 곤란",
+          "눈이 무거운 느낌",
+          "감기 증상",
+          "호흡곤란",
+          "발한",
+          "피부홍조",
+          "불안",
+          "가슴 답답"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_069",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "열은 아직 있는데, 전에 같은 춥고 떠는 건 없어졌어",
+      "gold": [
+        "열"
+      ],
+      "negative": [
+        "오한"
+      ],
+      "candidates": {
+        "alias": [
+          "열"
+        ],
+        "bm25": [
+          "오한",
+          "무증상",
+          "재채기",
+          "식욕부진",
+          "피로감",
+          "체중감소",
+          "흉통",
+          "호흡곤란",
+          "탈장"
+        ],
+        "combined": [
+          "열",
+          "오한",
+          "무증상",
+          "재채기",
+          "식욕부진",
+          "피로감",
+          "체중감소",
+          "흉통",
+          "호흡곤란",
+          "탈장"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_070",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "systemic_course",
+      "utterance": "몸살 때문에 좀 덜 피곤한 것 같긴 한데, 여전히 근육이 좀 아파서 힘들어",
+      "gold": [
+        "근육통",
+        "피로감"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "피로감",
+          "근육통"
+        ],
+        "bm25": [
+          "근육통",
+          "가래",
+          "복벽이 움푹 들어감",
+          "피로감",
+          "근력 약화",
+          "호흡곤란",
+          "사망",
+          "발한",
+          "피부홍조",
+          "두통"
+        ],
+        "combined": [
+          "피로감",
+          "근육통",
+          "가래",
+          "복벽이 움푹 들어감",
+          "근력 약화",
+          "호흡곤란",
+          "사망",
+          "발한",
+          "피부홍조",
+          "두통"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_071",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "ent_swallow_eye_voice",
+      "utterance": "목소리가 쉬어서 잘 나오지 않는 거 같아",
+      "gold": [
+        "목소리 변화"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "목소리 변화"
+        ],
+        "bm25": [
+          "목소리 변화",
+          "결막염",
+          "가슴 답답",
+          "콧물",
+          "가래",
+          "객혈",
+          "근력 약화",
+          "검은색 가래",
+          "식욕부진",
+          "기침"
+        ],
+        "combined": [
+          "목소리 변화",
+          "결막염",
+          "가슴 답답",
+          "콧물",
+          "가래",
+          "객혈",
+          "근력 약화",
+          "검은색 가래",
+          "식욕부진",
+          "기침"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_072",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "ent_swallow_eye_voice",
+      "utterance": "음식 삼키는 게 좀 힘들어",
+      "gold": [
+        "삼키기 곤란"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "삼키기 곤란"
+        ],
+        "bm25": [
+          "가래",
+          "삼키기 곤란",
+          "복벽이 움푹 들어감",
+          "근력 약화",
+          "폐부종",
+          "호흡곤란",
+          "탈장"
+        ],
+        "combined": [
+          "삼키기 곤란",
+          "가래",
+          "복벽이 움푹 들어감",
+          "근력 약화",
+          "폐부종",
+          "호흡곤란",
+          "탈장"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_073",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "ent_swallow_eye_voice",
+      "utterance": "사래는 좀 걸리는 거 같은데 음식 먹을 때는 별로 안 걸려",
+      "gold": [
+        "사래걸림"
+      ],
+      "negative": [
+        "삼키기 곤란"
+      ],
+      "candidates": {
+        "alias": [
+          "사래걸림"
+        ],
+        "bm25": [
+          "사래걸림",
+          "근력 약화",
+          "객혈",
+          "무증상",
+          "재채기",
+          "식욕부진",
+          "피로감",
+          "저산소증",
+          "목소리 변화",
+          "곤봉지"
+        ],
+        "combined": [
+          "사래걸림",
+          "근력 약화",
+          "객혈",
+          "무증상",
+          "재채기",
+          "식욕부진",
+          "피로감",
+          "저산소증",
+          "목소리 변화",
+          "곤봉지"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_074",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "ent_swallow_eye_voice",
+      "utterance": "눈이 빨갛게 충혈되어서 좀 불편해",
+      "gold": [
+        "눈의 충혈"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "눈의 충혈"
+        ],
+        "bm25": [
+          "구토",
+          "눈의 충혈",
+          "눈이 무거운 느낌",
+          "코막힘",
+          "부정맥",
+          "콧물",
+          "사망",
+          "호흡곤란"
+        ],
+        "combined": [
+          "눈의 충혈",
+          "구토",
+          "눈이 무거운 느낌",
+          "코막힘",
+          "부정맥",
+          "콧물",
+          "사망",
+          "호흡곤란"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_075",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "ent_swallow_eye_voice",
+      "utterance": "눈곱이 좀 끼는 거 같은데, 그거 외에는 다른 건 별로 없어",
+      "gold": [
+        "눈꼽"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "눈꼽"
+        ],
+        "bm25": [
+          "질식",
+          "눈꼽",
+          "두통",
+          "근육통",
+          "무증상",
+          "천명음",
+          "재채기",
+          "식욕부진",
+          "피로감",
+          "호흡기감염"
+        ],
+        "combined": [
+          "눈꼽",
+          "질식",
+          "두통",
+          "근육통",
+          "무증상",
+          "천명음",
+          "재채기",
+          "식욕부진",
+          "피로감",
+          "호흡기감염"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_076",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "ent_swallow_eye_voice",
+      "utterance": "목소리 쉬인 거 좀 나아진 거 같아",
+      "gold": [
+        "목소리 변화"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "목소리 변화"
+        ],
+        "bm25": [
+          "목소리 변화",
+          "가래",
+          "결막염",
+          "천명음",
+          "열",
+          "가슴 답답",
+          "콧물"
+        ],
+        "combined": [
+          "목소리 변화",
+          "가래",
+          "결막염",
+          "천명음",
+          "열",
+          "가슴 답답",
+          "콧물"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_077",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "ent_swallow_eye_voice",
+      "utterance": "음식 삼키는 건 여전히 힘들어",
+      "gold": [
+        "삼키기 곤란"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "삼키기 곤란"
+        ],
+        "bm25": [
+          "가래",
+          "삼키기 곤란",
+          "복벽이 움푹 들어감",
+          "근력 약화",
+          "폐부종",
+          "호흡곤란",
+          "사망",
+          "탈장"
+        ],
+        "combined": [
+          "삼키기 곤란",
+          "가래",
+          "복벽이 움푹 들어감",
+          "근력 약화",
+          "폐부종",
+          "호흡곤란",
+          "사망",
+          "탈장"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_078",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "ent_swallow_eye_voice",
+      "utterance": "사래는 여전히 들리는데, 음식 넘어가는 건 문제 없어",
+      "gold": [
+        "사래걸림"
+      ],
+      "negative": [
+        "삼키기 곤란"
+      ],
+      "candidates": {
+        "alias": [
+          "사래걸림"
+        ],
+        "bm25": [
+          "근력 약화",
+          "사래걸림",
+          "가슴 답답",
+          "사망",
+          "곤봉지",
+          "탈장"
+        ],
+        "combined": [
+          "사래걸림",
+          "근력 약화",
+          "가슴 답답",
+          "사망",
+          "곤봉지",
+          "탈장"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_079",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "ent_swallow_eye_voice",
+      "utterance": "눈이 여전히 빨갛게 충혈돼서 불편해",
+      "gold": [
+        "눈의 충혈"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "눈의 충혈"
+        ],
+        "bm25": [
+          "눈의 충혈",
+          "눈이 무거운 느낌",
+          "구토",
+          "사망",
+          "호흡곤란"
+        ],
+        "combined": [
+          "눈의 충혈",
+          "눈이 무거운 느낌",
+          "구토",
+          "사망",
+          "호흡곤란"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_080",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "ent_swallow_eye_voice",
+      "utterance": "눈곱 때문에 불편함이 계속되고 있어",
+      "gold": [
+        "눈꼽"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "눈꼽"
+        ],
+        "bm25": [
+          "코막힘",
+          "눈꼽",
+          "콧물",
+          "말초부종",
+          "호흡곤란",
+          "서맥",
+          "부정맥",
+          "감기 증상",
+          "저산소증"
+        ],
+        "combined": [
+          "눈꼽",
+          "코막힘",
+          "콧물",
+          "말초부종",
+          "호흡곤란",
+          "서맥",
+          "부정맥",
+          "감기 증상",
+          "저산소증"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_081",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "cardio_neuro_edema",
+      "utterance": "머리가 핑 돌고 어지러워",
+      "gold": [
+        "어지러움"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "어지러움"
+        ],
+        "bm25": [
+          "어지러움",
+          "발한",
+          "피부홍조",
+          "불안",
+          "두통",
+          "결막염",
+          "가래",
+          "가슴 답답",
+          "콧물"
+        ],
+        "combined": [
+          "어지러움",
+          "발한",
+          "피부홍조",
+          "불안",
+          "두통",
+          "결막염",
+          "가래",
+          "가슴 답답",
+          "콧물"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_082",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "cardio_neuro_edema",
+      "utterance": "가슴이 맥이 불규칙하게 두근거려서 걱정돼",
+      "gold": [
+        "가슴 두근거림"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "가슴 두근거림"
+        ],
+        "bm25": [
+          "가슴 두근거림",
+          "부정맥",
+          "가슴 답답",
+          "서맥",
+          "함몰가슴",
+          "흉통",
+          "저산소증",
+          "삼키기 곤란",
+          "코막힘",
+          "청색증"
+        ],
+        "combined": [
+          "가슴 두근거림",
+          "부정맥",
+          "가슴 답답",
+          "서맥",
+          "함몰가슴",
+          "흉통",
+          "저산소증",
+          "삼키기 곤란",
+          "코막힘",
+          "청색증"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_083",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "cardio_neuro_edema",
+      "utterance": "다리랑 발이 너무 붓는다, 신발 끼기도 힘들어",
+      "gold": [
+        "하지부종"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "하지부종"
+        ],
+        "bm25": [
+          "하지부종",
+          "호흡곤란",
+          "가래",
+          "근력 약화",
+          "복벽이 움푹 들어감",
+          "청색증",
+          "구토",
+          "질식",
+          "오한",
+          "탈장"
+        ],
+        "combined": [
+          "하지부종",
+          "호흡곤란",
+          "가래",
+          "근력 약화",
+          "복벽이 움푹 들어감",
+          "청색증",
+          "구토",
+          "질식",
+          "오한",
+          "탈장"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_084",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "cardio_neuro_edema",
+      "utterance": "팔다리에 힘이 잘 안 들어가는 느낌이야",
+      "gold": [
+        "근력 약화"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "근력 약화"
+        ],
+        "bm25": [
+          "근력 약화",
+          "삼키기 곤란",
+          "탈장",
+          "하지부종",
+          "코막힘",
+          "복벽이 움푹 들어감",
+          "눈이 무거운 느낌",
+          "콧물",
+          "목소리 변화",
+          "발한"
+        ],
+        "combined": [
+          "근력 약화",
+          "삼키기 곤란",
+          "탈장",
+          "하지부종",
+          "코막힘",
+          "복벽이 움푹 들어감",
+          "눈이 무거운 느낌",
+          "콧물",
+          "목소리 변화",
+          "발한"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_085",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "rag_pack_anchored",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "cardio_neuro_edema",
+      "utterance": "머리깽이 좀 아프긴 한데 어지럽지는 않아",
+      "gold": [
+        "두통"
+      ],
+      "negative": [
+        "어지러움"
+      ],
+      "candidates": {
+        "alias": [
+          "두통"
+        ],
+        "bm25": [
+          "두통",
+          "어지러움",
+          "목의 통증",
+          "흉통",
+          "부정맥",
+          "서맥",
+          "발한",
+          "곤봉지",
+          "피부홍조",
+          "불안"
+        ],
+        "combined": [
+          "두통",
+          "어지러움",
+          "목의 통증",
+          "흉통",
+          "부정맥",
+          "서맥",
+          "발한",
+          "곤봉지",
+          "피부홍조",
+          "불안"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_086",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "cardio_neuro_edema",
+      "utterance": "아직도 머리가 핑 돌거든, 어지러운 느낌이 계속 되고 있어",
+      "gold": [
+        "어지러움"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "어지러움"
+        ],
+        "bm25": [
+          "어지러움",
+          "눈이 무거운 느낌",
+          "코막힘",
+          "삼키기 곤란",
+          "발한",
+          "피부홍조",
+          "콧물",
+          "불안",
+          "말초부종",
+          "감기 증상"
+        ],
+        "combined": [
+          "어지러움",
+          "눈이 무거운 느낌",
+          "코막힘",
+          "삼키기 곤란",
+          "발한",
+          "피부홍조",
+          "콧물",
+          "불안",
+          "말초부종",
+          "감기 증상"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_087",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "cardio_neuro_edema",
+      "utterance": "가슴 두근거림이 여전히 많이 느껴지는 것 같아",
+      "gold": [
+        "가슴 두근거림"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "가슴 두근거림"
+        ],
+        "bm25": [
+          "가슴 두근거림",
+          "가슴 답답",
+          "함몰가슴",
+          "가래",
+          "흉통",
+          "기침",
+          "삼키기 곤란",
+          "청색증",
+          "열",
+          "사망"
+        ],
+        "combined": [
+          "가슴 두근거림",
+          "가슴 답답",
+          "함몰가슴",
+          "가래",
+          "흉통",
+          "기침",
+          "삼키기 곤란",
+          "청색증",
+          "열",
+          "사망"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_088",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "cardio_neuro_edema",
+      "utterance": "다리가 여전히 붓는 거 같은데, 신발 끼는 거 너무 불편해",
+      "gold": [
+        "하지부종"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "하지부종"
+        ],
+        "bm25": [
+          "하지부종",
+          "근력 약화",
+          "무증상",
+          "재채기",
+          "식욕부진",
+          "피로감",
+          "사망",
+          "체중감소",
+          "결막염",
+          "호흡곤란"
+        ],
+        "combined": [
+          "하지부종",
+          "근력 약화",
+          "무증상",
+          "재채기",
+          "식욕부진",
+          "피로감",
+          "사망",
+          "체중감소",
+          "결막염",
+          "호흡곤란"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_089",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "cardio_neuro_edema",
+      "utterance": "팔다리에 힘 들어가는 거 좀 안 좋아졌어",
+      "gold": [
+        "근력 약화"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "근력 약화"
+        ],
+        "bm25": [
+          "근력 약화",
+          "탈장",
+          "가래",
+          "하지부종",
+          "복벽이 움푹 들어감",
+          "호흡곤란",
+          "목소리 변화",
+          "삼키기 곤란"
+        ],
+        "combined": [
+          "근력 약화",
+          "탈장",
+          "가래",
+          "하지부종",
+          "복벽이 움푹 들어감",
+          "호흡곤란",
+          "목소리 변화",
+          "삼키기 곤란"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_090",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "rag_pack_anchored",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "cardio_neuro_edema",
+      "utterance": "머리깽이 아프기는 하는데, 그래도 어지럽지는 않아",
+      "gold": [
+        "두통"
+      ],
+      "negative": [
+        "어지러움"
+      ],
+      "candidates": {
+        "alias": [
+          "두통"
+        ],
+        "bm25": [
+          "두통",
+          "어지러움",
+          "흉통",
+          "목의 통증",
+          "결막염",
+          "빈호흡",
+          "부정맥",
+          "청색증",
+          "서맥",
+          "발한"
+        ],
+        "combined": [
+          "두통",
+          "어지러움",
+          "흉통",
+          "목의 통증",
+          "결막염",
+          "빈호흡",
+          "부정맥",
+          "청색증",
+          "서맥",
+          "발한"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_091",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "gi_nonspecific_confounders",
+      "utterance": "속이 울렁거리고 구토는 했는데 설사는 안 해",
+      "gold": [
+        "구토"
+      ],
+      "negative": [
+        "설사"
+      ],
+      "candidates": {
+        "alias": [
+          "설사",
+          "구토"
+        ],
+        "bm25": [
+          "구토",
+          "설사",
+          "근력 약화",
+          "가슴 답답",
+          "목소리 변화",
+          "피로감",
+          "열",
+          "청색증",
+          "오한",
+          "두통"
+        ],
+        "combined": [
+          "설사",
+          "구토",
+          "근력 약화",
+          "가슴 답답",
+          "목소리 변화",
+          "피로감",
+          "열",
+          "청색증",
+          "오한",
+          "두통"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_092",
+      "question_id": "Q1",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "gi_nonspecific_confounders",
+      "utterance": "묽은 변이 계속 나오는데, 진작에 그랬던 것도 아닌 거 같아",
+      "gold": [
+        "설사"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "설사"
+        ],
+        "bm25": [
+          "설사",
+          "객혈",
+          "코막힘",
+          "가래",
+          "콧물",
+          "흉통",
+          "감기 증상",
+          "목소리 변화",
+          "검은색 가래",
+          "기침"
+        ],
+        "combined": [
+          "설사",
+          "객혈",
+          "코막힘",
+          "가래",
+          "콧물",
+          "흉통",
+          "감기 증상",
+          "목소리 변화",
+          "검은색 가래",
+          "기침"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_093",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "rag_pack_anchored",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "gi_nonspecific_confounders",
+      "utterance": "창지가 꼬이는 느낌이랑 복통이 좀 있어",
+      "gold": [
+        "복부 통증"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "복부 통증"
+        ],
+        "bm25": [
+          "복부 통증",
+          "삼키기 곤란",
+          "가슴 답답",
+          "눈이 무거운 느낌",
+          "설사",
+          "피로감",
+          "발한",
+          "피부홍조",
+          "불안",
+          "구토"
+        ],
+        "combined": [
+          "복부 통증",
+          "삼키기 곤란",
+          "가슴 답답",
+          "눈이 무거운 느낌",
+          "설사",
+          "피로감",
+          "발한",
+          "피부홍조",
+          "불안",
+          "구토"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_094",
+      "question_id": "Q1",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "gi_nonspecific_confounders",
+      "utterance": "배가 빵빵하고 더부룩한 느낌이야",
+      "gold": [
+        "복부팽만감"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "복부팽만감"
+        ],
+        "bm25": [
+          "복부팽만감",
+          "삼키기 곤란",
+          "탈장",
+          "가슴 답답",
+          "눈이 무거운 느낌",
+          "검은색 가래",
+          "발한",
+          "피부홍조",
+          "불안",
+          "열"
+        ],
+        "combined": [
+          "복부팽만감",
+          "삼키기 곤란",
+          "탈장",
+          "가슴 답답",
+          "눈이 무거운 느낌",
+          "검은색 가래",
+          "발한",
+          "피부홍조",
+          "불안",
+          "열"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_095",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "gi_nonspecific_confounders",
+      "utterance": "여전히 입맛이 없고 음식을 잘 못 먹는다",
+      "gold": [
+        "식욕부진"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "식욕부진"
+        ],
+        "bm25": [
+          "식욕부진",
+          "사망",
+          "근력 약화",
+          "호흡곤란"
+        ],
+        "combined": [
+          "식욕부진",
+          "사망",
+          "근력 약화",
+          "호흡곤란"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_096",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "gi_nonspecific_confounders",
+      "utterance": "속이 울렁거리고 토했는데 설사는 전혀 없어",
+      "gold": [
+        "구토"
+      ],
+      "negative": [
+        "설사"
+      ],
+      "candidates": {
+        "alias": [
+          "설사",
+          "구토"
+        ],
+        "bm25": [
+          "구토",
+          "설사",
+          "가슴 답답",
+          "피로감"
+        ],
+        "combined": [
+          "설사",
+          "구토",
+          "가슴 답답",
+          "피로감"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_097",
+      "question_id": "Q3",
+      "language_style": "standard",
+      "dialect_source_layer": "none",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "gi_nonspecific_confounders",
+      "utterance": "묽은 변 계속 나는 거 같아",
+      "gold": [
+        "설사"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "설사"
+        ],
+        "bm25": [
+          "설사",
+          "삼키기 곤란",
+          "코막힘",
+          "가래",
+          "감기 증상",
+          "콧물",
+          "천명음",
+          "목소리 변화"
+        ],
+        "combined": [
+          "설사",
+          "삼키기 곤란",
+          "코막힘",
+          "가래",
+          "감기 증상",
+          "콧물",
+          "천명음",
+          "목소리 변화"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_098",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "rag_pack_anchored",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "gi_nonspecific_confounders",
+      "utterance": "창지가 계속 꼬이는 느낌이야, 별 나아진 거 없어",
+      "gold": [
+        "복부 통증"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "복부 통증"
+        ],
+        "bm25": [
+          "삼키기 곤란",
+          "가슴 답답",
+          "복부 통증",
+          "코막힘",
+          "눈이 무거운 느낌",
+          "감기 증상",
+          "콧물",
+          "발한",
+          "피부홍조",
+          "불안"
+        ],
+        "combined": [
+          "복부 통증",
+          "삼키기 곤란",
+          "가슴 답답",
+          "코막힘",
+          "눈이 무거운 느낌",
+          "감기 증상",
+          "콧물",
+          "발한",
+          "피부홍조",
+          "불안"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_099",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "clinical_colloquial",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "gi_nonspecific_confounders",
+      "utterance": "배가 여전히 빵빵하고 더부룩한 느낌이야, 다른 건 없어",
+      "gold": [
+        "복부팽만감"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "복부팽만감"
+        ],
+        "bm25": [
+          "복부팽만감",
+          "삼키기 곤란",
+          "질식",
+          "탈장",
+          "가슴 답답",
+          "눈이 무거운 느낌",
+          "두통",
+          "근육통",
+          "검은색 가래",
+          "사망"
+        ],
+        "combined": [
+          "복부팽만감",
+          "삼키기 곤란",
+          "질식",
+          "탈장",
+          "가슴 답답",
+          "눈이 무거운 느낌",
+          "두통",
+          "근육통",
+          "검은색 가래",
+          "사망"
+        ]
+      }
+    },
+    {
+      "case_id": "train_v2_100",
+      "question_id": "Q3",
+      "language_style": "gangwon",
+      "dialect_source_layer": "light_dialect_style",
+      "expression_policy": "lay_paraphrase",
+      "symptom_group": "gi_nonspecific_confounders",
+      "utterance": "아직 입맛이 없고 잘 못 먹는 느낌이야",
+      "gold": [
+        "식욕부진"
+      ],
+      "negative": [],
+      "candidates": {
+        "alias": [
+          "식욕부진"
+        ],
+        "bm25": [
+          "식욕부진",
+          "삼키기 곤란",
+          "눈이 무거운 느낌",
+          "근력 약화",
+          "발한",
+          "피부홍조",
+          "불안",
+          "가슴 답답",
+          "호흡곤란"
+        ],
+        "combined": [
+          "식욕부진",
+          "삼키기 곤란",
+          "눈이 무거운 느낌",
+          "근력 약화",
+          "발한",
+          "피부홍조",
+          "불안",
+          "가슴 답답",
+          "호흡곤란"
+        ]
+      }
+    }
+  ]
+}

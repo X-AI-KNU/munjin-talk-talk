@@ -1,0 +1,525 @@
+{
+  "track": "B_dialect_rag_sanity",
+  "runs_bedrock": false,
+  "gangwon_rows": 50,
+  "rag_pack_anchored_rows": 10,
+  "rag_pack_anchor_hit_rows": 10,
+  "rag_pack_anchor_recall": 1.0,
+  "non_anchor_gangwon_rows": 40,
+  "non_anchor_hint_rows": 0,
+  "non_anchor_hint_rate": 0.0,
+  "details": [
+    {
+      "case_id": "train_v2_006",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "열은 좀 있는데 기침은 안 나는 거 같아",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_007",
+      "dialect_source_layer": "rag_pack_anchored",
+      "utterance": "목이 아푸나 싶고 코도 계속 막혀서 숨 쉬기가 불편해",
+      "expected_anchor": "아푸나?",
+      "hit_expected_anchor": true,
+      "hints": [
+        {
+          "dialect": "아푸나?",
+          "standard": "아프니?",
+          "match_type": "exact",
+          "source_file": "dialect_kangwon.json"
+        }
+      ]
+    },
+    {
+      "case_id": "train_v2_008",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "콧물이 자꾸 나고 재채기도 잘해",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_009",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "목이 좀 아퍼서 불편해",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_010",
+      "dialect_source_layer": "rag_pack_anchored",
+      "utterance": "코빼기가 막혀서 숨쉬는 게 너무 답답해",
+      "expected_anchor": "코빼기",
+      "hit_expected_anchor": true,
+      "hints": [
+        {
+          "dialect": "코빼기",
+          "standard": "코",
+          "match_type": "exact",
+          "source_file": "dialect_kangwon.json"
+        }
+      ]
+    },
+    {
+      "case_id": "train_v2_015",
+      "dialect_source_layer": "rag_pack_anchored",
+      "utterance": "목이 아푸나 싶고 코는 여전히 막혀",
+      "expected_anchor": "아푸나?",
+      "hit_expected_anchor": true,
+      "hints": [
+        {
+          "dialect": "아푸나?",
+          "standard": "아프니?",
+          "match_type": "exact",
+          "source_file": "dialect_kangwon.json"
+        }
+      ]
+    },
+    {
+      "case_id": "train_v2_016",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "콧물이랑 재채기 계속 나는 거 같네, 아직도 괜찮지 않아",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_017",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "목이 아직 칼칼하고 때로는 많이 아플 때도 있어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_018",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "그때 이후로 코가 여전히 막혀서 숨쉬기가 답답해",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_024",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "거품 섞인 가래는 나오는데 피는 안 나와",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_025",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "숨 쉴 때마다 쌕쌕거리는 소리가 난다",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_026",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "기침은 자꾸 나는데 가래는 전혀 없어서 좀 이상해",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_027",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "요새 기침이 계속 나는 거 걱정스러워",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_028",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "목에 가래가 끼는 느낌이 심해서 불편해",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_034",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "기침은 여전히 있는데 가래는 나지 않아",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_035",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "기침이 아직도 나는군, 많이 안 나아진 것 같아",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_036",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "가래 좀 끼는 거 아직 나아지지 않았어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_037",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "여전히 기침이랑 가래 많이 나와",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_038",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "전번 병원 갔을 때랑 똑같이 누렇고 짙은 가래가 계속 나오는군",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_044",
+      "dialect_source_layer": "rag_pack_anchored",
+      "utterance": "가슴이 제리제리하고 답답한 느낌인데, 아프진 않아",
+      "expected_anchor": "(가슴이) 제리제리하다",
+      "hit_expected_anchor": true,
+      "hints": [
+        {
+          "dialect": "(가슴이) 제리제리하고",
+          "standard": "저리다",
+          "match_type": "exact",
+          "source_file": "dialect_kangwon.json"
+        },
+        {
+          "dialect": "가슴이 제리제리하고",
+          "standard": "저리다",
+          "match_type": "exact",
+          "source_file": "dialect_kangwon.json"
+        },
+        {
+          "dialect": "제리제리하고",
+          "standard": "저리다",
+          "match_type": "exact",
+          "source_file": "dialect_kangwon.json"
+        },
+        {
+          "dialect": "(가슴이) 제리제리하다",
+          "standard": "저리다",
+          "match_type": "partial",
+          "source_file": "dialect_kangwon.json"
+        },
+        {
+          "dialect": "(가슴이) 제리제리하니",
+          "standard": "저리다",
+          "match_type": "partial",
+          "source_file": "dialect_kangwon.json"
+        },
+        {
+          "dialect": "(가슴이) 제리제리하네",
+          "standard": "저리다",
+          "match_type": "partial",
+          "source_file": "dialect_kangwon.json"
+        },
+        {
+          "dialect": "가슴이 제리제리하다",
+          "standard": "저리다",
+          "match_type": "partial",
+          "source_file": "dialect_kangwon.json"
+        },
+        {
+          "dialect": "가슴이 제리제리하니",
+          "standard": "저리다",
+          "match_type": "partial",
+          "source_file": "dialect_kangwon.json"
+        }
+      ]
+    },
+    {
+      "case_id": "train_v2_045",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "입술이 좀 파래 보여서 걱정 되는데, 뭐라 할 수 없는 불편함 있어.",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_046",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "숨 쉬기 힘들어, 피 섞인 가래는 없지만 참 많이 힘들어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_047",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "숨 쉬기가 힘들어서 말하는 게 너무 힘들어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_053",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "입술이 또 파래 보이는 거 계속 돼",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_054",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "그 뒤로도 숨 쉬는 거 힘들고, 피 섞인 가래는 여전히 없어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_055",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "숨 쉬기는 조금 나아진 것 같은데, 여전히 힘들 때는 있어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_056",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "가슴이 덜 답답해졌어, 좀 나아진 거 같아",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_060",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "계속 피곤하고 축 처지는 느낌이야",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_061",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "요새 기운이 없는 것 같아",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_062",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "열은 나는데 오한은 없어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_063",
+      "dialect_source_layer": "rag_pack_anchored",
+      "utterance": "몸땡이 쑤시고 온몸이 피곤해",
+      "expected_anchor": "몸땡이",
+      "hit_expected_anchor": true,
+      "hints": [
+        {
+          "dialect": "몸땡이",
+          "standard": "몸통",
+          "match_type": "exact",
+          "source_file": "dialect_kangwon.json"
+        }
+      ]
+    },
+    {
+      "case_id": "train_v2_067",
+      "dialect_source_layer": "rag_pack_anchored",
+      "utterance": "자우름은 조금 나아졌지만, 아직도 가끔 축 처지는 느낌이 있어",
+      "expected_anchor": "자우름",
+      "hit_expected_anchor": true,
+      "hints": [
+        {
+          "dialect": "자우름",
+          "standard": "졸음",
+          "match_type": "exact",
+          "source_file": "dialect_kangwon.json"
+        }
+      ]
+    },
+    {
+      "case_id": "train_v2_068",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "기운없는 느낌이 좀 나아진 것 같아",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_069",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "열은 아직 있는데, 전에 같은 춥고 떠는 건 없어졌어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_070",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "몸살 때문에 좀 덜 피곤한 것 같긴 한데, 여전히 근육이 좀 아파서 힘들어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_073",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "사래는 좀 걸리는 거 같은데 음식 먹을 때는 별로 안 걸려",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_074",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "눈이 빨갛게 충혈되어서 좀 불편해",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_075",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "눈곱이 좀 끼는 거 같은데, 그거 외에는 다른 건 별로 없어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_078",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "사래는 여전히 들리는데, 음식 넘어가는 건 문제 없어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_079",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "눈이 여전히 빨갛게 충혈돼서 불편해",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_080",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "눈곱 때문에 불편함이 계속되고 있어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_084",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "팔다리에 힘이 잘 안 들어가는 느낌이야",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_085",
+      "dialect_source_layer": "rag_pack_anchored",
+      "utterance": "머리깽이 좀 아프긴 한데 어지럽지는 않아",
+      "expected_anchor": "머리깽이",
+      "hit_expected_anchor": true,
+      "hints": [
+        {
+          "dialect": "머리깽이",
+          "standard": "머리",
+          "match_type": "exact",
+          "source_file": "dialect_kangwon.json"
+        }
+      ]
+    },
+    {
+      "case_id": "train_v2_089",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "팔다리에 힘 들어가는 거 좀 안 좋아졌어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_090",
+      "dialect_source_layer": "rag_pack_anchored",
+      "utterance": "머리깽이 아프기는 하는데, 그래도 어지럽지는 않아",
+      "expected_anchor": "머리깽이",
+      "hit_expected_anchor": true,
+      "hints": [
+        {
+          "dialect": "머리깽이",
+          "standard": "머리",
+          "match_type": "exact",
+          "source_file": "dialect_kangwon.json"
+        }
+      ]
+    },
+    {
+      "case_id": "train_v2_093",
+      "dialect_source_layer": "rag_pack_anchored",
+      "utterance": "창지가 꼬이는 느낌이랑 복통이 좀 있어",
+      "expected_anchor": "창지",
+      "hit_expected_anchor": true,
+      "hints": [
+        {
+          "dialect": "창지",
+          "standard": "창자",
+          "match_type": "exact",
+          "source_file": "dialect_kangwon.json"
+        }
+      ]
+    },
+    {
+      "case_id": "train_v2_094",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "배가 빵빵하고 더부룩한 느낌이야",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_098",
+      "dialect_source_layer": "rag_pack_anchored",
+      "utterance": "창지가 계속 꼬이는 느낌이야, 별 나아진 거 없어",
+      "expected_anchor": "창지",
+      "hit_expected_anchor": true,
+      "hints": [
+        {
+          "dialect": "창지",
+          "standard": "창자",
+          "match_type": "exact",
+          "source_file": "dialect_kangwon.json"
+        }
+      ]
+    },
+    {
+      "case_id": "train_v2_099",
+      "dialect_source_layer": "clinical_colloquial",
+      "utterance": "배가 여전히 빵빵하고 더부룩한 느낌이야, 다른 건 없어",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    },
+    {
+      "case_id": "train_v2_100",
+      "dialect_source_layer": "light_dialect_style",
+      "utterance": "아직 입맛이 없고 잘 못 먹는 느낌이야",
+      "expected_anchor": "",
+      "hit_expected_anchor": null,
+      "hints": []
+    }
+  ]
+}
