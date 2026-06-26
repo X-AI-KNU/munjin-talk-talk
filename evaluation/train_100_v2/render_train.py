@@ -30,8 +30,8 @@ REPORT_PATH = OUT_DIR / "quality_gate_report.json"
 DEFAULT_MODEL_ID = os.environ.get("TRAIN_RENDER_MODEL_ID", "apac.amazon.nova-pro-v1:0")
 DEFAULT_REGION = os.environ.get("AWS_REGION", "ap-northeast-2")
 MAX_TOKENS = int(os.environ.get("TRAIN_RENDER_MAX_TOKENS", "900"))
-TEMPERATURE = float(os.environ.get("TRAIN_RENDER_TEMPERATURE", "0.7"))
-MAX_ATTEMPTS = int(os.environ.get("TRAIN_RENDER_ATTEMPTS", "3"))
+TEMPERATURE = float(os.environ.get("TRAIN_RENDER_TEMPERATURE", "0.9"))
+MAX_ATTEMPTS = int(os.environ.get("TRAIN_RENDER_ATTEMPTS", "8"))
 
 FORMAL_PATTERNS = ("습니다", "습니까", "합니다", "드립니다", "예정입니다")
 POLITE_ENDING_RE = re.compile(r"요(?:[.!?。]|$)")
@@ -40,8 +40,10 @@ MEDICATION_PATTERNS = ("약", "처방", "복용", "영양제", "한약", "진통
 EXACT_DURATION_PATTERNS = (
     "어제부터",
     "오늘부터",
+    "오늘 아침",
     "아침부터",
     "저녁부터",
+    "몇 일",
     "며칠",
     "몇일",
     "일주일",
@@ -49,9 +51,69 @@ EXACT_DURATION_PATTERNS = (
     "두 달",
     "언제부터",
 )
+PATIENT_VOICE_BLOCKERS = (
+    "증상",
+    "병원 왔",
+    "지난 방문 이후로",
+    "지난번 방문 후로",
+    "전 방문 후로",
+    "왜 이래",
+    "왜 그런",
+    "뭐 때문",
+)
 IMPROVED_MARKERS = ("나아", "좋아", "괜찮", "덜", "사라", "없어졌", "줄", "가라앉", "들어오")
 RECURRENT_MARKERS = ("계속", "아직", "다시", "또", "반복", "남아", "그대로", "여전", "후로", "지난번", "전번", "비슷", "심해")
 NEGATION_MARKERS = ("없", "아니", "안 ", "안나", "안 나", "않", "전혀", "한 번도", "느껴지지", "제대로")
+
+VOICE_DIRECTIONS = (
+    "Start directly from the body sensation or body part. Do not use a time adverb opening.",
+    "Sound worried but casual, like a patient trying to describe the feeling quickly.",
+    "Use a contrast structure only if the blueprint has negative symptoms.",
+    "For follow-up rows, describe change with words like still, better, worse, or not gone; avoid saying 'visit'.",
+    "Use plain everyday words and avoid medical meta words like 'symptom'.",
+    "Let the sentence feel spoken, slightly imperfect, and not polished.",
+    "Start from what makes daily life uncomfortable, not from a generic intro phrase.",
+    "Use a short first-person patient voice without explaining the dataset task.",
+)
+
+GOLD_EVIDENCE_PATTERNS = {
+    "목의 통증": (r"목.*(아프|아푸|칼칼|따갑|쓰리|불편|힘들)",),
+    "코막힘": (r"코.*(막|답답)",),
+    "콧물": (r"콧물", r"코.*(흐르|줄줄|훌쩍)"),
+    "재채기": (r"재채기",),
+    "감기 증상": (r"감기",),
+    "열": (r"열", r"뜨겁", r"미열"),
+    "기침": (r"기침", r"콜록"),
+    "가래": (r"가래", r"목.*(끼|걸)"),
+    "화농성 객담": (r"(누렇|노랗|진하|걸쭉).*가래", r"가래.*(누렇|노랗|진하|걸쭉)"),
+    "검은색 가래": (r"(검|까만).*가래", r"가래.*(검|까만)"),
+    "거품이 섞인 가래": (r"거품.*가래", r"가래.*거품"),
+    "천명음": (r"쌕쌕", r"숨.*소리", r"휘파람"),
+    "호흡곤란": (r"숨.*(차|힘들|가쁘|막히|쉬기 힘)", r"호흡.*곤란", r"말하기.*힘"),
+    "가슴 답답": (r"가슴.*답답", r"가슴.*막힌"),
+    "흉통": (r"가슴.*(아프|통증|찌르|쑤시)",),
+    "객혈": (r"피.*(가래|섞|나와)", r"가래.*피"),
+    "청색증": (r"입술.*(파래|파랗|푸르)",),
+    "오한": (r"춥", r"떨리", r"오한"),
+    "근육통": (r"몸.*(쑤시|아프)", r"근육.*아프", r"몸살"),
+    "피로감": (r"피곤", r"축.*처지", r"힘들", r"기운.*없"),
+    "기운없음": (r"기운.*없", r"힘.*없", r"축.*처지"),
+    "목소리 변화": (r"목소리.*(쉬|안 나오|잠기)",),
+    "삼키기 곤란": (r"삼키.*(힘|어렵|불편)", r"넘기.*힘"),
+    "사래걸림": (r"사래",),
+    "눈의 충혈": (r"눈.*(빨갛|충혈)",),
+    "눈곱": (r"눈곱", r"눈.*분비"),
+    "어지러움": (r"어지럽", r"핑.*돌", r"빙글"),
+    "가슴 두근거림": (r"두근", r"심장.*뛰", r"맥.*불규칙"),
+    "하지부종": (r"다리.*(붓|부어)", r"발.*(붓|부어)", r"신발.*끼"),
+    "근력 약화": (r"힘.*안.*들어", r"힘.*빠", r"팔다리.*힘"),
+    "두통": (r"머리.*(아프|쑤시)", r"머리깽이.*아프"),
+    "구토": (r"토하", r"구토", r"울렁"),
+    "설사": (r"설사", r"묽은.*변", r"변.*묽"),
+    "복부 통증": (r"배.*(아프|꼬이|통증)", r"복통", r"창지.*꼬"),
+    "복부 팽만": (r"배.*(빵빵|더부룩|부풀)",),
+    "식욕부진": (r"입맛.*없", r"못.*먹", r"잘.*안.*먹"),
+}
 
 
 def load_blueprint() -> list[dict[str, Any]]:
@@ -145,6 +207,11 @@ def call_bedrock_json(client, model_id: str, prompt: str) -> tuple[dict[str, Any
     return parse_json_object(raw_text), raw_text, meta
 
 
+def voice_direction(case: dict[str, Any]) -> str:
+    number = int(str(case["case_id"]).rsplit("_", 1)[-1])
+    return VOICE_DIRECTIONS[(number - 1) % len(VOICE_DIRECTIONS)]
+
+
 def build_prompt(case: dict[str, Any], repair_note: str = "") -> str:
     anchor = case.get("dialect_anchor") or {}
     anchor_block = ""
@@ -155,10 +222,12 @@ Dialect anchor requirement:
 - Meaning: {anchor.get('standard')}
 - Usage guardrail: {anchor.get('usage')}
 - Do not add a new symptom only because of the dialect anchor.
+- Keep the dialect expression close to the source surface. If it ends with '하다', use a spoken form such as '해', '했어', or '했던', not a noun form.
 """
 
     return f"""
 You are generating one synthetic Korean patient answer for a medical intake evaluation dataset.
+Imagine you are the patient sitting at the intake desk and answering out loud.
 
 Return ONLY a JSON object. No markdown.
 
@@ -170,16 +239,23 @@ Global rules:
 - Do not ask whether medicines, supplements, or treatments are okay.
 - Do not make onset timing or exact duration the main answer.
 - Do not mention diagnoses.
+- Do not use the word '증상'.
+- Do not say '병원 왔어' or explain why the patient came.
+- Do not start with repetitive boilerplate such as '요즘...', '지난 방문 이후로...', or '지난번 방문 후로...'.
 - Make the answer natural, not a slot-filled template.
 - Keep it short: one sentence or two short clauses.
-- Preserve the blueprint's intended symptoms and negative context.
+- Every item in gold_symptoms must be expressed in patient language.
+- Preserve the blueprint's negative context without turning negative symptoms into active complaints.
+
+Patient voice direction for this row:
+- {voice_direction(case)}
 
 Question target:
 - visit_type: {case['visit_type']}
 - question_id: {case['question_id']}
 - question_type: {case['question_type']}
 - For initial Q1, answer what is uncomfortable now.
-- For follow-up Q3, answer how symptoms have changed or continued since the previous visit, without exact dates.
+- For follow-up Q3, answer how the discomfort changed or continued since last time, without exact dates and without using the word 'visit'.
 
 Blueprint:
 {json.dumps(case, ensure_ascii=False, indent=2)}
@@ -228,6 +304,13 @@ def anchor_surface_candidates(anchor: dict[str, Any]) -> set[str]:
     return {normalize_anchor_text(value) for value in expanded if normalize_anchor_text(value)}
 
 
+def has_gold_evidence(symptom: str, utterance: str) -> bool:
+    patterns = GOLD_EVIDENCE_PATTERNS.get(symptom)
+    if not patterns:
+        return True
+    return any(re.search(pattern, utterance) for pattern in patterns)
+
+
 def validate_row(row: dict[str, Any], case: dict[str, Any]) -> tuple[list[str], list[str]]:
     errors: list[str] = []
     warnings: list[str] = []
@@ -242,6 +325,9 @@ def validate_row(row: dict[str, Any], case: dict[str, Any]) -> tuple[list[str], 
         errors.append("utterance too short")
     if len(utterance) > 180:
         errors.append("utterance too long")
+    first_token, _first_two = opening_tokens(utterance)
+    if first_token == "요즘":
+        errors.append("do not begin with 요즘; start with the body part, sensation, contrast, or change instead")
     if any(pattern in utterance for pattern in FORMAL_PATTERNS):
         errors.append("formal style detected")
     if POLITE_ENDING_RE.search(utterance):
@@ -252,6 +338,11 @@ def validate_row(row: dict[str, Any], case: dict[str, Any]) -> tuple[list[str], 
         errors.append("medication/supplement content detected")
     if any(pattern in utterance for pattern in EXACT_DURATION_PATTERNS):
         errors.append("exact onset/duration content detected")
+    if any(pattern in utterance for pattern in PATIENT_VOICE_BLOCKERS):
+        errors.append("template-like or non-patient voice detected")
+    missing_gold = [symptom for symptom in case.get("gold_symptoms") or [] if not has_gold_evidence(symptom, utterance)]
+    if missing_gold:
+        errors.append(f"missing patient-language evidence for gold symptoms: {missing_gold}")
 
     if case["language_style"] == "standard" and case["dialect_source_layer"] != "none":
         errors.append("standard row has dialect layer")
@@ -271,13 +362,21 @@ def validate_row(row: dict[str, Any], case: dict[str, Any]) -> tuple[list[str], 
 
     status = case["status_pattern"]
     if status == "improved_or_resolved" and not any(marker in utterance for marker in IMPROVED_MARKERS):
-        warnings.append("improved/resolved marker not obvious")
+        errors.append("improved/resolved marker missing")
     if status == "recurrent_or_persistent" and not any(marker in utterance for marker in RECURRENT_MARKERS):
-        warnings.append("recurrent/persistent marker not obvious")
+        errors.append("recurrent/persistent marker missing")
     if case.get("negative_symptoms") and not any(marker in utterance for marker in NEGATION_MARKERS):
         errors.append("negative symptom marker missing")
 
     return errors, warnings
+
+
+def opening_tokens(utterance: str) -> tuple[str, str]:
+    cleaned = re.sub(r"[\"'“”‘’.,!?。…]", " ", str(utterance or "")).strip()
+    parts = [part for part in cleaned.split() if part]
+    first = parts[0] if parts else ""
+    first_two = " ".join(parts[:2]) if len(parts) >= 2 else first
+    return first, first_two
 
 
 def render_case(client, model_id: str, case: dict[str, Any]) -> dict[str, Any]:
@@ -338,6 +437,29 @@ def build_report(rows: list[dict[str, Any]], blueprint: list[dict[str, Any]]) ->
         if row_errors:
             errors.append(f"{case['case_id']} failed quality: {row_errors}")
 
+    first_counts = Counter()
+    first_two_counts = Counter()
+    for row in rows:
+        first, first_two = opening_tokens(row.get("utterance") or "")
+        if first:
+            first_counts[first] += 1
+        if first_two:
+            first_two_counts[first_two] += 1
+
+    overused_first = {key: value for key, value in first_counts.items() if value > 12}
+    overused_first_two = {key: value for key, value in first_two_counts.items() if value > 6}
+    if overused_first:
+        errors.append(f"overused opening first tokens: {overused_first}")
+    if overused_first_two:
+        errors.append(f"overused opening two-token prefixes: {overused_first_two}")
+    if first_counts.get("요즘", 0) > 10:
+        errors.append(f"too many utterances start with 요즘: {first_counts.get('요즘', 0)}")
+    if first_counts.get("지난", 0) + first_counts.get("지난번", 0) > 16:
+        errors.append(
+            "too many follow-up boilerplate openings: "
+            f"지난={first_counts.get('지난', 0)}, 지난번={first_counts.get('지난번', 0)}"
+        )
+
     counts = {
         "visit_type": Counter(row.get("visit_type") for row in rows),
         "question_id": Counter(row.get("question_id") for row in rows),
@@ -346,6 +468,8 @@ def build_report(rows: list[dict[str, Any]], blueprint: list[dict[str, Any]]) ->
         "symptom_group": Counter(row.get("symptom_group") for row in rows),
         "status_pattern": Counter(row.get("status_pattern") for row in rows),
         "quality_passed": Counter(bool((row.get("quality") or {}).get("passed")) for row in rows),
+        "opening_first_token_top10": Counter(dict(first_counts.most_common(10))),
+        "opening_two_token_top10": Counter(dict(first_two_counts.most_common(10))),
     }
     failed = [
         {

@@ -336,11 +336,11 @@ ANCHOR_ASSIGNMENTS = {
         "sample_query": "목이 아푸나 싶어",
         "usage": "재진 Q3에서 목 통증 경과 표현에만 사용",
     },
-    "train_v2_056": {
+    "train_v2_044": {
         "dialect": "(가슴이) 제리제리하다",
         "standard": "저리다",
         "sample_query": "가슴이 제리제리해",
-        "usage": "가슴 이상감이 호전되었는지 말하는 Q3 경과 표현에만 사용",
+        "usage": "가슴 답답함과 함께 말하는 가슴 이상감 표현에만 사용",
     },
     "train_v2_063": {
         "dialect": "몸땡이",
