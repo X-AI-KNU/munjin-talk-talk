@@ -33,6 +33,15 @@ def test_dialect_rag_returns_context_shape():
     assert all(len(item["dialect"]) >= 2 for item in context["hints"])
 
 
+def test_dialect_rag_matches_parenthetical_and_conjugated_variants():
+    from dialect_rag import retrieve_dialect_context
+
+    context = retrieve_dialect_context("가슴이 제리제리해", top_k=3)
+    pairs = {(item["dialect"], item["standard"]) for item in context["hints"]}
+
+    assert ("가슴이 제리제리해", "저리다") in pairs
+
+
 def test_dialect_schema_rejects_ungrounded_quote():
     from schemas.dialect import validate_dialect_payload
 

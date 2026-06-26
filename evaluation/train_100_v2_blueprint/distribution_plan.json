@@ -1,0 +1,52 @@
+{
+  "version": "train_100_v2_blueprint_2026-06-26",
+  "total_rows": 100,
+  "visit_question_split": {
+    "initial_Q1": 50,
+    "followup_Q3": 50
+  },
+  "language_split": {
+    "standard": 50,
+    "gangwon": 50
+  },
+  "cross_split": {
+    "initial_Q1_standard": 25,
+    "initial_Q1_gangwon": 25,
+    "followup_Q3_standard": 25,
+    "followup_Q3_gangwon": 25
+  },
+  "symptom_group_distribution": {
+    "upper_airway_common": 18,
+    "cough_sputum_lower_airway": 20,
+    "dyspnea_chest_urgent": 18,
+    "systemic_course": 14,
+    "ent_swallow_eye_voice": 10,
+    "cardio_neuro_edema": 10,
+    "gi_nonspecific_confounders": 10
+  },
+  "status_pattern_distribution": {
+    "active_current": 45,
+    "recurrent_or_persistent": 25,
+    "improved_or_resolved": 10,
+    "denied_negative_context": 15,
+    "mixed_context": 5
+  },
+  "expression_policy_distribution": {
+    "direct_common": 35,
+    "lay_paraphrase": 45,
+    "technical_hidden": 20
+  },
+  "gangwon_source_layer_distribution": {
+    "rag_pack_anchored": 10,
+    "clinical_colloquial": 25,
+    "light_dialect_style": 15
+  },
+  "hard_rules": [
+    "No rendered patient text in blueprint rows.",
+    "Rendered data must target only initial Q1 and follow-up Q3.",
+    "Do not include Q2 onset/duration as the main answer.",
+    "Do not include Q4 doctor questions or medication/supplement questions.",
+    "All rendered patient utterances must be casual spoken Korean, not formal -습니다 style.",
+    "RAG-pack anchored dialect rows must retrieve the expected dialect hint before acceptance."
+  ]
+}

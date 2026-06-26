@@ -1,0 +1,153 @@
+{
+  "passed": true,
+  "errors": [],
+  "counts": {
+    "visit_type": {
+      "initial": 50,
+      "followup": 50
+    },
+    "question_id": {
+      "Q1": 50,
+      "Q3": 50
+    },
+    "language_style": {
+      "standard": 50,
+      "gangwon": 50
+    },
+    "cross": {
+      "initial_Q1_standard": 25,
+      "initial_Q1_gangwon": 25,
+      "followup_Q3_standard": 25,
+      "followup_Q3_gangwon": 25
+    },
+    "symptom_group": {
+      "upper_airway_common": 18,
+      "cough_sputum_lower_airway": 20,
+      "dyspnea_chest_urgent": 18,
+      "systemic_course": 14,
+      "ent_swallow_eye_voice": 10,
+      "cardio_neuro_edema": 10,
+      "gi_nonspecific_confounders": 10
+    },
+    "status_pattern": {
+      "active_current": 45,
+      "recurrent_or_persistent": 25,
+      "improved_or_resolved": 10,
+      "denied_negative_context": 15,
+      "mixed_context": 5
+    },
+    "expression_policy": {
+      "direct_common": 35,
+      "technical_hidden": 20,
+      "lay_paraphrase": 45
+    },
+    "dialect_source_layer": {
+      "none": 50,
+      "rag_pack_anchored": 10,
+      "clinical_colloquial": 25,
+      "light_dialect_style": 15
+    }
+  },
+  "rag_pack_anchor_cases": [
+    {
+      "case_id": "train_v2_006",
+      "group": "upper_airway_common",
+      "anchor": {
+        "dialect": "코빼기",
+        "standard": "코",
+        "sample_query": "코빼기가 막혀",
+        "usage": "코 증상에만 사용"
+      }
+    },
+    {
+      "case_id": "train_v2_007",
+      "group": "upper_airway_common",
+      "anchor": {
+        "dialect": "아푸나?",
+        "standard": "아프니?",
+        "sample_query": "목이 아푸나 싶어",
+        "usage": "아프다 계열 표현에만 사용"
+      }
+    },
+    {
+      "case_id": "train_v2_024",
+      "group": "cough_sputum_lower_airway",
+      "anchor": {
+        "dialect": "줄구다",
+        "standard": "줄이다",
+        "sample_query": "기침이 좀 줄구다",
+        "usage": "증상이 줄었다는 Q3 호전 표현에만 사용"
+      }
+    },
+    {
+      "case_id": "train_v2_044",
+      "group": "dyspnea_chest_urgent",
+      "anchor": {
+        "dialect": "(가슴이) 제리제리하다",
+        "standard": "저리다",
+        "sample_query": "가슴이 제리제리해",
+        "usage": "가슴 저림 또는 이상감 표현에만 사용"
+      }
+    },
+    {
+      "case_id": "train_v2_045",
+      "group": "dyspnea_chest_urgent",
+      "anchor": {
+        "dialect": "(가슴이) 제리제리하다",
+        "standard": "저리다",
+        "sample_query": "가슴이 제리제리해",
+        "usage": "가슴 저림 또는 이상감 표현에만 사용"
+      }
+    },
+    {
+      "case_id": "train_v2_060",
+      "group": "systemic_course",
+      "anchor": {
+        "dialect": "몸땡이",
+        "standard": "몸통",
+        "sample_query": "몸땡이가 쑤셔",
+        "usage": "몸살/몸통 불편 표현에만 사용"
+      }
+    },
+    {
+      "case_id": "train_v2_061",
+      "group": "systemic_course",
+      "anchor": {
+        "dialect": "자우름",
+        "standard": "졸음",
+        "sample_query": "자우름이 와",
+        "usage": "피로/졸림 동반 표현에만 사용"
+      }
+    },
+    {
+      "case_id": "train_v2_073",
+      "group": "ent_swallow_eye_voice",
+      "anchor": {
+        "dialect": "잠구키다[장구키다]",
+        "standard": "잠기다",
+        "sample_query": "목소리가 장구키다",
+        "usage": "목소리 잠김 표현에만 사용"
+      }
+    },
+    {
+      "case_id": "train_v2_084",
+      "group": "cardio_neuro_edema",
+      "anchor": {
+        "dialect": "머리깽이",
+        "standard": "머리",
+        "sample_query": "머리깽이가 핑 돌아",
+        "usage": "두통/어지러움 표현에만 사용"
+      }
+    },
+    {
+      "case_id": "train_v2_093",
+      "group": "gi_nonspecific_confounders",
+      "anchor": {
+        "dialect": "창지",
+        "standard": "창자",
+        "sample_query": "창지가 꼬이는 느낌",
+        "usage": "복부/장 불편 표현에만 사용"
+      }
+    }
+  ]
+}

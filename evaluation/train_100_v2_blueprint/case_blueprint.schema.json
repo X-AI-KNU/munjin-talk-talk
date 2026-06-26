@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "case_id",
+    "visit_type",
+    "question_id",
+    "question_type",
+    "language_style",
+    "dialect_source_layer",
+    "symptom_group",
+    "gold_symptoms",
+    "negative_symptoms",
+    "status_pattern",
+    "expression_policy",
+    "difficulty",
+    "renderer_intent",
+    "forbidden_content"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "pattern": "^train_v2_[0-9]{3}$"
+    },
+    "visit_type": {
+      "enum": [
+        "initial",
+        "followup"
+      ]
+    },
+    "question_id": {
+      "enum": [
+        "Q1",
+        "Q3"
+      ]
+    },
+    "question_type": {
+      "enum": [
+        "chief_complaint",
+        "progress"
+      ]
+    },
+    "language_style": {
+      "enum": [
+        "standard",
+        "gangwon"
+      ]
+    },
+    "dialect_source_layer": {
+      "enum": [
+        "none",
+        "rag_pack_anchored",
+        "clinical_colloquial",
+        "light_dialect_style"
+      ]
+    },
+    "symptom_group": {
+      "type": "string"
+    },
+    "gold_symptoms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "negative_symptoms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status_pattern": {
+      "enum": [
+        "active_current",
+        "recurrent_or_persistent",
+        "improved_or_resolved",
+        "denied_negative_context",
+        "mixed_context"
+      ]
+    },
+    "expression_policy": {
+      "enum": [
+        "direct_common",
+        "lay_paraphrase",
+        "technical_hidden"
+      ]
+    },
+    "difficulty": {
+      "enum": [
+        "easy",
+        "medium",
+        "hard"
+      ]
+    },
+    "renderer_intent": {
+      "type": "string"
+    },
+    "forbidden_content": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dialect_anchor": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

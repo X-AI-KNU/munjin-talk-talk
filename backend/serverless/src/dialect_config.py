@@ -83,12 +83,30 @@ def _expand_variants(text: str) -> list[str]:
         if inside:
             variants.add(inside)
 
+    # Source rows can include optional context in parentheses, e.g.
+    # "(가슴이) 제리제리하다". Patients often say the full phrase or only
+    # the core adjective, so index both forms.
+    without_parentheses = normalize_text(re.sub(r"[()]", " ", text))
+    without_parenthetical = normalize_text(re.sub(r"\([^)]*\)", " ", text))
+    for item in (without_parentheses, without_parenthetical):
+        if item:
+            variants.add(item)
+
     for part in re.split(r"[,/;·]", text):
         part = normalize_text(part)
         if part:
             variants.add(part)
 
-    return sorted(variants, key=len, reverse=True)
+    expanded = set(variants)
+    for variant in variants:
+        if variant.endswith("하다") and len(variant) > 2:
+            stem = variant[:-2]
+            expanded.update(
+                normalize_text(stem + suffix)
+                for suffix in ("해", "해요", "해서", "하고", "하니", "하네", "합니다")
+            )
+
+    return sorted(expanded, key=len, reverse=True)
 
 
 @lru_cache(maxsize=None)
