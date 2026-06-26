@@ -359,6 +359,13 @@ def validate_row(row: dict[str, Any], case: dict[str, Any]) -> tuple[list[str], 
         expected_standard = (anchor or {}).get("standard")
         if expected_standard and not any(item.get("standard") == expected_standard for item in hints):
             errors.append("rendered utterance does not retrieve expected dialect RAG hint")
+        unexpected = [item for item in hints if expected_standard and item.get("standard") != expected_standard]
+        if unexpected:
+            errors.append(f"unexpected dialect RAG hints for anchored row: {unexpected}")
+    elif case["dialect_source_layer"] in {"clinical_colloquial", "light_dialect_style"}:
+        hints = retrieve_dialect_context(utterance, top_k=8).get("hints") or []
+        if hints:
+            errors.append(f"unexpected dialect RAG hints for non-anchored row: {hints}")
 
     status = case["status_pattern"]
     if status == "improved_or_resolved" and not any(marker in utterance for marker in IMPROVED_MARKERS):

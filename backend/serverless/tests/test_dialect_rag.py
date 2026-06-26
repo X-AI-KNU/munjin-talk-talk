@@ -42,6 +42,20 @@ def test_dialect_rag_matches_parenthetical_and_conjugated_variants():
     assert ("가슴이 제리제리해", "저리다") in pairs
 
 
+def test_dialect_rag_filters_ambiguous_common_korean_fragments():
+    from dialect_rag import retrieve_dialect_context
+
+    context = retrieve_dialect_context("몸살 때문에 좀 덜 피곤한 것 같긴 한데", top_k=5)
+    pairs = {(item["dialect"], item["standard"]) for item in context["hints"]}
+
+    assert ("한데", "바깥") not in pairs
+
+    context = retrieve_dialect_context("팔다리에 힘이 잘 안 들어가는 느낌이야", top_k=5)
+    pairs = {(item["dialect"], item["standard"]) for item in context["hints"]}
+
+    assert ("안들", "아내") not in pairs
+
+
 def test_dialect_schema_rejects_ungrounded_quote():
     from schemas.dialect import validate_dialect_payload
 

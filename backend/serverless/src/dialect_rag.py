@@ -7,6 +7,12 @@ from dialect_config import load_dialect_entries
 from utils import compact_ir, normalize_text
 
 
+AMBIGUOUS_HINT_PAIRS = {
+    ("한데", "바깥"),
+    ("안들", "아내"),
+}
+
+
 def _dialect_top_k() -> int:
     return int(os.environ.get("DIALECT_TOP_K", "8"))
 
@@ -25,6 +31,8 @@ def retrieve_dialect_context(text: str, top_k: int | None = None) -> dict[str, A
         dialect = normalize_text(item.get("dialect") or "")
         standard = normalize_text(item.get("standard") or "")
         if not dialect or not standard:
+            continue
+        if is_ambiguous_hint(dialect, standard):
             continue
 
         compact_dialect = compact_ir(dialect)
@@ -69,6 +77,11 @@ def retrieve_dialect_context(text: str, top_k: int | None = None) -> dict[str, A
     }
     context["prompt_note"] = build_dialect_prompt_note(context)
     return context
+
+
+def is_ambiguous_hint(dialect: str, standard: str) -> bool:
+    """Filter short dialect rows that collide with ordinary Korean phrases."""
+    return (normalize_text(dialect), normalize_text(standard)) in AMBIGUOUS_HINT_PAIRS
 
 
 def char_ngram_score(query: str, term: str, n: int = 2) -> float:
