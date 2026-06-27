@@ -1,6 +1,6 @@
 # 문진톡톡 Hybrid IR 및 파이프라인 컴포넌트 분리 평가 명세
 
-본 브랜치(`eval/hybrid-ir-pipeline`)는 문진톡톡 메인 서비스 코드와 분리되어, **증상 후보 검색 엔진(IR)**과 **LLM 기반 구조화 파이프라인(Bedrock)**의 성능 병목을 독립적으로 검증하기 위한 탐색적 평가(Exploratory Evaluation) 환경입니다.
+본 브랜치(`eval/hybrid-ir-pipeline`)는 문진톡톡 메인 서비스 코드와 분리되어, **증상 후보 검색 엔진(IR)** 과 **LLM 기반 구조화 파이프라인(Bedrock)** 의 성능 병목을 독립적으로 검증하기 위한 탐색적 평가(Exploratory Evaluation) 환경입니다.
 
 공식 서비스 아키텍처 및 Held-out 벤치마크는 [main 브랜치](https://github.com/X-AI-KNU/munjin-talk-talk/tree/main)를 기준으로 합니다. 본 브랜치는 해커톤 심사 및 기술 검토 과정에서 **"Hybrid IR 엔진의 후보 풀링 성능, 사투리 RAG의 힌트 타당성, LangGraph 제어 흐름의 정합성"** 을 컴포넌트 단위로 분해하여 입증하기 위해 별도 구축되었습니다.
 
@@ -24,12 +24,16 @@
 
 | 문서/파일 링크 | 포함 내용 및 역할 |
 | --- | --- |
-| [평가팩 상세 설명](README.md) | 트랙별 아키텍처, 데이터 스키마, CLI 실행 방법, 지표 해석 가이드 |
-| [요약 지표 스냅샷](reports/metrics_summary.json) | Track A/B/C 파이프라인 관통 후 산출된 핵심 정량 수치 |
-| [분리 평가 리포트](reports/separated_evaluation_report.md) | 각 트랙별 세부 실행 로그 및 성공/실패 케이스 덤프 |
-| [오류 분석 및 정책 해석](reports/pipeline_error_analysis.md) | 파이프라인 Mismatch 요인 분석 및 임상 정책 타당성 해설 |
-| [데이터셋 설계 문서](design/README.md) | Train/Test 스플릿 원칙 및 합성 데이터 생성 방법론 |
-| [train_100_v2 명세](train_100_v2/README.md) | 본 평가에 사용된 100건의 개발용 벤치마크 데이터 스키마 |
+| [평가팩 상세 설명](evaluation/hybrid_ir_pipeline/README.md) | 트랙별 아키텍처, 데이터 스키마, CLI 실행 방법, 지표 해석 가이드 |
+| [요약 지표 스냅샷](evaluation/hybrid_ir_pipeline/reports/metrics_summary.json) | Track A/B/C 파이프라인 관통 후 산출된 핵심 정량 수치 |
+| [분리 평가 리포트](evaluation/hybrid_ir_pipeline/reports/separated_evaluation_report.md) | 각 트랙별 세부 실행 로그 및 성공/실패 케이스 덤프 |
+| [오류 분석 및 정책 해석](evaluation/hybrid_ir_pipeline/reports/pipeline_error_analysis.md) | 파이프라인 Mismatch 요인 분석 및 임상 정책 타당성 해설 |
+| [데이터셋 설계 문서](evaluation/hybrid_ir_pipeline/design/README.md) | Train/Test 스플릿 원칙 및 합성 데이터 생성 방법론 |
+| [평가 트랙 상세 설계](evaluation/hybrid_ir_pipeline/design/evaluation_tracks.md) | Offline IR, Dialect RAG, Pipeline Integration 트랙별 분리 평가 기준 |
+| [train_100_v2 Blueprint 초안](evaluation/hybrid_ir_pipeline/design/train_100_v2_blueprint_draft.md) | 100건 개발용 벤치마크 데이터 생성 전 설계 명세 |
+| [Blueprint 산출물 설명](evaluation/hybrid_ir_pipeline/blueprint/README.md) | 케이스 블루프린트, 분포 계획, 품질 게이트 리포트 설명 |
+| [train_100_v2 명세](evaluation/hybrid_ir_pipeline/train_100_v2/README.md) | 본 평가에 사용된 100건의 개발용 벤치마크 데이터 스키마 |
+| [평가 실행 스크립트](evaluation/hybrid_ir_pipeline/run_separated_evaluation.py) | Track A/B/C 분리 평가 실행 러너 |
 
 ---
 
