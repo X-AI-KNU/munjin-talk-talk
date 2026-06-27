@@ -2,6 +2,12 @@
 
 This folder is the new starting point after removing the first contaminated train/evaluation cycle.
 
+## 한국어 요약
+
+이 폴더는 오염된 첫 train/evaluation cycle을 걷어낸 뒤, 평가를 다시 설계한 기준 문서입니다. 핵심은 `train_100_v2`와 향후 `test_1000_v2`를 분리하고, held-out test 실패를 본 뒤 prompt, alias, few-shot, domain pack을 다시 고치는 식의 누수를 막는 것입니다.
+
+`train_100_v2`는 런타임 산출물을 만들고 파이프라인을 점검하는 용도입니다. 최종 공개 성능은 별도 고정 테스트셋에서 첫 실행 리포트를 저장한 뒤에만 말해야 합니다.
+
 ## Reset Scope
 
 Removed from the active tree:
