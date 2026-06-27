@@ -89,12 +89,4 @@ pytest tests\aws\test_aws_full.py -s
 - 실패 결과를 커밋하지 말고, 필요한 경우 민감정보를 제거한 요약만 문서화합니다.
 - 테스트용 access code, session token, API URL은 `.env` 또는 로컬 환경변수에서만 관리합니다.
 
-## 해커톤 제출 관점
 
-이 문서는 "AWS 배포가 완벽하다"는 보증서가 아닙니다. 심사위원에게 전달할 메시지는 다음입니다.
-
-```text
-문진톡톡은 실제 AWS 리소스와 연결되는 검증을 일반 테스트와 분리했다.
-Bedrock, DynamoDB, S3, Lambda, API Gateway 연결을 수동으로 확인할 수 있으며,
-비용과 민감정보 노출을 막기 위해 명시적 실행 조건을 둔다.
-```
