@@ -1,716 +1,170 @@
-# LangGraph 문진 처리 파이프라인
+# 문진톡톡 LangGraph AI 문진 파이프라인 아키텍처
 
-이 문서는 환자가 Q1~Q4 문진을 완료한 뒤, 백엔드가 답변 묶음을 어떤 순서로 분석해 원페이퍼와 환자 안내문으로 바꾸는지 설명합니다.
+본 문서는 환자가 제출한 음성 문진 답변 묶음(Q1~Q4)을 백엔드가 어떠한 상태 전이(State Transition) 순서로 분석하여 **의료진용 원페이퍼**와 **환자 맞춤형 안내문**으로 구조화하는지 명세합니다.
 
-실제 실행 코드는 다음 파일에 나뉘어 있습니다.
+파이프라인의 핵심 구동 코드는 서버리스 환경(`backend/serverless/src/`) 내 다음 5개 모듈로 역할이 엄격히 디커플링되어 있습니다.
 
 ```text
-backend/serverless/src/orchestration.py
-backend/serverless/src/pipeline_graph.py
-backend/serverless/src/pipeline_nodes.py
-backend/serverless/src/pipeline_state.py
-backend/serverless/src/pipeline_trace.py
+orchestration.py       # 비동기 실행 트리거 및 파이프라인 진입점
+pipeline_graph.py      # LangGraph 방향성 상태 그래프 및 분기(Edge) 명세
+pipeline_nodes.py      # 개별 그래프 노드 단위의 비즈니스 연산 로직
+pipeline_state.py      # 그래프 노드 간 공유되는 상태(State) 타입 스키마
+pipeline_trace.py      # 단계별 비식별 감사 로그(Trace) 수집기
 ```
 
 ---
 
-## 먼저 알아야 할 핵심
+## 💡 아키텍처 설계 핵심 사상
 
-문진톡톡은 환자 문진 결과를 하나의 큰 LLM 호출에 맡기지 않습니다.
-
-환자가 Q1~Q4를 모두 끝내면 프론트엔드는 답변을 한 번에 저장합니다. 이후 Lambda가 백그라운드에서 각 답변을 순서대로 LangGraph 노드에 통과시키고, 운영에 필요한 최소 trace를 S3 artifact로 남깁니다.
+문진톡톡은 고령 환자의 비정형 발화 분석을 **'단일 거대 LLM 호출(Single Monolithic LLM Call)'에 의존하지 않습니다.** 환자가 접수처 태블릿에서 Q1~Q4 답변 입력을 완료하면, API 핸들러는 답변 원문을 일괄 저장한 직후 백그라운드 Lambda를 비동기로 호출합니다. 이후 오케스트레이터가 답변 항목들을 순차적으로 LangGraph 그래프 노드에 주입하며 단계별 추론 및 검증을 제어합니다.
 
 ```text
-Q1~Q4 확인 답변 저장
-  -> 환자 화면에는 즉시 완료 응답
-  -> Lambda 백그라운드 분석 시작
-  -> 답변별 입력 검증
-  -> 안전 표현 1차 감지
-  -> 방언 RAG와 도메인 문맥 검색
-  -> LLM 의미 추출
-  -> fixed schema와 source_quote 검증
-  -> 검증 실패 시 repair prompt로 재시도
-  -> active symptom span은 Hybrid IR
-  -> 원페이퍼와 안내문용 artifact 저장
-  -> 의료진 화면에서 분석 결과 확인
+[Q1~Q4 일괄 제출] ──> 프론트엔드 즉시 완료 응답 (Non-Blocking UX)
+                      └──> Lambda 백그라운드 비동기 추론 시작
+                             ├── 1. 입력 정합성 및 필수값 검증
+                             ├── 2. Rule 기반 응급 위험 표현 1차 감지
+                             ├── 3. 강원 방언 RAG 해독 및 문맥 정규화
+                             ├── 4. 도메인 백과 참고 문맥 Retrieval
+                             ├── 5. Bedrock Nova 기반 의미 스팬(Span) 추출
+                             ├── 6. Pydantic 스키마 및 Quote Grounding 검증
+                             │       └── 실패 시: 정합성 복구 프롬프트로 자체 재시도(Retry)
+                             ├── 7. 활성 증상에 한해 Hybrid IR 표준 병명 매칭
+                             └── 8. 산출물 S3 아티팩트 적재 및 원페이퍼 동기화
 ```
 
-이 구조를 LangGraph로 명시한 이유는 다음과 같습니다.
-
-- 처리 단계가 코드에서 명확히 보입니다.
-- LLM 실패, 안전 플래그, schema 검증 실패가 같은 흐름 안에서 분기됩니다.
-- 운영에 필요한 최소 trace를 남겨 의료진 검토와 오류 분석에 활용할 수 있습니다.
-- 방언 RAG, validator, IR, reviewer처럼 역할이 다른 단계를 독립 노드로 관리할 수 있습니다.
+### LangGraph 기반 파이프라인 도입 타당성
+1. **명시적 워크플로우 제어:** 블랙박스 Agent 방식의 예측 불가능성을 배제하고, 모든 연산 단계와 순서를 결정론적 그래프로 시각화합니다.
+2. **통합 에러 핸들링:** LLM 추론 실패, 스키마 규격 위반, 안전 플래그 감지가 단일 그래프 상태 안에서 안전 경로로 분기됩니다.
+3. **결과 설명 가능성(Explainability) 확보:** 노드 통과 시점마다 최소한의 결정 근거를 Trace 아티팩트로 남겨 의료진의 사후 검증을 지원합니다.
 
 ---
 
-## LangChain과 LangGraph의 차이
+## 🔗 LangChain vs LangGraph 역할 분리
 
-현재 MVP는 LangChain과 LangGraph를 모두 사용합니다.
+현재 MVP 시스템은 LangChain Core와 LangGraph를 결합한 하이브리드 추론 모델을 취합니다.
 
-| 기술 | 사용하는 위치 | 하는 일 |
+| 프레임워크 | 주입 경로 | 엔지니어링 역할 및 책임 |
 | --- | --- | --- |
-| LangChain Core | `langchain_prompting.py`, `llm.py` | PromptTemplate, Bedrock 호출 Runnable, JSON parser를 하나의 chain으로 실행 |
-| LangGraph | `pipeline_graph.py`, `pipeline_nodes.py` | Runnable node 연결, RAG, parser/validator, retry 분기, trace 관리 |
+| **LangChain Core** | `langchain_prompting.py`<br>`llm.py` | 프롬프트 템플릿 바인딩, Amazon Bedrock 호출 래퍼, JSON 파서를 단일 추론 인터페이스(Runnable Chain)로 압축 |
+| **LangGraph** | `pipeline_graph.py`<br>`pipeline_nodes.py` | 체인 노드 간의 상태 전달, 외부 RAG 연동, 스키마 검증기 대조, 조건부 재시도 분기 제어 |
 
-쉽게 말하면:
-
-```text
-LangChain = LLM에게 어떻게 물어보고, 호출하고, JSON으로 파싱할지 정리하는 도구
-LangGraph = 여러 처리 단계를 어떤 순서로 실행할지 정리하는 도구
-```
+> **설계 요약:** LangChain이 단일 노드 내에서 **'모델에 어떻게 질의하고 규격화된 JSON을 뽑아낼 것인가'** 를 담당한다면, LangGraph는 **'이 노드들을 어떤 조건부 순서로 엮어 의료 사고 없는 안전한 파이프라인을 완주할 것인가'** 를 통제합니다.
 
 ---
 
-## 전체 노드 흐름
+## 📈 파이프라인 그래프 토폴로지 (Topology)
 
 ```mermaid
 flowchart LR
-  A["input_transcript<br/>필수값과 원문 확인"]
-  B["quick_safety_flag<br/>위험 표현 즉시 감지"]
-  C["dialect_normalization<br/>강원 방언 RAG + 표준화 보조"]
-  D["rag_context_retrieval<br/>원천 JSON 기반 참고 문맥"]
-  E["semantic_extraction<br/>LangChain Runnable + Bedrock"]
-  F["schema_quote_validation<br/>Pydantic + source_quote 검증"]
-  G["hybrid_ir_match<br/>BM25 + Titan Vector 증상 매칭"]
-  H["session_validation_save<br/>DynamoDB/S3 저장"]
-  I["safety_guardrail_save<br/>LLM 실패 시 safety만 저장"]
-  J["onepaper_refresh<br/>원페이퍼 갱신 trace"]
-  K["response_payload<br/>프론트 응답 조립"]
-  X["422 semantic_extraction_failed"]
+  A["input_transcript<br/>필수 파라미터 검증"]
+  B["quick_safety_flag<br/>응급 징후 Rule 감지"]
+  C["dialect_normalization<br/>강원 방언 RAG 정규화"]
+  D["rag_context_retrieval<br/>의학 백과 참고 문맥"]
+  E["semantic_extraction<br/>Bedrock 의미 추출"]
+  F["schema_quote_validation<br/>스키마 및 원문 대조"]
+  G["hybrid_ir_match<br/>BM25 + Vector 매칭"]
+  H["session_validation_save<br/>S3 아티팩트 확정"]
+  I["safety_guardrail_save<br/>응급 징후 우회 저장"]
+  J["onepaper_refresh<br/>원페이퍼 데이터 갱신"]
+  K["response_payload<br/>최종 응답 페이로드"]
+  X["HTTP 422<br/>추론 영구 실패"]
 
   A --> B --> C --> D --> E --> F
-  F -->|검증 실패 + retry 남음| E
-  F -->|검증 통과| G --> H --> J --> K
-  F -->|검증 실패 + safety flag 있음| I --> J --> K
-  F -->|검증 실패 + safety flag 없음| X
+  F -->|검증 실패 + 횟수 남음| E
+  F -->|100% 검증 통과| G --> H --> J --> K
+  F -->|검증 실패 + 응급 징후 있음| I --> J --> K
+  F -->|검증 실패 + 응급 징후 없음| X
 ```
 
 ---
 
-## 파일별 책임
+## 🗂️ 핵심 소스 파일 비즈니스 책임
 
-### `orchestration.py`
-
-환자 답변 저장과 분석 시작을 담당하는 진입점입니다. 환자 화면에서는 Q1~Q4 답변을 한 번에 저장하고, 실제 LangGraph 분석은 백그라운드 Lambda에서 수행합니다.
-
-```python
-def process_answers(body):
-    # Q1~Q4 텍스트를 저장하고 분석 작업을 비동기로 시작합니다.
-    ...
-```
-
-이 파일은 일부러 얇게 유지합니다. 실제 파이프라인은 `pipeline_graph.py`와 `pipeline_nodes.py`에 있습니다.
-
-### `pipeline_state.py`
-
-LangGraph 상태 타입과 그래프 설명을 담습니다.
-
-주요 내용:
-
-- `AnswerPipelineState`
-- `SYMPTOM_QUESTION_TYPES`
-- `PIPELINE_GRAPH`
-
-이 파일을 보면 파이프라인 전체에서 어떤 값이 오가는지 알 수 있습니다.
-
-### `pipeline_graph.py`
-
-노드 연결과 조건 분기만 담당합니다.
-
-포함 내용:
-
-- `run_answer_pipeline()`
-- `route_after_required_input()`
-- `route_after_schema_validation()`
-- `route_after_save()`
-- `_compiled_graph()`
-
-이 파일은 “흐름 지도”입니다.
-
-### `pipeline_nodes.py`
-
-실제 처리 함수가 모여 있습니다.
-
-포함 노드:
-
-- `input_transcript_node`
-- `quick_safety_flag_node`
-- `dialect_normalization_node`
-- `rag_context_retrieval_node`
-- `semantic_extraction_node`
-- `schema_quote_validation_node`
-- `hybrid_ir_match_node`
-- `session_validation_save_node`
-- `safety_guardrail_save_node`
-- `onepaper_refresh_node`
-- `response_payload_node`
-
-### `pipeline_trace.py`
-
-trace와 orchestration metadata를 담당합니다.
-
-포함 내용:
-
-- `trace_update()`
-- `next_trace_entry()`
-- `orchestration_snapshot()`
-- `response_errors()`
-- `persist_final_trace()`
+1. **`orchestration.py` (파이프라인 트리거):** API Gateway 비동기 이벤트 핸들러입니다. HTTP 페이로드를 수신하여 S3에 1차 마스킹 적재한 뒤 LangGraph 실행 엔진을 비동기 트리거합니다.
+2. **`pipeline_state.py` (상태 계약서):** 노드 간 전송되는 TypedDict 기반 스키마(`AnswerPipelineState`)를 정의합니다. 문진 유형 상수(`SYMPTOM_QUESTION_TYPES`)가 이곳에서 통제됩니다.
+3. **`pipeline_graph.py` (라우팅 매니저):** 그래프 노드의 조건부 전이 규칙(`route_after_schema_validation` 등)과 실행 방향성을 컴파일합니다.
+4. **`pipeline_nodes.py` (연산 로직 모음):** 실제 LLM 추론, 벡터 검색, Pydantic 검증기가 구동되는 개별 비즈니스 노드 함수 11종을 탑재합니다.
+5. **`pipeline_trace.py` (감사 로그 기록기):** 각 노드의 구동 시간, 모델 ID, 파서 해시값을 수집하여 S3 `llm_trace.redacted.json`으로 영구 빌드합니다.
 
 ---
 
-## 노드별 상세 설명
+## 🔍 노드별 세부 실행 규격
 
-### 1. `input_transcript`
+### 1. `input_transcript` (입력 정규화)
+* **검증 대상:** `session_id`, `question_id`, `question_type`, `visit_type`, `transcript(원문)`
+* **예외 처리:** 필수값 누락 혹은 빈 문자열 입력 시 즉시 `HTTP 400 Bad Request` 반환 후 그래프 종료
 
-입력 body에서 필수값을 꺼냅니다.
+### 2. `quick_safety_flag` (선제적 위험 감지)
+* **기능:** LLM의 무거운 추론을 기다리기 전, 정규식 기반 Rule 엔진으로 **객혈, 흉통, 심한 호흡곤란** 등의 응급 키워드를 선제 포착합니다.
+* **원칙:** 이 단계는 알림 배지 생성을 위한 고속 패스이며, 정밀 증상 추출 로직을 대체하지 않습니다.
 
-필수값:
+### 3. `dialect_normalization` (사투리 해독)
+* **기능:** 강원 권역 방언 사전(`dialect_kangwon.csv`)을 RAG로 대조하여 고령 환자의 구어체를 표준어 후보로 해독합니다.
+* **보안 제약:** 사투리 해독 힌트가 생성되더라도 `source_quote`는 반드시 환자가 실제로 발화한 원문 글자 그대로를 유지해야 합니다.
 
-- `session_id`
-- `question_id`
-- `question_type`
-- `visit_type`
-- `transcript`
+### 4. `rag_context_retrieval` (의학 문맥 주입)
+* **기능:** 추출 단서와 일치하는 서울아산병원 질병백과 본문(`diseases_cleaned.json`)의 표준 정의를 참조 문맥으로 주입합니다.
+* **통제 원칙:** LLM은 주입된 백과 본문 내용만 보고 환자가 말하지도 않은 합병증이나 검사 항목을 임의 생성할 수 없습니다.
 
-선택값:
+### 5. `semantic_extraction` (구조화 추론)
+* **기능:** Amazon Bedrock Nova Pro 모델을 구동하여 발화 내 증상 스팬, 임상 경과 단서, 환자 질문 항목을 추출합니다.
+* **통제 원칙:** 모델 자의적인 진단 점수(`score`) 생성을 원천 차단합니다.
 
-- `question_text`: 프론트엔드에 실제 표시된 질문 문구. 누락되면 도메인팩의 기본 질문 문구를 사용합니다.
+### 6. `schema_quote_validation` (정합성 대조기)
+LLM 생성 출력을 Pydantic 스키마 및 원문 대조 엔진으로 대조합니다.
+* **검증 통과 시:** `hybrid_ir_match` 노드로 진입
+* **검증 실패 시 (재시도 남음):** 에러 로그를 포함한 보구 프롬프트(`repair_note`)를 생성하여 `semantic_extraction` 노드로 반환 (재추론 루프)
+* **최종 실패 시 (응급 징후 존재):** `safety_guardrail_save` 노드로 우회하여 에러 데이터 대신 위험 배지만 원페이퍼에 강제 적재
+* **최종 실패 시 (응급 징후 없음):** `HTTP 422 Unprocessable Entity` 던짐
 
-실패 조건:
+### 7. `hybrid_ir_match` (표준 증상 매핑)
+* **트리거 조건:** 질문 유형이 `chief_complaint`, `progress`, `new_symptoms`인 증상 문항에 한해 구동 (복약·환자질문 문항은 스킵)
+* **매칭 공식:** $\text{BM25 Sparse Score} + \text{Titan Vector Similarity} + \text{Label Direct Signal}$ 융합 스코어가 유효 임계값을 통과할 경우 최종 표준 증상(`matched_slots`)으로 바인딩
 
-- 필수값 누락: 400 `missing_required_fields`
-- 빈 transcript: 400 `empty_transcript`
+### 8~11. 산출물 확정 노드 그룹
+* **`session_validation_save`:** 검증된 스팬과 정제 JSON을 S3 `answers.redacted.json`으로 아카이빙합니다.
+* **`onepaper_refresh`:** 원페이퍼 JSON 스키마를 재조립하여 의료진 대기열 화면에 동기화 트리거를 보냅니다.
+* **`response_payload`:** 프론트엔드 태블릿에 반환할 최종 상태 페이로드를 패킹합니다.
 
-trace 예시:
+---
 
-```json
-{
-  "node": "input_transcript",
-  "status": "passed",
-  "details": {
-    "question_id": "Q1",
-    "question_type": "chief_complaint",
-    "question_text_chars": 32,
-    "visit_type": "initial",
-    "transcript_chars": 20
-  }
-}
-```
+## ⚖️ LLM vs Hybrid IR 책임 경계
 
-### 2. `quick_safety_flag`
+의료 보조 시스템의 신뢰성을 담보하기 위해 두 엔진의 역할을 흑백으로 분리합니다.
 
-LLM 호출 전 위험 표현을 1차 감지합니다.
+| 구분 | LLM (의미 추론 엔진) | Hybrid IR (표준 매칭 엔진) |
+| :---: | --- | --- |
+| **핵심 역할** | 환자의 발화를 의미 단위로 분리하고, 구어체를 표준어로 다듬으며, 인용 원문(`source_quote`)을 지정 | LLM이 뽑은 후보 키워드를 공신력 있는 병원 질병백과 인덱스 대조군과 매핑 |
+| **금지 영역** | 임의의 의학적 진단명 확정, 처방 지시, 허위 확신도 수치(`confidence`) 생성 | 환자 발화 원문의 맥락 자의적 해석 및 문장 요약 |
 
-예:
+---
 
-- 객혈
-- 피 섞인 가래
-- 심한 호흡곤란
-- 흉통
+## 🛡️ IR 진입 전 선행 상태 필터링
 
-이 단계는 빠른 안전 감지를 위한 rule입니다. 증상 extraction을 대체하지 않습니다.
+LLM이 포착한 증상 키워드라 할지라도 모두 IR 검색 엔진으로 투입되지 않습니다. 파이프라인의 `clinical_state.py`는 속성 기반의 라우팅 필터를 선행 구동합니다.
 
-trace 예시:
+| 추출 스팬 상태 속성 | IR 투입 여부 | 아키텍처 제어 논리 |
+| --- | :---: | --- |
+| `status="있음"` + 활성 증상 유형 | **진입 허용** | 원페이퍼의 **[오늘 호소 증상 카드]** 매칭 후보군 |
+| `symptom_absent` + `status="없음"` | **진입 차단** | 환자가 "열은 없어요"라고 명시한 부재 데이터 $\rightarrow$ 단서 영역 격리 |
+| `progress_improved` + `status="없음"`| **진입 차단** | "기침은 싹 낫다" 등 호전 데이터 $\rightarrow$ 금일 집중 문진 대상에서 제외 |
 
-```json
-{
-  "node": "quick_safety_flag",
-  "status": "clear",
-  "details": {
-    "has_flag": false,
-    "flag_type": null,
-    "matched_pattern": null
-  }
-}
-```
+*(임상 예시: "두통은 싹 없어졌고 아직 숨만 좀 가빠요"라는 발화 수신 시, '두통'은 호전 단서로만 아카이빙되며 IR 검색 파이프라인에는 '숨 가쁨' 스팬 단 하나만 투입되어 표준 병명(호흡곤란) 매칭을 수행합니다.)*
 
-### 3. `dialect_normalization`
+---
 
-강원 방언팩에서 환자 발화와 가까운 표현을 먼저 검색하고, 필요한 경우 Nova Lite로 표준어 보조문을 만듭니다.
+## 🔄 한계 보구 및 재시도(Retry) 정책
 
-사용 파일:
-
+런타임 파이프라인 환경 변수 제어값:
 ```text
-dialect_config.py
-dialect_rag.py
-dialect_normalization.py
-schemas/dialect.py
-data/dialect_packs/dialect_kangwon.csv
-data/dialect_packs/dialect_kangwon.json
+EXTRACTION_RETRY_ATTEMPTS = 3
+REVIEW_RETRY_ATTEMPTS = 2
 ```
 
-중요:
-
-- 이 단계는 extraction의 이해를 돕는 보조 단계입니다.
-- 환자 사실을 추가하지 않습니다.
-- `source_quote`와 `original_quote`는 반드시 원문 환자 발화에서만 복사되어야 합니다.
-- 방언 RAG가 실패해도 원문만으로 다음 노드가 계속 실행됩니다.
-
-trace 예시:
-
-```json
-{
-  "node": "dialect_normalization",
-  "status": "standardized",
-  "details": {
-    "entry_count": 3,
-    "model": "apac.amazon.nova-lite-v1:0"
-  }
-}
-```
-
-### 4. `rag_context_retrieval`
-
-LLM extraction 전에 원천 JSON과 제한 alias bridge에서 참고 문맥을 검색합니다.
-
-사용 파일:
-
-```text
-rag_context.py
-retrieval_documents.py
-clinical_terms.py
-data/diseases_cleaned.json        # 비공개 배치
-data/symptom_index.json           # 비공개 배치
-```
-
-중요:
-
-- 공개 저장소에는 원천 의료 백과 본문과 파생 인덱스를 포함하지 않습니다. 배포 환경에서 비공개 데이터로 배치합니다.
-- RAG 결과는 환자 사실이 아닙니다.
-- RAG 결과만 보고 증상, 진단, 검사, 약제를 추가할 수 없습니다.
-- `source_quote`와 `original_quote`는 여전히 환자 원문에서만 나와야 합니다.
-- 최종 증상 매칭은 뒤의 `hybrid_ir_match`가 수행합니다.
-
-trace 예시:
-
-```json
-{
-  "node": "rag_context_retrieval",
-  "status": "retrieved",
-  "details": {
-    "retriever": "local_reference_rag",
-    "alias_hint_count": 1,
-    "symptom_reference_count": 3,
-    "source_files": ["diseases_cleaned.json", "symptom_index.json", "clinical_terms.IR_TEXT_ALIASES"]
-  }
-}
-```
-
-### 5. `semantic_extraction`
-
-LangChain Runnable chain으로 Bedrock Nova를 호출하여 환자 답변을 fixed JSON으로 구조화합니다.
-
-하는 일:
-
-- 구어체/사투리 표현 표준화
-- 의미 단위 span 분리
-- Q4 환자 질문 분리
-- clinical clues 추출
-- source_quote 보존
-
-사용 파일:
-
-```text
-extraction_prompts.py
-extraction_schema.py
-schemas/extraction.py
-llm.py
-langchain_prompting.py
-pipeline_nodes.py
-```
-
-중요:
-
-- LLM은 임의 score를 만들 수 없습니다.
-- `source_quote`는 환자 원문 substring이어야 합니다.
-- 이 노드는 LLM raw JSON과 LangChain parser meta를 상태에 남깁니다.
-- schema 검증과 retry 결정은 다음 `schema_quote_validation` 노드가 수행합니다.
-
-trace 예시:
-
-```json
-{
-  "node": "semantic_extraction",
-  "status": "generated",
-  "details": {
-    "model_id": "apac.amazon.nova-pro-v1:0",
-    "attempt": 1,
-    "langchain_chain": "langchain_core_prompt_bedrock_json",
-    "prompt_adapter": "ChatPromptTemplate",
-    "bedrock_runnable": "RunnableLambda",
-    "output_parser": "langchain_json_output_parser",
-    "rag_alias_hint_count": 1,
-    "rag_symptom_reference_count": 3
-  }
-}
-```
-
-### 6. `schema_quote_validation`
-
-`semantic_extraction`의 raw JSON을 Pydantic schema와 source_quote 규칙으로 검증하고 다음 경로를 결정합니다.
-
-분기:
-
-| 조건 | 다음 경로 |
-| --- | --- |
-| LLM 검증 성공 | `hybrid_ir_match` |
-| 검증 실패 + retry 횟수 남음 | `semantic_extraction` |
-| LLM 검증 실패 + safety flag 있음 | `safety_guardrail_save` |
-| LLM 검증 실패 + safety flag 없음 | 422 반환 |
-
-이 retry는 LangGraph graph 안에서 보입니다. 검증 오류가 있으면 `build_extraction_repair_note()`가 오류와 원문을 포함한 repair prompt를 만들고, graph가 다시 `semantic_extraction`으로 돌아갑니다.
-
-trace 예시:
-
-```json
-{
-  "node": "schema_quote_validation",
-  "status": "retry",
-  "details": {
-    "validator": "pydantic_extraction_schema",
-    "source_quote_grounding": "failed",
-    "attempt": 1,
-    "max_attempts": 3,
-    "validation_error_count": 1,
-    "next_node": "semantic_extraction"
-  }
-}
-```
-
-### 7. `hybrid_ir_match`
-
-증상 문항일 때만 실행됩니다.
-
-IR 대상 question type:
-
-```text
-chief_complaint
-progress
-new_symptoms
-```
-
-비증상 문항이면 skip:
-
-- 복약 문항
-- 환자 질문 문항
-- Q4 agenda 문항
-
-Hybrid IR 계산:
-
-```text
-BM25 lexical score
-+ Titan vector similarity
-+ 표준 증상명/alias 직접 일치 signal
--> threshold 통과 시 matched_slots 확정
-```
-
-trace 예시:
-
-```json
-{
-  "node": "hybrid_ir_match",
-  "status": "matched",
-  "details": {
-    "method": "bm25_titan_hybrid",
-    "matched_count": 2,
-    "unmatched_count": 0
-  }
-}
-```
-
-### 8. `session_validation_save`
-
-검증된 문항 결과를 S3 artifact에 저장하고 DynamoDB에는 요약 상태만 갱신합니다.
-
-S3에 저장되는 위치:
-
-- `answers.redacted.json`
-- `onepaper.redacted.json`
-- `llm_trace.redacted.json`
-
-운영 S3 payload에는 다음 값만 포함됩니다.
-
-- 저장 전 가명처리된 transcript
-- LLM spans
-- structured data
-- matched_slots
-
-다음 값은 운영 artifact에서 제거됩니다.
-
-- prompt 전문
-- LLM raw response
-- LangChain/LangGraph 전체 중간 상태
-- 전체 IR 후보 목록
-- 화면에 표시하지 않는 내부 점수
-
-DynamoDB에는 다음 요약만 남습니다.
-
-- `question_status.Qx.answered`
-- `question_status.Qx.span_count`
-- `question_status.Qx.matched_count`
-- `question_status.Qx.method`
-- `status`
-- `risk`
-- `onepager_ready`
-- S3 artifact key
-
-### 9. `safety_guardrail_save`
-
-LLM extraction이 실패했지만 safety flag가 있을 때 실행됩니다.
-
-이 분기는 잘못된 LLM JSON을 저장하지 않습니다. 대신 환자 안전과 관련된 flag만 저장하여 직원이나 의료진이 확인할 수 있게 남깁니다.
-
-사용 예:
-
-```text
-환자 발화: "피가 나와요"
-LLM schema 실패
-하지만 quick_safety_flag에서 객혈 의심 감지
--> safety_guardrail_save
-```
-
-### 10. `onepaper_refresh`
-
-저장 단계에서 원페이퍼가 갱신되었음을 trace에 남깁니다.
-
-실제 원페이퍼 조립은 `validate_and_save()` 내부에서 수행되며, 이 노드는 파이프라인 설명 가능성을 위해 존재합니다.
-
-### 11. `response_payload`
-
-프론트에 반환할 JSON을 조립합니다.
-
-응답에 포함되는 주요 필드:
-
-- `spans`
-- `structured`
-- `matched_slots`
-- `unmatched_spans`
-- `validator_passed`
-- `safety_flag`
-- `errors`
-- `onepager_ready`
-- `pipeline`
-
----
-
-## 정상 응답 예시
-
-입력:
-
-```json
-{
-  "session_id": "s_...",
-  "question_id": "Q1",
-  "question_type": "chief_complaint",
-  "visit_type": "initial",
-  "transcript": "어제부터 목이 칼칼하고 코가 막혀요."
-}
-```
-
-응답 일부:
-
-```json
-{
-  "validator_passed": true,
-  "spans": [
-    {
-      "source_quote": "목이 칼칼하고",
-      "type": "symptom",
-      "slot_ref": "throat_irritation",
-      "name": "목 자극감",
-      "normalized_text": "목 자극감",
-      "status": "있음",
-      "alert": false,
-      "explain": "환자가 목의 칼칼함을 직접 호소했습니다."
-    }
-  ],
-  "matched_slots": [
-    {
-      "slot_id": "throat_irritation",
-      "name": "목의 통증",
-      "source_quote": "목이 칼칼하고",
-      "ir_method": "bm25_titan_hybrid"
-    }
-  ],
-  "pipeline": {
-    "graph": "munjin_langgraph_answer_pipeline",
-    "status": "completed",
-    "active_path": [
-      "input_transcript",
-      "quick_safety_flag",
-      "rag_context_retrieval",
-      "semantic_extraction",
-      "schema_quote_validation",
-      "hybrid_ir_match",
-      "session_validation_save",
-      "onepaper_refresh",
-      "response_payload"
-    ]
-  }
-}
-```
-
----
-
-## 실패 응답 예시
-
-LLM이 schema나 quote 검증을 끝까지 통과하지 못하면 저장하지 않습니다.
-
-```json
-{
-  "error": "semantic_extraction_failed",
-  "message": "LLM schema/quote validation failed after retries.",
-  "details": {
-    "attempts": 3,
-    "retry_loop": "langgraph_schema_quote_repair",
-    "validation_error_count": 1
-  }
-}
-```
-
----
-
-## 저장소에서 확인할 위치
-
-### DynamoDB 세션 item
-
-```json
-{
-  "session_id": "s_...",
-  "status": "completed",
-  "question_status": {
-    "Q1": {
-      "answered": true,
-      "span_count": 2,
-      "matched_count": 2,
-      "method": "bedrock_nova_pro",
-      "has_safety_flag": false
-    }
-  },
-  "artifact": {
-    "prefix": "sessions/2026-06-08/s_.../",
-    "answers_key": "sessions/2026-06-08/s_.../answers.redacted.json",
-    "onepaper_key": "sessions/2026-06-08/s_.../onepaper.redacted.json",
-    "trace_key": "sessions/2026-06-08/s_.../llm_trace.redacted.json"
-  },
-  "onepager_ready": true
-}
-```
-
-확인 포인트:
-
-- DynamoDB에는 환자 원문, spans, matched_slots, onepager 전체가 없어야 합니다.
-- DynamoDB에는 상태, 개수, S3 key만 남아야 합니다.
-
-### S3 artifact
-
-```text
-sessions/YYYY-MM-DD/{session_id}/answers.redacted.json
-sessions/YYYY-MM-DD/{session_id}/onepaper.redacted.json
-sessions/YYYY-MM-DD/{session_id}/llm_trace.redacted.json
-```
-
-확인 포인트:
-
-- `answers.redacted.json.payload.Qx.text`: 저장 전 가명처리된 환자 발화
-- `answers.redacted.json.payload.Qx.spans`: LLM extraction 결과
-- `answers.redacted.json.payload.Qx.matched_slots`: 운영 표시용 IR 매칭 결과. 숫자 score와 후보 목록은 없음
-- `llm_trace.redacted.json.payload.Qx.active_path`: 노드 경로 요약
-- `llm_trace.redacted.json.payload.Qx.events`: 최소 node event, validator 통과 여부, 확정된 IR 근거 요약
-
----
-
-## LLM과 IR의 경계
-
-이 부분이 가장 중요합니다.
-
-### LLM이 하는 일
-
-- 환자 발화를 의미 단위로 나눔
-- 구어체를 표준 한국어로 정리
-- 증상 후보 span을 추출
-- 환자 질문을 agenda 후보로 분리
-- source_quote와 explain을 작성
-
-### LLM이 하지 않는 일
-
-- 화면용 확신도나 숫자 점수 생성
-- IR 점수 생성
-- 표준 증상 확정
-- 진단 또는 처방
-- 환자 원문에 없는 사실 생성
-
-### IR이 하는 일
-
-- LLM이 낸 증상 후보를 표준 증상 인덱스와 비교
-- BM25와 Titan vector similarity 계산
-- label/alias 직접 일치 신호 반영
-- threshold 통과 여부 판단
-- `matched_slots`와 `unmatched_spans` 생성
-- 운영 artifact에는 숫자 점수와 전체 후보 목록을 저장하지 않고, 최소 설명 trace에 확정 근거 요약만 저장
-
-### IR 진입 전 증상 상태 필터
-
-LLM이 추출한 모든 증상 후보가 IR로 들어가지는 않습니다. 먼저 공통 상태 정책
-`clinical_state.py`가 현재 불편함인지, 문진 맥락인지 구분합니다.
-
-| span 상태 | IR 진입 여부 | 이유 |
-| --- | --- | --- |
-| `symptom`, `new`, `progress_worsened`, `progress_unchanged` + `status="있음"` | 진입 | 현재 불편함 카드 후보 |
-| `symptom_absent` + `status="없음"` | 제외 | 현재 없다고 말한 증상 |
-| `progress_improved` + `status="없음"` | 제외 | 현재 불편함 카드로 올리지 않을 호전 맥락 |
-
-예를 들어 “열은 안 나요”, “두통은 없어졌어요”는 중요한 정보지만 현재 불편함
-카드가 아닙니다. 이 정보는 `clinical_clues`의 현재양상/부재 또는 재진경과/호전
-단서로 남기고, “아직 숨이 차요”, “기침이 계속 나요”처럼 현재 남은 증상만
-Hybrid IR로 표준 증상 매칭을 수행합니다.
-“기침은 줄었지만 아직 조금 나요”처럼 호전과 현재 지속이 함께 있는 경우에는
-호전 맥락은 `clinical_clues`로 남기고, 현재 남은 기침은 별도 active span으로
-IR에 진입해야 합니다.
-
----
-
-## 현재 retry 정책
-
-환경 변수:
-
-```text
-EXTRACTION_RETRY_ATTEMPTS=3
-REVIEW_RETRY_ATTEMPTS=2
-```
-
-Extraction retry는 다음 경우에 발생합니다.
-
-- JSON 형식 오류
-- schema 필드 누락
-- enum 값 오류
-- extra field 존재
-- `source_quote`가 원문에 없음
-- 증상 문항인데 grounded span이 비어 있음
-
-Retry 후에도 실패하면 rule-based로 조용히 대체하지 않습니다. 현재 운영 코드에는 LLM extraction을 규칙 기반으로 대체하는 경로가 없습니다.
-
----
-
-## 유지보수 포인트
-
-아래 항목은 현재 코드에서 역할이 분리되어 있는 위치입니다. 기능을 손볼 때는 해당 파일을 중심으로 확인합니다.
-
-| 영역 | 확인 위치 |
-| --- | --- |
-| 방언 RAG 데이터팩 | `data/dialect_packs/`, `dialect_rag.py`, `dialect_normalization.py` |
-| 안전 flag | `clinical_terms.py`, `quick_safety_flag_node` |
-| 원페이퍼 review | `onepaper_review.py`, `onepaper_sections.py` |
-| 도메인 문맥 RAG | `rag_context.py`, `domain_config.py` |
-| trace 저장 | `pipeline_trace.py`, S3 `llm_trace.redacted.json` artifact |
-| 인증/권한 분기 | `handler.py`, `security.py` |
-
----
-
-## 관련 문서
-
-- [프로젝트 구조](PROJECT_STRUCTURE.md)
-- [내부 JSON 스키마](DATA_SCHEMA.md)
-- [서버리스 백엔드 README](../backend/serverless/README.md)
+**추론 재시도 트리거 조건:**
+* JSON 포맷 파싱 에러 혹은 Pydantic 필수 스키마 필드 누락
+* 열거형(Enum) 규격 외의 임의 문자열 할당 시도
+* 추출된 `source_quote`가 환자 원문 문자열 내에 실재하지 않는 환각(Hallucination) 상태
+* 증상 확인 문항임에도 유효 스팬 리스트가 빈 배열`[]`로 반환된 경우
+
+> ⚠️ **엔지니어링 원칙:** 지정된 재시도 횟수를 모두 소모하고도 통과하지 못하면 **규칙 기반(Rule-based) 텍스트로 조용히 위장하여 대체하지 않습니다.** 의료 정합성이 결려된 데이터는 데이터베이스를 오염시키지 않고 차단(HTTP 422)하는 것이 시스템의 대원칙입니다.
