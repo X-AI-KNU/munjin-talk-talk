@@ -1,64 +1,54 @@
-# 문진톡톡 MVP 실행 및 점검 가이드
+# 문진톡톡 MVP 로컬 구동 및 클라우드 검증 매뉴얼 (Smoke Test)
 
-이 문서는 개발자와 시연 준비자가 문진톡톡 MVP를 로컬 또는 AWS 제출 환경에서 실행하고 점검하는 방법을 설명합니다.
+본 매뉴얼은 개발 팀원의 프로젝트 온보딩 및 해커톤 현장 시연 직전, 문진톡톡 MVP의 로컬 구동 상태와 AWS 클라우드 스테이징 환경 간의 End-to-End 연결 무결성을 점검하기 위한 표준 스모크 테스트 가이드입니다.
 
-문진톡톡은 프론트엔드만으로 완전한 기능을 수행하지 않습니다. 음성 인식, LLM extraction, Hybrid IR, 원페이퍼 생성, 환자 안내문 저장은 AWS 백엔드와 연결되어야 실제로 동작합니다.
+문진톡톡은 프론트엔드 단독으로 작동하지 않습니다. 음성 스트리밍 인식(STT), LLM 의미 구조화, Hybrid IR 증상 매칭, 원페이퍼 렌더링, 안내문 생성 로직은 반드시 AWS 서버리스 백엔드 인프라와 결합되어야 완료됩니다.
 
 ---
 
-## 1. 실행 모드
+## 1. 검증 및 구동 모드
 
-| 모드 | 설명 | 사용 상황 |
+| 구동 모드 | 목표 인프라 | 적용 및 검증 시나리오 |
 | --- | --- | --- |
-| 프론트 로컬 실행 | `localhost:5173`에서 React 앱 실행 | UI 수정, 화면 확인 |
-| AWS 제출 환경 연결 | 로컬 프론트가 API Gateway backend를 호출 | 실제 STT, Bedrock, DynamoDB, S3 artifact 점검 |
-| Amplify main 배포 | GitHub `main` 브랜치 기준 Amplify 배포 | 발표, 심사, 외부 공유 |
+| **프론트 로컬 독립 구동** | `http://localhost:5173` | UI 레이아웃 퍼블리싱, 컴포넌트 상태 제어 확인 |
+| **클라우드 하이브리드 연결** | Local Frontend $\rightarrow$ AWS API Gateway | 실제 브라우저 마이크 연동, Bedrock 추론, S3 적재 무결성 검증 |
+| **Amplify 완전 호스팅 구동**| `https://main.*.amplifyapp.com` | 공식 해커톤 피칭, 심사위원 시연, 대외 서비스 배포 |
 
 ---
 
-## 2. 현재 MVP 아키텍처 요약
+## 2. MVP End-to-End 아키텍처 요약
 
 ```text
-React/Vite Frontend
-  -> API Gateway
-  -> Lambda Python 3.12
-  -> DynamoDB minimal session state
-  -> S3 redacted artifact bucket
-  -> Amazon Bedrock Nova/Titan
-  -> Amazon Transcribe Streaming
+[React / Vite SPA] 
+  ──> AWS API Gateway (HTTP API) 
+        ──> AWS Lambda (Python 3.12 오케스트레이터)
+              ├──> Amazon DynamoDB (경량 세션 메타데이터 저장)
+              ├──> Amazon S3 (PII 비식별 아티팩트 보관소)
+              ├──> Amazon Bedrock (Nova Pro/Lite 추론 + Titan 임베딩)
+              └──> Amazon Transcribe Streaming (실시간 웹소켓 STT)
 ```
 
-중요한 저장 규칙:
-
-- 음성 원본 파일은 저장하지 않습니다.
-- DynamoDB에는 세션 상태와 S3 key만 저장합니다.
-- 문진 답변, 원페이퍼, trace, 의사 답변, 안내문은 S3 artifact로 저장합니다.
-- S3 artifact는 저장 전 `privacy.py`에서 1차 가명처리를 거칩니다.
+### 🛡️ 핵심 데이터 보안 준수 원칙
+* **Zero-Storage 음성 통제:** 마이크 입력 오디오 스트림은 STT 텍스트 변환 즉시 소멸하며 서버 스토리지에 원본(`.wav` 등)을 남기지 않습니다.
+* **상태와 원문의 격리:** DynamoDB에는 세션 진행 상태와 인덱스 키만 남기며, 발화 원문 및 추론 결과는 `privacy.py`의 정규식 마스킹을 거쳐 S3 아티팩트에 격리합니다.
 
 ---
 
-## 3. 필수 준비물
+## 3. 사전 요구 환경
 
-로컬 개발:
+**로컬 개발 환경**
+* Node.js v20.19 이상 (또는 v22.12 이상) 및 npm
+* Python 3.12
+* AWS SAM CLI 및 AWS CLI (인증 프로필 구성 완료)
 
-- Node.js 20.19 이상 또는 22.12 이상
-- npm
-- Python 3.12
-- AWS SAM CLI
-
-AWS 동작 확인:
-
-- AWS CLI 로그인 또는 콘솔 권한
-- DynamoDB table
-- S3 artifact bucket
-- Lambda execution role
-- Bedrock model access
-- Amplify app
-- HTTPS 접속 가능한 프론트 URL
+**AWS 클라우드 인프라 자산**
+* 프로비저닝 완료된 DynamoDB 세션 테이블 (`MunjinSessions`)
+* 산출물 적재용 S3 아티팩트 버킷
+* 권한 바인딩 완료된 Lambda Execution Role 및 Bedrock 모델 액세스 승인
 
 ---
 
-## 4. 프론트엔드 로컬 실행
+## 4. 프론트엔드 로컬 온보딩
 
 ```powershell
 cd frontend
@@ -66,44 +56,27 @@ npm install
 Copy-Item .env.example .env.local
 npm run dev -- --host 127.0.0.1 --port 5173
 ```
+*(Windows PowerShell 실행 정책에 의해 스크립트 실행이 차단될 경우 `npm.cmd run dev -- --host 127.0.0.1 --port 5173`으로 실행하십시오.)*
 
-PowerShell 실행 정책 때문에 `npm`이 막히면 다음처럼 실행합니다.
-
-```powershell
-npm.cmd run dev -- --host 127.0.0.1 --port 5173
-```
-
-접속:
-
-```text
-http://127.0.0.1:5173/staff
-```
+* 브라우저 검증 주소: `http://127.0.0.1:5173/staff`
 
 ---
 
-## 5. AWS 백엔드 연결
+## 5. AWS 백엔드 하이브리드 바인딩
 
-`frontend/.env.local`에 API Gateway URL을 입력합니다.
+`frontend/.env.local` 파일에 배포된 백엔드 엔드포인트를 주입합니다.
 
 ```text
 VITE_API_BASE_URL=https://<api-id>.execute-api.ap-northeast-2.amazonaws.com
 ```
-
-저장 후 dev server를 재시작합니다.
-
-```powershell
-npm.cmd run dev -- --host 127.0.0.1 --port 5173
-```
+환경 변수 저장 후 개발 서버를 강제 재시작합니다.
 
 ---
 
-## 6. 백엔드 빌드와 배포
+## 6. 백엔드 빌드 및 클라우드 배포
 
-공개 저장소에는 원천 의료 백과 본문과 파생 증상 인덱스·embedding cache가 포함되지 않습니다. Hybrid IR까지 포함해 배포하려면 `sam build` 전에 팀 내부 비공개 데이터 저장소에서 아래 파일을 `backend/serverless/src/data/`에 배치합니다.
-
-- `diseases_cleaned.json`
-- `symptom_index.json`
-- `symptom_embeddings_amazon.titan-embed-text-v2_0_512.json`
+> ⚠️ **선행 필수 작업:** 저작권 보호로 공개 레포지토리에서 제외된 **의학 백과 런타임 데이터 3종**을 `backend/serverless/src/data/` 경로에 수동 배치해야 Hybrid IR 엔진이 구동됩니다.
+> (`diseases_cleaned.json`, `symptom_index.json`, `symptom_embeddings_*.json`)
 
 ```powershell
 cd backend/serverless
@@ -111,123 +84,55 @@ sam build
 sam deploy --guided
 ```
 
-제출 환경 예시:
-
+**SAM 대화형 입력 규격 기준:**
 ```text
 Stack Name: munjin-mvp-backend
 AWS Region: ap-northeast-2
 Parameter SessionsTableName: MunjinSessions
-Parameter ArtifactsBucketName: <s3-artifact-bucket-name>
-Parameter LambdaRoleArn: <lambda-role-arn>
-Parameter CustomVocabularyName:
+Parameter ArtifactsBucketName: <생성된_S3_버킷명>
+Parameter LambdaRoleArn: <실행_Role_ARN>
+Parameter CustomVocabularyName:              <-- (공백 통과 시 Enter)
 Confirm changes before deploy: y
 Allow SAM CLI IAM role creation: n
 MunjinApiFunction has no authentication. Is this okay?: y
 ```
 
-배포 완료 후 출력되는 `ApiEndpoint`를 Amplify 또는 `.env.local`의 `VITE_API_BASE_URL`에 입력합니다.
+---
+
+## 7. 현장 시연 직전 인수 검증 체크리스트 (Smoke Test)
+
+해커톤 시연 전 아래의 5단계 흐름을 순차 검증하여 인프라 병목을 차단합니다.
+
+### Step 01. 접수처 파트 (`/staff`)
+1. 접근 코드 로그인 통과 후 신규 환자 정보(이름, 생년월일, 진료과) 입력 및 세션 생성
+2. 당일 대기열 목록에 정상 등록 확인
+* **`검증 체크포인트`**: DynamoDB 레코드 확인 시 `patient.full_name`, `phone`이 평문 저장되지 않고 `patient.name("김*자")` 형태의 마스킹 표기로 적재되었는가?
+
+### Step 02. 환자 동의 파트 (태블릿 모달)
+1. 생성된 문진 세션 클릭 $\rightarrow$ 개인정보 및 민감 건강정보 처리 동의 체결
+* **`검증 체크포인트`**: S3 아티팩트 버킷 내 `sessions/.../consent.json` 파일이 정상 빌드되었는가?
+
+### Step 03. 음성 문진 파트 (`/patient/:sessionId`)
+1. Q1~Q4 문항 순차 실시간 발화 및 STT 전사 확인 문자열 확정 제출
+* **`검증 체크포인트`**: S3 버킷 내에 음성 파일(`.wav`)이 생성되지 않았으며, `answers.redacted.json`과 `llm_trace.redacted.json`만 비식별 상태로 생성되었는가?
+
+### Step 04. 의료진 원페이퍼 파트 (`/doctor/:sessionId`)
+1. 의료진 대기열에서 '분석 완료' 확인 후 원페이퍼 진입
+2. 환자 발화 인용 원문(Quote) 하이라이트 및 Hybrid IR 표준 증상 매칭 결과 대조
+* **`검증 체크포인트`**: LLM의 임의 추론 확신도 점수(`score`, `confidence`)가 화면 UI에 노출되지 않고 격리되었는가?
+
+### Step 05. 환자 안내문 발급 파트 (`/guide/:sessionId`)
+1. 원페이퍼 아젠다 패널에 의사 답변 및 강조 키워드 작성 후 `안내문 생성` 트리거
+2. 큰 글씨 렌더링, 음성 재생(TTS), 인쇄 레이아웃(Print 모드) 정상 작동 확인
+* **`검증 체크포인트`**: 의사가 입력한 지시 강조사항을 LLM이 임의 왜곡하지 않고 원문 그대로 안내문 본문에 출력하는가?
 
 ---
 
-## 7. Amplify 브랜치/환경 점검
+## 8. 백엔드 API 모의 호출 스펙 (PowerShell)
 
-제출용 Amplify 앱은 `main` 브랜치 하나를 기준으로 운영합니다. 다음 값을 반드시 확인합니다.
+클라이언트 단에서의 API 주입 정합성을 터미널에서 직접 검증하는 페이로드 예시입니다.
 
-```text
-Branch: main
-Monorepo app root: frontend
-Build command: npm run build
-Build output directory: dist
-Environment variable:
-  VITE_API_BASE_URL=https://<api-id>.execute-api.ap-northeast-2.amazonaws.com
-```
-
-주의:
-
-- 기능 개발은 Git 브랜치에서 진행하되, Amplify와 AWS 리소스는 `main` 제출 환경으로 단일화하면 DynamoDB/S3/API 혼선을 줄일 수 있습니다.
-
----
-
-## 8. 최종 동작 확인 절차
-
-### 8-1. 접수처
-
-1. `/staff` 접속
-2. 환자 이름, 생년월일, 성별, 진료과, 담당의 입력
-3. 초진 또는 재진 선택
-4. `문진 세션 생성` 클릭
-5. 오늘 접수 목록에 환자가 나타나는지 확인
-
-확인할 점:
-
-- DynamoDB에 `patient.full_name`, `patient.birth_date`, `patient.phone`이 저장되지 않아야 합니다.
-- `patient.name`은 마스킹된 표시명이어야 합니다.
-- `artifact.prefix`와 S3 key들이 생성되어야 합니다.
-
-### 8-2. 동의 모달
-
-1. 환자 태블릿 화면으로 이동
-2. 서비스 이용 동의 모달 확인
-3. 개인정보 수집·이용 안내 체크
-4. 건강 관련 문진 정보 처리 동의 체크
-5. 동의 후 문진 시작
-
-확인할 점:
-
-- S3에 `consent.json`이 생성되어야 합니다.
-- DynamoDB에는 동의 요약만 저장되어야 합니다.
-
-### 8-3. 환자 문진
-
-1. Q1부터 Q4까지 음성 입력
-2. STT 결과 확인 화면에서 `맞아요` 선택
-3. 각 문항 처리 후 다음 문항으로 이동
-4. 마지막 문항 후 완료 화면 확인
-
-확인할 점:
-
-- 음성 원본 파일이 S3에 생성되지 않아야 합니다.
-- S3 `answers.redacted.json`이 생성되어야 합니다.
-- S3 `llm_trace.redacted.json`이 생성되어야 합니다.
-- DynamoDB에는 `responses`, `question_results`가 없어야 합니다.
-
-### 8-4. 원페이퍼
-
-1. `/doctor/:sessionId` 접속
-2. 오늘 말한 불편함 확인
-3. 원문 quote 확인
-4. 문진 맥락 chip 확인
-5. 의료진 확인 항목 확인
-6. 환자 질문에 답변 입력
-7. 환자 안내 강조사항 입력
-8. 환자 안내문 생성 버튼 클릭
-
-확인할 점:
-
-- S3 `onepaper.redacted.json`이 생성되어야 합니다.
-- 증상 카드에 숫자 점수가 표시되지 않아야 합니다.
-- 환자 질문이 Q4 agenda로 분리되어야 합니다.
-
-### 8-5. 안내문
-
-1. `/guide/:sessionId` 접속
-2. 의사 답변 기반 안내문 확인
-3. 선생님 강조사항이 원문 그대로 표시되는지 확인
-4. 말로 재생하기 버튼 확인
-5. 종이 출력 화면 확인
-
-확인할 점:
-
-- S3 `doctor_review.redacted.json`이 생성되어야 합니다.
-- S3 `patient_guide.redacted.json`이 생성되어야 합니다.
-- 의사가 적은 강조사항은 LLM이 바꾸지 않아야 합니다.
-
----
-
-## 9. 운영 API 확인 예시
-
-세션 생성:
-
+### 세션 생성 호출
 ```powershell
 $base = "https://<api-id>.execute-api.ap-northeast-2.amazonaws.com"
 
@@ -246,11 +151,9 @@ $body = @{
 
 Invoke-RestMethod -Method Post -Uri "$base/sessions" -ContentType "application/json" -Body $body
 ```
+*(주의: 본 예시는 프론트엔드가 전송하는 Raw Request입니다. 백엔드는 수신 즉시 식별자를 마스킹하고 원본 연락처를 파기한 뒤 DB에 적재합니다.)*
 
-이 예시는 입력 payload입니다. 백엔드는 이 값을 그대로 DynamoDB에 저장하지 않습니다.
-
-문진 답변 일괄 저장:
-
+### 답변 일괄 제출 호출
 ```powershell
 $answers = @{
   session_id = "<session_id>"
@@ -267,45 +170,35 @@ $answers = @{
 Invoke-RestMethod -Method Post -Uri "$base/process-answers" -ContentType "application/json" -Body $answers
 ```
 
-원페이퍼 조회:
-
-```powershell
-Invoke-RestMethod -Method Get -Uri "$base/onepager/<session_id>"
-```
-
 ---
 
-## 10. 자주 발생하는 문제
+## 9. 트러블슈팅 매뉴얼
 
-| 문제 | 원인 | 해결 |
+| 발생 증상 | 핵심 원인 분석 | 조치 방안 |
 | --- | --- | --- |
-| 문진 세션 생성이 안 됨 | `VITE_API_BASE_URL`이 비었거나 잘못됨 | `.env.local` 또는 Amplify 환경 변수 확인 |
-| 환자 태블릿에서 마이크가 안 됨 | HTTPS가 아니거나 브라우저 권한 거부 | Amplify URL 또는 localhost 사용, 마이크 권한 허용 |
-| STT 결과가 비어 있음 | 마이크 입력 없음, Transcribe 연결 실패 | 브라우저 console, `/transcribe-stream-url` 응답 확인 |
-| 답변 저장 후 원페이퍼가 늦게 보임 | `/process-answers`는 답변 저장 후 백그라운드 분석을 시작함 | 잠시 후 새로고침, CloudWatch 확인 |
-| 원페이퍼가 비어 있음 | 백그라운드 분석 실패 또는 S3 artifact 없음 | S3 `answers.redacted.json`, `onepaper.redacted.json` 확인 |
-| 안내문이 안 나옴 | 의사 답변 저장 실패 또는 guide generation 실패 | S3 `doctor_review.redacted.json`, `patient_guide.redacted.json` 확인 |
-| S3 AccessDenied | Lambda role 권한 부족 | Lambda role에 artifact bucket `GetObject`, `PutObject` 권한 추가 |
+| **세션 생성이 먹통임** | `VITE_API_BASE_URL` 환경 변수 미주입 | `.env.local` 문자열 확인 후 빌드 서버 재시작 |
+| **태블릿 마이크 비활성화**| 비보안 프로토콜(`http://`) 접근 차단 | 로컬 `127.0.0.1` 혹은 정식 `https://` 도메인 접속 확인 |
+| **STT 인식 텍스트 누락** | Transcribe 웹소켓 바인딩 실패 | 네트워크 방화벽 및 `/transcribe/stream-url` 발급 확인 |
+| **원페이퍼 생성 지연** | 비동기 Lambda 호출 큐 대기 중 | 3~5초 대기 후 새로고침 (정상 비동기 흐름) |
+| **원페이퍼 본문이 빈 값**| 백그라운드 추론 에러 혹은 IR 인덱스 부재 | S3 `answers.redacted.json` 생성 여부 및 `src/data/` 파일 대조 |
+| **S3 AccessDenied** | Lambda 실행 역할의 버킷 권한 누락 | IAM Policy 내 아티팩트 버킷 `GetObject`, `PutObject` 확인 |
 
 ---
 
-## 11. 검증 명령
+## 10. 무결성 검증 표준 명령어
 
-프론트엔드:
-
+**[Frontend 빌드 검증]**
 ```powershell
 cd frontend
 npm.cmd run build
 ```
 
-백엔드:
-
+**[Backend 문법 검증]**
 ```powershell
 python -m compileall backend/serverless/src
 ```
 
-SAM:
-
+**[SAM 인프라 규격 검증]**
 ```powershell
 cd backend/serverless
 sam validate
@@ -314,13 +207,10 @@ sam build
 
 ---
 
-## 12. 시연 후 정리
+## 11. 시연 종료 후 인프라 Teardown 가이드
 
-시연 후 삭제 또는 보존 정책을 확인할 항목:
+해커톤 심사 종료 후 불필요한 클라우드 과금 및 데이터 잔류를 막기 위해 다음 자산을 확인합니다.
 
-- S3 artifact bucket의 `sessions/` 객체
-- DynamoDB 세션 테이블 item
-- CloudWatch Logs 보존 기간
-- Transcribe job이 생성되지 않았는지 확인
-
-현재 구조에서는 Transcribe batch job을 만들지 않으므로 Transcribe 작업 목록에 새 job이 쌓이지 않는 것이 정상입니다.
+1. **S3 아티팩트 버킷:** 테스트 간 생성된 `sessions/` 하위 객체 전체 수동 파기 (혹은 Lifecycle 3일 규칙 동작 확인)
+2. **DynamoDB 테이블:** 시연용 임시 세션 아이템 스캔 후 정리
+3. **Amazon Transcribe:** 실시간 스트리밍 아키텍처 특성상 Batch Job 리스트에 작업 이력이 남지 않는 것이 정상 규격임을 최종 확인
