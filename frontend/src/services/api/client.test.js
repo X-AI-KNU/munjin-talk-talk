@@ -64,7 +64,8 @@ describe('normalizeSession', () => {
     expect(result.patient.name).toBe('환자')
     expect(result.patient.gender).toBe('-')
     expect(result.patient.department).toBe('이비인후과')
-    expect(result.patient.honorific).toBe('어르신')
+    // 최신 main: honorific 기본값/'어르신'은 '환자님'으로 정규화됨
+    expect(result.patient.honorific).toBe('환자님')
   })
 })
 

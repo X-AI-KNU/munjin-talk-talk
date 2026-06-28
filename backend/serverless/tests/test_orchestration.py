@@ -37,6 +37,8 @@ def _install_stubs():
     sessions._store = {}
     sessions.get_session = lambda sid: sessions._store.get(sid)
     sessions.update_session = lambda sid, updates: sessions._store.get(sid, {}).update(updates)
+    # 최신 main에서 추가된 의사 대기열 위치 함수도 stub으로 제공합니다.
+    sessions.doctor_queue_position = lambda sid: 1
     sys.modules["sessions"] = sessions
 
     artifact_store = types.ModuleType("artifact_store")

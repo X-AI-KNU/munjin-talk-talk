@@ -8,6 +8,12 @@ __pycache__/
 venv/
 .tmp-pydeps/
 
+# Test coverage artifacts
+.coverage
+coverage/
+frontend/coverage/
+htmlcov/
+
 # Backend generated files
 backend/.env
 backend/serverless/.aws-sam/
