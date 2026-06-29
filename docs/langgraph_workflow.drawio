@@ -1,0 +1,38 @@
+<mxfile host="app.diagrams.net" agent="kiro" version="24.0.0">
+  <diagram id="langgraph-workflow-5step" name="LangGraph 워크플로우 (5단계)">
+    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="문진톡톡 · LangGraph 워크플로우 (5단계)" style="text;html=1;fontSize=18;fontStyle=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="700" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s1" value="① 입력 검증 &amp; 안전 감지&#10;필수값 확인 + 응급 징후 1차 Rule 감지" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" value="② 문맥 정규화 &amp; RAG&#10;강원 방언 해독 + 의학 백과 문맥 주입" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#43A047;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="300" y="120" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="③ LLM 의미 추출&#10;Bedrock Nova 증상 스팬·단서 구조화" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FB8C00;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="560" y="120" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="s4" value="④ 검증 &amp; 표준 매칭&#10;스키마·원문 대조 + Hybrid IR 병명 매칭" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#FBC02D;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="820" y="120" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="s5" value="⑤ 저장 &amp; 원페이퍼 동기화&#10;S3 적재 + 원페이퍼 갱신 + 응답 반환" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="120" width="200" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="s1" target="s2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="s2" target="s3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="s3" target="s4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="s4" target="s5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_retry" value="검증 실패 시 재추론 (최대 3회)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeWidth=2;dashed=1;strokeColor=#FB8C00;fontColor=#E65100;fontSize=10;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="s4" target="s3">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="920" y="80" /><mxPoint x="660" y="80" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
