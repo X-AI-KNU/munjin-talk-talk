@@ -1,4 +1,4 @@
 -r ../backend/serverless/src/requirements.txt
-boto3>=1.34,<2
+boto3>=1.43.48,<2
 botocore>=1.34,<2
 sentence-transformers>=3.0,<5
